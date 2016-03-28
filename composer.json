@@ -12,14 +12,19 @@
         "irc": "irc://irc.freenode.net/yii",
         "source": "https://github.com/yiisoft/yii2"
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "require": {
         "php": ">=5.4.0",
         "yiisoft/yii2": ">=2.0.6",
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
         "schmunk42/yii2-giiant": "@stable",
-        "2amigos/yii2-translateable-behavior": "*"
+        "2amigos/yii2-translateable-behavior": "*",
+        "rmrevin/yii2-fontawesome": "2.10.*",
+        "dmstr/yii2-adminlte-asset": "2.*",
+        "insolita/yii2-adminlte-widgets": "*",
+        "webvimark/module-user-management": "1.0.4",
+        "mdmsoft/yii2-admin": "~2.0"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

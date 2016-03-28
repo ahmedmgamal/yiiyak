@@ -28,6 +28,11 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        'authManager' => [
+            'class' => 'yii\rbac\PhpManager',
+            'defaultRoles' => ['admin', 'company'],
+
+        ],
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,

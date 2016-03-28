@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "52b542420fdabf5c14fd9dfd35542aab",
-    "content-hash": "89e3ae256c51f3ea5f97d54f4e415159",
+    "hash": "7c263d965d684504ce8bc7148d6fcbde",
+    "content-hash": "317df097245f63a442155bb2434b12f9",
     "packages": [
         {
             "name": "2amigos/yii2-translateable-behavior",
@@ -49,6 +49,46 @@
                 "yii"
             ],
             "time": "2014-08-22 09:10:21"
+        },
+        {
+            "name": "almasaeed2010/adminlte",
+            "version": "v2.3.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/almasaeed2010/AdminLTE.git",
+                "reference": "8db979795044412a2e2b4e9659788c23cb59fcd3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/almasaeed2010/AdminLTE/zipball/8db979795044412a2e2b4e9659788c23cb59fcd3",
+                "reference": "8db979795044412a2e2b4e9659788c23cb59fcd3",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Abdullah Almsaeed",
+                    "email": "support@almsaeedstudio.com"
+                }
+            ],
+            "description": "AdminLTE - admin control panel and dashboard that's based on Bootstrap 3",
+            "homepage": "http://almsaeedstudio.com/",
+            "keywords": [
+                "JS",
+                "admin",
+                "back-end",
+                "css",
+                "less",
+                "responsive",
+                "template",
+                "theme",
+                "web"
+            ],
+            "time": "2016-03-24 14:31:41"
         },
         {
             "name": "bower-asset/bootstrap",
@@ -100,6 +140,43 @@
             ]
         },
         {
+            "name": "bower-asset/fontawesome",
+            "version": "v4.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FortAwesome/Font-Awesome.git",
+                "reference": "41b9ed01103e6820c3cb043ba7ddab30ecd3f4c0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FortAwesome/Font-Awesome/zipball/41b9ed01103e6820c3cb043ba7ddab30ecd3f4c0",
+                "reference": "41b9ed01103e6820c3cb043ba7ddab30ecd3f4c0",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "./css/font-awesome.css",
+                    "./fonts/*"
+                ],
+                "bower-asset-ignore": [
+                    "*/.*",
+                    "*.json",
+                    "src",
+                    "*.yml",
+                    "Gemfile",
+                    "Gemfile.lock",
+                    "*.md"
+                ]
+            },
+            "license": [
+                "OFL-1.1",
+                "MIT",
+                "CC-BY-3.0"
+            ],
+            "description": "Font Awesome"
+        },
+        {
             "name": "bower-asset/jquery",
             "version": "2.2.2",
             "source": {
@@ -129,6 +206,38 @@
                 "jquery",
                 "library"
             ]
+        },
+        {
+            "name": "bower-asset/jquery-cookie",
+            "version": "v1.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/carhartl/jquery-cookie.git",
+                "reference": "7f88a4e631aba8a8c688fd8999ce6b9bcfd50718"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/carhartl/jquery-cookie/zipball/7f88a4e631aba8a8c688fd8999ce6b9bcfd50718",
+                "reference": "7f88a4e631aba8a8c688fd8999ce6b9bcfd50718",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.2"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "./jquery.cookie.js"
+                ],
+                "bower-asset-ignore": [
+                    "test",
+                    ".*",
+                    "*.json",
+                    "*.md",
+                    "*.txt",
+                    "Gruntfile.js"
+                ]
+            }
         },
         {
             "name": "bower-asset/jquery.inputmask",
@@ -326,6 +435,49 @@
             "time": "2015-03-06 05:28:07"
         },
         {
+            "name": "cebe/yii2-gravatar",
+            "version": "1.1",
+            "target-dir": "cebe/gravatar",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cebe/yii2-gravatar.git",
+                "reference": "c9c01bd14c9bdee9e5ae1ef1aad23f80c182c057"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cebe/yii2-gravatar/zipball/c9c01bd14c9bdee9e5ae1ef1aad23f80c182c057",
+                "reference": "c9c01bd14c9bdee9e5ae1ef1aad23f80c182c057",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-0": {
+                    "cebe\\gravatar\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Carsten Brandt",
+                    "email": "mail@cebe.cc",
+                    "homepage": "http://cebe.cc/",
+                    "role": "Core framework development"
+                }
+            ],
+            "description": "Gravatar Widget for Yii 2",
+            "keywords": [
+                "gravatar",
+                "yii"
+            ],
+            "time": "2013-12-10 17:49:58"
+        },
+        {
             "name": "cmrcx/phptidy",
             "version": "v2.16",
             "source": {
@@ -365,6 +517,60 @@
             "description": "PHP code formatter",
             "homepage": "https://github.com/cmrcx/phptidy",
             "time": "2015-10-27 09:29:21"
+        },
+        {
+            "name": "dmstr/yii2-adminlte-asset",
+            "version": "2.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dmstr/yii2-adminlte-asset.git",
+                "reference": "73eca05cf04d70f169a88b430d2c03c3b54d623a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dmstr/yii2-adminlte-asset/zipball/73eca05cf04d70f169a88b430d2c03c3b54d623a",
+                "reference": "73eca05cf04d70f169a88b430d2c03c3b54d623a",
+                "shasum": ""
+            },
+            "require": {
+                "almasaeed2010/adminlte": "~2.0",
+                "cebe/yii2-gravatar": "1.*",
+                "rmrevin/yii2-fontawesome": "~2.9",
+                "yiisoft/yii2": "2.*",
+                "yiisoft/yii2-bootstrap": "2.*"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "dmstr\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Tobias Munk",
+                    "email": "tobias@diemeisterei.de"
+                },
+                {
+                    "name": "Evgeniy Tkachenko",
+                    "email": "et.coder@gmail.com"
+                }
+            ],
+            "description": "Backend theme for Yii2 Framework",
+            "keywords": [
+                "AdminLTE",
+                "extension",
+                "yii2"
+            ],
+            "time": "2016-03-23 04:18:15"
         },
         {
             "name": "dmstr/yii2-bootstrap",
@@ -536,6 +742,154 @@
             "time": "2013-11-30 08:25:19"
         },
         {
+            "name": "ikimea/browser",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Ikimea/Browser.git",
+                "reference": "3fb8a2498ed36d49832d95f1da0c4cc055a64728"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Ikimea/Browser/zipball/3fb8a2498ed36d49832d95f1da0c4cc055a64728",
+                "reference": "3fb8a2498ed36d49832d95f1da0c4cc055a64728",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Ikimea\\Browser\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ikimea",
+                    "homepage": "http://www.ikimea.com"
+                },
+                {
+                    "name": "Gary White",
+                    "homepage": "http://www.apptools.com/phptools/browser/"
+                },
+                {
+                    "name": "Chris Schuld",
+                    "homepage": "http://chrisschuld.com"
+                }
+            ],
+            "description": "Detecting the user’s browser",
+            "homepage": "http://www.ikimea.com",
+            "keywords": [
+                "browser"
+            ],
+            "time": "2015-08-26 20:05:14"
+        },
+        {
+            "name": "insolita/yii2-adminlte-widgets",
+            "version": "v1.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Insolita/yii2-adminlte-widgets.git",
+                "reference": "ebacdd1ae19df12c8cd9d062f16c3735867fafad"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Insolita/yii2-adminlte-widgets/zipball/ebacdd1ae19df12c8cd9d062f16c3735867fafad",
+                "reference": "ebacdd1ae19df12c8cd9d062f16c3735867fafad",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery-cookie": "*",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "insolita\\wgadminlte\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "insolita",
+                    "email": "donnainsolita@gmail.com"
+                }
+            ],
+            "description": "Widgets for AdminLTE theme (Box with remember collapse state, Timeline, Tile, Callout, SmallBox etc)",
+            "keywords": [
+                "AdminLTE",
+                "widget",
+                "yii2"
+            ],
+            "time": "2016-02-02 01:32:53"
+        },
+        {
+            "name": "mdmsoft/yii2-admin",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mdmsoft/yii2-admin.git",
+                "reference": "600c4bd0349118a59acf1eb814e4c4ed4d20eba0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mdmsoft/yii2-admin/zipball/600c4bd0349118a59acf1eb814e4c4ed4d20eba0",
+                "reference": "600c4bd0349118a59acf1eb814e4c4ed4d20eba0",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "~2.0.7"
+            },
+            "require-dev": {
+                "yiisoft/yii2-codeception": "~2.0"
+            },
+            "suggest": {
+                "yiisoft/yii2-bootstrap": "Used when using layout 'left-menu', 'right-menu' or 'top-menu'"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.0.master": "1.0.x-dev",
+                    "dev-master": "2.x-dev"
+                },
+                "asset-installer-paths": {
+                    "npm-asset-library": "vendor/npm",
+                    "bower-asset-library": "vendor/bower"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "mdm\\admin\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Misbahul Munir",
+                    "email": "misbahuldmunir@gmail.com"
+                }
+            ],
+            "description": "RBAC Auth manager for Yii2 ",
+            "keywords": [
+                "admin",
+                "auth",
+                "rbac",
+                "yii"
+            ],
+            "time": "2016-03-24 10:13:00"
+        },
+        {
             "name": "phpspec/php-diff",
             "version": "v1.0.2",
             "source": {
@@ -568,6 +922,58 @@
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
             "time": "2013-11-01 13:02:21"
+        },
+        {
+            "name": "rmrevin/yii2-fontawesome",
+            "version": "2.10.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rmrevin/yii2-fontawesome.git",
+                "reference": "ce4dd62a048090f3d98822d4bc9401bfcdde1f98"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rmrevin/yii2-fontawesome/zipball/ce4dd62a048090f3d98822d4bc9401bfcdde1f98",
+                "reference": "ce4dd62a048090f3d98822d4bc9401bfcdde1f98",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/fontawesome": "4.3.*",
+                "php": ">=5.4.0",
+                "yiisoft/yii2": "2.0.*"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "asset-installer-paths": {
+                    "npm-asset-library": "vendor/npm",
+                    "bower-asset-library": "vendor/bower"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "rmrevin\\yii\\fontawesome\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Roman Revin",
+                    "email": "xgismox@gmail.com",
+                    "homepage": "http://rmrevin.ru/"
+                }
+            ],
+            "description": "Asset Bundle for Yii2 with Font Awesome",
+            "keywords": [
+                "asset",
+                "awesome",
+                "bundle",
+                "font",
+                "yii"
+            ],
+            "time": "2015-06-23 13:06:14"
         },
         {
             "name": "schmunk42/yii2-giiant",
@@ -676,6 +1082,211 @@
                 "mailer"
             ],
             "time": "2015-06-06 14:19:39"
+        },
+        {
+            "name": "webvimark/bootstrap-switch",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webvimark/bootstrap-switch.git",
+                "reference": "c7493ba37747a83951cd95acf876668cbc0aba7f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webvimark/bootstrap-switch/zipball/c7493ba37747a83951cd95acf876668cbc0aba7f",
+                "reference": "c7493ba37747a83951cd95acf876668cbc0aba7f",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "webvimark\\extensions\\BootstrapSwitch\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "BootstrapSwitch extension for yii 2",
+            "time": "2014-06-23 10:35:32"
+        },
+        {
+            "name": "webvimark/components",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webvimark/components.git",
+                "reference": "782cb6ec7a4dc1a27389504cdfe9e15d0c47f04d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webvimark/components/zipball/782cb6ec7a4dc1a27389504cdfe9e15d0c47f04d",
+                "reference": "782cb6ec7a4dc1a27389504cdfe9e15d0c47f04d",
+                "shasum": ""
+            },
+            "require": {
+                "webvimark/helpers": "dev-master",
+                "webvimark/image": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "webvimark\\components\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "Components for yii 2",
+            "time": "2015-08-26 19:46:29"
+        },
+        {
+            "name": "webvimark/date-range-picker",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webvimark/date-range-picker.git",
+                "reference": "4b93d19534ad956c2ae06be0020601ccf8af99fb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webvimark/date-range-picker/zipball/4b93d19534ad956c2ae06be0020601ccf8af99fb",
+                "reference": "4b93d19534ad956c2ae06be0020601ccf8af99fb",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "webvimark\\extensions\\DateRangePicker\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "dangrossman daterangepicker yii 2 gridview",
+            "time": "2015-10-06 12:14:43"
+        },
+        {
+            "name": "webvimark/grid-bulk-actions",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webvimark/grid-bulk-actions.git",
+                "reference": "b1a28927d9d343922375cdb2b9d073b511fbdd49"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webvimark/grid-bulk-actions/zipball/b1a28927d9d343922375cdb2b9d073b511fbdd49",
+                "reference": "b1a28927d9d343922375cdb2b9d073b511fbdd49",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "webvimark\\extensions\\GridBulkActions\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "Bulk actions extension for yii 2 gridview",
+            "time": "2015-10-16 07:10:38"
+        },
+        {
+            "name": "webvimark/grid-page-size",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webvimark/grid-page-size.git",
+                "reference": "e0e57a7ecd3858625a97d565b0f9582d83da7e9a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webvimark/grid-page-size/zipball/e0e57a7ecd3858625a97d565b0f9582d83da7e9a",
+                "reference": "e0e57a7ecd3858625a97d565b0f9582d83da7e9a",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "webvimark\\extensions\\GridPageSize\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "Grid page size extension for yii 2 gridview",
+            "time": "2015-10-26 16:13:58"
+        },
+        {
+            "name": "webvimark/helpers",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webvimark/helpers.git",
+                "reference": "f3f1d8752a6bd3221b6e9fd9db6948676d3e2e66"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webvimark/helpers/zipball/f3f1d8752a6bd3221b6e9fd9db6948676d3e2e66",
+                "reference": "f3f1d8752a6bd3221b6e9fd9db6948676d3e2e66",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "webvimark\\helpers\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "Helpers for yii 2",
+            "time": "2015-09-13 16:37:28"
+        },
+        {
+            "name": "webvimark/image",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webvimark/image.git",
+                "reference": "18a3f257b55d0670086b4ccdac005fe376ad7c21"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webvimark/image/zipball/18a3f257b55d0670086b4ccdac005fe376ad7c21",
+                "reference": "18a3f257b55d0670086b4ccdac005fe376ad7c21",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "webvimark\\image\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "Kohana image lib wrapper for yii 2",
+            "time": "2014-07-02 07:33:43"
+        },
+        {
+            "name": "webvimark/module-user-management",
+            "version": "1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webvimark/user-management.git",
+                "reference": "ca3b1365260294c179de749434e71570baaffad5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webvimark/user-management/zipball/ca3b1365260294c179de749434e71570baaffad5",
+                "reference": "ca3b1365260294c179de749434e71570baaffad5",
+                "shasum": ""
+            },
+            "require": {
+                "ikimea/browser": "dev-master",
+                "webvimark/bootstrap-switch": "dev-master",
+                "webvimark/components": "dev-master",
+                "webvimark/date-range-picker": "dev-master",
+                "webvimark/grid-bulk-actions": "dev-master",
+                "webvimark/grid-page-size": "dev-master",
+                "webvimark/helpers": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "webvimark\\modules\\UserManagement\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "User with improved RBAC",
+            "time": "2016-01-25 15:42:35"
         },
         {
             "name": "yiisoft/yii2",
@@ -1166,7 +1777,7 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "stability-flags": {
         "schmunk42/yii2-giiant": 0
     },
