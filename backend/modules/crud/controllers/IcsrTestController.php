@@ -13,5 +13,8 @@ namespace backend\modules\crud\controllers;
  */
 class IcsrTestController extends \backend\modules\crud\controllers\base\IcsrTestController
 {
-
+    public function behaviors() {
+        
+        return [];
+    }
 }

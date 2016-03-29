@@ -3,10 +3,10 @@ return [
     3 => [
         'admin',
     ],
-    1 => [
+    2 => [
         'company',
     ],
-    2 => [
+    1 => [
         'company',
     ],
 ];
