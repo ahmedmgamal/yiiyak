@@ -103,11 +103,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 
 <?php $this->beginBlock('Icsrs'); ?>
 <div style='position: relative'><div style='position:absolute; right: 0px; top: 0px;'>
-  <?php echo Html::a(
-	'<span class="glyphicon glyphicon-list"></span> ' . Yii::t('app', 'List All') . ' Icsrs',
-	['/crud/icsr/index'],
-	['class'=>'btn text-muted btn-xs']
-) ?>
+
   <?php echo Html::a(
 	'<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('app', 'New') . ' Icsr',
 	['/crud/icsr/create', 'Icsr' => ['drug_id' => $model->id]],
