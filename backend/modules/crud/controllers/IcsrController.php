@@ -45,6 +45,15 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
 		return $this->render('create', ['model' => $model]);
 	}
 
-        
+        public function actionExport($id) {
+ 
+//\Yii::$app->response->format = \yii\web\Response::FORMAT_XML;
+
+		return $this->render('export', [
+				'model' => $this->findModel($id),
+			]);
+
+        }
+
     
 }

@@ -46,7 +46,7 @@ use yii\bootstrap\ActiveForm;
 			<?php echo                         $form->field($model, 'patient_age_unit')->dropDownList(
 	backend\modules\crud\models\Icsr::optspatientageunit()
 ); ?>
-			<?php echo $form->field($model, 'patient_birth_date')->widget(DatePicker::className(),[]); ?>
+			<?php echo $form->field($model, 'patient_birth_date')->widget(DatePicker::className(),['dateFormat' => 'yyyy-MM-dd']); ?>
 			<?php echo $form->field($model, 'patient_weight')->textInput(['maxlength' => true]) ?>
 			<?php echo $form->field($model, 'patient_weight_unit')->dropDownList(
 	backend\modules\crud\models\Icsr::optspatientweightunit()

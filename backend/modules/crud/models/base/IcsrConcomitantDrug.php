@@ -55,7 +55,7 @@ abstract class IcsrConcomitantDrug extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'icsr_id', 'frequency_lkp_id'], 'required'],
+            [[  'icsr_id', 'frequency_lkp_id'], 'required'],
             [['id', 'icsr_id', 'frequency_lkp_id'], 'integer'],
             [['start_date', 'stop_date'], 'safe'],
             [['drug_name', 'duration_of_use', 'dose'], 'string', 'max' => 45],

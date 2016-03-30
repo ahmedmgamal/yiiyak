@@ -13,5 +13,8 @@ namespace backend\modules\crud\controllers;
  */
 class IcsrTypeController extends \backend\modules\crud\controllers\base\IcsrTypeController
 {
-
+    public function behaviors() {
+        
+        return [];
+    }
 }

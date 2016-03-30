@@ -38,58 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php echo Html::a('<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('app', 'New'), ['create'], ['class' => 'btn btn-success']) ?>
         </div>
 
-        <div class="pull-right">
-
-
-            <?php echo
-\yii\bootstrap\ButtonDropdown::widget(
-	[
-		'id' => 'giiant-relations',
-		'encodeLabel' => false,
-		'label' => '<span class="glyphicon glyphicon-paperclip"></span> ' . Yii::t('app', 'Relations'),
-		'dropdown' => [
-			'options' => [
-				'class' => 'dropdown-menu-right'
-			],
-			'encodeLabels' => false,
-			'items' => [            [
-					'url' => ['/crud/drug-prescription/index'],
-					'label' => '<i class="glyphicon glyphicon-arrow-right">&nbsp;' . Yii::t('app', 'Drug Prescription') . '</i>',
-				],            [
-					'url' => ['/crud/drug/index'],
-					'label' => '<i class="glyphicon glyphicon-arrow-right">&nbsp;' . Yii::t('app', 'Drug') . '</i>',
-				],            [
-					'url' => ['/crud/icsr-concomitant-drug/index'],
-					'label' => '<i class="glyphicon glyphicon-arrow-right">&nbsp;' . Yii::t('app', 'Icsr Concomitant Drug') . '</i>',
-				],            [
-					'url' => ['/crud/icsr-event/index'],
-					'label' => '<i class="glyphicon glyphicon-arrow-right">&nbsp;' . Yii::t('app', 'Icsr Event') . '</i>',
-				],            [
-					'url' => ['/crud/icsr-outcome/index'],
-					'label' => '<i class="glyphicon glyphicon-arrow-right">&nbsp;' . Yii::t('app', 'Icsr Outcome') . '</i>',
-				],            [
-					'url' => ['/crud/lkp-icsr-outcome/index'],
-					'label' => '<i class="glyphicon glyphicon-arrow-right">&nbsp;' . Yii::t('app', 'Lkp Icsr Outcome') . '</i>',
-				],            [
-					'url' => ['/crud/icsr-reporter/index'],
-					'label' => '<i class="glyphicon glyphicon-arrow-right">&nbsp;' . Yii::t('app', 'Icsr Reporter') . '</i>',
-				],            [
-					'url' => ['/crud/icsr-test/index'],
-					'label' => '<i class="glyphicon glyphicon-arrow-right">&nbsp;' . Yii::t('app', 'Icsr Test') . '</i>',
-				],            [
-					'url' => ['/crud/icsr-type/index'],
-					'label' => '<i class="glyphicon glyphicon-arrow-right">&nbsp;' . Yii::t('app', 'Icsr Type') . '</i>',
-				],            [
-					'url' => ['/crud/lkp-icsr-type/index'],
-					'label' => '<i class="glyphicon glyphicon-arrow-right">&nbsp;' . Yii::t('app', 'Lkp Icsr Type') . '</i>',
-				], ]
-		],
-		'options' => [
-			'class' => 'btn-default'
-		]
-	]
-);
-?>        </div>
+  
     </div>
 
 

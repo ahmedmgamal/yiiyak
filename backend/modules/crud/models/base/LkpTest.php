@@ -49,7 +49,6 @@ abstract class LkpTest extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id'], 'required'],
             [['id'], 'integer'],
             [['name', 'description'], 'string', 'max' => 45]
         ];

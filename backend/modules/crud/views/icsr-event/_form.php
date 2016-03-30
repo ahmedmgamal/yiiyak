@@ -34,10 +34,7 @@ use yii\jui\DatePicker;
         <?php $this->beginBlock('main'); ?>
 
         <p>
-			<?php 
-                                          echo       Html::activeHiddenInput($model, 'icsr_id') ;
-
- ?>
+			<?php echo       Html::activeHiddenInput($model, 'icsr_id') ;?>
 			<?php echo $form->field($model, 'event_description')->textInput(['maxlength' => true]) ?>
 			<?php echo                         $form->field($model, 'event_type')->dropDownList(
 	backend\modules\crud\models\IcsrEvent::optseventtype()
@@ -53,7 +50,7 @@ $form->field($model, 'meddra_llt_id')->dropDownList(
 	['prompt' => Yii::t('app', 'Select')]
 ); ?>
 
-        <?php echo $form->field($model, 'event_date')->widget(DatePicker::className(),[]); ?>
+        <?php echo $form->field($model, 'event_date')->widget(DatePicker::className(),['dateFormat' => 'yyyy-MM-dd']); ?>
                         
         </p>
         <?php $this->endBlock(); ?>

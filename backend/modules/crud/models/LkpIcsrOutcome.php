@@ -10,4 +10,8 @@ use \backend\modules\crud\models\base\LkpIcsrOutcome as BaseLkpIcsrOutcome;
  */
 class LkpIcsrOutcome extends BaseLkpIcsrOutcome
 {
+    
+    public function behaviors() {
+        return [];
+    }
 }

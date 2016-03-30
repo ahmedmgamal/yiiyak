@@ -39,8 +39,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
     <?php endif; ?>
 
     <h1>
-        <?php echo $model->getAliasModel() ?>        <small>
-            <?php echo $model->id ?>        </small>
+              <?php echo $model->trade_name ?>        
     </h1>
 
 
@@ -156,7 +155,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 		'id' => 'relation-tabs',
 		'encodeLabels' => false,
 		'items' => [ [
-				'label'   => '<b class=""># '.$model->id.'</b>',
+				'label'   => '<b class=""># '.$model->id. '</b>',
 				'content' => $this->blocks['backend\modules\crud\models\Drug'],
 				'active'  => true,
 			],  [

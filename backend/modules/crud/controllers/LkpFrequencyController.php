@@ -13,5 +13,7 @@ namespace backend\modules\crud\controllers;
  */
 class LkpFrequencyController extends \backend\modules\crud\controllers\base\LkpFrequencyController
 {
-
+    public function behaviors() {
+        return [];
+    }
 }

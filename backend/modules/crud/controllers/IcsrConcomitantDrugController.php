@@ -13,5 +13,8 @@ namespace backend\modules\crud\controllers;
  */
 class IcsrConcomitantDrugController extends \backend\modules\crud\controllers\base\IcsrConcomitantDrugController
 {
-
+    public function behaviors() {
+        
+        return [];
+    }
 }

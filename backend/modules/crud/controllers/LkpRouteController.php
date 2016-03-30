@@ -13,5 +13,8 @@ namespace backend\modules\crud\controllers;
  */
 class LkpRouteController extends \backend\modules\crud\controllers\base\LkpRouteController
 {
-
+    public function behaviors() {
+        
+        return [];
+    }
 }

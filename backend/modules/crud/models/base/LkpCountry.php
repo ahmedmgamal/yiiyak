@@ -49,8 +49,7 @@ abstract class LkpCountry extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id'], 'required'],
-            [['id'], 'integer'],
+             [['id'], 'integer'],
             [['name', 'code'], 'string', 'max' => 45]
         ];
     }

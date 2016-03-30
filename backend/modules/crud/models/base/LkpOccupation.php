@@ -48,7 +48,6 @@ abstract class LkpOccupation extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id'], 'required'],
             [['id'], 'integer'],
             [['description'], 'string', 'max' => 45]
         ];

@@ -49,8 +49,7 @@ abstract class LkpFrequency extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id'], 'required'],
-            [['id'], 'integer'],
+             [['id'], 'integer'],
             [['description'], 'string', 'max' => 45]
         ];
     }

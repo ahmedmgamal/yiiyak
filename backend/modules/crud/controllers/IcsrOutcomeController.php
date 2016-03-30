@@ -13,5 +13,8 @@ namespace backend\modules\crud\controllers;
  */
 class IcsrOutcomeController extends \backend\modules\crud\controllers\base\IcsrOutcomeController
 {
-
+    public function behaviors() {
+        
+        return [];
+    }
 }

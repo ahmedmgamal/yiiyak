@@ -13,5 +13,8 @@ namespace backend\modules\crud\controllers;
  */
 class LkpCountryController extends \backend\modules\crud\controllers\base\LkpCountryController
 {
-
+    public function behaviors() {
+        
+        return [];
+    }
 }

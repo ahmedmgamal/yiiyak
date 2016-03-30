@@ -77,7 +77,7 @@ abstract class DrugPrescription extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'drug_id', 'icsr_id'], 'required'],
+            [[   'icsr_id'], 'required'],
             [['id', 'drug_id', 'icsr_id', 'frequency_lkp_id'], 'integer'],
             [['expiration_date', 'use_date_start', 'use_date_end'], 'safe'],
             [['duration_of_use'], 'number'],

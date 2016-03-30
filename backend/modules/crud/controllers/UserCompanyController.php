@@ -13,5 +13,8 @@ namespace backend\modules\crud\controllers;
  */
 class UserCompanyController extends \backend\modules\crud\controllers\base\UserCompanyController
 {
-
+    public function behaviors() {
+        
+        return [];
+    }
 }

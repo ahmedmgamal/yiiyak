@@ -13,5 +13,8 @@ namespace backend\modules\crud\controllers;
  */
 class LkpIcsrTypeController extends \backend\modules\crud\controllers\base\LkpIcsrTypeController
 {
-
+    public function behaviors() {
+        
+        return [];
+    }
 }

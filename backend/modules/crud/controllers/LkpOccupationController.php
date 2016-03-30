@@ -13,5 +13,8 @@ namespace backend\modules\crud\controllers;
  */
 class LkpOccupationController extends \backend\modules\crud\controllers\base\LkpOccupationController
 {
-
+    public function behaviors() {
+        
+        return [];
+    }
 }
