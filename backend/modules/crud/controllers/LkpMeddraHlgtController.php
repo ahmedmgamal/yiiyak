@@ -13,5 +13,8 @@ namespace backend\modules\crud\controllers;
  */
 class LkpMeddraHlgtController extends \backend\modules\crud\controllers\base\LkpMeddraHlgtController
 {
-
+    public function behaviors() {
+        
+        return [];
+    }
 }

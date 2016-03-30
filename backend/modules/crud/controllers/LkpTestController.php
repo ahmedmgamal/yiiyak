@@ -13,5 +13,7 @@ namespace backend\modules\crud\controllers;
  */
 class LkpTestController extends \backend\modules\crud\controllers\base\LkpTestController
 {
-
+    public function behaviors() {
+        return[];
+    }
 }

@@ -13,5 +13,8 @@ namespace backend\modules\crud\controllers;
  */
 class LkpMeddraPtController extends \backend\modules\crud\controllers\base\LkpMeddraPtController
 {
-
+    public function behaviors() {
+        
+        return [];
+    }
 }

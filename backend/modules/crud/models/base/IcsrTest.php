@@ -56,7 +56,7 @@ abstract class IcsrTest extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'icsr_id', 'test_lkp_id'], 'required'],
+            [[ 'icsr_id', 'test_lkp_id'], 'required'],
             [['id', 'icsr_id', 'test_lkp_id'], 'integer'],
             [['date'], 'safe'],
             [['result'], 'string', 'max' => 512],

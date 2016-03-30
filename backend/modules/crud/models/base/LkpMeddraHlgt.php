@@ -49,7 +49,6 @@ abstract class LkpMeddraHlgt extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id'], 'required'],
             [['id'], 'integer'],
             [['code', 'description'], 'string', 'max' => 45]
         ];

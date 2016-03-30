@@ -51,7 +51,7 @@ abstract class LkpMeddraLlt extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'meddra_pt_id'], 'required'],
+            [[  'meddra_pt_id'], 'required'],
             [['id', 'meddra_pt_id'], 'integer'],
             [['code', 'description'], 'string', 'max' => 45],
             [['meddra_pt_id'], 'exist', 'skipOnError' => true, 'targetClass' => LkpMeddraPt::className(), 'targetAttribute' => ['meddra_pt_id' => 'id']]

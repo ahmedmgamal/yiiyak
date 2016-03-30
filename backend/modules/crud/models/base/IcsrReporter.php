@@ -68,7 +68,7 @@ abstract class IcsrReporter extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'icsr_id', 'country_lkp_id', 'occupation_lkp_id'], 'required'],
+            [[ 'icsr_id', 'country_lkp_id', 'occupation_lkp_id'], 'required'],
             [['id', 'icsr_id', 'country_lkp_id', 'occupation_lkp_id'], 'integer'],
             [['health_professional'], 'string'],
             [['first_name', 'last_name', 'address_line_1', 'address_line_2', 'city', 'state', 'zip_code', 'email'], 'string', 'max' => 45],

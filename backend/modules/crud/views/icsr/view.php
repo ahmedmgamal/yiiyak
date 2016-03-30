@@ -100,11 +100,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 
 <?php $this->beginBlock('DrugPrescriptions'); ?>
 <div style='position: relative'><div style='position:absolute; right: 0px; top: 0px;'>
-  <?php echo Html::a(
-	'<span class="glyphicon glyphicon-list"></span> ' . Yii::t('app', 'List All') . ' Drug Prescriptions',
-	['/crud/drug-prescription/index'],
-	['class'=>'btn text-muted btn-xs']
-) ?>
+
   <?php echo Html::a(
 	'<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('app', 'New') . ' Drug Prescription',
 	['/crud/drug-prescription/create', 'DrugPrescription' => ['icsr_id' => $model->id]],
@@ -187,11 +183,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 
 <?php $this->beginBlock('IcsrConcomitantDrugs'); ?>
 <div style='position: relative'><div style='position:absolute; right: 0px; top: 0px;'>
-  <?php echo Html::a(
-	'<span class="glyphicon glyphicon-list"></span> ' . Yii::t('app', 'List All') . ' Icsr Concomitant Drugs',
-	['/crud/icsr-concomitant-drug/index'],
-	['class'=>'btn text-muted btn-xs']
-) ?>
+
   <?php echo Html::a(
 	'<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('app', 'New') . ' Icsr Concomitant Drug',
 	['/crud/icsr-concomitant-drug/create', 'IcsrConcomitantDrug' => ['icsr_id' => $model->id]],
@@ -256,11 +248,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 
 <?php $this->beginBlock('IcsrEvents'); ?>
 <div style='position: relative'><div style='position:absolute; right: 0px; top: 0px;'>
-  <?php echo Html::a(
-	'<span class="glyphicon glyphicon-list"></span> ' . Yii::t('app', 'List All') . ' Icsr Events',
-	['/crud/icsr-event/index'],
-	['class'=>'btn text-muted btn-xs']
-) ?>
+
   <?php echo Html::a(
 	'<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('app', 'New') . ' Icsr Event',
 	['/crud/icsr-event/create', 'IcsrEvent' => ['icsr_id' => $model->id]],
@@ -307,7 +295,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 				 */
 				'value' => function ($model) {
 					if ($rel = $model->getMeddraLlt()->one()) {
-						return Html::a($rel->id, ['/crud/lkp-meddra-llt/view', 'id' => $rel->id, ], ['data-pjax' => 0]);
+						return Html::a($rel->code, ['/crud/lkp-meddra-llt/view', 'id' => $rel->id, ], ['data-pjax' => 0]);
 					} else {
 						return '';
 					}
@@ -324,7 +312,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 				 */
 				'value' => function ($model) {
 					if ($rel = $model->getMeddraPt()->one()) {
-						return Html::a($rel->id, ['/crud/lkp-meddra-pt/view', 'id' => $rel->id, ], ['data-pjax' => 0]);
+						return Html::a($rel->code, ['/crud/lkp-meddra-pt/view', 'id' => $rel->id, ], ['data-pjax' => 0]);
 					} else {
 						return '';
 					}
@@ -340,11 +328,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 
 <?php $this->beginBlock('IcsrOutcomeLkps'); ?>
 <div style='position: relative'><div style='position:absolute; right: 0px; top: 0px;'>
-  <?php echo Html::a(
-	'<span class="glyphicon glyphicon-list"></span> ' . Yii::t('app', 'List All') . ' Icsr Outcome Lkps',
-	['/crud/lkp-icsr-outcome/index'],
-	['class'=>'btn text-muted btn-xs']
-) ?>
+ 
   <?php echo Html::a(
 	'<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('app', 'New') . ' Icsr Outcome Lkp',
 	['/crud/lkp-icsr-outcome/create', 'IcsrOutcomeLkp' => ['id' => $model->id]],
@@ -436,11 +420,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 
 <?php $this->beginBlock('IcsrReporters'); ?>
 <div style='position: relative'><div style='position:absolute; right: 0px; top: 0px;'>
-  <?php echo Html::a(
-	'<span class="glyphicon glyphicon-list"></span> ' . Yii::t('app', 'List All') . ' Icsr Reporters',
-	['/crud/icsr-reporter/index'],
-	['class'=>'btn text-muted btn-xs']
-) ?>
+ 
   <?php echo Html::a(
 	'<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('app', 'New') . ' Icsr Reporter',
 	['/crud/icsr-reporter/create', 'IcsrReporter' => ['icsr_id' => $model->id]],
@@ -507,11 +487,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 
 <?php $this->beginBlock('IcsrTests'); ?>
 <div style='position: relative'><div style='position:absolute; right: 0px; top: 0px;'>
-  <?php echo Html::a(
-	'<span class="glyphicon glyphicon-list"></span> ' . Yii::t('app', 'List All') . ' Icsr Tests',
-	['/crud/icsr-test/index'],
-	['class'=>'btn text-muted btn-xs']
-) ?>
+ 
   <?php echo Html::a(
 	'<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('app', 'New') . ' Icsr Test',
 	['/crud/icsr-test/create', 'IcsrTest' => ['icsr_id' => $model->id]],
@@ -577,11 +553,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 
 <?php $this->beginBlock('IcsrTypeLkps'); ?>
 <div style='position: relative'><div style='position:absolute; right: 0px; top: 0px;'>
-  <?php echo Html::a(
-	'<span class="glyphicon glyphicon-list"></span> ' . Yii::t('app', 'List All') . ' Icsr Type Lkps',
-	['/crud/lkp-icsr-type/index'],
-	['class'=>'btn text-muted btn-xs']
-) ?>
+ 
   <?php echo Html::a(
 	'<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('app', 'New') . ' Icsr Type Lkp',
 	['/crud/lkp-icsr-type/create', 'IcsrTypeLkp' => ['id' => $model->id]],
@@ -679,16 +651,12 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 				'content' => $this->blocks['backend\modules\crud\models\Icsr'],
 				'active'  => true,
 			], [
-				'content' => $this->blocks['DrugPrescriptions'],
-				'label'   => '<small>Drug Prescriptions <span class="badge badge-default">'.count($model->getDrugPrescriptions()->asArray()->all()).'</span></small>',
-				'active'  => false,
-			], [
-				'content' => $this->blocks['IcsrConcomitantDrugs'],
-				'label'   => '<small>Icsr Concomitant Drugs <span class="badge badge-default">'.count($model->getIcsrConcomitantDrugs()->asArray()->all()).'</span></small>',
-				'active'  => false,
-			], [
 				'content' => $this->blocks['IcsrEvents'],
 				'label'   => '<small>Icsr Events <span class="badge badge-default">'.count($model->getIcsrEvents()->asArray()->all()).'</span></small>',
+				'active'  => false,
+			], [
+				'content' => $this->blocks['IcsrTests'],
+				'label'   => '<small>Icsr Tests <span class="badge badge-default">'.count($model->getIcsrTests()->asArray()->all()).'</span></small>',
 				'active'  => false,
 			], [
 				'content' => $this->blocks['IcsrOutcomeLkps'],
@@ -699,12 +667,16 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 				'label'   => '<small>Icsr Reporters <span class="badge badge-default">'.count($model->getIcsrReporters()->asArray()->all()).'</span></small>',
 				'active'  => false,
 			], [
-				'content' => $this->blocks['IcsrTests'],
-				'label'   => '<small>Icsr Tests <span class="badge badge-default">'.count($model->getIcsrTests()->asArray()->all()).'</span></small>',
-				'active'  => false,
-			], [
 				'content' => $this->blocks['IcsrTypeLkps'],
 				'label'   => '<small>Icsr Type Lkps <span class="badge badge-default">'.count($model->getIcsrTypeLkps()->asArray()->all()).'</span></small>',
+				'active'  => false,
+			],[
+				'content' => $this->blocks['DrugPrescriptions'],
+				'label'   => '<small>Drug Prescriptions <span class="badge badge-default">'.count($model->getDrugPrescriptions()->asArray()->all()).'</span></small>',
+				'active'  => false,
+			], [
+				'content' => $this->blocks['IcsrConcomitantDrugs'],
+				'label'   => '<small>Icsr Concomitant Drugs <span class="badge badge-default">'.count($model->getIcsrConcomitantDrugs()->asArray()->all()).'</span></small>',
 				'active'  => false,
 			], ]
 	]

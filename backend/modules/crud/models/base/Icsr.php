@@ -74,7 +74,7 @@ abstract class Icsr extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'drug_id'], 'required'],
+            [['drug_id'], 'required'],
             [['id', 'drug_id'], 'integer'],
             [['patient_age', 'patient_weight'], 'number'],
             [['patient_age_unit', 'patient_weight_unit'], 'string'],
