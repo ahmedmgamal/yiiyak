@@ -40,10 +40,17 @@ B.1 Patient
     B.1.3 Weight (kg)
 
 
+B.2 Reactions or events
+    B.2.i.0 Reaction or event as reported by the primary source
+    B.2.i.1 Reaction or event in MedDRA terminology (Lowest Level Term)
+    B.2.i.2 Reaction or event in MedDRA terminology (Preferred Term)
+    B.2.i.4 Date of start of reaction or event
+==> B.2.i.5 Date of end of reaction or event
+==> B.2.i.8 Outcome of reaction or event at the time of last observation (Recovered/resolved,Recovering/resolving,Not recovered/not resolved,Recovered/resolved with sequelae,Fatal,Unknown
 
-
-
-
+B.3
+    B.3.1 Structured information (repeat as necessary)
+    B.3.2 Results of tests and procedures relevant to the investigation
 
 
 
@@ -107,3 +114,7 @@ B.1.10.1 Parent identification
 inbetween 
 
 B.1.9. In case of death
+
+
+B.2.i.6 Duration of reaction or event
+B.2.i.7 Time intervals between suspect drug administration and start of reaction or event
