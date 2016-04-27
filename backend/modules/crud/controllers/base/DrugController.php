@@ -49,7 +49,9 @@ class DrugController extends Controller
 						 *
 						 */
 						'matchCallback' => function ($rule, $action) {
-                    return true;//\Yii::$app->user->can($this->module->id . '_' . $this->id . '_' . $action->id, ['route' => true]);
+              $result = \Yii::$app->user->can( '/' .$this->module->id . '/' . $this->id . '/' . $action->id, ['route' => true]);
+              //die($result);
+              return $result;
                     },
 					]
 				]

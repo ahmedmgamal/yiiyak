@@ -1,0 +1,7 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+     xmlns="bookstore-schema"
+     elementFormDefault="qualified"
+     targetNamespace="bookstore-schema">
+  <xsd:include id="books_common" schemaLocation="books_common.xsd"/>
+  <xsd:element name="bookstore" type="xsd:string" />
+</xsd:schema>

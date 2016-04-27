@@ -1,0 +1,10 @@
+drug identifer 
+status of yakaza center 
+wha is the api to submit files to 
+
+whats is the diffrent xsds
+
+how to genertae from from the provided xsds
+
+whts is the model design 
+laravel 

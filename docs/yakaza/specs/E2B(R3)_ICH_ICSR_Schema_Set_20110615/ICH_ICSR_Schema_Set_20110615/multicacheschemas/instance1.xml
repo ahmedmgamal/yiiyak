@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<v3:MCCI_IN200100UV01 xmlns:mif2="urn:hl7-org:v3/mif2"
+ xmlns:mif="urn:hl7-org:v3/mif"
+ xmlns:ex="urn:hl7-org/v3-example"
+ xmlns:sch="http://www.ascc.net/xml/schematron"
+ xmlns:v3="urn:hl7-org:v3"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="urn:hl7-org:v3 file:/C:/Users/Mahmoud/Desktop/yakaza/specs/E2B(R3)_ICH_ICSR_Schema_Set_20110615/ICH_ICSR_Schema_Set_20110615/multicacheschemas/MCCI_IN200100UV01.xsd" ITSVersion="XML_1.0">
+    <v3:id/>
+    <v3:creationTime/>
+    <v3:responseModeCode/>
+    <v3:interactionId/>
+    <v3:PORR_IN049017UV>
+        <v3:id/>
+        <v3:creationTime/>
+        <v3:interactionId/>
+        <v3:processingCode/>
+        <v3:processingModeCode/>
+        <v3:acceptAckCode/>
+        <v3:receiver typeCode="RCV">
+            <v3:device classCode="DEV" determinerCode="INSTANCE">
+                <v3:id/>
+                <v3:id/>
+            </v3:device>
+        </v3:receiver>
+        <v3:receiver typeCode="RCV">
+            <v3:device classCode="DEV" determinerCode="INSTANCE">
+                <v3:id/>
+                <v3:id/>
+            </v3:device>
+        </v3:receiver>
+        <v3:sender typeCode="RCV">
+            <v3:device classCode="DEV" determinerCode="INSTANCE">
+                <v3:id/>
+                <v3:id/>
+            </v3:device>
+        </v3:sender>
+        <v3:controlActProcess classCode="CACT" moodCode="APT">
+        </v3:controlActProcess>
+    </v3:PORR_IN049017UV>
+    <v3:PORR_IN049016UV>
+        <v3:id/>
+        <v3:creationTime/>
+        <v3:interactionId/>
+        <v3:processingCode/>
+        <v3:processingModeCode/>
+        <v3:acceptAckCode/>
+        <v3:receiver typeCode="RCV">
+            <v3:device classCode="DEV" determinerCode="INSTANCE">
+                <v3:id/>
+                <v3:id/>
+            </v3:device>
+        </v3:receiver>
+        <v3:receiver typeCode="RCV">
+            <v3:device classCode="DEV" determinerCode="INSTANCE">
+                <v3:id/>
+                <v3:id/>
+            </v3:device>
+        </v3:receiver>
+        <v3:sender typeCode="RCV">
+            <v3:device classCode="DEV" determinerCode="INSTANCE">
+                <v3:id/>
+                <v3:id/>
+            </v3:device>
+        </v3:sender>
+        <v3:controlActProcess classCode="CACT" moodCode="APT">
+        </v3:controlActProcess>
+    </v3:PORR_IN049016UV>
+    <v3:receiver>
+        <v3:device classCode="DEV" determinerCode="INSTANCE">
+            <v3:id/>
+            <v3:id/>
+        </v3:device>
+    </v3:receiver>
+    <v3:sender>
+        <v3:device classCode="DEV" determinerCode="INSTANCE">
+            <v3:id/>
+            <v3:id/>
+        </v3:device>
+    </v3:sender>
+</v3:MCCI_IN200100UV01>

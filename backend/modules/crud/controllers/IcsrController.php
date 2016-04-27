@@ -46,14 +46,61 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
 	}
 
         public function actionExport($id) {
- 
-//\Yii::$app->response->format = \yii\web\Response::FORMAT_XML;
+        $icsr = $this->findModel($id);
+           //$model->$icsr->getIcsrReporters()->;
+           
+        $this->layout = false;
 
-		return $this->render('export', [
-				'model' => $this->findModel($id),
-			]);
+        \Yii::$app->response->headers->add('Content-Type', 'text/xml');
+        $xml = $this->render('export', [
+                                      'model' => $icsr,
+                              ]);
+        //\Yii::$app->response->format = \yii\web\Response::FORMAT_XML;
+       // $this->getResponse()->setHeader('Content-Type', '
+       //\Yii->$app->getModule('crud')->getBaseUrl()
+       $dtd = \Yii::$app->getModule('crud')->getViewPath().'/icsr/ich-icsr-v2_1.dtd';
+
+         $this->validateXML($xml,$dtd );
+         return $xml;
 
         }
 
+    public function validateXML($xml, $dtd_realpath=null) {
+        
+    $xml_lines = explode('\n', $xml);
+    $doc = new \DOMDocument;
+    if ($dtd_realpath) {
+        // Inject DTD inside DOCTYPE line:
+        $dtd_lines = file($dtd_realpath);
+        $new_lines = array();
+        foreach ($xml_lines as $x) {
     
+            // Assume DOCTYPE SYSTEM "blah blah" format:
+            if (preg_match('/DOCTYPE/', $x)) {
+                $y = preg_replace('/SYSTEM "(.*)"/', " [\n" . implode("\n", $dtd_lines) . "\n]", $x);
+                $new_lines[] = $y;
+            } else {
+                $new_lines[] = $x;
+            }
+        }
+
+        
+        $doc->loadXML(implode("\n", $new_lines));
+    } else {
+        $doc->loadXML(implode("\n", $xml_lines));
+    }
+    // Enable user error handling
+    libxml_use_internal_errors(true);
+    if (@$doc->validate()) {
+       // echo "Valid!\n";
+    } else {
+        echo "Not valid:\n";
+        file_put_contents(\Yii::$app->getModule('crud')->getViewPath().'/icsr/invalid.xml', $xml);
+        $errors = libxml_get_errors();
+        foreach ($errors as $error) {
+            print_r($error, true);
+        }
+        die();
+    }
+}
 }

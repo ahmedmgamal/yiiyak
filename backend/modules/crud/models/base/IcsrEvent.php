@@ -89,8 +89,8 @@ abstract class IcsrEvent extends \yii\db\ActiveRecord
             'icsr_id' => Yii::t('app', 'Icsr ID'),
             'event_description' => Yii::t('app', 'Event Description'),
             'event_type' => Yii::t('app', 'Event Type'),
-            'meddra_llt_id' => Yii::t('app', 'Meddra Llt ID'),
-            'meddra_pt_id' => Yii::t('app', 'Meddra Pt ID'),
+            'meddra_llt_id' => Yii::t('app', 'Meddra LLT ID'),
+            'meddra_pt_id' => Yii::t('app', 'Meddra PT ID'),
             'event_date' => Yii::t('app', 'Event Date'),
         ];
     }
@@ -107,8 +107,8 @@ abstract class IcsrEvent extends \yii\db\ActiveRecord
             'icsr_id' => Yii::t('app', 'Icsr Id'),
             'event_description' => Yii::t('app', 'Event Description'),
             'event_type' => Yii::t('app', 'Event Type'),
-            'meddra_llt_id' => Yii::t('app', 'Meddra Llt Id'),
-            'meddra_pt_id' => Yii::t('app', 'Meddra Pt Id'),
+            'meddra_llt_id' => Yii::t('app', 'Meddra LLT Id'),
+            'meddra_pt_id' => Yii::t('app', 'Meddra PT Id'),
             'event_date' => Yii::t('app', 'Event Date'),
             ]);
     }

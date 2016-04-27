@@ -1,0 +1,353 @@
+<?php
+/**
+ * /var/www/html/yiiyak/console/runtime/giiant/d4b4964a63cc95065fa0ae19074007ee
+ *
+ * @package default
+ */
+
+
+use dmstr\helpers\Html;
+use yii\helpers\Url;
+use yii\grid\GridView;
+use yii\widgets\DetailView;
+use yii\widgets\Pjax;
+use dmstr\bootstrap\Tabs;
+
+ $config = \Yii::$app->getModule('crud')->params;
+
+?>
+ 
+<!DOCTYPE ichicsr SYSTEM "ich-icsr-v2_1.dtd">
+<ichicsr lang="en">
+	<ichicsrmessageheader>
+		<messagetype>ICSR</messagetype>
+		<messageformatversion>2.1</messageformatversion>
+		<messageformatrelease>1.0</messageformatrelease>
+		<messagenumb><?php echo $model->id; ?></messagenumb>
+		<messagesenderidentifier><?php echo $model->getDrug()->one()->getCompany()->one()->name;  ?></messagesenderidentifier>
+		<messagereceiveridentifier><?php echo $config['messagereceiveridentifier'] ?></messagereceiveridentifier>
+		<messagedateformat>102</messagedateformat>
+		<messagedate><?php echo date("Ymd"); ?> </messagedate>
+	</ichicsrmessageheader>
+	<safetyreport>
+		<safetyreportversion>1.0</safetyreportversion>
+		<safetyreportid> EG-<?php echo $model->getDrug()->one()->getCompany()->one()->name;  ?>-<?php echo $model->id; ?></safetyreportid>
+		<primarysourcecountry>EG</primarysourcecountry>
+		<occurcountry>EG</occurcountry>
+		<transmissiondateformat>102</transmissiondateformat>
+		<transmissiondate><?php echo date("Ymd"); ?> </transmissiondate>
+		<reporttype>1</reporttype>
+		<!--<serious>1</serious>-->
+		<!--#<seriousnessdeath>1</seriousnessdeath>-->
+		<!--<seriousnesslifethreatening>1</seriousnesslifethreatening>-->
+		<!--<seriousnesshospitalization>1</seriousnesshospitalization>-->
+		<!--<seriousnessdisabling>2</seriousnessdisabling>-->
+		<!--<seriousnesscongenitalanomali>2</seriousnesscongenitalanomali>-->
+		<!--<seriousnessother>2</seriousnessother>-->
+		<!--#<receivedateformat>102</receivedateformat>-->
+		<!--#<receivedate>19970102</receivedate>-->
+		<!--#####-->
+                <receiptdateformat>102</receiptdateformat>
+		<receiptdate><?php echo date("Ymd"); ?> </receiptdate>
+		<!--<additionaldocument>1</additionaldocument>-->
+		<!--<documentlist>death certificate, discharge summary, medical history, autopsy report, clinical records, passport,id</documentlist>-->
+		<!--<fulfillexpeditecriteria>1</fulfillexpeditecriteria>-->
+		<!--#<companynumb>US-pharmaceutical company-Report1</companynumb>-->
+		<!--#<duplicate>1</duplicate>-->
+		<!--<casenullification>1</casenullification>-->
+		<!--<nullificationreason>portions of previous reports were found to be erroneous and key data was missing.  invalid information regarding the drug reaction.  previously transmitted report should be considered completely void.</nullificationreason>-->
+		<!--<medicallyconfirm>1</medicallyconfirm>-->
+<!--		<reportduplicate>
+			<duplicatesource>smith, coopers, barnies, and young pharmaceuticals</duplicatesource>
+			<duplicatenumb>nmbr1234567891011121314151617181920</duplicatenumb>
+		</reportduplicate>
+		<reportduplicate>
+			<duplicatesource>smith, coopers, barnies, and young pharmaceuticals</duplicatesource>
+			<duplicatenumb>number12345678910111213141516171819</duplicatenumb>
+		</reportduplicate>
+		<linkedreport>
+			<linkreportnumb>12345678910111213141516171819202122</linkreportnumb>
+		</linkedreport>
+		<linkedreport>
+			<linkreportnumb>report number 123456789101234567891</linkreportnumb>
+		</linkedreport>-->
+		<primarysource>
+			<reportertitle><?php echo count($model->icsrReporters); ?></reportertitle>
+			<reportergivename>annabella christine katherine, VIII</reportergivename>
+			<reportermiddlename>anna maria, III</reportermiddlename>
+			<reporterfamilyname>antonita-guillermo marvellosa, XIII</reporterfamilyname>
+			<reporterorganization>friedman farms industrial pharmaceuticals of aberdeenie, md.</reporterorganization>
+			<reporterdepartment>departments of pharmacology, research and development groups</reporterdepartment>
+			<reporterstreet>12345 hammermill boulevard, suite 24100a</reporterstreet>
+			<reportercity>conquistador villa encanta junction</reportercity>
+			<reporterstate>texas texas texas texas texas texas texa</reporterstate>
+			<reporterpostcode>85226-0301abcde</reporterpostcode>
+			<reportercountry>US</reportercountry>
+			<qualification>1</qualification>
+			<literaturereference>n engl j med 1997; 336: 223-24.  n engl j med 1997; 122: 144-56. n engl j med 1996; 336: 223-24.  n engl j med 1996; 122: 144-56. n engl j med 1995; 336: 2223-24.  n engl j med 1995; 1122: 144-56. n engl j med 1994; 336: 223-24.  n engl j med 1997; 122: 1244-56. n engl j med 1997; 336: 223-24.  n engl j med 1994; 122: 144-56. n engl j med 1993; 336: 2223-24.  n engl j med 1993; 122: 144-56. n engl j med 1992; 336: 223-24.  n engl j med 1992; 122: 2144-56.  n engl j med 1991; 3136: 1223-24.</literaturereference>
+			<studyname>homeopathic cures for homicidal men</studyname>
+			<sponsorstudynumb>sponsor study number 12345678912345</sponsorstudynumb>
+			<observestudytype>2</observestudytype>
+		</primarysource>
+
+		<sender>
+ 			<senderorganization>pharmaceutical company</senderorganization>
+ 		 	</sender>
+		<receiver>
+			<receivertype>6</receivertype>
+		 		</receiver>
+		<patient>
+			<patientinitial>tms</patientinitial>
+			<patientgpmedicalrecordnumb>pmrn 102030405060708</patientgpmedicalrecordnumb>
+			<patientspecialistrecordnumb>pslrn 12345678987654</patientspecialistrecordnumb>
+			<patienthospitalrecordnumb>phrn 112233445566778</patienthospitalrecordnumb>
+			<patientinvestigationnumb>pin 988776655443322</patientinvestigationnumb>
+			<patientbirthdateformat>102</patientbirthdateformat>
+			<patientbirthdate>19970303</patientbirthdate>
+			<patientonsetage>00023</patientonsetage>
+			<patientonsetageunit>801</patientonsetageunit>
+			<gestationperiod>002</gestationperiod>
+			<gestationperiodunit>810</gestationperiodunit>
+			<patientagegroup>1</patientagegroup>
+			<patientweight>100210</patientweight>
+			<patientheight>125</patientheight>
+			<patientsex>2</patientsex>
+			<lastmenstrualdateformat>102</lastmenstrualdateformat>
+			<patientlastmenstrualdate>19970417</patientlastmenstrualdate>
+			<patientmedicalhistorytext>patient has a history of diabetes, heart disease, and asthma.  patient was hospitalized for insulin shock in 1994 for 2 weeks.  despite doctor's warnings, patient continues to smoke and does not exercise regularly.  a proper diet would help tremendously.  patient has a history of mental illness in the family.  patient was institutionalized for mild depression in 1990 for eight months.  depression is being treated with prescription drugs.  patient has never been hospitalized for severe asthma.</patientmedicalhistorytext>
+			<resultstestsprocedures> blood glucose was 227 mg/dl and the glucose tolerance test was consistent with diabetes.  Serum electrolytes indicated that the patient was not hyperosmotic.  Urinalysis was 4+ glucose, 3+protein, with no RBC or WBC.</resultstestsprocedures>
+			<medicalhistoryepisode>
+				<patientepisodenamemeddraversion> v. 2.1</patientepisodenamemeddraversion>
+				<patientepisodename> dermatitis medicamentosa</patientepisodename>
+				<patientmedicalstartdateformat>102</patientmedicalstartdateformat>
+				<patientmedicalstartdate>19970101</patientmedicalstartdate>
+				<patientmedicalcontinue>3</patientmedicalcontinue>
+				<patientmedicalenddateformat>102</patientmedicalenddateformat>
+				<patientmedicalenddate>19970304</patientmedicalenddate>
+				<patientmedicalcomment>patient's blood pressure medicine reacted adversely with asthma medicine, patient stopped breathing. </patientmedicalcomment>
+			</medicalhistoryepisode>
+			<medicalhistoryepisode>
+				<patientepisodenamemeddraversion>v. 2.2</patientepisodenamemeddraversion>
+				<patientepisodename>apnea</patientepisodename>
+				<patientmedicalstartdateformat>102</patientmedicalstartdateformat>
+				<patientmedicalstartdate>19970304</patientmedicalstartdate>
+				<patientmedicalcontinue>3</patientmedicalcontinue>
+				<patientmedicalenddateformat>102</patientmedicalenddateformat>
+				<patientmedicalenddate>19970304</patientmedicalenddate>
+				<patientmedicalcomment>patient's blood pressure medicine reacted adversely with asthma medicine, patient stopped breathing.</patientmedicalcomment>
+			</medicalhistoryepisode>
+			<patientpastdrugtherapy>
+				<patientdrugname>anti-coagulant, anti-inflammatory.  name: cardiophalopitustracin, ampm.</patientdrugname>
+				<patientdrugstartdateformat>102</patientdrugstartdateformat>
+				<patientdrugstartdate>19970103</patientdrugstartdate>
+				<patientdrugenddateformat>102</patientdrugenddateformat>
+				<patientdrugenddate>19970313</patientdrugenddate>
+				<patientindicationmeddraversion>v. 1.4</patientindicationmeddraversion>
+				<patientdrugindication>suffered an asthma attack due to an allergic reaction to blood pressure medicine. breathing stopped.</patientdrugindication>
+				<patientdrgreactionmeddraversion> v. 2.3</patientdrgreactionmeddraversion>
+				<patientdrugreaction>asthma nos</patientdrugreaction>
+			</patientpastdrugtherapy>
+			<patientpastdrugtherapy>
+				<patientdrugname>anti-coagulant, anti-inflammatory.  name: cardiophalopitustracin, ampm.</patientdrugname>
+				<patientdrugstartdateformat>102</patientdrugstartdateformat>
+				<patientdrugstartdate>19971003</patientdrugstartdate>
+				<patientdrugenddateformat>102</patientdrugenddateformat>
+				<patientdrugenddate>19971023</patientdrugenddate>
+				<patientindicationmeddraversion> v. 2.3</patientindicationmeddraversion>
+				<patientdrugindication>hypertension nos</patientdrugindication>
+				<patientdrgreactionmeddraversion> v. 2.3</patientdrgreactionmeddraversion>
+				<patientdrugreaction>asthma aggravated</patientdrugreaction>
+			</patientpastdrugtherapy>
+			<patientdeath>
+				<patientdeathdateformat>102</patientdeathdateformat>
+				<patientdeathdate>19970305</patientdeathdate>
+				<patientautopsyyesno>1</patientautopsyyesno>
+				<patientdeathcause>
+					<patientdeathreportmeddraversion> v. 2.3</patientdeathreportmeddraversion>
+					<patientdeathreport>ventricular fibrillation</patientdeathreport>
+				</patientdeathcause>
+				<patientdeathcause>
+					<patientdeathreportmeddraversion> v. 2.3</patientdeathreportmeddraversion>
+					<patientdeathreport>cardiomyopathy acute</patientdeathreport>
+				</patientdeathcause>
+				<patientautopsy>
+					<patientdetermautopsmeddraversion> v. 2.3</patientdetermautopsmeddraversion>
+					<patientdetermineautopsy>Hypersensitivity nos</patientdetermineautopsy>
+				</patientautopsy>
+				<patientautopsy>
+					<patientdetermautopsmeddraversion> v. 2.3</patientdetermautopsmeddraversion>
+					<patientdetermineautopsy>respiratory arrest (exc neonatal)</patientdetermineautopsy>
+				</patientautopsy>
+			</patientdeath>
+			<parent>
+				<parentidentification>rac</parentidentification>
+				<parentage>43</parentage>
+				<parentageunit>801</parentageunit>
+				<parentlastmenstrualdateformat>102</parentlastmenstrualdateformat>
+				<parentlastmenstrualdate>19970301</parentlastmenstrualdate>
+				<parentweight>001234</parentweight>
+				<parentheight>130</parentheight>
+				<parentsex>2</parentsex>
+				<parentmedicalrelevanttext>parents have a history of asthma and heart disease.  mother has been hospitalized numerous times for allergic reactions to medication. parents have a history of asthma and heart disease.  mother has been hospitalized numerous times for allergic reactions to medication. parents have a history of asthma and heart disease.  mother has been father died of heart failure at age 45.  history.</parentmedicalrelevanttext>
+				<parentmedicalhistoryepisode>
+					<parentmdepisodemeddraversion> v. 2.3</parentmdepisodemeddraversion>
+					<parentmedicalepisodename>myocardial infarction</parentmedicalepisodename>
+					<parentmedicalstartdateformat>102</parentmedicalstartdateformat>
+					<parentmedicalstartdate>19960102</parentmedicalstartdate>
+					<parentmedicalcontinue>3</parentmedicalcontinue>
+					<parentmedicalenddateformat>102</parentmedicalenddateformat>
+					<parentmedicalenddate>19960404</parentmedicalenddate>
+					<parentmedicalcomment>patient's blood pressure medicine reacted adversely with asthma medicine, patient stopped breathing.</parentmedicalcomment>
+				</parentmedicalhistoryepisode>
+				<parentmedicalhistoryepisode>
+					<parentmdepisodemeddraversion> v. 2.3</parentmdepisodemeddraversion>
+					<parentmedicalepisodename>sudden death unexplained</parentmedicalepisodename>
+					<parentmedicalstartdateformat>102</parentmedicalstartdateformat>
+					<parentmedicalstartdate>19950102</parentmedicalstartdate>
+					<parentmedicalcontinue>3</parentmedicalcontinue>
+					<parentmedicalenddateformat>102</parentmedicalenddateformat>
+					<parentmedicalenddate>19950112</parentmedicalenddate>
+					<parentmedicalcomment>patient's blood pressure medicine reacted adversely with asthma medicine, patient stopped breathing.</parentmedicalcomment>
+				</parentmedicalhistoryepisode>
+				<parentpastdrugtherapy>
+					<parentdrugname>acetatetraglyceride 3, acetatetraglyceride 31, acetatetraglyceride 32.</parentdrugname>
+					<parentdrugstartdateformat>102</parentdrugstartdateformat>
+					<parentdrugstartdate>19960411</parentdrugstartdate>
+					<parentdrugenddateformat>102</parentdrugenddateformat>
+					<parentdrugenddate>19961019</parentdrugenddate>
+					<parentdrgindicationmeddraversion> v. 2.3</parentdrgindicationmeddraversion>
+					<parentdrugindication>glomerulonephritis membranous</parentdrugindication>
+					<parentdrgreactionmeddraversion> v. 2.3</parentdrgreactionmeddraversion>
+					<parentdrugreaction>hypersensitivity nos</parentdrugreaction>
+				</parentpastdrugtherapy>
+				<parentpastdrugtherapy>
+					<parentdrugname>acetatetraglyceride 3, acetatetraglyceride 31, acetatetraglyceride 32.</parentdrugname>
+					<parentdrugstartdateformat>102</parentdrugstartdateformat>
+					<parentdrugstartdate>19951101</parentdrugstartdate>
+					<parentdrugenddateformat>102</parentdrugenddateformat>
+					<parentdrugenddate>19960211</parentdrugenddate>
+					<parentdrgindicationmeddraversion> v. 2.3</parentdrgindicationmeddraversion>
+					<parentdrugindication>Henoch-Shonlein Purpura</parentdrugindication>
+					<parentdrgreactionmeddraversion> v. 2.3</parentdrgreactionmeddraversion>
+					<parentdrugreaction>asthma attack, bronchial tubes constricted, cut off breathing. reacted with blood pressure medicine.</parentdrugreaction>
+				</parentpastdrugtherapy>
+			</parent>
+			<reaction>
+				<primarysourcereaction>allergic reaction between asthma medicine and blood pressure medicine.  caused difficulty breathing.</primarysourcereaction>
+				<reactionmeddraversionllt> v. 2.3</reactionmeddraversionllt>
+				<reactionmeddrallt>difficulty breathing</reactionmeddrallt>
+				<reactionmeddraversionpt> v. 2.3</reactionmeddraversionpt>
+				<reactionmeddrapt>dyspnoea nos</reactionmeddrapt>
+				<termhighlighted>1</termhighlighted>
+				<reactionstartdateformat>102</reactionstartdateformat>
+				<reactionstartdate>19960511</reactionstartdate>
+				<reactionenddateformat>102</reactionenddateformat>
+				<reactionenddate>19961014</reactionenddate>
+				<reactionduration>00054</reactionduration>
+				<reactiondurationunit>804</reactiondurationunit>
+				<reactionfirsttime>01200</reactionfirsttime>
+				<reactionfirsttimeunit>806</reactionfirsttimeunit>
+				<reactionlasttime>10365</reactionlasttime>
+				<reactionlasttimeunit>806</reactionlasttimeunit>
+				<reactionoutcome>5</reactionoutcome>
+			</reaction>
+			<reaction>
+				<primarysourcereaction>allergic reaction between asthma medicine and blood pressure medicine.  caused difficulty breathing.</primarysourcereaction>
+				<reactionmeddraversionllt> v. 2.3</reactionmeddraversionllt>
+				<reactionmeddrallt>Asthma aggravated</reactionmeddrallt>
+				<reactionmeddraversionpt> v. 2.3</reactionmeddraversionpt>
+				<reactionmeddrapt>Asthma aggravated</reactionmeddrapt>
+				<termhighlighted>1</termhighlighted>
+				<reactionstartdateformat>102</reactionstartdateformat>
+				<reactionstartdate>19971020</reactionstartdate>
+				<reactionenddateformat>102</reactionenddateformat>
+				<reactionenddate>19970303</reactionenddate>
+				<reactionduration>87654</reactionduration>
+				<reactiondurationunit>804</reactiondurationunit>
+				<reactionfirsttime>74125</reactionfirsttime>
+				<reactionfirsttimeunit>807</reactionfirsttimeunit>
+				<reactionlasttime>45632</reactionlasttime>
+				<reactionlasttimeunit>807</reactionlasttimeunit>
+				<reactionoutcome>6</reactionoutcome>
+			</reaction>
+			<test>
+				<testdateformat>102</testdateformat>
+				<testdate>19951025</testdate>
+				<testname>endochromagnopholis test phase 3, step 4343b.  tests level of endoche.</testname>
+				<testresult>.12345657</testresult>
+				<testunit>percentage of endochrome4 in blood.</testunit>
+				<lowtestrange>0.01874147</lowtestrange>
+				<hightestrange>1.00236547</hightestrange>
+				<moreinformation>2</moreinformation>
+			</test>
+			<test>
+				<testdateformat>102</testdateformat>
+				<testdate>19951031</testdate>
+				<testname>endochromagnopholis test phase 3, step 4343b.  tests level of endoche.</testname>
+				<testresult>.12345657</testresult>
+				<testunit>percentage of endochrome4 in blood.</testunit>
+				<lowtestrange>0.17896541</lowtestrange>
+				<hightestrange>3.21403698</hightestrange>
+				<moreinformation>2</moreinformation>
+			</test>
+			<drug>
+				<drugcharacterization>1</drugcharacterization>
+				<medicinalproduct>witecaker's wittimandellicus seronome type n-4 for high blood pressure</medicinalproduct>
+				<obtaindrugcountry>US</obtaindrugcountry>
+				<drugbatchnumb>batch number 123456789123456789AAAA</drugbatchnumb>
+				<drugauthorizationnumb>authorization number a1b2c3d4e5f6g7</drugauthorizationnumb>
+				<drugauthorizationcountry>US</drugauthorizationcountry>
+				<drugauthorizationholder>yutz and putz laboratories of maryland and northern virginia</drugauthorizationholder>
+				<drugstructuredosagenumb>12345678</drugstructuredosagenumb>
+				<drugstructuredosageunit>004</drugstructuredosageunit>
+				<drugseparatedosagenumb>741</drugseparatedosagenumb>
+				<drugintervaldosageunitnumb>002</drugintervaldosageunitnumb>
+				<drugintervaldosagedefinition>804</drugintervaldosagedefinition>
+				<drugcumulativedosagenumb>10</drugcumulativedosagenumb>
+				<drugcumulativedosageunit>003</drugcumulativedosageunit>
+				<drugdosagetext>recommended dosage must be strictly followed. take medicine as prescribed, only on an empty stomach.12345678 micrograms 741 times every other day for a very long time. </drugdosagetext>
+				<drugdosageform>drug dosage form is listed as 100000 mg caplettes.</drugdosageform>
+				<drugadministrationroute>048</drugadministrationroute>
+				<drugparadministration>048</drugparadministration>
+				<reactiongestationperiod>112</reactiongestationperiod>
+				<reactiongestationperiodunit>803</reactiongestationperiodunit>
+				<drugindicationmeddraversion> v. 2.3</drugindicationmeddraversion>
+				<drugindication>cardiac murmur nos</drugindication>
+				<drugstartdateformat>102</drugstartdateformat>
+				<drugstartdate>19951011</drugstartdate>
+				<drugstartperiod>98765</drugstartperiod>
+				<drugstartperiodunit>806</drugstartperiodunit>
+				<druglastperiod>45678</druglastperiod>
+				<druglastperiodunit>807</druglastperiodunit>
+				<drugenddateformat>102</drugenddateformat>
+				<drugenddate>19950106</drugenddate>
+				<drugtreatmentduration>10021</drugtreatmentduration>
+				<drugtreatmentdurationunit>803</drugtreatmentdurationunit>
+				<actiondrug>1</actiondrug>
+				<drugrecurreadministration>3</drugrecurreadministration>
+				<drugadditional>studies being performed to assess the effect of this new drug. in search of additional information.</drugadditional>
+				<activesubstance>
+					<activesubstancename>active ingredients include:  hydrochorataine, water, and hypertacitus.</activesubstancename>
+				</activesubstance>
+				<drugrecurrence>
+					<drugrecuractionmeddraversion> v. 2.3</drugrecuractionmeddraversion>
+					<drugrecuraction>asthma aggravated</drugrecuraction>
+				</drugrecurrence>
+				<drugreactionrelatedness>
+					<drugreactionassesmeddraversion> v. 2.3</drugreactionassesmeddraversion>
+					<drugreactionasses>asthma aggravated</drugreactionasses>
+					<drugassessmentsource>regulatory agency for the prevention of any needless deaths.</drugassessmentsource>
+					<drugassessmentmethod>algorithm</drugassessmentmethod>
+					<drugresult>related</drugresult>
+				</drugreactionrelatedness>
+			</drug>
+			<summary>
+				<narrativeincludeclinical>physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures. the outcome is currently being determined.  additional relevant information will soon follow. the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures. the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures. the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures. the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures. the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures. the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures. the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures. the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures. the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures. the outcome is currently being determined.</narrativeincludeclinical>
+				<reportercomment>more information is necessary to accurately assess this lethal drug combination (654321a).  i recommend an in-depth investigation be conducted by the proper authorities (123).  no further comments at this time.</reportercomment>
+				<senderdiagnosismeddraversion>v. 2.3</senderdiagnosismeddraversion>
+				<senderdiagnosis>more information is necessary to accurately assess this lethal drug combination (654321a).  i recommend an in-depth investigation be conducted by the proper authorities (123).  no further comments at this time.</senderdiagnosis>
+				<sendercomment>this will be the agency's last transmission for some time.  ICSRs will be submitted again next month.  this will be the agency's last transmission for some time.  ICSRs will be submitted again next month.  this will be the agency's last transmission for some time.  ICSRs will be submitted again next month. this will be the agency's last transmission for some time.  ICSRs will be submitted again next month.  this will be the agency's last transmission for some time.  ICSRs will be submitted again next month.  this will be the agency's last transmission for some time.  ICSRs will be submitted again next month.  this will be the agency's last transmission for some time.  ICSRs will be submitted again next month.  this will be the agency's last transmission for some time.  ICSRs will be submitted again next month.  this will be the agency's last transmission for some time.  ICSRs will be submitted again next month.  more comments are necessary. questions, please feel free to contact.</sendercomment>
+			</summary>
+		</patient>
+	</safetyreport>
+</ichicsr>
