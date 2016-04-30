@@ -39,13 +39,10 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
     <div class="clearfix crud-navigation">
         <!-- menu buttons -->
         <div class='pull-left'>
-            <?= Html::a('<span class="glyphicon glyphicon-pencil"></span> ' . Yii::t('app', 'Edit'), ['update', 'id' => $model->id],['class' => 'btn btn-info']) ?>
-            <?= Html::a('<span class="glyphicon glyphicon-copy"></span> ' . Yii::t('app', 'Copy'), ['create', 'id' => $model->id, 'Icsr            '=>$copyParams],['class' => 'btn btn-success']) ?>
-            <?= Html::a('<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('app', 'New'), ['create'], ['class' => 'btn btn-success']) ?>
+            <?php echo Html::a('<span class="glyphicon glyphicon-pencil"></span> ' . Yii::t('app', 'Edit'), ['update', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
+            <?php echo Html::a('<span class="glyphicon glyphicon-copy"></span> ' . Yii::t('app', 'Export  Xml'), ['export', 'id' => $model->id ], ['class' => 'btn btn-success', 'target'=>'_blank']) ?>
         </div>
-        <div class="pull-right">
-            <?= Html::a('<span class="glyphicon glyphicon-list"></span> ' . Yii::t('app', 'Full list'), ['index'], ['class'=>'btn btn-default']) ?>
-        </div>
+
 
     </div>
 
@@ -53,7 +50,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
     <?php $this->beginBlock('backend\modules\crud\models\Icsr'); ?>
 
     
-    <?= DetailView::widget([
+    <?php echo DetailView::widget([
     'model' => $model,
     'attributes' => [
             'id',
@@ -120,7 +117,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
     
     <hr/>
 
-    <?= Html::a('<span class="glyphicon glyphicon-trash"></span> ' . Yii::t('app', 'Delete'), ['delete', 'id' => $model->id],
+    <?php echo Html::a('<span class="glyphicon glyphicon-trash"></span> ' . Yii::t('app', 'Delete'), ['delete', 'id' => $model->id],
     [
     'class' => 'btn btn-danger',
     'data-confirm' => '' . Yii::t('app', 'Are you sure to delete this item?') . '',
@@ -132,6 +129,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
     
 <?php $this->beginBlock('DrugPrescriptions'); ?>
 <div style='position: relative'><div style='position:absolute; right: 0px; top: 0px;'>
+
   <?php echo Html::a(
             '<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('app', 'New') . ' Drug Prescription',
 	['/crud/drug-prescription/create', 'DrugPrescription' => ['icsr_id' => $model->id]],
@@ -150,6 +148,10 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
     'class'      => 'yii\grid\ActionColumn',
     'template'   => '{view} {update}',
     'contentOptions' => ['nowrap'=>'nowrap'],
+
+				/**
+				 *
+				 */
     'urlCreator' => function ($action, $model, $key, $index) {
         // using the column name as key, not mapping to 'id' like the standard generator
         $params = is_array($key) ? $key : [$model->primaryKey()[0] => (string) $key];
@@ -182,7 +184,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
     'attribute' => 'frequency_lkp_id',
     'value' => function ($model) {
         if ($rel = $model->getFrequencyLkp()->one()) {
-            return Html::a($rel->id, ['lkp-frequency/view', 'id' => $rel->id,], ['data-pjax' => 0]);
+						return Html::a($rel->description, ['/crud/lkp-frequency/view', 'id' => $rel->id, ], ['data-pjax' => 0]);
         } else {
             return '';
         }
@@ -197,9 +199,6 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 ]) . '</div>' ?>
 <?php Pjax::end() ?>
 <?php $this->endBlock() ?>
-
-
-
 
 
 <?php $this->beginBlock('IcsrEvents'); ?>
