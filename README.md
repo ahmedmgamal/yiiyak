@@ -14,10 +14,10 @@ xml must have files
 
 A.1 Case
      A.1.0.1 Sender’s (case) safety report unique identifier
- =>  A.1.1 Identification of the country of the primary source
- ==> A.1.4 Type of report
- ===>A.1.5 Seriousness
- ===>A.1.5.2. Seriousness criteria
+     A.1.1 Identification of the country of the primary source
+     A.1.4 Type of report
+     A.1.5 Seriousness
+     A.1.5.2. Seriousness criteria
      A.1.6 Date report was first received from source
      A.1.10 Worldwide unique case identification number.
 
@@ -48,15 +48,15 @@ B.2 Reactions or events
     B.2.i.1 Reaction or event in MedDRA terminology (Lowest Level Term)
     B.2.i.2 Reaction or event in MedDRA terminology (Preferred Term)
     B.2.i.4 Date of start of reaction or event
-==> B.2.i.5 Date of end of reaction or event
-==> B.2.i.8 Outcome of reaction or event at the time of last observation (Recovered/resolved,Recovering/resolving,Not recovered/not resolved,Recovered/resolved with sequelae,Fatal,Unknown
+	B.2.i.5 Date of end of reaction or event
+	B.2.i.8 Outcome of reaction or event at the time of last observation (Recovered/resolved,Recovering/resolving,Not recovered/not resolved,Recovered/resolved with sequelae,Fatal,Unknown
 
 B.3
     B.3.1 Structured information (repeat as necessary)
     B.3.2 Results of tests and procedures relevant to the investigation
 
 B.4
-==>	B.4.k.1 Characterization of drug role (Suspect/Concomitant/Interacting)
+	B.4.k.1 Characterization of drug role (Suspect/Concomitant/Interacting)
 	B.4.k.2 Drug identification
 	B.4.k.3 Batch/lot number
 	B.4.k.6 Dosage text
@@ -65,7 +65,7 @@ B.4
 	B.4.k.12 Date of start of drug
 	B.4.k.14 Date of last administration
 	B.4.k.15 Duration of drug administration
-==> B.4.k.16 Action(s) taken with drug (− Drug withdrawn,− Dose reduced,− Dose increased,− Dose not changed,− Unknown,− Not applicable)
+	B.4.k.16 Action(s) taken with drug (− Drug withdrawn,− Dose reduced,− Dose increased,− Dose not changed,− Unknown,− Not applicable)
 	B.4.k.17 Effect of rechallenge
 	B.4.k.19 Additional information on drug
 	

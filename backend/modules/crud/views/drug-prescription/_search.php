@@ -1,44 +1,34 @@
 <?php
-/**
- * /var/www/html/yiiyak/console/runtime/giiant/eeda5c365686c9888dbc13dbc58f89a1
- *
- * @package default
- */
-
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /**
- *
- * @var yii\web\View $this
- * @var backend\modules\crud\models\search\DrugPrescription $model
- * @var yii\widgets\ActiveForm $form
- */
+* @var yii\web\View $this
+* @var backend\modules\crud\models\search\DrugPrescription $model
+* @var yii\widgets\ActiveForm $form
+*/
 ?>
 
 <div class="drug-prescription-search">
 
     <?php $form = ActiveForm::begin([
-		'action' => ['index'],
-		'method' => 'get',
-	]); ?>
+    'action' => ['index'],
+    'method' => 'get',
+    ]); ?>
 
-    		<?php echo $form->field($model, 'id') ?>
+    		<?= $form->field($model, 'id') ?>
 
-		<?php echo $form->field($model, 'drug_id') ?>
+		<?= $form->field($model, 'drug_id') ?>
 
-		<?php echo $form->field($model, 'icsr_id') ?>
+		<?= $form->field($model, 'icsr_id') ?>
 
-		<?php echo $form->field($model, 'dose') ?>
+		<?= $form->field($model, 'dose') ?>
 
-		<?php echo $form->field($model, 'frequency_lkp_id') ?>
 
 		<?php // echo $form->field($model, 'expiration_date') ?>
 
 		<?php // echo $form->field($model, 'lot_no') ?>
-
-		<?php // echo $form->field($model, 'ndc') ?>
 
 		<?php // echo $form->field($model, 'use_date_start') ?>
 
@@ -56,9 +46,25 @@ use yii\widgets\ActiveForm;
 
 		<?php // echo $form->field($model, 'product_avilable') ?>
 
+		<?php // echo $form->field($model, 'active_substance_names') ?>
+
+		<?php // echo $form->field($model, 'drug_role') ?>
+
+		<?php // echo $form->field($model, 'drug_addtional_info') ?>
+
+		<?php // echo $form->field($model, 'drug_action_drug_withdrawn')->checkbox() ?>
+
+		<?php // echo $form->field($model, 'drug_action_dose_reduced')->checkbox() ?>
+
+		<?php // echo $form->field($model, 'drug_action_dose_increased')->checkbox() ?>
+
+		<?php // echo $form->field($model, 'drug_action_dose_not_changed')->checkbox() ?>
+
+		<?php // echo $form->field($model, 'drug_action_unknown')->checkbox() ?>
+
     <div class="form-group">
-        <?php echo Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
-        <?php echo Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-default']) ?>
+        <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
+        <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-default']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
