@@ -27,7 +27,7 @@ class Icsr extends BaseIcsr
             'patient_birth_date' => Yii::t('app', 'B.1.2.1 Date of birth'),
             'patient_weight' => Yii::t('app', 'B.1.3 Weight '),
             'patient_weight_unit' => Yii::t('app', 'B.1.3b Weight  Unit'),
-            'extra_history' => Yii::t('app', 'Extra History'),
+            'extra_history' => Yii::t('app', 'B.1.7.2 Text for relevant medical history and concurrent conditions (not including reaction/event)'),
             ]);
     }
 }
