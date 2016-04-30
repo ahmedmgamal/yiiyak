@@ -1,10 +1,11 @@
 <?php
+
 return [
 
-    'params'=>  [  
+    'params' => [
         'messagereceiveridentifier' => 'Egyptian PV',
-    'supportEmail' => 'support@example.com',
-    'user.passwordResetTokenExpire' => 3600,
-        ]
-        
+        'meddraversion' => 'v. 2.3',
+        'supportEmail' => 'support@example.com',
+        'user.passwordResetTokenExpire' => 3600,
+    ]
 ];

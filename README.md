@@ -7,7 +7,18 @@ TODO
 -add xml refrence  
 
 
+drug presecritopn 
+	show drug list of the comapnyy 
+icsr event
+	icsr list : remove list all icsr events link 
+fix date conversion issue 
+remove $patient_weight_unit
+remove more info from test
+use of active ssubtance vs traade name 
 
+
+question 
+what is the diffece betwenn A.1.0.1, A.1.10.2, 
 
 xml must have files 
 ====================
@@ -15,6 +26,7 @@ xml must have files
 A.1 Case
      A.1.0.1 Sender’s (case) safety report unique identifier
      A.1.1 Identification of the country of the primary source
+     A.1.3 Date of this transmission
      A.1.4 Type of report
      A.1.5 Seriousness
      A.1.5.2. Seriousness criteria
@@ -83,8 +95,10 @@ B.4
 Post launch 
 ===========
 A.1
+	A.1.2 Identification of the country where the reaction / event occurred
     A.1.7 Date of receipt of the most recent information for this report
     A.1.8.1 Are additional documents available?
+    A.1.11 Other case identifiers in previous transmissions
     
 A.2
     A.2.2 Literature references

@@ -5,40 +5,226 @@
 		<messagetype>ICSR</messagetype>
 		<messageformatversion>2.1</messageformatversion>
 		<messageformatrelease>1.0</messageformatrelease>
-		<messagenumb>5</messagenumb>
+		<messagenumb>1</messagenumb>
 		<messagesenderidentifier>EMEO5</messagesenderidentifier>
 		<messagereceiveridentifier>Egyptian PV</messagereceiveridentifier>
 		<messagedateformat>102</messagedateformat>
-		<messagedate>20160427 </messagedate>
+		<messagedate>20160430 </messagedate>
 	</ichicsrmessageheader>
 	<safetyreport>
 		<safetyreportversion>1.0</safetyreportversion>
-		<safetyreportid> EG-EMEO5-5</safetyreportid>
+		
+		<!--A.1.0.1 Sender’s (case) safety report unique identifier-->
+		<safetyreportid> EG-EMEO5-1</safetyreportid>
+		
+		<!--     A.1.1 Identification of the country of the primary source -->
 		<primarysourcecountry>EG</primarysourcecountry>
-		<occurcountry>EG</occurcountry>
+		
+		<!--      A.1.3 Date of this transmission -->
 		<transmissiondateformat>102</transmissiondateformat>
-		<transmissiondate>20160427 </transmissiondate>
-		<reporttype>1</reporttype>
+		<transmissiondate>20160430 </transmissiondate>
+		
+		<!--     A.1.4 Type of report --> 
+		<reporttype>from_study</reporttype>
+ 		
+ 		<!--A.1.5 Seriousness -->
+ 		<serious>yes</serious>
+		
+		<!--A.1.5.2. Seriousness criteria-->
+		<seriousnessdeath>no</seriousnessdeath>
+		<seriousnesslifethreatening>yes</seriousnesslifethreatening>
+		<seriousnesshospitalization>no</seriousnesshospitalization>
+		<seriousnessdisabling>yes</seriousnessdisabling>
+		<seriousnesscongenitalanomali>yes</seriousnesscongenitalanomali>
+		<seriousnessother>yes</seriousnessother>
+		
+		<!--*** A.1.6 Date report was first received from source-->
+		<receivedateformat>102</receivedateformat>
+		<receivedate>19970102</receivedate>
+        
+        <!--*** A.1.7	Date of receipt of the most recent information for this report --> 
+        <receiptdateformat>102</receiptdateformat>
+		<receiptdate>20160430 </receiptdate>
+		
+		<!--A.1.10	Worldwide unique case identification number.      --> 
+		<companynumb> EG-EMEO5-1</companynumb>
  
-                <receiptdateformat>102</receiptdateformat>
-		<receiptdate>20160427 </receiptdate>
- 
-		<primarysource>
-  
-		</primarysource>
-
-		<sender>
- 			<senderorganization>pharmaceutical company</senderorganization>
- 		 	</sender>
-		<receiver>
-			<receivertype>6</receivertype>
-		 		</receiver>
-		<patient>
-  
-			<reaction>
+					<primarysource>
+				<!--A.2.1.1	Reporter identifier (name or initials)       -->
+				<reportergivename></reportergivename>
+				<reporterfamilyname></reporterfamilyname>
 				
+				<!-- A.2.1.2	Reporter’s address          -->
+				<reporterstreet>  </reporterstreet>
+				<reportercity>asd</reportercity>
+				<reporterstate>dasdas</reporterstate>
+				<reporterpostcode>111</reporterpostcode>
+			
+				<!--  A.2.1.3	Country           -->
+				<reportercountry>EG</reportercountry>
+				
+				<!-- A.2.1.4	Qualification           -->
+				<qualification> Other Health Professional </qualification>
+
+			</primarysource>  
+	 
+					<primarysource>
+				<!--A.2.1.1	Reporter identifier (name or initials)       -->
+				<reportergivename>asda</reportergivename>
+				<reporterfamilyname>dasd</reporterfamilyname>
+				
+				<!-- A.2.1.2	Reporter’s address          -->
+				<reporterstreet>asdasdas dasdasd </reporterstreet>
+				<reportercity>asdas</reportercity>
+				<reporterstate></reporterstate>
+				<reporterpostcode></reporterpostcode>
+			
+				<!--  A.2.1.3	Country           -->
+				<reportercountry>EG</reportercountry>
+				
+				<!-- A.2.1.4	Qualification           -->
+				<qualification> Other Health Professional </qualification>
+
+			</primarysource>  
+	 
+		 
+	
+	<!-- A.3	Sender	and reviver          -->
+		<sender>
+ 			
+<!-- A.3.1.1	Sender Type          -->
+			<sendertype>pharmaceutical company</sendertype>
+					
+<!--	A.3.1.2	Sender identifier          -->
+			<senderorganization>EMEO5</senderorganization>
+
+<!--***	A.3.1.3	Person responsible for sending the report      -->
+			<sendergivename>ahmed</sendergivename>
+
+<!-- A.3.1.4l E-mail address -->
+ 			<senderemailaddress>ahmed@ahmed.com</senderemailaddress>
+
+ 		</sender>
+ 
+
+		<receiver>
+			 <!--	A.3.2.1	Receiver Type          -->
+			<receivertype>Regulatory authority</receivertype>
+		</receiver>
+
+		<patient>
+<!--  B.1.1	Patient (name or initials)        -->
+			<patientinitial>ad</patientinitial>
+
+<!--  B.1.2.1	Date of birth         -->
+			<patientbirthdateformat>102</patientbirthdateformat>
+            <patientbirthdate>2002-11-15</patientbirthdate>
+<!--  B.1.2.2	Age at time of onset of reaction / event   -->
+			<patientonsetage>22.00</patientonsetage>
+			<patientonsetageunit>month</patientonsetageunit>
+<!--  B.1.3	Weight (kg)          -->
+			<patientweight>22.00</patientweight>
+
+<!--  B.1.7.2	Text for relevant medical history and concurrent conditions (not including reaction/event) -->
+			<patientmedicalhistorytext>dfgdsfgdfg</patientmedicalhistorytext>
+
+				<reaction>
+<!--  B.2.i.0	Reaction or event as reported by the primary source   -->
+				<primarysourcereaction>sfsdf</primarysourcereaction>
+
+<!--  B.2.i.1	Reaction or event in MedDRA terminology (Lowest Level Term)   -->
+				<reactionmeddraversionllt> v. 2.3 </reactionmeddraversionllt>
+				<reactionmeddrallt>LkpMeddraLlt 2222</reactionmeddrallt>
+<!--  B.2.i.2	Reaction or event in MedDRA terminology (Preferred Term)    -->
+				<reactionmeddraversionpt>  v. 2.3 </reactionmeddraversionpt>
+				<reactionmeddrapt>asdfsadf</reactionmeddrapt>
+<!--  B.2.i.4	Date of start of reaction or event     -->
+				<reactionstartdateformat>102</reactionstartdateformat>
+				<reactionstartdate>2016-03-30</reactionstartdate>
+<!--  B.2.i.5	Date of end of reaction or event     -->
+				<reactionenddateformat>102</reactionenddateformat>
+				<reactionenddate>2016-04-28</reactionenddate>
+
+<!--  B.2.i.8	Outcome of reaction or event at the time of last observation (Recovered/resolved,Recovering/resolving,Not-->
+				<reactionoutcome>Not recovered/not resolved</reactionoutcome>
+
+
 			</reaction>
-  
+				<reaction>
+<!--  B.2.i.0	Reaction or event as reported by the primary source   -->
+				<primarysourcereaction>sss</primarysourcereaction>
+
+<!--  B.2.i.1	Reaction or event in MedDRA terminology (Lowest Level Term)   -->
+				<reactionmeddraversionllt> v. 2.3 </reactionmeddraversionllt>
+				<reactionmeddrallt>LkpMeddraLlt 11111</reactionmeddrallt>
+<!--  B.2.i.2	Reaction or event in MedDRA terminology (Preferred Term)    -->
+				<reactionmeddraversionpt>  v. 2.3 </reactionmeddraversionpt>
+				<reactionmeddrapt>Meddra Pt Text</reactionmeddrapt>
+<!--  B.2.i.4	Date of start of reaction or event     -->
+				<reactionstartdateformat>102</reactionstartdateformat>
+				<reactionstartdate>2016-04-04</reactionstartdate>
+<!--  B.2.i.5	Date of end of reaction or event     -->
+				<reactionenddateformat>102</reactionenddateformat>
+				<reactionenddate>2016-04-21</reactionenddate>
+
+<!--  B.2.i.8	Outcome of reaction or event at the time of last observation (Recovered/resolved,Recovering/resolving,Not-->
+				<reactionoutcome>Recovered/resolved with sequelae</reactionoutcome>
+
+
+			</reaction>
+	
+
+			<test>
+			<!--B.3.1	Structured information (repeat as necessary)       -->
+				<testdateformat>102</testdateformat>
+				<testdate>2016-03-16</testdate>
+				<testname>	blood presure</testname>
+				<testresult>sdf</testresult>
+				<testunit>sdfsdfs</testunit>
+				<lowtestrange>dfsdf</lowtestrange>
+				<hightestrange>sdfsdf</hightestrange>
+				<moreinformation>sdfsd</moreinformation>
+			
+		</test>
+					<drug>
+<!--  B.4.k.1	Characterization of drug role (Suspect/Concomitant/Interacting)    -->   
+				<drugcharacterization>Suspect</drugcharacterization>
+
+<!--  B.4.k.2	Drug identification           -->
+
+ 
+				<medicinalproduct>drug8</medicinalproduct>
+
+				 <!--  B.4.k.3	Batch/lot number           -->
+				<drugbatchnumb>222</drugbatchnumb>
+
+<!--  B.4.k.6	Dosage text           -->
+				<drugdosagetext>22</drugdosagetext>
+
+<!--  B.4.k.8	Route of administration   -->       
+				<drugadministrationroute>8</drugadministrationroute>
+
+<!--  B.4.k.11	Indication for use in the case       -->
+				<drugindication>B.4.k.11 Indication for use in the case</drugindication>
+<!--  B.4.k.12	Date of start of drug        -->
+				<drugstartdateformat>102</drugstartdateformat>
+				<drugstartdate>2016-04-10</drugstartdate>
+<!--  B.4.k.14	Date of last administration      -->  
+ 				<drugenddateformat>102</drugenddateformat>
+				<drugenddate>2016-04-27</drugenddate>
+<!--  B.4.k.15	Duration of drug administration      -->   
+				<drugtreatmentduration>22.00</drugtreatmentduration>
+				<drugtreatmentdurationunit>day</drugtreatmentdurationunit>
+<!--  B.4.k.16	Action(s) taken with drug (− Drug withdrawn,− Dose reduced,− Dose increased,− Dose -->
+<actiondrug>drug_withdrawn</actiondrug>
+
+									<actiondrug>drug_withdrawn</actiondrug>
+				
+<!--  B.4.k.17	Effect of rechallenge          -->
+<!--  B.4.k.19	Additional information on drug     -->    
+
+			</drug>
+	
  		</patient>
 	</safetyreport>
 </ichicsr>
