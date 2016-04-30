@@ -12,14 +12,17 @@ use Yii;
  * @property integer $id
  * @property integer $icsr_id
  * @property string $event_description
- * @property string $event_type
  * @property integer $meddra_llt_id
  * @property integer $meddra_pt_id
  * @property string $event_date
+ * @property string $event_end_date
+ * @property string $event_outcome
+ * @property string $meddra_llt_text
+ * @property string $meddra_pt_text
  *
- * @property \backend\modules\crud\models\Icsr $icsr
  * @property \backend\modules\crud\models\LkpMeddraLlt $meddraLlt
  * @property \backend\modules\crud\models\LkpMeddraPt $meddraPt
+ * @property \backend\modules\crud\models\Icsr $icsr
  * @property string $aliasModel
  */
 abstract class IcsrEvent extends \yii\db\ActiveRecord
@@ -30,9 +33,12 @@ abstract class IcsrEvent extends \yii\db\ActiveRecord
     /**
     * ENUM field values
     */
-    const EVENT_TYPE_PROBLEM = 'problem';
-    const EVENT_TYPE_EVENT = 'event';
-    const EVENT_TYPE_USER_CASE_ERR = 'user_case_err';
+    const EVENT_OUTCOME_RECOVEREDRESOLVED = 'Recovered/resolved';
+    const EVENT_OUTCOME_RECOVERINGRESOLVING = 'Recovering/resolving';
+    const EVENT_OUTCOME_NOT_RECOVEREDNOT_RESOLVED = 'Not recovered/not resolved';
+    const EVENT_OUTCOME_RECOVEREDRESOLVED_WITH_SEQUELAE = 'Recovered/resolved with sequelae';
+    const EVENT_OUTCOME_FATAL = 'Fatal';
+    const EVENT_OUTCOME_UNKNOWN = 'Unknown';
     var $enum_labels = false;
     /**
      * @inheritdoc
@@ -62,18 +68,22 @@ abstract class IcsrEvent extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [[ 'icsr_id', 'meddra_llt_id', 'meddra_pt_id'], 'required'],
-            [['id', 'icsr_id', 'meddra_llt_id', 'meddra_pt_id'], 'integer'],
-            [['event_type'], 'string'],
-            [['event_date'], 'safe'],
+            [['icsr_id', 'meddra_llt_id', 'meddra_pt_id'], 'required'],
+            [['icsr_id', 'meddra_llt_id', 'meddra_pt_id'], 'integer'],
+            [['event_date', 'event_end_date'], 'safe'],
+            [['event_outcome'], 'string'],
             [['event_description'], 'string', 'max' => 512],
-            [['icsr_id'], 'exist', 'skipOnError' => true, 'targetClass' => Icsr::className(), 'targetAttribute' => ['icsr_id' => 'id']],
+            [['meddra_llt_text', 'meddra_pt_text'], 'string', 'max' => 45],
             [['meddra_llt_id'], 'exist', 'skipOnError' => true, 'targetClass' => LkpMeddraLlt::className(), 'targetAttribute' => ['meddra_llt_id' => 'id']],
             [['meddra_pt_id'], 'exist', 'skipOnError' => true, 'targetClass' => LkpMeddraPt::className(), 'targetAttribute' => ['meddra_pt_id' => 'id']],
-            ['event_type', 'in', 'range' => [
-                    self::EVENT_TYPE_PROBLEM,
-                    self::EVENT_TYPE_EVENT,
-                    self::EVENT_TYPE_USER_CASE_ERR,
+            [['icsr_id'], 'exist', 'skipOnError' => true, 'targetClass' => Icsr::className(), 'targetAttribute' => ['icsr_id' => 'id']],
+            ['event_outcome', 'in', 'range' => [
+                    self::EVENT_OUTCOME_RECOVEREDRESOLVED,
+                    self::EVENT_OUTCOME_RECOVERINGRESOLVING,
+                    self::EVENT_OUTCOME_NOT_RECOVEREDNOT_RESOLVED,
+                    self::EVENT_OUTCOME_RECOVEREDRESOLVED_WITH_SEQUELAE,
+                    self::EVENT_OUTCOME_FATAL,
+                    self::EVENT_OUTCOME_UNKNOWN,
                 ]
             ]
         ];
@@ -88,10 +98,13 @@ abstract class IcsrEvent extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'icsr_id' => Yii::t('app', 'Icsr ID'),
             'event_description' => Yii::t('app', 'Event Description'),
-            'event_type' => Yii::t('app', 'Event Type'),
-            'meddra_llt_id' => Yii::t('app', 'Meddra LLT ID'),
-            'meddra_pt_id' => Yii::t('app', 'Meddra PT ID'),
+            'meddra_llt_id' => Yii::t('app', 'Meddra Llt ID'),
+            'meddra_pt_id' => Yii::t('app', 'Meddra Pt ID'),
             'event_date' => Yii::t('app', 'Event Date'),
+            'event_end_date' => Yii::t('app', 'Event End Date'),
+            'event_outcome' => Yii::t('app', 'Event Outcome'),
+            'meddra_llt_text' => Yii::t('app', 'Meddra Llt Text'),
+            'meddra_pt_text' => Yii::t('app', 'Meddra Pt Text'),
         ];
     }
 
@@ -105,20 +118,17 @@ abstract class IcsrEvent extends \yii\db\ActiveRecord
             [
             'id' => Yii::t('app', 'ID'),
             'icsr_id' => Yii::t('app', 'Icsr Id'),
-            'event_description' => Yii::t('app', 'B.2.i.0 Reaction or event as reported by the primary source'),
-            'event_type' => Yii::t('app', 'Event Type'),
-            'meddra_llt_id' => Yii::t('app', 'Reaction or event in MedDRA terminology (Lowest Level Term)'),
-            'meddra_pt_id' => Yii::t('app', 'Reaction or event in MedDRA terminology (Preferred Term)'),
-            'event_date' => Yii::t('app', 'Date of start of reaction or event'),
+            'event_description' => Yii::t('app', '    B.2.i.0 Reaction or event as reported by the primary source
+'),
+            'meddra_llt_id' => Yii::t('app', 'B.2.i.1 Reaction or event in MedDRA terminology (Lowest Level Term)
+'),
+            'meddra_pt_id' => Yii::t('app', 'B.2.i.2 Reaction or event in MedDRA terminology (Preferred Term)'),
+            'event_date' => Yii::t('app', 'B.2.i.4 Date of start of reaction or event'),
+            'event_end_date' => Yii::t('app', 'B.2.i.5 Date of end of reaction or event'),
+            'event_outcome' => Yii::t('app', 'B.2.i.8 Outcome of reaction or event at the time of last observation'),
+            'meddra_llt_text' => Yii::t('app', 'B.2.i.1 Reaction or event in MedDRA terminology (Lowest Level Term)'),
+            'meddra_pt_text' => Yii::t('app', 'B.2.i.2 Reaction or event in MedDRA terminology (Preferred Term)'),
             ]);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getIcsr()
-    {
-        return $this->hasOne(\backend\modules\crud\models\Icsr::className(), ['id' => 'icsr_id']);
     }
 
     /**
@@ -137,25 +147,24 @@ abstract class IcsrEvent extends \yii\db\ActiveRecord
         return $this->hasOne(\backend\modules\crud\models\LkpMeddraPt::className(), ['id' => 'meddra_pt_id']);
     }
 
-
-    
     /**
-     * @inheritdoc
-     * @return \backend\modules\crud\models\query\IcsrEventQuery the active query used by this AR class.
+     * @return \yii\db\ActiveQuery
      */
-    public static function find()
+    public function getIcsr()
     {
-        return new \backend\modules\crud\models\query\IcsrEventQuery(get_called_class());
+        return $this->hasOne(\backend\modules\crud\models\Icsr::className(), ['id' => 'icsr_id']);
     }
 
 
+
+
     /**
-     * get column event_type enum value label
+     * get column event_outcome enum value label
      * @param string $value
      * @return string
      */
-    public static function getEventTypeValueLabel($value){
-        $labels = self::optsEventType();
+    public static function getEventOutcomeValueLabel($value){
+        $labels = self::optsEventOutcome();
         if(isset($labels[$value])){
             return $labels[$value];
         }
@@ -163,15 +172,18 @@ abstract class IcsrEvent extends \yii\db\ActiveRecord
     }
 
     /**
-     * column event_type ENUM value labels
+     * column event_outcome ENUM value labels
      * @return array
      */
-    public static function optsEventType()
+    public static function optsEventOutcome()
     {
         return [
-            self::EVENT_TYPE_PROBLEM => Yii::t('app', self::EVENT_TYPE_PROBLEM),
-            self::EVENT_TYPE_EVENT => Yii::t('app', self::EVENT_TYPE_EVENT),
-            self::EVENT_TYPE_USER_CASE_ERR => Yii::t('app', self::EVENT_TYPE_USER_CASE_ERR),
+            self::EVENT_OUTCOME_RECOVEREDRESOLVED => Yii::t('app', self::EVENT_OUTCOME_RECOVEREDRESOLVED),
+            self::EVENT_OUTCOME_RECOVERINGRESOLVING => Yii::t('app', self::EVENT_OUTCOME_RECOVERINGRESOLVING),
+            self::EVENT_OUTCOME_NOT_RECOVEREDNOT_RESOLVED => Yii::t('app', self::EVENT_OUTCOME_NOT_RECOVEREDNOT_RESOLVED),
+            self::EVENT_OUTCOME_RECOVEREDRESOLVED_WITH_SEQUELAE => Yii::t('app', self::EVENT_OUTCOME_RECOVEREDRESOLVED_WITH_SEQUELAE),
+            self::EVENT_OUTCOME_FATAL => Yii::t('app', self::EVENT_OUTCOME_FATAL),
+            self::EVENT_OUTCOME_UNKNOWN => Yii::t('app', self::EVENT_OUTCOME_UNKNOWN),
         ];
     }
 
