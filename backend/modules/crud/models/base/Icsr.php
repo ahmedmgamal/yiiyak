@@ -18,10 +18,20 @@ use Yii;
  * @property string $patient_weight
  * @property string $patient_weight_unit
  * @property string $extra_history
+ * @property string $is_serious
+ * @property string $results_in_death
+ * @property string $life_threatening
+ * @property string $requires_hospitalization
+ * @property string $results_in_disability
+ * @property string $is_congenital_anomaly
+ * @property string $others_significant
+ * @property string $report_type
+ * @property integer $reaction_country_id
  *
  * @property \backend\modules\crud\models\DrugPrescription[] $drugPrescriptions
+ * @property \backend\modules\crud\models\LkpCountry $reactionCountry
  * @property \backend\modules\crud\models\Drug $drug
- * @property \backend\modules\crud\models\IcsrConcomitantDrug[] $icsrConcomitantDrugs
+ * @property \backend\modules\crud\models\IcsrConcomitantDrugs[] $icsrConcomitantDrugs
  * @property \backend\modules\crud\models\IcsrEvent[] $icsrEvents
  * @property \backend\modules\crud\models\IcsrOutcome[] $icsrOutcomes
  * @property \backend\modules\crud\models\LkpIcsrOutcome[] $icsrOutcomeLkps
@@ -45,6 +55,24 @@ abstract class Icsr extends \yii\db\ActiveRecord
     const PATIENT_AGE_UNIT_YEAR = 'year';
     const PATIENT_WEIGHT_UNIT_LBS = 'lbs';
     const PATIENT_WEIGHT_UNIT_KGS = 'kgs';
+    const IS_SERIOUS_YES = 'yes';
+    const IS_SERIOUS_NO = 'no';
+    const RESULTS_IN_DEATH_YES = 'yes';
+    const RESULTS_IN_DEATH_NO = 'no';
+    const LIFE_THREATENING_YES = 'yes';
+    const LIFE_THREATENING_NO = 'no';
+    const REQUIRES_HOSPITALIZATION_YES = 'yes';
+    const REQUIRES_HOSPITALIZATION_NO = 'no';
+    const RESULTS_IN_DISABILITY_YES = 'yes';
+    const RESULTS_IN_DISABILITY_NO = 'no';
+    const IS_CONGENITAL_ANOMALY_YES = 'yes';
+    const IS_CONGENITAL_ANOMALY_NO = 'no';
+    const OTHERS_SIGNIFICANT_YES = 'yes';
+    const OTHERS_SIGNIFICANT_NO = 'no';
+    const REPORT_TYPE_SPONTANEOUS = 'spontaneous';
+    const REPORT_TYPE_FROM_STUDY = 'from_study';
+    const REPORT_TYPE_OTHERS = 'others';
+    const REPORT_TYPE_NA = 'NA';
     var $enum_labels = false;
     /**
      * @inheritdoc
@@ -75,11 +103,12 @@ abstract class Icsr extends \yii\db\ActiveRecord
     {
         return [
             [['drug_id'], 'required'],
-            [['id', 'drug_id'], 'integer'],
+            [['drug_id', 'reaction_country_id'], 'integer'],
             [['patient_age', 'patient_weight'], 'number'],
-            [['patient_age_unit', 'patient_weight_unit'], 'string'],
+            [['patient_age_unit', 'patient_weight_unit', 'is_serious', 'results_in_death', 'life_threatening', 'requires_hospitalization', 'results_in_disability', 'is_congenital_anomaly', 'others_significant', 'report_type'], 'string'],
             [['patient_birth_date'], 'safe'],
             [['patient_identifier', 'extra_history'], 'string', 'max' => 45],
+            [['reaction_country_id'], 'exist', 'skipOnError' => true, 'targetClass' => LkpCountry::className(), 'targetAttribute' => ['reaction_country_id' => 'id']],
             [['drug_id'], 'exist', 'skipOnError' => true, 'targetClass' => Drug::className(), 'targetAttribute' => ['drug_id' => 'id']],
             ['patient_age_unit', 'in', 'range' => [
                     self::PATIENT_AGE_UNIT_DAY,
@@ -91,6 +120,48 @@ abstract class Icsr extends \yii\db\ActiveRecord
             ['patient_weight_unit', 'in', 'range' => [
                     self::PATIENT_WEIGHT_UNIT_LBS,
                     self::PATIENT_WEIGHT_UNIT_KGS,
+                ]
+            ],
+            ['is_serious', 'in', 'range' => [
+                    self::IS_SERIOUS_YES,
+                    self::IS_SERIOUS_NO,
+                ]
+            ],
+            ['results_in_death', 'in', 'range' => [
+                    self::RESULTS_IN_DEATH_YES,
+                    self::RESULTS_IN_DEATH_NO,
+                ]
+            ],
+            ['life_threatening', 'in', 'range' => [
+                    self::LIFE_THREATENING_YES,
+                    self::LIFE_THREATENING_NO,
+                ]
+            ],
+            ['requires_hospitalization', 'in', 'range' => [
+                    self::REQUIRES_HOSPITALIZATION_YES,
+                    self::REQUIRES_HOSPITALIZATION_NO,
+                ]
+            ],
+            ['results_in_disability', 'in', 'range' => [
+                    self::RESULTS_IN_DISABILITY_YES,
+                    self::RESULTS_IN_DISABILITY_NO,
+                ]
+            ],
+            ['is_congenital_anomaly', 'in', 'range' => [
+                    self::IS_CONGENITAL_ANOMALY_YES,
+                    self::IS_CONGENITAL_ANOMALY_NO,
+                ]
+            ],
+            ['others_significant', 'in', 'range' => [
+                    self::OTHERS_SIGNIFICANT_YES,
+                    self::OTHERS_SIGNIFICANT_NO,
+                ]
+            ],
+            ['report_type', 'in', 'range' => [
+                    self::REPORT_TYPE_SPONTANEOUS,
+                    self::REPORT_TYPE_FROM_STUDY,
+                    self::REPORT_TYPE_OTHERS,
+                    self::REPORT_TYPE_NA,
                 ]
             ]
         ];
@@ -111,6 +182,15 @@ abstract class Icsr extends \yii\db\ActiveRecord
             'patient_weight' => Yii::t('app', 'Patient Weight'),
             'patient_weight_unit' => Yii::t('app', 'Patient Weight Unit'),
             'extra_history' => Yii::t('app', 'Extra History'),
+            'is_serious' => Yii::t('app', 'Is Serious'),
+            'results_in_death' => Yii::t('app', 'Results In Death'),
+            'life_threatening' => Yii::t('app', 'Life Threatening'),
+            'requires_hospitalization' => Yii::t('app', 'Requires Hospitalization'),
+            'results_in_disability' => Yii::t('app', 'Results In Disability'),
+            'is_congenital_anomaly' => Yii::t('app', 'Is Congenital Anomaly'),
+            'others_significant' => Yii::t('app', 'Others Significant'),
+            'report_type' => Yii::t('app', 'Report Type'),
+            'reaction_country_id' => Yii::t('app', 'Reaction Country ID'),
         ];
     }
 
@@ -131,6 +211,15 @@ abstract class Icsr extends \yii\db\ActiveRecord
             'patient_weight' => Yii::t('app', 'Patient Weight'),
             'patient_weight_unit' => Yii::t('app', 'Patient Weight Unit'),
             'extra_history' => Yii::t('app', 'Extra History'),
+            'is_serious' => Yii::t('app', 'A.1.5.1 Serious'),
+            'results_in_death' => Yii::t('app', 'A.1.5.2 Seriousness criteria -'),
+            'life_threatening' => Yii::t('app', 'A.1.5.2 Seriousness criteria -'),
+            'requires_hospitalization' => Yii::t('app', 'A.1.5.2 Seriousness criteria -'),
+            'results_in_disability' => Yii::t('app', 'A.1.5.2 Seriousness criteria -'),
+            'is_congenital_anomaly' => Yii::t('app', 'A.1.5.2 Seriousness criteria -'),
+            'others_significant' => Yii::t('app', 'A.1.5.2 Seriousness criteria -'),
+            'report_type' => Yii::t('app', 'A.1.4 Type of report'),
+            'reaction_country_id' => Yii::t('app', 'A.1.2 Identification of the country where the reaction/event occurred'),
             ]);
     }
 
@@ -140,6 +229,14 @@ abstract class Icsr extends \yii\db\ActiveRecord
     public function getDrugPrescriptions()
     {
         return $this->hasMany(\backend\modules\crud\models\DrugPrescription::className(), ['icsr_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getReactionCountry()
+    {
+        return $this->hasOne(\backend\modules\crud\models\LkpCountry::className(), ['id' => 'reaction_country_id']);
     }
 
     /**
@@ -215,15 +312,6 @@ abstract class Icsr extends \yii\db\ActiveRecord
     }
 
 
-    
-    /**
-     * @inheritdoc
-     * @return \backend\modules\crud\models\query\IcsrQuery the active query used by this AR class.
-     */
-    public static function find()
-    {
-        return new \backend\modules\crud\models\query\IcsrQuery(get_called_class());
-    }
 
 
     /**
@@ -275,6 +363,208 @@ abstract class Icsr extends \yii\db\ActiveRecord
         return [
             self::PATIENT_WEIGHT_UNIT_LBS => Yii::t('app', self::PATIENT_WEIGHT_UNIT_LBS),
             self::PATIENT_WEIGHT_UNIT_KGS => Yii::t('app', self::PATIENT_WEIGHT_UNIT_KGS),
+        ];
+    }
+
+    /**
+     * get column is_serious enum value label
+     * @param string $value
+     * @return string
+     */
+    public static function getIsSeriousValueLabel($value){
+        $labels = self::optsIsSerious();
+        if(isset($labels[$value])){
+            return $labels[$value];
+        }
+        return $value;
+    }
+
+    /**
+     * column is_serious ENUM value labels
+     * @return array
+     */
+    public static function optsIsSerious()
+    {
+        return [
+            self::IS_SERIOUS_YES => Yii::t('app', self::IS_SERIOUS_YES),
+            self::IS_SERIOUS_NO => Yii::t('app', self::IS_SERIOUS_NO),
+        ];
+    }
+
+    /**
+     * get column results_in_death enum value label
+     * @param string $value
+     * @return string
+     */
+    public static function getResultsInDeathValueLabel($value){
+        $labels = self::optsResultsInDeath();
+        if(isset($labels[$value])){
+            return $labels[$value];
+        }
+        return $value;
+    }
+
+    /**
+     * column results_in_death ENUM value labels
+     * @return array
+     */
+    public static function optsResultsInDeath()
+    {
+        return [
+            self::RESULTS_IN_DEATH_YES => Yii::t('app', self::RESULTS_IN_DEATH_YES),
+            self::RESULTS_IN_DEATH_NO => Yii::t('app', self::RESULTS_IN_DEATH_NO),
+        ];
+    }
+
+    /**
+     * get column life_threatening enum value label
+     * @param string $value
+     * @return string
+     */
+    public static function getLifeThreateningValueLabel($value){
+        $labels = self::optsLifeThreatening();
+        if(isset($labels[$value])){
+            return $labels[$value];
+        }
+        return $value;
+    }
+
+    /**
+     * column life_threatening ENUM value labels
+     * @return array
+     */
+    public static function optsLifeThreatening()
+    {
+        return [
+            self::LIFE_THREATENING_YES => Yii::t('app', self::LIFE_THREATENING_YES),
+            self::LIFE_THREATENING_NO => Yii::t('app', self::LIFE_THREATENING_NO),
+        ];
+    }
+
+    /**
+     * get column requires_hospitalization enum value label
+     * @param string $value
+     * @return string
+     */
+    public static function getRequiresHospitalizationValueLabel($value){
+        $labels = self::optsRequiresHospitalization();
+        if(isset($labels[$value])){
+            return $labels[$value];
+        }
+        return $value;
+    }
+
+    /**
+     * column requires_hospitalization ENUM value labels
+     * @return array
+     */
+    public static function optsRequiresHospitalization()
+    {
+        return [
+            self::REQUIRES_HOSPITALIZATION_YES => Yii::t('app', self::REQUIRES_HOSPITALIZATION_YES),
+            self::REQUIRES_HOSPITALIZATION_NO => Yii::t('app', self::REQUIRES_HOSPITALIZATION_NO),
+        ];
+    }
+
+    /**
+     * get column results_in_disability enum value label
+     * @param string $value
+     * @return string
+     */
+    public static function getResultsInDisabilityValueLabel($value){
+        $labels = self::optsResultsInDisability();
+        if(isset($labels[$value])){
+            return $labels[$value];
+        }
+        return $value;
+    }
+
+    /**
+     * column results_in_disability ENUM value labels
+     * @return array
+     */
+    public static function optsResultsInDisability()
+    {
+        return [
+            self::RESULTS_IN_DISABILITY_YES => Yii::t('app', self::RESULTS_IN_DISABILITY_YES),
+            self::RESULTS_IN_DISABILITY_NO => Yii::t('app', self::RESULTS_IN_DISABILITY_NO),
+        ];
+    }
+
+    /**
+     * get column is_congenital_anomaly enum value label
+     * @param string $value
+     * @return string
+     */
+    public static function getIsCongenitalAnomalyValueLabel($value){
+        $labels = self::optsIsCongenitalAnomaly();
+        if(isset($labels[$value])){
+            return $labels[$value];
+        }
+        return $value;
+    }
+
+    /**
+     * column is_congenital_anomaly ENUM value labels
+     * @return array
+     */
+    public static function optsIsCongenitalAnomaly()
+    {
+        return [
+            self::IS_CONGENITAL_ANOMALY_YES => Yii::t('app', self::IS_CONGENITAL_ANOMALY_YES),
+            self::IS_CONGENITAL_ANOMALY_NO => Yii::t('app', self::IS_CONGENITAL_ANOMALY_NO),
+        ];
+    }
+
+    /**
+     * get column others_significant enum value label
+     * @param string $value
+     * @return string
+     */
+    public static function getOthersSignificantValueLabel($value){
+        $labels = self::optsOthersSignificant();
+        if(isset($labels[$value])){
+            return $labels[$value];
+        }
+        return $value;
+    }
+
+    /**
+     * column others_significant ENUM value labels
+     * @return array
+     */
+    public static function optsOthersSignificant()
+    {
+        return [
+            self::OTHERS_SIGNIFICANT_YES => Yii::t('app', self::OTHERS_SIGNIFICANT_YES),
+            self::OTHERS_SIGNIFICANT_NO => Yii::t('app', self::OTHERS_SIGNIFICANT_NO),
+        ];
+    }
+
+    /**
+     * get column report_type enum value label
+     * @param string $value
+     * @return string
+     */
+    public static function getReportTypeValueLabel($value){
+        $labels = self::optsReportType();
+        if(isset($labels[$value])){
+            return $labels[$value];
+        }
+        return $value;
+    }
+
+    /**
+     * column report_type ENUM value labels
+     * @return array
+     */
+    public static function optsReportType()
+    {
+        return [
+            self::REPORT_TYPE_SPONTANEOUS => Yii::t('app', self::REPORT_TYPE_SPONTANEOUS),
+            self::REPORT_TYPE_FROM_STUDY => Yii::t('app', self::REPORT_TYPE_FROM_STUDY),
+            self::REPORT_TYPE_OTHERS => Yii::t('app', self::REPORT_TYPE_OTHERS),
+            self::REPORT_TYPE_NA => Yii::t('app', self::REPORT_TYPE_NA),
         ];
     }
 
