@@ -20,7 +20,6 @@ use dmstr\bootstrap\Tabs;
   
 ?>
  
-<!DOCTYPE ichicsr SYSTEM "ich-icsr-v2_1.dtd">
 <ichicsr lang="en">
 	<ichicsrmessageheader>
 		<messagetype>ICSR</messagetype>

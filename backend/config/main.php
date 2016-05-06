@@ -61,6 +61,11 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => true,
             'rules' => [
+                    [
+                    'pattern' => 'crud/icsr/export',
+                    'route' => 'crud/icsr/export',
+                    'suffix' => '.xml',
+                ],
             ],
         ],
        

@@ -51,22 +51,22 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
            
         $this->layout = false;
 
-        \Yii::$app->response->headers->add('Content-Type', 'text/xml');
-        $xml = $this->render('export', [
-                                      'model' => $icsr,
-                              ]);
-        //\Yii::$app->response->format = \yii\web\Response::FORMAT_XML;
-       // $this->getResponse()->setHeader('Content-Type', '
-       //\Yii->$app->getModule('crud')->getBaseUrl()
-       $dtd = \Yii::$app->getModule('crud')->getViewPath().'/icsr/ich-icsr-v2_1.dtd';
-
-         $this->validateXML($xml,$dtd );
+   //set content type xml in response
+    \Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
+    $headers = \Yii::$app->response->headers;
+    $headers->add('Content-Type', 'text/xml');
+     $xml = $this->renderPartial('export', [
+         'model' => $icsr,
+    ]);
+ 
+        $dtd = \Yii::$app->getModule('crud')->getViewPath().'/icsr/ich-icsr-v2_1.dtd';
+        $this->validateXML($xml,$dtd );
          return $xml;
 
         }
 
     public function validateXML($xml, $dtd_realpath=null) {
-        
+    $xml ='<!DOCTYPE ichicsr SYSTEM "ich-icsr-v2_1.dtd">\n'.$xml;
     $xml_lines = explode('\n', $xml);
     $doc = new \DOMDocument;
     if ($dtd_realpath) {
