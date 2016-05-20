@@ -9,6 +9,7 @@
 namespace backend\modules\crud\controllers;
 use backend\modules\crud\models\Icsr;
 use backend\modules\crud\models\search\Icsr as IcsrSearch;
+use backend\modules\crud\models\DrugPrescription as DrugPrescription;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\helpers\Url;
@@ -34,7 +35,12 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
                 //$_POST['Icsr']
 		try {
 			if ($model->load($_POST) && $model->save()) {
-				return $this->redirect(Url::previous());
+                            $pres = new DrugPrescription;
+                            $pres->drug_id =($model->getDrug()->one()->id);
+                            $pres->drug_role = DrugPrescription::DRUG_ROLE_SUSPECT;
+                            $pres->icsr_id = $model->id;
+                            $pres->save();
+                            return $this->redirect(Url::previous());
 			} elseif (!\Yii::$app->request->isPost) {
 				$model->load($_GET);
 			}

@@ -15,8 +15,8 @@ use dmstr\bootstrap\Tabs;
 
 
  $config = \Yii::$app->getModule('crud')->params;
- 
-
+ \Yii::$app->formatter->booleanFormat = [2,1];
+ $formatter = \Yii::$app->formatter;
   
 ?>
  
@@ -48,15 +48,15 @@ use dmstr\bootstrap\Tabs;
 		<reporttype><?php echo $model->report_type; ?></reporttype>
  		
  		<!--A.1.5 Seriousness -->
- 		<serious><?php echo $model->is_serious; ?></serious>
+ 		<serious><?php echo $formatter->asBoolean( $model->is_serious); ?></serious>
 		
 		<!--A.1.5.2. Seriousness criteria-->
-		<seriousnessdeath><?php echo $model->results_in_death; ?></seriousnessdeath>
-		<seriousnesslifethreatening><?php echo $model->life_threatening; ?></seriousnesslifethreatening>
-		<seriousnesshospitalization><?php echo $model->requires_hospitalization; ?></seriousnesshospitalization>
-		<seriousnessdisabling><?php echo $model->results_in_disability; ?></seriousnessdisabling>
-		<seriousnesscongenitalanomali><?php echo $model->is_congenital_anomaly; ?></seriousnesscongenitalanomali>
-		<seriousnessother><?php echo $model->others_significant; ?></seriousnessother>
+		<seriousnessdeath><?php echo  $formatter->asBoolean( $model->results_in_death); ?></seriousnessdeath>
+		<seriousnesslifethreatening><?php echo  $formatter->asBoolean( $model->life_threatening); ?></seriousnesslifethreatening>
+		<seriousnesshospitalization><?php echo  $formatter->asBoolean( $model->requires_hospitalization); ?></seriousnesshospitalization>
+		<seriousnessdisabling><?php echo  $formatter->asBoolean( $model->results_in_disability); ?></seriousnessdisabling>
+		<seriousnesscongenitalanomali><?php echo  $formatter->asBoolean( $model->is_congenital_anomaly); ?></seriousnesscongenitalanomali>
+		<seriousnessother><?php echo  $formatter->asBoolean( $model->others_significant); ?></seriousnessother>
 		
 		<!--*** A.1.6 Date report was first received from source-->
 		<receivedateformat>102</receivedateformat>
@@ -96,7 +96,7 @@ use dmstr\bootstrap\Tabs;
 		<sender>
  			
 <!-- A.3.1.1	Sender Type          -->
-			<sendertype>pharmaceutical company</sendertype>
+			<sendertype>1</sendertype>
 					
 <!--	A.3.1.2	Sender identifier          -->
 			<senderorganization><?php echo Yii::$app->user->identity->getCompany()->one()->name;  ?></senderorganization>
@@ -112,7 +112,7 @@ use dmstr\bootstrap\Tabs;
 
 		<receiver>
 			 <!--	A.3.2.1	Receiver Type          -->
-			<receivertype>Regulatory authority</receivertype>
+			<receivertype>6</receivertype>
 		</receiver>
 
 		<patient>
@@ -221,7 +221,7 @@ use dmstr\bootstrap\Tabs;
 				<?php } ?>
 
 <!--  B.4.k.17	Effect of rechallenge          -->
-				<drugrecurreadministration><?php echo $drug->problem_returned_after_reuse ; ?></drugrecurreadministration>
+				<drugrecurreadministration><?php echo  $drug->problem_returned_after_reuse ; ?></drugrecurreadministration>
 
 <!--  B.4.k.19	Additional information on drug     -->    
 				<drugadditional><?php echo $drug->drug_addtional_info ; ?></drugadditional>
