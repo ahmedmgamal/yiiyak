@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8a0090005f2e8daae40d0d5bda7af083",
-    "content-hash": "a0d7d8975d2f9406bcb6d5372b673497",
+    "hash": "6ceb00324f5dd8c003f5680fdf57e0b8",
+    "content-hash": "9fcefffc7e391aea3f0896b07620ec78",
     "packages": [
         {
             "name": "2amigos/yii2-translateable-behavior",
@@ -866,7 +866,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mdmsoft/yii2-admin/zipball/600c4bd0349118a59acf1eb814e4c4ed4d20eba0",
+                "url": "https://api.github.com/repos/mdmsoft/yii2-admin/zipball/58b3d023de9899da42c7be47c901391b8ef43663",
                 "reference": "600c4bd0349118a59acf1eb814e4c4ed4d20eba0",
                 "shasum": ""
             },
@@ -1109,6 +1109,47 @@
             "time": "2015-06-06 14:19:39"
         },
         {
+            "name": "tmukherjee13/yii2-reverse-migration",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tmukherjee13/yii2-reverse-migration.git",
+                "reference": "121ec40eff0c143b2449506dfd5e6cd18c5aa5ea"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tmukherjee13/yii2-reverse-migration/zipball/121ec40eff0c143b2449506dfd5e6cd18c5aa5ea",
+                "reference": "121ec40eff0c143b2449506dfd5e6cd18c5aa5ea",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "tmukherjee13\\migration\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tarun Mukherjee",
+                    "email": "tmukherjee13@gmail.com"
+                }
+            ],
+            "description": "Generate working migration classes from existing Database",
+            "keywords": [
+                "database",
+                "migration",
+                "yii2"
+            ],
+            "time": "2016-01-24 09:12:03"
+        },
+        {
             "name": "webvimark/bootstrap-switch",
             "version": "dev-master",
             "source": {
@@ -1142,7 +1183,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webvimark/components/zipball/782cb6ec7a4dc1a27389504cdfe9e15d0c47f04d",
+                "url": "https://api.github.com/repos/webvimark/components/zipball/d4d6dc29150a09ee59c8e7e66e005b083f223d40",
                 "reference": "782cb6ec7a4dc1a27389504cdfe9e15d0c47f04d",
                 "shasum": ""
             },
@@ -1567,7 +1608,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-jui/zipball/226ffd897b26965a357e187cdf67f6c2e43e3139",
+                "url": "https://api.github.com/repos/yiisoft/yii2-jui/zipball/9ab9a2cb17cd7f13921339e11e5146295cf39083",
                 "reference": "226ffd897b26965a357e187cdf67f6c2e43e3139",
                 "shasum": ""
             },

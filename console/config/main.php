@@ -21,5 +21,11 @@ return [
             ],
         ],
     ],
+     'controllerMap' => [
+        'migration' => [
+            'class' => 'tmukherjee13\migration\console\controllers\MigrationController',
+            'templateFile' => '@tmukherjee13/migration/views/template.php',
+        ],
+         ],
     'params' => $params,
 ];
