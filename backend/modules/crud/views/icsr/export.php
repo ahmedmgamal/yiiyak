@@ -45,7 +45,7 @@ use dmstr\bootstrap\Tabs;
 		<transmissiondate><?php echo date("Ymd"); ?> </transmissiondate>
 		
 		<!--     A.1.4 Type of report --> 
-		<reporttype><?php echo $model->report_type; ?></reporttype>
+		<reporttype><?php echo $model->getIcsrType()->one()->id; ?></reporttype>
  		
  		<!--A.1.5 Seriousness -->
  		<serious><?php echo $formatter->asBoolean( $model->is_serious); ?></serious>
@@ -85,7 +85,7 @@ use dmstr\bootstrap\Tabs;
 				<reportercountry><?php echo $reporter->getCountryLkp()->one()->code; ?></reportercountry>
 				
 				<!-- A.2.1.4	Qualification           -->
-				<qualification> <?php echo $reporter->getOccupationLkp()->one()->description ?> </qualification>
+				<qualification> <?php echo $reporter->getOccupationLkp()->one()->id ?> </qualification>
 
 			</primarysource>  
 	 
