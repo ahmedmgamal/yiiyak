@@ -2087,4 +2087,187 @@ return [
     '/*' => [
         'type' => 2,
     ],
+    '/crud/icsr/export' => [
+        'type' => 2,
+    ],
+    '/crud/lkp-dose-unit/index' => [
+        'type' => 2,
+    ],
+    '/crud/lkp-dose-unit/view' => [
+        'type' => 2,
+    ],
+    '/crud/lkp-dose-unit/create' => [
+        'type' => 2,
+    ],
+    '/crud/lkp-dose-unit/update' => [
+        'type' => 2,
+    ],
+    '/crud/lkp-dose-unit/delete' => [
+        'type' => 2,
+    ],
+    '/crud/lkp-dose-unit/*' => [
+        'type' => 2,
+    ],
+    '/crud/lkp-drug-action/index' => [
+        'type' => 2,
+    ],
+    '/crud/lkp-drug-action/view' => [
+        'type' => 2,
+    ],
+    '/crud/lkp-drug-action/create' => [
+        'type' => 2,
+    ],
+    '/crud/lkp-drug-action/update' => [
+        'type' => 2,
+    ],
+    '/crud/lkp-drug-action/delete' => [
+        'type' => 2,
+    ],
+    '/crud/lkp-drug-action/*' => [
+        'type' => 2,
+    ],
+    '/crud/lkp-drug-role/index' => [
+        'type' => 2,
+    ],
+    '/crud/lkp-drug-role/view' => [
+        'type' => 2,
+    ],
+    '/crud/lkp-drug-role/create' => [
+        'type' => 2,
+    ],
+    '/crud/lkp-drug-role/update' => [
+        'type' => 2,
+    ],
+    '/crud/lkp-drug-role/delete' => [
+        'type' => 2,
+    ],
+    '/crud/lkp-drug-role/*' => [
+        'type' => 2,
+    ],
+    '/crud/lkp-reaction-outcome/index' => [
+        'type' => 2,
+    ],
+    '/crud/lkp-reaction-outcome/view' => [
+        'type' => 2,
+    ],
+    '/crud/lkp-reaction-outcome/create' => [
+        'type' => 2,
+    ],
+    '/crud/lkp-reaction-outcome/update' => [
+        'type' => 2,
+    ],
+    '/crud/lkp-reaction-outcome/delete' => [
+        'type' => 2,
+    ],
+    '/crud/lkp-reaction-outcome/*' => [
+        'type' => 2,
+    ],
+    '/crud/lkp-time-unit/index' => [
+        'type' => 2,
+    ],
+    '/crud/lkp-time-unit/view' => [
+        'type' => 2,
+    ],
+    '/crud/lkp-time-unit/create' => [
+        'type' => 2,
+    ],
+    '/crud/lkp-time-unit/update' => [
+        'type' => 2,
+    ],
+    '/crud/lkp-time-unit/delete' => [
+        'type' => 2,
+    ],
+    '/crud/lkp-time-unit/*' => [
+        'type' => 2,
+    ],
+    '/crud/base/lkp-dose-unit/index' => [
+        'type' => 2,
+    ],
+    '/crud/base/lkp-dose-unit/view' => [
+        'type' => 2,
+    ],
+    '/crud/base/lkp-dose-unit/create' => [
+        'type' => 2,
+    ],
+    '/crud/base/lkp-dose-unit/update' => [
+        'type' => 2,
+    ],
+    '/crud/base/lkp-dose-unit/delete' => [
+        'type' => 2,
+    ],
+    '/crud/base/lkp-dose-unit/*' => [
+        'type' => 2,
+    ],
+    '/crud/base/lkp-drug-action/index' => [
+        'type' => 2,
+    ],
+    '/crud/base/lkp-drug-action/view' => [
+        'type' => 2,
+    ],
+    '/crud/base/lkp-drug-action/create' => [
+        'type' => 2,
+    ],
+    '/crud/base/lkp-drug-action/update' => [
+        'type' => 2,
+    ],
+    '/crud/base/lkp-drug-action/delete' => [
+        'type' => 2,
+    ],
+    '/crud/base/lkp-drug-action/*' => [
+        'type' => 2,
+    ],
+    '/crud/base/lkp-drug-role/index' => [
+        'type' => 2,
+    ],
+    '/crud/base/lkp-drug-role/view' => [
+        'type' => 2,
+    ],
+    '/crud/base/lkp-drug-role/create' => [
+        'type' => 2,
+    ],
+    '/crud/base/lkp-drug-role/update' => [
+        'type' => 2,
+    ],
+    '/crud/base/lkp-drug-role/delete' => [
+        'type' => 2,
+    ],
+    '/crud/base/lkp-drug-role/*' => [
+        'type' => 2,
+    ],
+    '/crud/base/lkp-reaction-outcome/index' => [
+        'type' => 2,
+    ],
+    '/crud/base/lkp-reaction-outcome/view' => [
+        'type' => 2,
+    ],
+    '/crud/base/lkp-reaction-outcome/create' => [
+        'type' => 2,
+    ],
+    '/crud/base/lkp-reaction-outcome/update' => [
+        'type' => 2,
+    ],
+    '/crud/base/lkp-reaction-outcome/delete' => [
+        'type' => 2,
+    ],
+    '/crud/base/lkp-reaction-outcome/*' => [
+        'type' => 2,
+    ],
+    '/crud/base/lkp-time-unit/index' => [
+        'type' => 2,
+    ],
+    '/crud/base/lkp-time-unit/view' => [
+        'type' => 2,
+    ],
+    '/crud/base/lkp-time-unit/create' => [
+        'type' => 2,
+    ],
+    '/crud/base/lkp-time-unit/update' => [
+        'type' => 2,
+    ],
+    '/crud/base/lkp-time-unit/delete' => [
+        'type' => 2,
+    ],
+    '/crud/base/lkp-time-unit/*' => [
+        'type' => 2,
+    ],
 ];

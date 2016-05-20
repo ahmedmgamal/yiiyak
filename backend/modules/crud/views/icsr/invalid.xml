@@ -1,4 +1,4 @@
- 
+<!DOCTYPE ichicsr SYSTEM "ich-icsr-v2_1.dtd">\n 
 <ichicsr lang="en">
 	<ichicsrmessageheader>
 		<messagetype>ICSR</messagetype>
@@ -6,9 +6,9 @@
 		<messageformatrelease>1.0</messageformatrelease>
 		<messagenumb>6</messagenumb>
 		<messagesenderidentifier>EMEO5</messagesenderidentifier>
-		<messagereceiveridentifier>Egyptian PV</messagereceiveridentifier>
+		<messagereceiveridentifier>EPVC</messagereceiveridentifier>
 		<messagedateformat>102</messagedateformat>
-		<messagedate>20160506 </messagedate>
+		<messagedate>20160520 </messagedate>
 	</ichicsrmessageheader>
 	<safetyreport>
 		<safetyreportversion>1.0</safetyreportversion>
@@ -21,21 +21,21 @@
 		
 		<!--      A.1.3 Date of this transmission -->
 		<transmissiondateformat>102</transmissiondateformat>
-		<transmissiondate>20160506 </transmissiondate>
+		<transmissiondate>20160520 </transmissiondate>
 		
 		<!--     A.1.4 Type of report --> 
-		<reporttype>spontaneous</reporttype>
+		<reporttype>1</reporttype>
  		
  		<!--A.1.5 Seriousness -->
- 		<serious>yes</serious>
+ 		<serious><span class="not-set">(not set)</span></serious>
 		
 		<!--A.1.5.2. Seriousness criteria-->
-		<seriousnessdeath>yes</seriousnessdeath>
-		<seriousnesslifethreatening>yes</seriousnesslifethreatening>
-		<seriousnesshospitalization>yes</seriousnesshospitalization>
-		<seriousnessdisabling>yes</seriousnessdisabling>
-		<seriousnesscongenitalanomali>yes</seriousnesscongenitalanomali>
-		<seriousnessother>yes</seriousnessother>
+		<seriousnessdeath><span class="not-set">(not set)</span></seriousnessdeath>
+		<seriousnesslifethreatening><span class="not-set">(not set)</span></seriousnesslifethreatening>
+		<seriousnesshospitalization><span class="not-set">(not set)</span></seriousnesshospitalization>
+		<seriousnessdisabling><span class="not-set">(not set)</span></seriousnessdisabling>
+		<seriousnesscongenitalanomali><span class="not-set">(not set)</span></seriousnesscongenitalanomali>
+		<seriousnessother><span class="not-set">(not set)</span></seriousnessother>
 		
 		<!--*** A.1.6 Date report was first received from source-->
 		<receivedateformat>102</receivedateformat>
@@ -43,7 +43,7 @@
         
         <!--*** A.1.7	Date of receipt of the most recent information for this report --> 
         <receiptdateformat>102</receiptdateformat>
-		<receiptdate>20160506 </receiptdate>
+		<receiptdate>20160520 </receiptdate>
 		
 		<!--A.1.10	Worldwide unique case identification number.      --> 
 		<companynumb> EG-EMEO5-6</companynumb>
@@ -73,7 +73,7 @@
 		<sender>
  			
 <!-- A.3.1.1	Sender Type          -->
-			<sendertype>pharmaceutical company</sendertype>
+			<sendertype>1</sendertype>
 					
 <!--	A.3.1.2	Sender identifier          -->
 			<senderorganization>EMEO5</senderorganization>
@@ -89,7 +89,7 @@
 
 		<receiver>
 			 <!--	A.3.2.1	Receiver Type          -->
-			<receivertype>Regulatory authority</receivertype>
+			<receivertype>6</receivertype>
 		</receiver>
 
 		<patient>
@@ -98,7 +98,7 @@
 
 <!--  B.1.2.1	Date of birth         -->
 			<patientbirthdateformat>102</patientbirthdateformat>
-            <patientbirthdate>0002-12-02</patientbirthdate>
+            <patientbirthdate>2004-07-29</patientbirthdate>
 <!--  B.1.2.2	Age at time of onset of reaction / event   -->
 			<patientonsetage>1.00</patientonsetage>
 			<patientonsetageunit>week</patientonsetageunit>
@@ -146,7 +146,7 @@
 		</test>
 					<drug>
 <!--  B.4.k.1	Characterization of drug role (Suspect/Concomitant/Interacting)    -->   
-				<drugcharacterization></drugcharacterization>
+				<drugcharacterization>Suspect</drugcharacterization>
 
 <!--  B.4.k.2	Drug identification           -->
 
@@ -175,6 +175,7 @@
 				<drugtreatmentdurationunit>day</drugtreatmentdurationunit>
 <!--  B.4.k.16	Action(s) taken with drug (− Drug withdrawn,− Dose reduced,− Dose increased,− Dose -->
  
+									<actiondrug>drug_withdrawn</actiondrug>
 				
 <!--  B.4.k.17	Effect of rechallenge          -->
 				<drugrecurreadministration>yes</drugrecurreadministration>
