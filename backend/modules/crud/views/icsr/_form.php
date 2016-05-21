@@ -43,12 +43,15 @@ $form->field($model, 'report_type')->dropDownList(
 			<?php echo $form->field($model, 'patient_identifier')->textInput(['maxlength' => true]) ?>
 			<?php echo $form->field($model, 'patient_age')->textInput(['maxlength' => true]) ?>
 			<?php echo $form->field($model, 'patient_age_unit')->dropDownList(
-                            backend\modules\crud\models\Icsr::optspatientageunit()
+
+                            \yii\helpers\ArrayHelper::map(backend\modules\crud\models\LkpTimeUnit::find()->all(), 'id', 'name')
+
                         ); ?>
 			<?php echo $form->field($model, 'patient_birth_date')->widget(DatePicker::className(),['dateFormat' => 'yyyy-MM-dd']); ?>
 			<?php echo $form->field($model, 'patient_weight')->textInput(['maxlength' => true]) ?>
 			<?php echo $form->field($model, 'patient_weight_unit')->dropDownList(
-                            backend\modules\crud\models\Icsr::optspatientweightunit()
+                            \yii\helpers\ArrayHelper::map(backend\modules\crud\models\LkpWeightUnit::find()->all(), 'id', 'name')
+
                         ); ?>
 			<?php echo $form->field($model, 'extra_history')->textArea(['maxlength' => true]) ;?>
 <?= $form->field($model, 'is_serious')->checkbox() ?>

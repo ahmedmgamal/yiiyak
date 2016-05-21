@@ -70,13 +70,15 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
             'patient_age',
             [
                 'attribute' => 'patient_age_unit',
-                'value' => backend\modules\crud\models\Icsr::getPatientAgeUnitValueLabel($model->patient_age_unit),
+                'value' => ($model->getAgeUnit()->one() ?$model->getAgeUnit()->one()->name:'<span class="label label-warning">?</span>'),
             ],
             'patient_birth_date',
             'patient_weight',
             [
                 'attribute' => 'patient_weight_unit',
-                'value' => backend\modules\crud\models\Icsr::getPatientWeightUnitValueLabel($model->patient_weight_unit),
+
+                'value' => ($model->getPatientWeightUnit()->one() ?$model->getPatientWeightUnit()->one()->name:'<span class="label label-warning">?</span>'),
+
             ],
             'extra_history',
             'is_serious:boolean',

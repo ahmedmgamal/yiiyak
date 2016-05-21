@@ -30,7 +30,6 @@ class DrugPrescription extends BaseDrugPrescription
             'id' => Yii::t('app', 'ID'),
             'drug_id' => Yii::t('app', 'Drug Id'),
             'icsr_id' => Yii::t('app', 'Icsr Id'),
-            'dose' => Yii::t('app', 'B.4.k.6 Dosage text'),
             'frequency_lkp_id' => Yii::t('app', 'Frequency Lkp Id'),
             'expiration_date' => Yii::t('app', 'Expiration Date'),
             'lot_no' => Yii::t('app', 'B.4.k.3 Batch/lot number'),

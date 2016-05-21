@@ -39,6 +39,8 @@ use Yii;
  * @property \backend\modules\crud\models\IcsrTest[] $icsrTests
  * @property \backend\modules\crud\models\IcsrType $icsrType
  * @property \backend\modules\crud\models\LkpIcsrType[] $icsrTypeLkps
+ * @property \backend\modules\crud\models\LkpTimeUnit $ageUnit
+ * @property \backend\modules\crud\models\LkpWeightUnit $patientWeightUnit
  * @property string $aliasModel
  */
 abstract class Icsr extends \yii\db\ActiveRecord
@@ -49,10 +51,7 @@ abstract class Icsr extends \yii\db\ActiveRecord
     /**
     * ENUM field values
     */
-    const PATIENT_AGE_UNIT_DAY = 'day';
-    const PATIENT_AGE_UNIT_WEEK = 'week';
-    const PATIENT_AGE_UNIT_MONTH = 'month';
-    const PATIENT_AGE_UNIT_YEAR = 'year';
+
     const PATIENT_WEIGHT_UNIT_LBS = 'lbs';
     const PATIENT_WEIGHT_UNIT_KGS = 'kgs';
     const IS_SERIOUS_YES = 'yes';
@@ -108,18 +107,7 @@ abstract class Icsr extends \yii\db\ActiveRecord
             [['patient_identifier', 'extra_history'], 'string', 'max' => 45],
             [['reaction_country_id'], 'exist', 'skipOnError' => true, 'targetClass' => LkpCountry::className(), 'targetAttribute' => ['reaction_country_id' => 'id']],
             [['drug_id'], 'exist', 'skipOnError' => true, 'targetClass' => Drug::className(), 'targetAttribute' => ['drug_id' => 'id']],
-            ['patient_age_unit', 'in', 'range' => [
-                    self::PATIENT_AGE_UNIT_DAY,
-                    self::PATIENT_AGE_UNIT_WEEK,
-                    self::PATIENT_AGE_UNIT_MONTH,
-                    self::PATIENT_AGE_UNIT_YEAR,
-                ]
-            ],
-            ['patient_weight_unit', 'in', 'range' => [
-                    self::PATIENT_WEIGHT_UNIT_LBS,
-                    self::PATIENT_WEIGHT_UNIT_KGS,
-                ]
-            ],
+ 
      
  
         ];
@@ -196,6 +184,10 @@ abstract class Icsr extends \yii\db\ActiveRecord
     {
         return $this->hasOne(\backend\modules\crud\models\LkpCountry::className(), ['id' => 'reaction_country_id']);
     }
+    public function getAgeUnit()
+    {
+        return $this->hasOne(\backend\modules\crud\models\LkpTimeUnit::className(), ['id' => 'patient_age_unit']);
+    }
 
     /**
      * @return \yii\db\ActiveQuery
@@ -210,6 +202,15 @@ abstract class Icsr extends \yii\db\ActiveRecord
     public function getIcsrType()
     {
         return $this->hasOne(\backend\modules\crud\models\LkpIcsrType::className(), ['id' => 'report_type']);
+    }
+        /**
+     * column patient_weight_unit ENUM value labels
+     * @return array
+     */
+    public  function getPatientWeightUnit()
+    {
+        return $this->hasOne(\backend\modules\crud\models\LkpWeightUnit::className(), ['id' => 'patient_weight_unit']);
+
     }
     /**
      * @return \yii\db\ActiveQuery
@@ -285,19 +286,7 @@ abstract class Icsr extends \yii\db\ActiveRecord
         return $value;
     }
 
-    /**
-     * column patient_age_unit ENUM value labels
-     * @return array
-     */
-    public static function optsPatientAgeUnit()
-    {
-        return [
-            self::PATIENT_AGE_UNIT_DAY => Yii::t('app', self::PATIENT_AGE_UNIT_DAY),
-            self::PATIENT_AGE_UNIT_WEEK => Yii::t('app', self::PATIENT_AGE_UNIT_WEEK),
-            self::PATIENT_AGE_UNIT_MONTH => Yii::t('app', self::PATIENT_AGE_UNIT_MONTH),
-            self::PATIENT_AGE_UNIT_YEAR => Yii::t('app', self::PATIENT_AGE_UNIT_YEAR),
-        ];
-    }
+ 
 
     /**
      * get column patient_weight_unit enum value label
@@ -312,17 +301,7 @@ abstract class Icsr extends \yii\db\ActiveRecord
         return $value;
     }
 
-    /**
-     * column patient_weight_unit ENUM value labels
-     * @return array
-     */
-    public static function optsPatientWeightUnit()
-    {
-        return [
-            self::PATIENT_WEIGHT_UNIT_LBS => Yii::t('app', self::PATIENT_WEIGHT_UNIT_LBS),
-            self::PATIENT_WEIGHT_UNIT_KGS => Yii::t('app', self::PATIENT_WEIGHT_UNIT_KGS),
-        ];
-    }
+
 
   
     /**
@@ -338,18 +317,6 @@ abstract class Icsr extends \yii\db\ActiveRecord
         return $value;
     }
 
-    /**
-     * column report_type ENUM value labels
-     * @return array
-     */
-    public static function optsReportType()
-    {
-        return [
-            self::REPORT_TYPE_SPONTANEOUS => Yii::t('app', self::REPORT_TYPE_SPONTANEOUS),
-            self::REPORT_TYPE_FROM_STUDY => Yii::t('app', self::REPORT_TYPE_FROM_STUDY),
-            self::REPORT_TYPE_OTHERS => Yii::t('app', self::REPORT_TYPE_OTHERS),
-            self::REPORT_TYPE_NA => Yii::t('app', self::REPORT_TYPE_NA),
-        ];
-    }
+ 
 
 }

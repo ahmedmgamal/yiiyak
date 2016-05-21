@@ -75,26 +75,18 @@ $this->params['breadcrumbs'][] = $this->title;
     },
     'format' => 'raw',
 ],
+			'patient_identifier',
 			'patient_age',
-			'patient_weight',
+			
 			[
                 'attribute'=>'patient_age_unit',
-                'value' => function ($model) {
-                    return backend\modules\crud\models\Icsr::getPatientAgeUnitValueLabel($model->patient_age_unit);
-                }    
-            ],
+                'value' => function ($model) { return $model->patient_age_unit ;}    
+            ],'patient_weight',
 			[
                 'attribute'=>'patient_weight_unit',
-                'value' => function ($model) {
-                    return backend\modules\crud\models\Icsr::getPatientWeightUnitValueLabel($model->patient_weight_unit);
-                }    
+                'value' =>function ($model) { return $model->getPatientWeightUnit()->one()->name;}     
             ],
-			[
-                'attribute'=>'is_serious',
-                'value' => function ($model) {
-                    return backend\modules\crud\models\Icsr::getIsSeriousValueLabel($model->is_serious);
-                }    
-            ],
+
 			/*[
                 'attribute'=>'results_in_death',
                 'value' => function ($model) {
