@@ -31,7 +31,9 @@ use yii\jui\DatePicker;
             
  <?php  echo       Html::activeHiddenInput($model, 'icsr_id') ; ?>
 			<?=                         $form->field($model, 'drug_role')->dropDownList(
-                            backend\modules\crud\models\DrugPrescription::optsdrugrole()
+                            
+                            \yii\helpers\ArrayHelper::map(backend\modules\crud\models\LkpDrugRole::find()->all(), 'id', 'name')
+
                         ); ?>
 
 			<?= $form->field($model, 'active_substance_names')->textInput(['maxlength' => true]) ?>
@@ -48,19 +50,14 @@ $form->field($model, 'frequency_lkp_id')->dropDownList(
 			<?php echo $form->field($model, 'use_date_start')->widget(DatePicker::className(),['dateFormat' => 'yyyy-MM-dd']); ?>
 			<?php echo $form->field($model, 'use_date_end')->widget(DatePicker::className(),['dateFormat' => 'yyyy-MM-dd']); ?>
 			<?php echo $form->field($model, 'duration_of_use')->textInput(['maxlength' => true]) ?>
-			<?php echo                         $form->field($model, 'duration_of_use_unit')->dropDownList(
-                            backend\modules\crud\models\DrugPrescription::optsdurationofuseunit()
+			<?php echo $form->field($model, 'duration_of_use_unit')->dropDownList(                          
+                            \yii\helpers\ArrayHelper::map(backend\modules\crud\models\LkpTimeUnit::find()->all(), 'id', 'name')
+
                         ); ?>
 			<?php echo $form->field($model, 'reason_of_use')->textInput(['maxlength' => true]) ?>
-			<?php echo                          $form->field($model, 'problem_went_after_stop')->dropDownList(
-                            backend\modules\crud\models\DrugPrescription::optsproblemwentafterstop()
-                        ); ?>
-			<?php echo                          $form->field($model, 'problem_returned_after_reuse')->dropDownList(
-                            backend\modules\crud\models\DrugPrescription::optsproblemreturnedafterreuse()
-                        ); ?>
-			<?php echo                          $form->field($model, 'product_avilable')->dropDownList(
-                            backend\modules\crud\models\DrugPrescription::optsproductavilable()
-                        ); ?>
+			<?php echo $form->field($model, 'problem_went_after_stop')->checkbox(); ?>
+			<?php echo $form->field($model, 'problem_returned_after_reuse')->checkbox(); ?>
+			<?php echo  $form->field($model, 'product_avilable')->checkbox(); ?>
 			<?= $form->field($model, 'drug_addtional_info')->textInput(['maxlength' => true]) ?>
 			<?= $form->field($model, 'drug_action_drug_withdrawn')->checkbox() ?>
 			<?= $form->field($model, 'drug_action_dose_reduced')->checkbox() ?>

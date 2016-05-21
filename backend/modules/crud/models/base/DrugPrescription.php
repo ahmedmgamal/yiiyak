@@ -36,6 +36,7 @@ use Yii;
  * @property \backend\modules\crud\models\Drug $drug
  * @property \backend\modules\crud\models\Icsr $icsr
  * @property \backend\modules\crud\models\LkpFrequency $frequencyLkp
+ * @property \backend\modules\crud\models\LkpDrugRole $drugRole
  * @property string $aliasModel
  */
 abstract class DrugPrescription extends \yii\db\ActiveRecord
@@ -43,21 +44,7 @@ abstract class DrugPrescription extends \yii\db\ActiveRecord
 
 
 
-    /**
-    * ENUM field values
-    */
-    const DURATION_OF_USE_UNIT_DAY = 'day';
-    const DURATION_OF_USE_UNIT_WEEK = 'week';
-    const DURATION_OF_USE_UNIT_MONTH = 'month';
-    const PROBLEM_WENT_AFTER_STOP_YES = 'yes';
-    const PROBLEM_WENT_AFTER_STOP_NO = 'no';
-    const PROBLEM_RETURNED_AFTER_REUSE_YES = 'yes';
-    const PROBLEM_RETURNED_AFTER_REUSE_NO = 'no';
-    const PRODUCT_AVILABLE_YES = 'yes';
-    const PRODUCT_AVILABLE_NO = 'no';
-    const DRUG_ROLE_SUSPECT = 'Suspect';
-    const DRUG_ROLE_CONCOMITANT = 'Concomitant';
-    const DRUG_ROLE_INTERACTING = 'Interacting';
+
     var $enum_labels = false;
     /**
      * @inheritdoc
@@ -99,33 +86,9 @@ abstract class DrugPrescription extends \yii\db\ActiveRecord
             [['drug_id'], 'exist', 'skipOnError' => true, 'targetClass' => Drug::className(), 'targetAttribute' => ['drug_id' => 'id']],
             [['icsr_id'], 'exist', 'skipOnError' => true, 'targetClass' => Icsr::className(), 'targetAttribute' => ['icsr_id' => 'id']],
             [['frequency_lkp_id'], 'exist', 'skipOnError' => true, 'targetClass' => LkpFrequency::className(), 'targetAttribute' => ['frequency_lkp_id' => 'id']],
-            ['duration_of_use_unit', 'in', 'range' => [
-                    self::DURATION_OF_USE_UNIT_DAY,
-                    self::DURATION_OF_USE_UNIT_WEEK,
-                    self::DURATION_OF_USE_UNIT_MONTH,
-                ]
-            ],
-            ['problem_went_after_stop', 'in', 'range' => [
-                    self::PROBLEM_WENT_AFTER_STOP_YES,
-                    self::PROBLEM_WENT_AFTER_STOP_NO,
-                ]
-            ],
-            ['problem_returned_after_reuse', 'in', 'range' => [
-                    self::PROBLEM_RETURNED_AFTER_REUSE_YES,
-                    self::PROBLEM_RETURNED_AFTER_REUSE_NO,
-                ]
-            ],
-            ['product_avilable', 'in', 'range' => [
-                    self::PRODUCT_AVILABLE_YES,
-                    self::PRODUCT_AVILABLE_NO,
-                ]
-            ],
-            ['drug_role', 'in', 'range' => [
-                    self::DRUG_ROLE_SUSPECT,
-                    self::DRUG_ROLE_CONCOMITANT,
-                    self::DRUG_ROLE_INTERACTING,
-                ]
-            ]
+            [['drug_role'], 'exist', 'skipOnError' => true, 'targetClass' =>  \backend\modules\crud\models\LkpDrugRole::className(), 'targetAttribute' => ['drug_role' => 'id']],
+            
+         
         ];
     }
 
@@ -172,31 +135,21 @@ abstract class DrugPrescription extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'drug_id' => Yii::t('app', 'Drug Id'),
             'icsr_id' => Yii::t('app', 'Icsr Id'),
-            'dose' => Yii::t('app', '	B.4.k.6 Dosage text (e.g., 2 mg three times a day for five days)
-'),
+            'dose' => Yii::t('app', '	B.4.k.6 Dosage text (e.g., 2 mg three times a day for five days)'),
             'frequency_lkp_id' => Yii::t('app', 'Frequency Lkp Id'),
             'expiration_date' => Yii::t('app', 'Expiration Date'),
-            'lot_no' => Yii::t('app', '	B.4.k.3 Batch/lot number
-'),
+            'lot_no' => Yii::t('app', '	B.4.k.3 Batch/lot number'),
             'use_date_start' => Yii::t('app', 'B.4.k.12 Date of start of drug'),
-            'use_date_end' => Yii::t('app', '	B.4.k.14 Date of last administration
-'),
-            'duration_of_use' => Yii::t('app', '	B.4.k.15 Duration of drug administration
-'),
-            'duration_of_use_unit' => Yii::t('app', '	B.4.k.15 Duration of drug administration
-'),
-            'reason_of_use' => Yii::t('app', '	B.4.k.11 Indication for use in the case
-'),
+            'use_date_end' => Yii::t('app', '	B.4.k.14 Date of last administration'),
+            'duration_of_use' => Yii::t('app', '	B.4.k.15 Duration of drug administration'),
+            'duration_of_use_unit' => Yii::t('app', '	B.4.k.15 Duration of drug administration'),
+            'reason_of_use' => Yii::t('app', '	B.4.k.11 Indication for use in the case'),
             'problem_went_after_stop' => Yii::t('app', 'Problem Went After Stop'),
-            'problem_returned_after_reuse' => Yii::t('app', '	B.4.k.17 Effect of rechallenge
-'),
+            'problem_returned_after_reuse' => Yii::t('app', '	B.4.k.17 Effect of rechallenge'),
             'product_avilable' => Yii::t('app', 'Product Avilable'),
-            'active_substance_names' => Yii::t('app', 'B.4.k.2.2 Active substance name(s)
-
-'),
+            'active_substance_names' => Yii::t('app', 'B.4.k.2.2 Active substance name(s)'),
             'drug_role' => Yii::t('app', 'B.4.k.1 Characterization of drug role (Suspect/Concomitant/Interacting)'),
-            'drug_addtional_info' => Yii::t('app', 'B.4.k.19 Additional information on drug
-'),
+            'drug_addtional_info' => Yii::t('app', 'B.4.k.19 Additional information on drug'),
             'drug_action_drug_withdrawn' => Yii::t('app', 'B.4.k.16 Action(s) taken with drug'),
             'drug_action_dose_reduced' => Yii::t('app', 'B.4.k.16 Action(s) taken with drug'),
             'drug_action_dose_increased' => Yii::t('app', 'B.4.k.16 Action(s) taken with drug'),
@@ -228,135 +181,14 @@ abstract class DrugPrescription extends \yii\db\ActiveRecord
     {
         return $this->hasOne(\backend\modules\crud\models\LkpFrequency::className(), ['id' => 'frequency_lkp_id']);
     }
-
-
-
-
-    /**
-     * get column duration_of_use_unit enum value label
-     * @param string $value
-     * @return string
-     */
-    public static function getDurationOfUseUnitValueLabel($value){
-        $labels = self::optsDurationOfUseUnit();
-        if(isset($labels[$value])){
-            return $labels[$value];
+    public function getDrugRole()
+        {
+            return $this->hasOne(\backend\modules\crud\models\LkpDrugRole::className(), ['id' => 'drug_role']);
         }
-        return $value;
-    }
-
-    /**
-     * column duration_of_use_unit ENUM value labels
-     * @return array
-     */
-    public static function optsDurationOfUseUnit()
-    {
-        return [
-            self::DURATION_OF_USE_UNIT_DAY => Yii::t('app', self::DURATION_OF_USE_UNIT_DAY),
-            self::DURATION_OF_USE_UNIT_WEEK => Yii::t('app', self::DURATION_OF_USE_UNIT_WEEK),
-            self::DURATION_OF_USE_UNIT_MONTH => Yii::t('app', self::DURATION_OF_USE_UNIT_MONTH),
-        ];
-    }
-
-    /**
-     * get column problem_went_after_stop enum value label
-     * @param string $value
-     * @return string
-     */
-    public static function getProblemWentAfterStopValueLabel($value){
-        $labels = self::optsProblemWentAfterStop();
-        if(isset($labels[$value])){
-            return $labels[$value];
+    public function getDurationOfUseUnit()
+        {
+            return $this->hasOne(\backend\modules\crud\models\LkpTimeUnit::className(), ['id' => 'duration_of_use_unit']);
         }
-        return $value;
-    }
 
-    /**
-     * column problem_went_after_stop ENUM value labels
-     * @return array
-     */
-    public static function optsProblemWentAfterStop()
-    {
-        return [
-            self::PROBLEM_WENT_AFTER_STOP_YES => Yii::t('app', self::PROBLEM_WENT_AFTER_STOP_YES),
-            self::PROBLEM_WENT_AFTER_STOP_NO => Yii::t('app', self::PROBLEM_WENT_AFTER_STOP_NO),
-        ];
-    }
-
-    /**
-     * get column problem_returned_after_reuse enum value label
-     * @param string $value
-     * @return string
-     */
-    public static function getProblemReturnedAfterReuseValueLabel($value){
-        $labels = self::optsProblemReturnedAfterReuse();
-        if(isset($labels[$value])){
-            return $labels[$value];
-        }
-        return $value;
-    }
-
-    /**
-     * column problem_returned_after_reuse ENUM value labels
-     * @return array
-     */
-    public static function optsProblemReturnedAfterReuse()
-    {
-        return [
-            self::PROBLEM_RETURNED_AFTER_REUSE_YES => Yii::t('app', self::PROBLEM_RETURNED_AFTER_REUSE_YES),
-            self::PROBLEM_RETURNED_AFTER_REUSE_NO => Yii::t('app', self::PROBLEM_RETURNED_AFTER_REUSE_NO),
-        ];
-    }
-
-    /**
-     * get column product_avilable enum value label
-     * @param string $value
-     * @return string
-     */
-    public static function getProductAvilableValueLabel($value){
-        $labels = self::optsProductAvilable();
-        if(isset($labels[$value])){
-            return $labels[$value];
-        }
-        return $value;
-    }
-
-    /**
-     * column product_avilable ENUM value labels
-     * @return array
-     */
-    public static function optsProductAvilable()
-    {
-        return [
-            self::PRODUCT_AVILABLE_YES => Yii::t('app', self::PRODUCT_AVILABLE_YES),
-            self::PRODUCT_AVILABLE_NO => Yii::t('app', self::PRODUCT_AVILABLE_NO),
-        ];
-    }
-
-    /**
-     * get column drug_role enum value label
-     * @param string $value
-     * @return string
-     */
-    public static function getDrugRoleValueLabel($value){
-        $labels = self::optsDrugRole();
-        if(isset($labels[$value])){
-            return $labels[$value];
-        }
-        return $value;
-    }
-
-    /**
-     * column drug_role ENUM value labels
-     * @return array
-     */
-    public static function optsDrugRole()
-    {
-        return [
-            self::DRUG_ROLE_SUSPECT => Yii::t('app', self::DRUG_ROLE_SUSPECT),
-            self::DRUG_ROLE_CONCOMITANT => Yii::t('app', self::DRUG_ROLE_CONCOMITANT),
-            self::DRUG_ROLE_INTERACTING => Yii::t('app', self::DRUG_ROLE_INTERACTING),
-        ];
-    }
 
 }

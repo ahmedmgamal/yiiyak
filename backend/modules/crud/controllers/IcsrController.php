@@ -37,7 +37,7 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
 			if ($model->load($_POST) && $model->save()) {
                             $pres = new DrugPrescription;
                             $pres->drug_id =($model->getDrug()->one()->id);
-                            $pres->drug_role = DrugPrescription::DRUG_ROLE_SUSPECT;
+                            $pres->drug_role = '1';//value of suspect 
                             $pres->icsr_id = $model->id;
                             $pres->save();
                             return $this->redirect(Url::previous());

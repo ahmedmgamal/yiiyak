@@ -82,25 +82,18 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
         'duration_of_use',
             [
                 'attribute'=>'duration_of_use_unit',
-                'value'=>backend\modules\crud\models\DrugPrescription::getDurationOfUseUnitValueLabel($model->duration_of_use_unit),
+                'value' => ($model->getDurationOfUseUnit()->one() ? Html::a($model->getDurationOfUseUnit()->one()->id, ['lkp-time-unit/view', 'id' => $model->getDurationOfUseUnit()->one()->id,]) : '<span class="label label-warning">?</span>'),
+
             ],
         'reason_of_use',
-            [
-                'attribute'=>'problem_went_after_stop',
-                'value'=>backend\modules\crud\models\DrugPrescription::getProblemWentAfterStopValueLabel($model->problem_went_after_stop),
-            ],
-            [
-                'attribute'=>'problem_returned_after_reuse',
-                'value'=>backend\modules\crud\models\DrugPrescription::getProblemReturnedAfterReuseValueLabel($model->problem_returned_after_reuse),
-            ],
-            [
-                'attribute'=>'product_avilable',
-                'value'=>backend\modules\crud\models\DrugPrescription::getProductAvilableValueLabel($model->product_avilable),
-            ],
+        'problem_went_after_stop:boolean',
+        'problem_returned_after_reuse:boolean',
+        'product_avilable:boolean',
+
         'active_substance_names',
             [
                 'attribute'=>'drug_role',
-                'value'=>backend\modules\crud\models\DrugPrescription::getDrugRoleValueLabel($model->drug_role),
+                'value' => ($model->getDrugRole()->one() ? Html::a($model->getDrugRole()->one()->id, ['lkp-drug-role/view', 'id' => $model->getDrugRole()->one()->id,]) : '<span class="label label-warning">?</span>'),
             ],
         'drug_addtional_info',
         'drug_action_drug_withdrawn:boolean',
