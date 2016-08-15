@@ -96,7 +96,8 @@ $(document).ready(function() {
 	// Bootstrap Carousels
 	$('.carousel').carousel({
 		interval: 5000,
-		pause	: 'hover'
+		pause	: 'hover',
+
 	});
 	function formBottomFixedWidth(){
 		// Bottom fixed form - take parent container width
@@ -123,6 +124,7 @@ $(document).ready(function() {
 	if($(".owl-carousel").length > 0){
 		$(".owl-carousel").each(function(){ 
 			$(this).owlCarousel({
+
 				rtl: $(this).data("owl-rtl"),
 				items: $(this).data("owl-items"),
 				loop: $(this).data("owl-loop"),
@@ -152,6 +154,7 @@ $(document).ready(function() {
 	if($(".owl-carousel-single").length > 0){
 		$(".owl-carousel-single").each(function(){ 
 			$(this).owlCarousel({
+				autoPlay : true,
 				rtl: $(this).data("owl-rtl"),
 				items: $(this).data("owl-items"),
 				loop: $(this).data("owl-loop"),

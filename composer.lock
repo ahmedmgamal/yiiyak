@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6ceb00324f5dd8c003f5680fdf57e0b8",
-    "content-hash": "9fcefffc7e391aea3f0896b07620ec78",
+    "hash": "d2beff793ba6758ed979f773f67aca1f",
+    "content-hash": "7f6f607affd92be68adac8009225b2ba",
     "packages": [
         {
             "name": "2amigos/yii2-translateable-behavior",
@@ -866,7 +866,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mdmsoft/yii2-admin/zipball/58b3d023de9899da42c7be47c901391b8ef43663",
+                "url": "https://api.github.com/repos/mdmsoft/yii2-admin/zipball/600c4bd0349118a59acf1eb814e4c4ed4d20eba0",
                 "reference": "600c4bd0349118a59acf1eb814e4c4ed4d20eba0",
                 "shasum": ""
             },
@@ -1183,7 +1183,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webvimark/components/zipball/d4d6dc29150a09ee59c8e7e66e005b083f223d40",
+                "url": "https://api.github.com/repos/webvimark/components/zipball/782cb6ec7a4dc1a27389504cdfe9e15d0c47f04d",
                 "reference": "782cb6ec7a4dc1a27389504cdfe9e15d0c47f04d",
                 "shasum": ""
             },
@@ -1608,7 +1608,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-jui/zipball/9ab9a2cb17cd7f13921339e11e5146295cf39083",
+                "url": "https://api.github.com/repos/yiisoft/yii2-jui/zipball/226ffd897b26965a357e187cdf67f6c2e43e3139",
                 "reference": "226ffd897b26965a357e187cdf67f6c2e43e3139",
                 "shasum": ""
             },
@@ -1650,16 +1650,16 @@
         },
         {
             "name": "yiisoft/yii2-swiftmailer",
-            "version": "2.0.5",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-swiftmailer.git",
-                "reference": "e2c6315caff30a9271a7afad4d684627721dc69a"
+                "reference": "163b9c6273e133c43a596aef46a9f5b1537731f9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-swiftmailer/zipball/e2c6315caff30a9271a7afad4d684627721dc69a",
-                "reference": "e2c6315caff30a9271a7afad4d684627721dc69a",
+                "url": "https://api.github.com/repos/yiisoft/yii2-swiftmailer/zipball/163b9c6273e133c43a596aef46a9f5b1537731f9",
+                "reference": "163b9c6273e133c43a596aef46a9f5b1537731f9",
                 "shasum": ""
             },
             "require": {
@@ -1696,7 +1696,7 @@
                 "swiftmailer",
                 "yii2"
             ],
-            "time": "2016-03-17 03:58:49"
+            "time": "2016-04-14 08:50:13"
         }
     ],
     "packages-dev": [

@@ -35,6 +35,17 @@ return [
         ]
     ],
     'components' => [
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.gmail.com',
+                'username' => 'yiiyaktest@gmail.com',
+                'password' => 'opensource',
+                'port' => '587',
+                'encryption' => 'tls',
+            ],
+        ],
         'user' => [
             'identityClass' => 'backend\modules\crud\models\User',
             'enableAutoLogin' => true,

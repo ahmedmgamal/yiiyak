@@ -1,5 +1,7 @@
 <?php
 use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\widgets\ActiveForm;
 
 $this->title = 'PV-Radar';
 
@@ -20,7 +22,7 @@ $this->title = 'PV-Radar';
                             <?= Html::img('@web/images/backgrounds/full-bg-7.jpg',['class' => 'ls-bg' , 'style' => 'width: 100%' , 'alt' => 'Slide background']); ?>
                             <!-- Center title -->
                             <h3 class="ls-l title-lg c-white text-uppercase text-center strong-700" style="width:100%; top:35%; left:50%;" data-ls="offsetxin:0;offsetyin:250;durationin:1000;delayin:500;offsetxout:0;offsetyout:-8;easingout:easeInOutQuart;scalexout:1.2;scaleyout:1.2;">
-                                Stay hungry. Stay foolish
+                                No worries, we follow up
                             </h3>
 
                             <!-- Center paragraph -->
@@ -29,11 +31,10 @@ $this->title = 'PV-Radar';
                                 and get on with improving your other innovations.
                             </p>
 
-                            <a href="about-1.html" class="btn btn-lg btn-base-1 ls-l" style="top: 70%; left: 40%;" data-ls="offsetxin: 0; offsetyin: 250; durationin: 1000; delayin: 1000; offsetxout: 0; offsetyout:-8;easingout:easeInOutQuart;scalexout:1.2;scaleyout:1.2;">
-                                Learn more
-                            </a>
-                            <a href="#section-1" class="btn btn-lg btn-b-white ls-l scroll-me" style="top: 70%; left: 55%;" data-ls="offsetxin: 0; offsetyin: 250; durationin: 1000; delayin: 1000; offsetxout: 0; offsetyout:-8;easingout:easeInOutQuart;scalexout:1.2;scaleyout:1.2;">
-                                Continue tour
+                            <?= Html::a('Login',Url::toRoute(['site/login']),['class' => 'btn btn-lg btn-base-1 ls-l' ,  'style' => "top: 70%; left: 40%;" ,'data-ls' =>"offsetxin: 0; offsetyin: 250; durationin: 1000; delayin: 1000; offsetxout: 0; offsetyout:-8;easingout:easeInOutQuart;scalexout:1.2;scaleyout:1.2;"]); ?>
+
+                            <a href="#section-7" class="btn btn-lg btn-b-white ls-l scroll-me" style="top: 70%; left: 55%;" data-ls="offsetxin: 0; offsetyin: 250; durationin: 1000; delayin: 1000; offsetxout: 0; offsetyout:-8;easingout:easeInOutQuart;scalexout:1.2;scaleyout:1.2;">
+                                Request Quotation
                             </a>
                         </div>
                     </div>
@@ -50,7 +51,7 @@ $this->title = 'PV-Radar';
                                         </div>
                                     </div>
                                     <div class="block-body scroll-on fadeIn" data-wow-duration="1s">
-                                        <h1 class="block-title">Web Development</h1>
+                                        <h1 class="block-title">RADAR software ICSR collectiont</h1>
                                         <p class="text-center">
                                             Pellentesquemattis arcu malesuada in. Donec urna sem, rutrum sit amet pellentesque vel, suscipit at metus.
                                         </p>
@@ -65,7 +66,7 @@ $this->title = 'PV-Radar';
                                         </div>
                                     </div>
                                     <div class="block-body scroll-on fadeIn" data-wow-duration="1s">
-                                        <h1 class="block-title">Web Development</h1>
+                                        <h1 class="block-title"> follow-up </h1>
                                         <p class="text-center">
                                             Pellentesquemattis arcu malesuada in. Donec urna sem, rutrum sit amet pellentesque vel, suscipit at metus.
                                         </p>
@@ -80,7 +81,7 @@ $this->title = 'PV-Radar';
                                         </div>
                                     </div>
                                     <div class="block-body scroll-on fadeIn" data-wow-duration="1s">
-                                        <h1 class="block-title">Web Development</h1>
+                                        <h1 class="block-title"> assessment and reporting</h1>
                                         <p class="text-center">
                                             Pellentesquemattis arcu malesuada in. Donec urna sem, rutrum sit amet pellentesque vel, suscipit at metus.
                                         </p>
@@ -96,11 +97,10 @@ $this->title = 'PV-Radar';
                     <div class="container">
                         <div class="section-title-wrapper style-1 v1 scroll-on bounceInDown" data-wow-duration="1s" data-wow-offset="100">
                             <h3 class="section-title center">
-                                <span>A new template concept</span>
+                                <span>Pharmacovigilance Pre and post authorization services</span>
                                 <span class="section-subtitle">Layout oriented, smartly coded, made to be customized and much more.</span>
                             </h3>
                             <div class="section-title-text text-center">
-                                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim ad minim veniam quis nostrud.</p>
                             </div>
                         </div>
 
@@ -162,7 +162,7 @@ $this->title = 'PV-Radar';
                     <div class="container">
                         <div class="section-title-wrapper style-1 v1 scroll-on bounceInDown" data-wow-duration="1s" data-wow-offset="100">
                             <h3 class="section-title center">
-                                <span>Extensive documentation and great support</span>
+                                <span>3 packages are available (Contracts for 2 years only)</span>
                                 <span class="section-subtitle">To be the best means to make each customer your friend and give him what he needs</span>
                             </h3>
                         </div>
@@ -171,8 +171,8 @@ $this->title = 'PV-Radar';
                             <div class="col-md-4 scroll-on slideInLeft" data-wow-duration=".5s" data-wow-offset="200">
                                 <div class="block block-pricing style-1 bg-base-1 mt-20">
                                     <div class="block-header">
-                                        <h3 class="pricing-title">Personal</h3>
-                                        <span class="pricing-subtitle">Get some features</span>
+                                        <h3 class="pricing-title">Package 1</h3>
+                                        <span class="pricing-subtitle">< 10 products</span>
                                     </div>
                                     <div class="block-body">
                                         <ul>
@@ -185,15 +185,15 @@ $this->title = 'PV-Radar';
                                         <h3 class="price-tag text-center">6,99$<span>/m</span></h3>
                                     </div>
                                     <div class="block-footer">
-                                        <a href="#" class="btn btn-lg btn-base-1">Add to cart</a>
+                                        <a href="#request-form" class="btn btn-lg btn-base-1 scroll-me" onclick="$('#request-message').val('i would like to request package 1');">Request</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4 scroll-on zoomIn" data-wow-duration=".5s" data-wow-delay=".5s" data-wow-offset="100">
                                 <div class="block block-pricing style-1 bg-base-2">
                                     <div class="block-header">
-                                        <h3 class="pricing-title">Personal</h3>
-                                        <span class="pricing-subtitle">Get some features</span>
+                                        <h3 class="pricing-title">Package 2</h3>
+                                        <span class="pricing-subtitle">10-50 products</span>
                                     </div>
                                     <div class="block-body">
                                         <ul>
@@ -206,15 +206,15 @@ $this->title = 'PV-Radar';
                                         <h3 class="price-tag text-center">9,99$<span>/m</span></h3>
                                     </div>
                                     <div class="block-footer">
-                                        <a href="#" class="btn btn-lg btn-base-2">Add to cart</a>
+                                        <a href="#request-form" class="btn btn-lg btn-base-2 scroll-me" onclick="$('#request-message').val('i would like to request package 2');">Request</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4 scroll-on slideInRight" data-wow-duration=".5s" data-wow-offset="200">
                                 <div class="block block-pricing style-1 bg-base-1 mt-20">
                                     <div class="block-header">
-                                        <h3 class="pricing-title">Personal</h3>
-                                        <span class="pricing-subtitle">Get some features</span>
+                                        <h3 class="pricing-title">Package 3</h3>
+                                        <span class="pricing-subtitle"> 51-100 products</span>
                                     </div>
                                     <div class="block-body">
                                         <ul>
@@ -227,7 +227,7 @@ $this->title = 'PV-Radar';
                                         <h3 class="price-tag text-center">12,99$<span>/m</span></h3>
                                     </div>
                                     <div class="block-footer">
-                                        <a href="#" class="btn btn-lg btn-base-1">Add to cart</a>
+                                        <a href="#request-form" class="btn btn-lg btn-base-1 scroll-me" onclick="$('#request-message').val('i would like to request package 3');">Request</a>
                                     </div>
                                 </div>
                             </div>
@@ -292,7 +292,7 @@ $this->title = 'PV-Radar';
                                 <div class="testimonial-fluid mb-20">
                                     <h3>What John says about us</h3>
                                     <p class="testimonial-text">
-                                        Great service with fast and relible support The design work and detail put into themes are great.
+                                        Periodic benefit risk evaluation report (PBRER) scheduling, production and submission
                                     </p>
                                     <span class="testimonial-author">John Doe - Company In</span>
                                 </div>
@@ -302,17 +302,38 @@ $this->title = 'PV-Radar';
                                 <div class="testimonial-fluid">
                                     <h3>What Rachel says about us</h3>
                                     <p class="testimonial-text">
-                                        Great service with fast and relible support The design work and detail put into themes are great.
+                                        Risk management system(s) and monitoring of the outcome of risk minimisation measures
                                     </p>
                                     <span class="testimonial-author">Rachel McAdams - Company In</span>
                                 </div>
                             </div>
+
+                            <div class="item">
+                                <div class="testimonial-fluid">
+                                    <h3>What Rachel says about us</h3>
+                                    <p class="testimonial-text">
+                                        Pharmacovigilance system master file(PSMF)
+                                    </p>
+                                    <span class="testimonial-author">Rachel McAdams - Company In</span>
+                                </div>
+                            </div>
+
+                            <div class="item">
+                                <div class="testimonial-fluid">
+                                    <h3>What Rachel says about us</h3>
+                                    <p class="testimonial-text">
+                                        Outsourcing of QPPV
+                                    </p>
+                                    <span class="testimonial-author">Rachel McAdams - Company In</span>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </section>
 
                 <!-- SECTION 7 -->
-                <section class="slice relative" style="background: url('<?php echo Yii::getAlias('@web');?>/images/patterns/subway-lines.png') repeat;">
+                <section id="section-7" class="slice relative" style="background: url('<?php echo Yii::getAlias('@web');?>/images/patterns/subway-lines.png') repeat;">
                     <div class="mask mask-3 v1"></div>
                     <div class="container">
                         <div class="row">
@@ -321,8 +342,9 @@ $this->title = 'PV-Radar';
                                 <div class="section-title-wrapper style-1 v1 v2 mb-40">
                                     <h3 class="section-title section-title-sm left">
                                         <span>Our office</span>
-                                        <small class="section-subtitle">Lorem ipsum dolor sit amet</small>
+                                        <small class="section-subtitle">زهراء مدينة نصر  </small>
                                     </h3>
+
                                 </div>
 
                                 <span class="clearfix"></span>
@@ -342,29 +364,30 @@ $this->title = 'PV-Radar';
                                 <!-- Section title with subtitle -->
                                 <div class="section-title-wrapper style-1 v1 v2 mb-40">
                                     <h3 class="section-title section-title-sm left">
-                                        <span>Contact us</span>
+                                        <span>Request Quotation</span>
                                         <small class="section-subtitle">We are here to help you</small>
                                     </h3>
                                 </div>
                                 <span class="clearfix"></span>
 
                                 <!-- Contact form -->
-                                <form class="form-base-1 form-opaque mt-20">
+                                    <?php  $form= ActiveForm::begin(['action' => ['site/send-mail'],'options' => ['id' => 'request-form','class'=> 'form-base-1 form-opaque mt-20']]) ?>
                                     <div class="form-group">
-                                        <input type="email" class="form-control input-lg" placeholder="Your name">
+                                        <input type="text" name="userName" class="form-control input-lg" placeholder="Your name">
+
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control input-lg" placeholder="Your company">
+                                        <input name="company" type="text" class="form-control input-lg" placeholder="Your company">
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control input-lg" placeholder="Your email">
+                                        <input name="email" type="text" class="form-control input-lg" placeholder="Your email">
                                     </div>
                                     <div class="form-group">
-                                        <textarea class="form-control" rows="5" placeholder="Enter you message here ..."></textarea>
+                                        <textarea id="request-message" name="message" class="form-control" rows="5" placeholder="Enter you message here ..."></textarea>
                                     </div>
 
-                                    <button type="submit" class="btn btn-lg btn-block btn-base-1">Send message</button>
-                                </form>
+                                    <button type="submit" class="btn btn-lg btn-block btn-base-1">Send Request</button>
+                                <? ActiveForm::end()?>
                             </div>
                         </div>
                     </div>
@@ -380,10 +403,8 @@ $this->title = 'PV-Radar';
                                         <i class="fa fa-circle"></i>
                                     </div>
                                     <div class="block-content">
-                                        <h3 class="block-title-2">This is a title</h3>
-                                        <p>
-                                            Lorem ipsum dolor sit amet consectetur adipiscing elit eiusmod.
-                                        </p>
+                                        <h3 class="block-title-2">Our Office</h3>
+                                        <p> زهراء مدينة نصر </p>
                                     </div>
                                 </div>
 
@@ -394,10 +415,8 @@ $this->title = 'PV-Radar';
                                         <i class="fa fa-circle"></i>
                                     </div>
                                     <div class="block-content">
-                                        <h3 class="block-title-2">This is a title2</h3>
-                                        <p>
-                                            Lorem ipsum dolor sit amet consectetur adipiscing elit eiusmod.
-                                        </p>
+                                        <h3 class="block-title-2">Email</h3>
+                                        <p>pv@emcoegypt.com </p>
                                     </div>
                                 </div>
 
@@ -422,10 +441,8 @@ $this->title = 'PV-Radar';
                                         <i class="fa fa-long-arrow-right"></i>
                                     </div>
                                     <div class="block-content">
-                                        <h3 class="block-title-2">This is a title</h3>
-                                        <p>
-                                            Lorem ipsum dolor sit amet consectetur adipiscing elit eiusmod.
-                                        </p>
+                                        <h3 class="block-title-2">Company</h3>
+                                        <p> Egyptian medicine company(EMCO)</p>
                                     </div>
                                 </div>
 
@@ -436,7 +453,7 @@ $this->title = 'PV-Radar';
                                         <i class="fa fa-long-arrow-right"></i>
                                     </div>
                                     <div class="block-content">
-                                        <h3 class="block-title-2">This is a title</h3>
+                                        <h3 class="block-title-2">This is a title2</h3>
                                         <p>
                                             Lorem ipsum dolor sit amet consectetur adipiscing elit eiusmod.
                                         </p>
@@ -464,10 +481,8 @@ $this->title = 'PV-Radar';
                                         <i class="fa fa-edit"></i>
                                     </div>
                                     <div class="block-content">
-                                        <h3 class="block-title-2">This is a title</h3>
-                                        <p>
-                                            Lorem ipsum dolor sit amet consectetur adipiscing elit eiusmod.
-                                        </p>
+                                        <h3 class="block-title-2">Phone Numbers</h3>
+                                        <p>+201144222092 - 01100145097</p>
                                     </div>
                                 </div>
 
@@ -536,4 +551,4 @@ $this->title = 'PV-Radar';
 </div><!-- END: st-pusher -->
 </div><!-- END: body-wrap -->
 
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8qj-3E6nRcvPyJP9DwpAZ3Xr_iSq_ot8&v=3.exp&amp;sensor=false"></script>

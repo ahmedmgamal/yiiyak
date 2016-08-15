@@ -1,9 +1,9 @@
 <?php
 /* @var $content string */
 
-use backend\assets\AppAsset;
+use backend\assets\LandingAsset;
 use yii\helpers\Html;
-AppAsset::register($this);
+LandingAsset::register($this);
 ?>
 
 
@@ -45,6 +45,7 @@ AppAsset::register($this);
         speed : 0.15
     });
 </script>
+
 
 </body>
 </html>
