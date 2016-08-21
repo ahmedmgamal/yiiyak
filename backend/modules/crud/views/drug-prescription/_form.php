@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use \dmstr\bootstrap\Tabs;
 use yii\jui\DatePicker;
+use yii\helpers\ArrayHelper;
 
 /**
 * @var yii\web\View $this
@@ -59,11 +60,14 @@ $form->field($model, 'frequency_lkp_id')->dropDownList(
 			<?php echo $form->field($model, 'problem_returned_after_reuse')->checkbox(); ?>
 			<?php echo  $form->field($model, 'product_avilable')->checkbox(); ?>
 			<?= $form->field($model, 'drug_addtional_info')->textInput(['maxlength' => true]) ?>
-			<?= $form->field($model, 'drug_action_drug_withdrawn')->checkbox() ?>
-			<?= $form->field($model, 'drug_action_dose_reduced')->checkbox() ?>
-			<?= $form->field($model, 'drug_action_dose_increased')->checkbox() ?>
-			<?= $form->field($model, 'drug_action_dose_not_changed')->checkbox() ?>
-			<?= $form->field($model, 'drug_action_unknown')->checkbox() ?>
+
+            <?php
+                $drug_actions = backend\modules\crud\models\LkpDrugAction::find()->all();
+                $drug_actions_drop_list = ArrayHelper::map($drug_actions,'id','name');
+                ?>
+
+            <?=       $form->field($model, 'drug_action')->dropDownList($drug_actions_drop_list); ?>
+
         </p>
         <?php $this->endBlock(); ?>
         
