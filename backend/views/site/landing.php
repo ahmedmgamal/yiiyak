@@ -22,19 +22,19 @@ $this->title = 'PV-Radar';
                             <?= Html::img('@web/images/backgrounds/full-bg-7.jpg',['class' => 'ls-bg' , 'style' => 'width: 100%' , 'alt' => 'Slide background']); ?>
                             <!-- Center title -->
                             <h3 class="ls-l title-lg c-white text-uppercase text-center strong-700" style="width:100%; top:35%; left:50%;" data-ls="offsetxin:0;offsetyin:250;durationin:1000;delayin:500;offsetxout:0;offsetyout:-8;easingout:easeInOutQuart;scalexout:1.2;scaleyout:1.2;">
-                                No worries, we follow up
+                              <?= Yii::t('app','  No worries, we follow up'); ?>
                             </h3>
 
                             <!-- Center paragraph -->
                             <p class="ls-l text-standard text-center c-white" style="width: 900px; top: 50%; left: 50%;" data-ls="offsetxin:-250;offsetyin:-;durationin:1000;delayin:1000;offsetxout:0;offsetyout:-8;easingout:easeInOutQuart;scalexout:1.2;scaleyout:1.2;">
-                                Sometimes when you innovate, you make mistakes. It is best to admit them quickly, <br>
-                                and get on with improving your other innovations.
+                             <?= Yii::t('app',' Sometimes when you innovate, you make mistakes. It is best to admit them quickly, <br>
+                                and get on with improving your other innovations.')?>
                             </p>
 
                             <?= Html::a('Login',Url::toRoute(['site/login']),['class' => 'btn btn-lg btn-base-1 ls-l' ,  'style' => "top: 70%; left: 40%;" ,'data-ls' =>"offsetxin: 0; offsetyin: 250; durationin: 1000; delayin: 1000; offsetxout: 0; offsetyout:-8;easingout:easeInOutQuart;scalexout:1.2;scaleyout:1.2;"]); ?>
 
                             <a href="#section-7" class="btn btn-lg btn-b-white ls-l scroll-me" style="top: 70%; left: 55%;" data-ls="offsetxin: 0; offsetyin: 250; durationin: 1000; delayin: 1000; offsetxout: 0; offsetyout:-8;easingout:easeInOutQuart;scalexout:1.2;scaleyout:1.2;">
-                                Request Quotation
+                              <?= Yii::t('app','Request Quotation') ?>
                             </a>
                         </div>
                     </div>
@@ -53,7 +53,7 @@ $this->title = 'PV-Radar';
                                     <div class="block-body scroll-on fadeIn" data-wow-duration="1s">
                                         <h1 class="block-title">RADAR software ICSR collectiont</h1>
                                         <p class="text-center">
-                                            Pellentesquemattis arcu malesuada in. Donec urna sem, rutrum sit amet pellentesque vel, suscipit at metus.
+                                          <?= Yii::t('app','Pellentesquemattis arcu malesuada in. Donec urna sem, rutrum sit amet pellentesque vel, suscipit at metus.') ?>
                                         </p>
                                     </div>
                                 </div>
@@ -68,7 +68,7 @@ $this->title = 'PV-Radar';
                                     <div class="block-body scroll-on fadeIn" data-wow-duration="1s">
                                         <h1 class="block-title"> follow-up </h1>
                                         <p class="text-center">
-                                            Pellentesquemattis arcu malesuada in. Donec urna sem, rutrum sit amet pellentesque vel, suscipit at metus.
+                                           <?= Yii::t('app','Pellentesquemattis arcu malesuada in. Donec urna sem, rutrum sit amet pellentesque vel, suscipit at metus.')?>
                                         </p>
                                     </div>
                                 </div>
@@ -81,9 +81,9 @@ $this->title = 'PV-Radar';
                                         </div>
                                     </div>
                                     <div class="block-body scroll-on fadeIn" data-wow-duration="1s">
-                                        <h1 class="block-title"> assessment and reporting</h1>
+                                        <h1 class="block-title"><?= Yii::t('app',' assessment and reporting')?></h1>
                                         <p class="text-center">
-                                            Pellentesquemattis arcu malesuada in. Donec urna sem, rutrum sit amet pellentesque vel, suscipit at metus.
+                                        <?= Yii::t('app','Pellentesquemattis arcu malesuada in. Donec urna sem, rutrum sit amet pellentesque vel, suscipit at metus.')?>
                                         </p>
                                     </div>
                                 </div>
@@ -97,8 +97,7 @@ $this->title = 'PV-Radar';
                     <div class="container">
                         <div class="section-title-wrapper style-1 v1 scroll-on bounceInDown" data-wow-duration="1s" data-wow-offset="100">
                             <h3 class="section-title center">
-                                <span>Pharmacovigilance Pre and post authorization services</span>
-                                <span class="section-subtitle">Layout oriented, smartly coded, made to be customized and much more.</span>
+                                <span><?= Yii::t('app','Pharmacovigilance Pre and post authorization services')?></span>
                             </h3>
                             <div class="section-title-text text-center">
                             </div>
@@ -117,40 +116,30 @@ $this->title = 'PV-Radar';
                 <!-- SECTION 3 -->
                 <section class="slice sct-color-2 bb">
                     <div class="container">
-                        <div class="section-title-wrapper style-1 v1 scroll-on bounceInDown" data-wow-duration="1s" data-wow-offset="100">
-                            <h3 class="section-title center">
-                                <span>Incredible tools to ease customization</span>
-                                <span class="section-subtitle">Created with LESS. We provide you great tools to customize the template</span>
-                            </h3>
-                            <div class="section-title-text text-center">
-                                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim ad minim veniam quis nostrud.</p>
-                            </div>
-                        </div>
-
                         <!-- MILESTONE COUNTER -->
                         <div class="row">
                             <div class="col-md-3 scroll-on zoomIn" data-wow-duration=".5s">
                                 <div class="milestone-counter">
                                     <div class="milestone-count c-base-2" data-from="0" data-to="5518" data-speed="3000" data-refresh-interval="100"></div>
-                                    <h4 class="milestone-info c-base-4">Clients</h4>
+                                    <h4 class="milestone-info c-base-4"><?= Yii::t('app','Clients')?></h4>
                                 </div>
                             </div>
                             <div class="col-md-3 scroll-on zoomIn" data-wow-duration=".5s" data-wow-delay=".5s">
                                 <div class="milestone-counter">
                                     <div class="milestone-count c-base-2" data-from="0" data-to="154" data-speed="5000" data-refresh-interval="50"></div>
-                                    <h4 class="milestone-info c-base-4">Successful projects</h4>
+                                    <h4 class="milestone-info c-base-4"><?= Yii::t('app','Successful projects')?></h4>
                                 </div>
                             </div>
                             <div class="col-md-3 scroll-on zoomIn" data-wow-duration=".5s" data-wow-delay="1s">
                                 <div class="milestone-counter">
                                     <div class="milestone-count c-base-2" data-from="0" data-to="33" data-speed="5000" data-refresh-interval="80"></div>
-                                    <h4 class="milestone-info c-base-4">Awards</h4>
+                                    <h4 class="milestone-info c-base-4"><?= Yii::t('app','Awards') ?></h4>
                                 </div>
                             </div>
                             <div class="col-md-3 scroll-on zoomIn" data-wow-duration=".5s" data-wow-delay="1.5s">
                                 <div class="milestone-counter">
                                     <div class="milestone-count c-base-2" data-from="0" data-to="1230" data-speed="5000" data-refresh-interval="80"></div>
-                                    <h4 class="milestone-info c-base-4">Great ideas</h4>
+                                    <h4 class="milestone-info c-base-4"><?= Yii::t('app','Great ideas')?></h4>
                                 </div>
                             </div>
                         </div>
@@ -162,8 +151,8 @@ $this->title = 'PV-Radar';
                     <div class="container">
                         <div class="section-title-wrapper style-1 v1 scroll-on bounceInDown" data-wow-duration="1s" data-wow-offset="100">
                             <h3 class="section-title center">
-                                <span>3 packages are available (Contracts for 2 years only)</span>
-                                <span class="section-subtitle">To be the best means to make each customer your friend and give him what he needs</span>
+                                <span><?= Yii::t('app','3 packages are available (Contracts for 2 years only)')?></span>
+                                <span class="section-subtitle"><?= Yii::t('app','To be the best means to make each customer your friend and give him what he needs')?></span>
                             </h3>
                         </div>
 
@@ -241,8 +230,7 @@ $this->title = 'PV-Radar';
                     <div class="container">
                         <div class="section-title-wrapper style-1 v1 scroll-on bounceInDown" data-wow-duration="1s" data-wow-offset="100">
                             <h3 class="section-title center">
-                                <span>Companies we work with</span>
-                                <span class="section-subtitle">Our service is totaly thin and light</span>
+                                <span><?= Yii::t('app','Companies we work with')?></span>
                             </h3>
                         </div>
 
@@ -290,41 +278,33 @@ $this->title = 'PV-Radar';
                         <div id="owlDemo-1" class="owl-carousel-single" data-owl-loop="false" data-owl-items="1" data-owl-nav="false" data-owl-dots="true" data-owl-item-margin="0">
                             <div class="item">
                                 <div class="testimonial-fluid mb-20">
-                                    <h3>What John says about us</h3>
                                     <p class="testimonial-text">
-                                        Periodic benefit risk evaluation report (PBRER) scheduling, production and submission
+                                     <?= Yii::t('app',' Periodic benefit risk evaluation report (PBRER) scheduling, production and submission')?>
                                     </p>
-                                    <span class="testimonial-author">John Doe - Company In</span>
                                 </div>
                             </div>
 
                             <div class="item">
                                 <div class="testimonial-fluid">
-                                    <h3>What Rachel says about us</h3>
                                     <p class="testimonial-text">
-                                        Risk management system(s) and monitoring of the outcome of risk minimisation measures
+                                        <?= Yii::t('app','Risk management system(s) and monitoring of the outcome of risk minimisation measures')?>
                                     </p>
-                                    <span class="testimonial-author">Rachel McAdams - Company In</span>
                                 </div>
                             </div>
 
                             <div class="item">
                                 <div class="testimonial-fluid">
-                                    <h3>What Rachel says about us</h3>
                                     <p class="testimonial-text">
-                                        Pharmacovigilance system master file(PSMF)
+                                        <?= Yii::t('app','Pharmacovigilance system master file(PSMF)')?>
                                     </p>
-                                    <span class="testimonial-author">Rachel McAdams - Company In</span>
                                 </div>
                             </div>
 
                             <div class="item">
                                 <div class="testimonial-fluid">
-                                    <h3>What Rachel says about us</h3>
                                     <p class="testimonial-text">
-                                        Outsourcing of QPPV
+                                        <?= Yii::t('app','Outsourcing of QPPV')?>
                                     </p>
-                                    <span class="testimonial-author">Rachel McAdams - Company In</span>
                                 </div>
                             </div>
 
@@ -341,7 +321,7 @@ $this->title = 'PV-Radar';
                                 <!-- Section title with subtitle -->
                                 <div class="section-title-wrapper style-1 v1 v2 mb-40">
                                     <h3 class="section-title section-title-sm left">
-                                        <span>Our office</span>
+                                        <span><?= Yii::t('app','Our office')?></span>
                                         <small class="section-subtitle">زهراء مدينة نصر  </small>
                                     </h3>
 
@@ -523,7 +503,7 @@ $this->title = 'PV-Radar';
                     <div class="container">
                         <div class="div-table v-middle">
                             <div class="cell">
-                                All rights reserved. Copyright &copy; 2015 <span class="company-rights">Devisio</span>
+                                All rights reserved. Copyright &copy; 2015 <span class="company-rights">Pv-Raddar</span>
                             </div>
                             <div class="cell">
                                 <div class="social-media style-2 v4 text-right">
