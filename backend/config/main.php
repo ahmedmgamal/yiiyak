@@ -56,20 +56,21 @@ return [
             'class' => 'yii\rbac\PhpManager',
             'defaultRoles' => ['admin', 'company'],
         ],
-
         'urlManager' => [
+            'class' => 'yii\web\UrlManager',
+            // Hide index.php
+            'showScriptName' => false,
+            // Use pretty URLs
             'enablePrettyUrl' => true,
-            'showScriptName' => true,
             'rules' => [
-                    [
+                [
                     'pattern' => 'crud/icsr/export',
                     'route' => 'crud/icsr/export',
                     'suffix' => '.xml',
                 ],
             ],
         ],
-       
-        
+
     ],
     'params' => $params,
 ];

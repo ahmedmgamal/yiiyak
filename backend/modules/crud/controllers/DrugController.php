@@ -31,8 +31,8 @@ class DrugController extends \backend\modules\crud\controllers\base\DrugControll
 	public function actionIndex() {
 		$searchModel  = new DrugSearch;
                // $criteria = ;
-               
-                $_GET['Drug']['company_id'] = Yii::$app->user->identity->getCompany()->one()->id;
+
+        $_GET['Drug']['company_id'] = Yii::$app->user->identity->getCompany()->one()->id;
 
  		$dataProvider = $searchModel->search($_GET);
 
