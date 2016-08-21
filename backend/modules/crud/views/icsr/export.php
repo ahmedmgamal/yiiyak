@@ -19,7 +19,7 @@ use dmstr\bootstrap\Tabs;
  $formatter = \Yii::$app->formatter;
   
 ?>
- 
+
 <ichicsr lang="en">
 	<ichicsrmessageheader>
 		<messagetype>ICSR</messagetype>
@@ -33,23 +33,23 @@ use dmstr\bootstrap\Tabs;
 	</ichicsrmessageheader>
 	<safetyreport>
 		<safetyreportversion>1.0</safetyreportversion>
-		
+
 		<!--A.1.0.1 Sender’s (case) safety report unique identifier-->
 		<safetyreportid> <?php echo $model->getReactionCountry()->one()->code; ?>-<?php echo $model->getDrug()->one()->getCompany()->one()->name;  ?>-<?php echo $model->id; ?></safetyreportid>
-		
+
 		<!--     A.1.1 Identification of the country of the primary source -->
 		<primarysourcecountry><?php echo $model->getReactionCountry()->one()->code; ?></primarysourcecountry>
 		
 		<!--      A.1.3 Date of this transmission -->
 		<transmissiondateformat>102</transmissiondateformat>
 		<transmissiondate><?php echo date("Ymd"); ?> </transmissiondate>
-		
+
 		<!--     A.1.4 Type of report --> 
 		<reporttype><?php echo $model->getIcsrType()->one()->id; ?></reporttype>
  		
  		<!--A.1.5 Seriousness -->
  		<serious><?php echo $formatter->asBoolean( $model->is_serious); ?></serious>
-		
+
 		<!--A.1.5.2. Seriousness criteria-->
 		<seriousnessdeath><?php echo  $formatter->asBoolean( $model->results_in_death); ?></seriousnessdeath>
 		<seriousnesslifethreatening><?php echo  $formatter->asBoolean( $model->life_threatening); ?></seriousnesslifethreatening>
@@ -61,7 +61,7 @@ use dmstr\bootstrap\Tabs;
 		<!--*** A.1.6 Date report was first received from source-->
 		<receivedateformat>102</receivedateformat>
 		<receivedate>19970102</receivedate>
-        
+
         <!--*** A.1.7	Date of receipt of the most recent information for this report --> 
         <receiptdateformat>102</receiptdateformat>
 		<receiptdate><?php echo date("Ymd"); ?> </receiptdate>
@@ -121,7 +121,7 @@ use dmstr\bootstrap\Tabs;
 
 <!--  B.1.2.1	Date of birth         -->
 			<patientbirthdateformat>102</patientbirthdateformat>
-            <patientbirthdate><?php echo $model->patient_birth_date ; ?></patientbirthdate>
+            <patientbirthdate><?php echo  date('Ymd',strtotime($model->patient_birth_date))  ; ?></patientbirthdate>
 <!--  B.1.2.2	Age at time of onset of reaction / event   -->
 			<patientonsetage><?php echo $model->patient_age ; ?></patientonsetage>
 			<patientonsetageunit><?php echo $model->patient_age_unit ; ?></patientonsetageunit>
@@ -144,10 +144,10 @@ use dmstr\bootstrap\Tabs;
 				<reactionmeddrapt><?php echo isset($event->meddra_pt_id)?$event->getMeddraPt()->one()->code:$event->meddra_pt_text ; ?></reactionmeddrapt>
 <!--  B.2.i.4	Date of start of reaction or event     -->
 				<reactionstartdateformat>102</reactionstartdateformat>
-				<reactionstartdate><?php echo $event->event_date ; ?></reactionstartdate>
+				<reactionstartdate><?php echo date('Ymd',strtotime($event->event_date)) ; ?></reactionstartdate>
 <!--  B.2.i.5	Date of end of reaction or event     -->
 				<reactionenddateformat>102</reactionenddateformat>
-				<reactionenddate><?php echo $event->event_end_date ; ?></reactionenddate>
+				<reactionenddate><?php echo date('Ymd',strtotime($event->event_end_date)) ; ?></reactionenddate>
 
 <!--  B.2.i.8	Outcome of reaction or event at the time of last observation (Recovered/resolved,Recovering/resolving,Not-->
 				<reactionoutcome><?php echo $event->event_outcome ; ?></reactionoutcome>
@@ -161,7 +161,7 @@ use dmstr\bootstrap\Tabs;
 		<test>
 			<!--B.3.1	Structured information (repeat as necessary)       -->
 				<testdateformat>102</testdateformat>
-				<testdate><?php echo $test->date ; ?></testdate>
+				<testdate><?php echo date('Ymd',strtotime($test->date)) ; ?></testdate>
 				<testname>	<?php echo isset($test->test_lkp_id)?$test->getTestLkp()->one()->name:$test->test_name ; ?></testname>
 				<testresult><?php echo $test->result ; ?></testresult>
 				<testunit><?php echo $test->result_unit ; ?></testunit>
@@ -199,10 +199,10 @@ use dmstr\bootstrap\Tabs;
 				<drugindication><?php echo $drug->reason_of_use ; ?></drugindication>
 <!--  B.4.k.12	Date of start of drug        -->
 				<drugstartdateformat>102</drugstartdateformat>
-				<drugstartdate><?php echo $drug->use_date_start ; ?></drugstartdate>
+				<drugstartdate><?php echo date('Ymd',strtotime($drug->use_date_start)) ; ?></drugstartdate>
 <!--  B.4.k.14	Date of last administration      -->  
  				<drugenddateformat>102</drugenddateformat>
-				<drugenddate><?php echo $drug->use_date_end ; ?></drugenddate>
+				<drugenddate><?php echo date('Ymd',strtotime($drug->use_date_end)) ; ?></drugenddate>
 <!--  B.4.k.15	Duration of drug administration      -->   
 				<drugtreatmentduration><?php echo $drug->duration_of_use ; ?></drugtreatmentduration>
 				<drugtreatmentdurationunit><?php echo $drug->duration_of_use_unit ; ?></drugtreatmentdurationunit>
