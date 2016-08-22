@@ -66,7 +66,7 @@ $form->field($model, 'frequency_lkp_id')->dropDownList(
                 $drug_actions_drop_list = ArrayHelper::map($drug_actions,'id','name');
                 ?>
 
-            <?=       $form->field($model, 'drug_action')->dropDownList($drug_actions_drop_list); ?>
+            <?=       $form->field($model, 'lkp_drug_action_id')->dropDownList($drug_actions_drop_list)->label('Drug Action'); ?>
 
         </p>
         <?php $this->endBlock(); ?>

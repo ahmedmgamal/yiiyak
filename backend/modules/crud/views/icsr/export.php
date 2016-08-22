@@ -150,7 +150,7 @@ use dmstr\bootstrap\Tabs;
 				<reactionenddate><?php echo $event->event_end_date ; ?></reactionenddate>
 
 <!--  B.2.i.8	Outcome of reaction or event at the time of last observation (Recovered/resolved,Recovering/resolving,Not-->
-				<reactionoutcome><?php echo $event->event_outcome ; ?></reactionoutcome>
+				<reactionoutcome><?php echo $event->lkp_icsr_eventoutcome_id ; ?></reactionoutcome>
 
 
 			</reaction>
@@ -207,18 +207,9 @@ use dmstr\bootstrap\Tabs;
 				<drugtreatmentduration><?php echo $drug->duration_of_use ; ?></drugtreatmentduration>
 				<drugtreatmentdurationunit><?php echo $drug->duration_of_use_unit ; ?></drugtreatmentdurationunit>
 <!--  B.4.k.16	Action(s) taken with drug (− Drug withdrawn,− Dose reduced,− Dose increased,− Dose -->
- 
-				<?php if($drug->drug_action_drug_withdrawn){ ?>
-					<actiondrug>drug_withdrawn</actiondrug>
-				<?php } elseif($drug->drug_action_dose_reduced){ ?>
-					<actiondrug>dose_reduced</actiondrug>
-				<?php } elseif($drug->drug_action_dose_increased){ ?>
-					<actiondrug>dose_increased</actiondrug>
-				<?php } elseif($drug->drug_action_dose_not_changed){ ?>
-					<actiondrug>dose_not_changed</actiondrug>
-				<?php } elseif($drug->drug_action_unknown){ ?>
-					<actiondrug>unknown</actiondrug>
-				<?php } ?>
+
+			<actiondrug><?= $drug->lkp_drug_action_id ?></actiondrug>
+
 
 <!--  B.4.k.17	Effect of rechallenge          -->
 				<drugrecurreadministration><?php echo  $drug->problem_returned_after_reuse ; ?></drugrecurreadministration>

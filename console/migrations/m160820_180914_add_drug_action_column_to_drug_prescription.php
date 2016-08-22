@@ -6,8 +6,8 @@ class m160820_180914_add_drug_action_column_to_drug_prescription extends Migrati
 {
     public function up()
     {
-        $this->addColumn('drug_prescription', 'drug_action', $this->integer()->notNull()->defaultValue(1));
-        $this->addForeignKey('fk-drug-prescription-drug_action','drug_prescription','drug_action','lkp_drug_action','id','CASCADE');
+        $this->addColumn('drug_prescription', 'lkp_drug_action_id', $this->integer()->notNull()->defaultValue(1));
+        $this->addForeignKey('fk-drug-prescription-drug_action','drug_prescription','lkp_drug_action_id','lkp_drug_action','id','CASCADE');
     }
 
     public function down()
@@ -16,6 +16,6 @@ class m160820_180914_add_drug_action_column_to_drug_prescription extends Migrati
             'fk-drug-prescription-drug_action',
             'drug_prescription'
         );
-        $this->dropColumn('drug_prescription', 'drug_action');
+        $this->dropColumn('drug_prescription', 'lkp_drug_action_id');
     }
 }

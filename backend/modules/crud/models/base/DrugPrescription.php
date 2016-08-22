@@ -74,7 +74,7 @@ abstract class DrugPrescription extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['drug_id', 'icsr_id', 'frequency_lkp_id','drug_action'], 'integer'],
+            [['drug_id', 'icsr_id', 'frequency_lkp_id','lkp_drug_action_id'], 'integer'],
             [['icsr_id'], 'required'],
             [['expiration_date', 'use_date_start', 'use_date_end'], 'safe'],
             [['duration_of_use'], 'number'],
@@ -155,7 +155,6 @@ abstract class DrugPrescription extends \yii\db\ActiveRecord
             'drug_action_dose_increased' => Yii::t('app', 'B.4.k.16 Action(s) taken with drug'),
             'drug_action_dose_not_changed' => Yii::t('app', 'B.4.k.16 Action(s) taken with drug'),
             'drug_action_unknown' => Yii::t('app', 'B.4.k.16 Action(s) taken with drug'),
-             'drug_action' =>   Yii::t('app', 'B.4.k.16 Action(s) taken with drug')
             ]);
     }
 

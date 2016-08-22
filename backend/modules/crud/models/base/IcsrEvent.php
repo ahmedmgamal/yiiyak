@@ -69,7 +69,7 @@ abstract class IcsrEvent extends \yii\db\ActiveRecord
     {
         return [
             [['icsr_id'], 'required'],
-            [['icsr_id', 'meddra_llt_id', 'meddra_pt_id'], 'integer'],
+            [['icsr_id', 'meddra_llt_id', 'meddra_pt_id','lkp_icsr_eventoutcome_id'], 'integer'],
             [['event_date', 'event_end_date'], 'safe'],
             [['event_outcome'], 'string'],
             [['event_description'], 'string', 'max' => 512],
@@ -128,6 +128,7 @@ abstract class IcsrEvent extends \yii\db\ActiveRecord
             'event_outcome' => Yii::t('app', 'B.2.i.8 Outcome of reaction or event at the time of last observation'),
             'meddra_llt_text' => Yii::t('app', 'B.2.i.1 Reaction or event in MedDRA terminology (Lowest Level Term)'),
             'meddra_pt_text' => Yii::t('app', 'B.2.i.2 Reaction or event in MedDRA terminology (Preferred Term)'),
+             'lkp_icsr_eventoutcome_id'  => Yii::t('app', 'B.2.i.8 Outcome of reaction or event at the time of last observation'),
             ]);
     }
 
@@ -156,6 +157,10 @@ abstract class IcsrEvent extends \yii\db\ActiveRecord
     }
 
 
+    public function getLkpIcsrEventoutcome()
+    {
+        return $this->hasOne(\backend\modules\crud\models\LkpIcsrEventoutcome::className(),['id' => 'lkp_icsr_eventoutcome_id']);
+    }
 
 
     /**
@@ -186,5 +191,7 @@ abstract class IcsrEvent extends \yii\db\ActiveRecord
             self::EVENT_OUTCOME_UNKNOWN => Yii::t('app', self::EVENT_OUTCOME_UNKNOWN),
         ];
     }
+
+
 
 }

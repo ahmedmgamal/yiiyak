@@ -10,6 +10,12 @@ class m160820_180344_create_lkp_drug_action_table extends Migration
             'id' => $this->primaryKey(),
             'name' => $this->string(255)
         ]);
+
+        $seeds = array('Drug withdrawn' , 'Dose reduced' , 'Dose increased' ,
+                        'Dose not changed' , 'Unknown' , 'Not applicable');
+
+        foreach ($seeds as $key => $value)
+        $this->insert('lkp_drug_action',['name' => "{$value}"]);
     }
 
     public function down()
