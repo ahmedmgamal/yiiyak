@@ -88,12 +88,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 
     <hr/>
 
-    <?php echo Html::a('<span class="glyphicon glyphicon-trash"></span> ' . Yii::t('app', 'Delete'), ['delete', 'id' => $model->id],
-	[
-		'class' => 'btn btn-danger',
-		'data-confirm' => '' . Yii::t('app', 'Are you sure to delete this item?') . '',
-		'data-method' => 'post',
-	]); ?>
+
     <?php $this->endBlock(); ?>
 
 

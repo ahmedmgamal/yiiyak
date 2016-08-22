@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use \dmstr\bootstrap\Tabs;
 use yii\jui\DatePicker;
 use yii\bootstrap\ActiveForm;
-
+use yii\jui\Accordion;
 
 /**
 * @var yii\web\View $this
@@ -54,14 +54,19 @@ $form->field($model, 'report_type')->dropDownList(
 
                         ); ?>
 			<?php echo $form->field($model, 'extra_history')->textArea(['maxlength' => true]) ;?>
-<?= $form->field($model, 'is_serious')->checkbox() ?>
- 
+
+
+ <fieldset>
+            <legend><?= $form->field($model, 'is_serious')->checkbox() ?></legend>
+            <div id="showSeriousBoxes">
 <?= $form->field($model, 'results_in_death')->checkbox() ?>
 <?= $form->field($model, 'life_threatening')->checkbox() ?>
 <?= $form->field($model, 'requires_hospitalization')->checkbox() ?>
 <?= $form->field($model, 'results_in_disability')->checkbox() ?>
 <?= $form->field($model, 'is_congenital_anomaly')->checkbox() ?>
 <?= $form->field($model, 'others_significant')->checkbox() ?>
+            </div>
+</fieldset>
 
 
  
@@ -110,3 +115,7 @@ $form->field($model, 'reaction_country_id')->dropDownList(
 
 </div>
 
+
+
+<?php $this->registerJsFile('@web/crud/icsr/js/custom.js', ['depends' => [\yii\web\JqueryAsset::className()]]);?>
+<?php $this->registerCssFile('@web/crud/icsr/css/custom.css',['depends' => [\yii\bootstrap\BootstrapAsset::className()]])?>
