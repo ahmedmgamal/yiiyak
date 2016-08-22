@@ -6,7 +6,7 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use common\models\LoginForm;
 use yii\filters\VerbFilter;
-
+use yii\helpers\Url;
 /**
  * Site controller
  */
@@ -22,7 +22,7 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'error'],
+                        'actions' => ['login', 'error','landing','send-mail'],
                         'allow' => true,
                     ],
                     [
@@ -79,5 +79,28 @@ class SiteController extends Controller
         Yii::$app->user->logout();
 
         return $this->goHome();
+    }
+
+    public function actionLanding () {
+        $this->layout = 'landing';
+        return $this->render('landing');
+    }
+
+    public function actionSendMail(){
+        $request = Yii::$app->request;
+        $emailBody = 'user name is:- ' . $request->post('userName').
+                     ' and the company is:- ' .$request->post('company').
+                     ' his email is:- '.$request->post('email').
+                     ' the requested package is:- '.$request->post('message');
+
+        Yii::$app->mailer->compose()
+            ->setFrom($request->post('email'))
+            ->setTo('ahmedabdelftah95165@gmail.com')
+            ->setSubject('Quotation Request')
+            ->setTextBody($emailBody)
+            ->send();
+        $this->layout = 'landing';
+        $this->redirect(Url::toRoute(['site/landing']));
+
     }
 }
