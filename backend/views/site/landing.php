@@ -22,18 +22,17 @@ $this->title = 'PV-Radar';
                             <?= Html::img('@web/images/backgrounds/full-bg-7.jpg',['class' => 'ls-bg' , 'style' => 'width: 100%' , 'alt' => 'Slide background']); ?>
                             <!-- Center title -->
                             <h3 class="ls-l title-lg c-white text-uppercase text-center strong-700" style="width:100%; top:35%; left:50%;" data-ls="offsetxin:0;offsetyin:250;durationin:1000;delayin:500;offsetxout:0;offsetyout:-8;easingout:easeInOutQuart;scalexout:1.2;scaleyout:1.2;">
-                              <?= Yii::t('app','  No worries, we follow up'); ?>
+                              <?= Yii::t('app','PV-Radar '); ?>
                             </h3>
 
                             <!-- Center paragraph -->
                             <p class="ls-l text-standard text-center c-white" style="width: 900px; top: 50%; left: 50%;" data-ls="offsetxin:-250;offsetyin:-;durationin:1000;delayin:1000;offsetxout:0;offsetyout:-8;easingout:easeInOutQuart;scalexout:1.2;scaleyout:1.2;">
-                             <?= Yii::t('app',' Sometimes when you innovate, you make mistakes. It is best to admit them quickly, <br>
-                                and get on with improving your other innovations.')?>
+                             <?= Yii::t('app',' No worries, we follow up')?>
                             </p>
 
-                            <?= Html::a('Login',Url::toRoute(['site/login']),['class' => 'btn btn-lg btn-base-1 ls-l' ,  'style' => "top: 70%; left: 40%;" ,'data-ls' =>"offsetxin: 0; offsetyin: 250; durationin: 1000; delayin: 1000; offsetxout: 0; offsetyout:-8;easingout:easeInOutQuart;scalexout:1.2;scaleyout:1.2;"]); ?>
+                            <?= Html::a('Login',Url::toRoute(['site/login']),['class' => 'btn btn-lg btn-b-white ls-l' ,  'style' => "top: 70%; left: 40%;" ,'data-ls' =>"offsetxin: 0; offsetyin: 250; durationin: 1000; delayin: 1000; offsetxout: 0; offsetyout:-8;easingout:easeInOutQuart;scalexout:1.2;scaleyout:1.2;"]); ?>
 
-                            <a href="#section-7" class="btn btn-lg btn-b-white ls-l scroll-me" style="top: 70%; left: 55%;" data-ls="offsetxin: 0; offsetyin: 250; durationin: 1000; delayin: 1000; offsetxout: 0; offsetyout:-8;easingout:easeInOutQuart;scalexout:1.2;scaleyout:1.2;">
+                            <a href="#section-7" class="btn btn-lg btn-base-1  ls-l scroll-me" style="top: 70%; left: 55%;" data-ls="offsetxin: 0; offsetyin: 250; durationin: 1000; delayin: 1000; offsetxout: 0; offsetyout:-8;easingout:easeInOutQuart;scalexout:1.2;scaleyout:1.2;">
                               <?= Yii::t('app','Request Quotation') ?>
                             </a>
                         </div>
@@ -503,24 +502,9 @@ $this->title = 'PV-Radar';
                     <div class="container">
                         <div class="div-table v-middle">
                             <div class="cell">
-                                All rights reserved. Copyright &copy; 2015 <span class="company-rights">Pv-Raddar</span>
+                                All rights reserved. Copyright &copy; <?= date('Y') ?> <span class="company-rights">Pv-Raddar</span>
                             </div>
-                            <div class="cell">
-                                <div class="social-media style-2 v4 text-right">
-                                    <a href="#" class="facebook">
-                                        <i class="fa fa-facebook "></i>
-                                    </a>
-                                    <a href="#" class="google-plus">
-                                        <i class="fa fa-google-plus "></i>
-                                    </a>
-                                    <a href="#" class="pinterest">
-                                        <i class="fa fa-pinterest "></i>
-                                    </a>
-                                    <a href="#" class="twitter">
-                                        <i class="fa fa-twitter "></i>
-                                    </a>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
