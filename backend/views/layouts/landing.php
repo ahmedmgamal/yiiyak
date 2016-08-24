@@ -6,7 +6,7 @@ use yii\helpers\Html;
 LandingAsset::register($this);
 ?>
 
-
+<?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
@@ -21,7 +21,7 @@ LandingAsset::register($this);
 
 <body>
 
-
+<?php $this->beginBody() ?>
 
 <?= $content ?>
 
