@@ -184,7 +184,7 @@ $this->title = 'PV-Radar';
                                     <div class="block-body">
                                         <ul>
                                             <li><a >51-100 products</a></li>
-                                            <li><a>5 Users</a></li>
+                                            <li><a>10 Users</a></li>
                                             <li><a >unlimited ICSR storgae</a></li>
                                             <li><a >E2B complinet </a></li>
                                             <li><a >duplication detetciton</a></li>
