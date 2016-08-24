@@ -23,12 +23,11 @@ $this->title = 'PV-Radar';
                             <!-- Center title -->
                             <h3 class="ls-l title-lg c-white text-uppercase text-center strong-700" style="width:100%; top:35%; left:50%;" data-ls="offsetxin:0;offsetyin:250;durationin:1000;delayin:500;offsetxout:0;offsetyout:-8;easingout:easeInOutQuart;scalexout:1.2;scaleyout:1.2;">
                               <?= Yii::t('app','PV-Radar '); ?>
-                                <small style="color: #0a0814;"><?= Yii::t('app',' we care for you phamcovigilence process')?></small>
                             </h3>
 
                             <!-- Center paragraph -->
                             <p class="ls-l text-standard text-center c-white" style="width: 900px; top: 50%; left: 50%;" data-ls="offsetxin:-250;offsetyin:-;durationin:1000;delayin:1000;offsetxout:0;offsetyout:-8;easingout:easeInOutQuart;scalexout:1.2;scaleyout:1.2;">
-                                <small ><?= Yii::t('app',' we care for you phamcovigilence process')?></small>
+                                <medium ><?= Yii::t('app',' Taking care of your Phamcovigilence')?></medium>
 
                             </p>
 
