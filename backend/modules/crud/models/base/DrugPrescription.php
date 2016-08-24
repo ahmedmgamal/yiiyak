@@ -74,7 +74,7 @@ abstract class DrugPrescription extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['drug_id', 'icsr_id', 'frequency_lkp_id'], 'integer'],
+            [['drug_id', 'icsr_id', 'frequency_lkp_id','lkp_drug_action_id'], 'integer'],
             [['icsr_id'], 'required'],
             [['expiration_date', 'use_date_start', 'use_date_end'], 'safe'],
             [['duration_of_use'], 'number'],
@@ -189,6 +189,11 @@ abstract class DrugPrescription extends \yii\db\ActiveRecord
         {
             return $this->hasOne(\backend\modules\crud\models\LkpTimeUnit::className(), ['id' => 'duration_of_use_unit']);
         }
+
+    public function getLkpDrugAction()
+    {
+        return $this->hasOne(\backend\modules\crud\models\LkpDrugAction::className(),['id' => 'lkp_drug_action_id']);
+    }
 
 
 }

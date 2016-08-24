@@ -96,11 +96,10 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                 'value' => ($model->getDrugRole()->one() ? Html::a($model->getDrugRole()->one()->id, ['lkp-drug-role/view', 'id' => $model->getDrugRole()->one()->id,]) : '<span class="label label-warning">?</span>'),
             ],
         'drug_addtional_info',
-        'drug_action_drug_withdrawn:boolean',
-        'drug_action_dose_reduced:boolean',
-        'drug_action_dose_increased:boolean',
-        'drug_action_dose_not_changed:boolean',
-        'drug_action_unknown:boolean',
+       [
+           'attribute' => 'drug_action',
+           'value' => $model->lkpDrugAction->name
+       ]
     ],
     ]); ?>
 

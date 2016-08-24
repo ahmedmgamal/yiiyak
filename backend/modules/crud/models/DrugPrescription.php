@@ -42,6 +42,7 @@ class DrugPrescription extends BaseDrugPrescription
             'problem_went_after_stop' => Yii::t('app', 'Problem Went After Stop'),
             'problem_returned_after_reuse' => Yii::t('app', 'B.4.k.17 Effect of rechallenge (or re-exposure), for suspect drug(s) only'),
             'product_avilable' => Yii::t('app', 'Product Avilable'),
+            'lkp_drug_action_id' =>   Yii::t('app', 'B.4.k.16 Action(s) taken with drug')
             ]);
     }
 }

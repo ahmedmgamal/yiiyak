@@ -51,7 +51,9 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 
     <?php $this->beginBlock('backend\modules\crud\models\IcsrEvent'); ?>
 
-    
+    <?php $events = new backend\modules\crud\models\IcsrEvent();
+
+    ?>
     <?= DetailView::widget([
     'model' => $model,
     'attributes' => [
@@ -79,7 +81,8 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
         'event_end_date',
             [
                 'attribute'=>'event_outcome',
-                'value'=>backend\modules\crud\models\IcsrEvent::getEventOutcomeValueLabel($model->event_outcome),
+
+                'value'=> $model->lkpIcsrEventoutcome->name,
             ],
         'meddra_llt_text',
         'meddra_pt_text',

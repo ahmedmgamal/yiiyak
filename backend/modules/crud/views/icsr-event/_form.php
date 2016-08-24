@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use \dmstr\bootstrap\Tabs;
 use yii\jui\DatePicker;
+use yii\helpers\ArrayHelper;
 
 /**
 * @var yii\web\View $this
@@ -52,10 +53,13 @@ $form->field($model, 'meddra_pt_id')->dropDownList(
         <?php echo $form->field($model, 'event_date')->widget(DatePicker::className(),['dateFormat' => 'yyyy-MM-dd']); ?>
         <?php echo $form->field($model, 'event_end_date')->widget(DatePicker::className(),['dateFormat' => 'yyyy-MM-dd']); ?>
 
+            <?php
+            $events_outcome = backend\modules\crud\models\LkpIcsrEventoutcome::find()->all();
+            $events_outcome_list = ArrayHelper::map($events_outcome,'id','name');
+            ?>
+			<?=  $form->field($model, 'lkp_icsr_eventoutcome_id')->dropDownList($events_outcome_list )->label('Event Outcome'); ?>
 
-			<?=                         $form->field($model, 'event_outcome')->dropDownList(
-                            backend\modules\crud\models\IcsrEvent::optseventoutcome()
-                        ); ?>
+
        </p>
         <?php $this->endBlock(); ?>
         
