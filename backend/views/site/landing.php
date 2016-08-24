@@ -46,13 +46,21 @@ $this->title = 'PV-Radar';
                                 <div class="block block-arrow arrow-down">
                                     <div class="block-icon-wrapper scroll-on bounceInLeft" data-wow-duration="1s">
                                         <div class="block-icon">
-                                            <?= Html::img('@web/images/icons/svg/set-1/calendar.svg',['class' => 'img-responsive img-center']) ?>
+                                            <?= Html::img('@web/images/icons/svg/services.png',['class' => 'img-responsive img-center']) ?>
                                         </div>
                                     </div>
                                     <div class="block-body scroll-on fadeIn" data-wow-duration="1s">
-                                        <h1 class="block-title">RADAR software ICSR collectiont</h1>
+                                        <h1 class="block-title">Services PV-Radar </h1>
                                         <p class="text-center">
-                                          <?= Yii::t('app','') ?>
+                                          <?= Yii::t('app','unlimited ICSR storgae ') ?>
+
+                                        </p>
+                                        <p class="text-center">
+                                            <?= Yii::t('app','E2B complinet  ') ?>
+                                        </p>
+
+                                        <p class="text-center">
+                                            <?= Yii::t('app','duplication detetciton') ?>
                                         </p>
                                     </div>
                                 </div>
@@ -65,9 +73,21 @@ $this->title = 'PV-Radar';
                                         </div>
                                     </div>
                                     <div class="block-body scroll-on fadeIn" data-wow-duration="1s">
-                                        <h1 class="block-title"> follow-up </h1>
+                                        <h1 class="block-title"> PV regulatroty Follow UP  </h1>
                                         <p class="text-center">
-                                           <?= Yii::t('app','')?>
+                                           <?= Yii::t('app','Write and Submission and follow up diffrent PV regualtory requiremented')?>
+                                        </p>
+                                        <p class="text-center">
+                                            <?= Yii::t('app','PV Master file ')?>
+                                        </p>
+                                        <p class="text-center">
+                                            <?= Yii::t('app','RMP')?>
+                                        </p>
+                                        <p class="text-center">
+                                            <?= Yii::t('app','BSUR')?>
+                                        </p>
+                                        <p class="text-center">
+                                            <?= Yii::t('app','ICSR')?>
                                         </p>
                                     </div>
                                 </div>
@@ -76,13 +96,13 @@ $this->title = 'PV-Radar';
                                 <div class="block block-arrow arrow-down">
                                     <div class="block-icon-wrapper scroll-on bounceInRight" data-wow-duration="1s">
                                         <div class="block-icon">
-                                            <?= Html::img('@web/images/icons/svg/set-1/chat.svg',['class' => 'img-responsive img-center']) ?>
+                                            <?= Html::img('@web/images/icons/svg/consult.png',['class' => 'img-responsive img-center']) ?>
                                         </div>
                                     </div>
                                     <div class="block-body scroll-on fadeIn" data-wow-duration="1s">
-                                        <h1 class="block-title"><?= Yii::t('app',' assessment and reporting')?></h1>
+                                        <h1 class="block-title"><?= Yii::t('app',' PV consultation ')?></h1>
                                         <p class="text-center">
-                                        <?= Yii::t('app','')?>
+                                        <?= Yii::t('app','assess your PV regulatory system and identify next setps to improve your PV process and to comply with standard requaltions')?>
                                         </p>
                                     </div>
                                 </div>
