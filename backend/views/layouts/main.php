@@ -35,7 +35,6 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
         ['label' => 'Drugs', 'url' => ['/crud/drug/index']],
         
     ];

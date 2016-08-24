@@ -61,12 +61,12 @@ class SiteController extends Controller
     public function actionLogin()
     {
         if (!\Yii::$app->user->isGuest) {
-            return $this->redirect('@web/site/index');
+            return $this->redirect('@web/crud/drug/index');
         }
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-          return  $this->redirect('@web/site/index');
+          return  $this->redirect('@web/crud/drug/index');
         } else {
             return $this->render('login', [
                 'model' => $model,
@@ -88,9 +88,8 @@ class SiteController extends Controller
 
     public function actionSendMail(){
         $request = Yii::$app->request;
-        $emailBody = 'user name is:- ' . $request->post('userName').
-                     ' and the company is:- ' .$request->post('company').
-                     ' his email is:- '.$request->post('email').
+        $emailBody = 'email is:- ' . $request->post('email').
+                     ' and his number is:- ' .$request->post('number').
                      ' the requested package is:- '.$request->post('message');
 
         Yii::$app->mailer->compose()

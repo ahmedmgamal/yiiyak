@@ -27,7 +27,7 @@ $this->title = 'PV-Radar';
 
                             <!-- Center paragraph -->
                             <p class="ls-l text-standard text-center c-white" style="width: 900px; top: 50%; left: 50%;" data-ls="offsetxin:-250;offsetyin:-;durationin:1000;delayin:1000;offsetxout:0;offsetyout:-8;easingout:easeInOutQuart;scalexout:1.2;scaleyout:1.2;">
-                             <?= Yii::t('app',' No worries, we follow up')?>
+                             <?= Yii::t('app',' we care for you phamcovigilence process')?>
                             </p>
 
                             <?= Html::a('Login',Url::toRoute(['site/login']),['class' => 'btn btn-lg btn-b-white ls-l' ,  'style' => "top: 70%; left: 40%;" ,'data-ls' =>"offsetxin: 0; offsetyin: 250; durationin: 1000; delayin: 1000; offsetxout: 0; offsetyout:-8;easingout:easeInOutQuart;scalexout:1.2;scaleyout:1.2;"]); ?>
@@ -52,7 +52,7 @@ $this->title = 'PV-Radar';
                                     <div class="block-body scroll-on fadeIn" data-wow-duration="1s">
                                         <h1 class="block-title">RADAR software ICSR collectiont</h1>
                                         <p class="text-center">
-                                          <?= Yii::t('app','Pellentesquemattis arcu malesuada in. Donec urna sem, rutrum sit amet pellentesque vel, suscipit at metus.') ?>
+                                          <?= Yii::t('app','') ?>
                                         </p>
                                     </div>
                                 </div>
@@ -67,7 +67,7 @@ $this->title = 'PV-Radar';
                                     <div class="block-body scroll-on fadeIn" data-wow-duration="1s">
                                         <h1 class="block-title"> follow-up </h1>
                                         <p class="text-center">
-                                           <?= Yii::t('app','Pellentesquemattis arcu malesuada in. Donec urna sem, rutrum sit amet pellentesque vel, suscipit at metus.')?>
+                                           <?= Yii::t('app','')?>
                                         </p>
                                     </div>
                                 </div>
@@ -82,7 +82,7 @@ $this->title = 'PV-Radar';
                                     <div class="block-body scroll-on fadeIn" data-wow-duration="1s">
                                         <h1 class="block-title"><?= Yii::t('app',' assessment and reporting')?></h1>
                                         <p class="text-center">
-                                        <?= Yii::t('app','Pellentesquemattis arcu malesuada in. Donec urna sem, rutrum sit amet pellentesque vel, suscipit at metus.')?>
+                                        <?= Yii::t('app','')?>
                                         </p>
                                     </div>
                                 </div>
@@ -90,30 +90,8 @@ $this->title = 'PV-Radar';
                         </div>
                     </div>
                 </section>
-
-                <!-- SECTION 2 -->
-                <section class="slice sct-color-1 bb">
-                    <div class="container">
-                        <div class="section-title-wrapper style-1 v1 scroll-on bounceInDown" data-wow-duration="1s" data-wow-offset="100">
-                            <h3 class="section-title center">
-                                <span><?= Yii::t('app','Pharmacovigilance Pre and post authorization services')?></span>
-                            </h3>
-                            <div class="section-title-text text-center">
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-12 scroll-on bounceInUp" data-wow-duration="2s" data-wow-offset="100">
-                                <div class="big-promo-img-wrapper text-center mt-40">
-                                    <?= Html::img('@web/images/prv/other/img-promo-1.png') ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
                 <!-- SECTION 3 -->
-                <section class="slice sct-color-2 bb">
+                <section class="slice sct-color-2 bb" style="display: none;">
                     <div class="container">
                         <!-- MILESTONE COUNTER -->
                         <div class="row">
@@ -159,63 +137,62 @@ $this->title = 'PV-Radar';
                             <div class="col-md-4 scroll-on slideInLeft" data-wow-duration=".5s" data-wow-offset="200">
                                 <div class="block block-pricing style-1 bg-base-1 mt-20">
                                     <div class="block-header">
-                                        <h3 class="pricing-title">Package 1</h3>
-                                        <span class="pricing-subtitle">< 10 products</span>
+                                        <h3 class="pricing-title">Silver</h3>
+                                        <span class="pricing-subtitle"></span>
                                     </div>
                                     <div class="block-body">
                                         <ul>
-                                            <li><a href="#">25 Projects</a></li>
-                                            <li><a href="#">50 GB Storage</a></li>
-                                            <li><a href="#">with 1 Domain</a></li>
-                                            <li><a href="#">10 Users</a></li>
-                                            <li><a href="#">Unlimited bandwidth</a></li>
+                                            <li><a>< 10 products</a></li>
+                                            <li><a>2 Users</a></li>
+                                            <li><a >unlimited ICSR storgae</a></li>
+                                            <li><a >E2B complinet </a></li>
+                                            <li><a >duplication detetciton</a></li>
                                         </ul>
-                                        <h3 class="price-tag text-center">6,99$<span>/m</span></h3>
+
                                     </div>
                                     <div class="block-footer">
-                                        <a href="#request-form" class="btn btn-lg btn-base-1 scroll-me" onclick="$('#request-message').val('i would like to request package 1');">Request</a>
+                                        <a href="#request-form" class="btn btn-lg btn-base-1 scroll-me" onclick="$('#request-message').val('i would like to request Silver package'); setTimeout(function() {$('#email').focus()},100);">Request</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4 scroll-on zoomIn" data-wow-duration=".5s" data-wow-delay=".5s" data-wow-offset="100">
                                 <div class="block block-pricing style-1 bg-base-2">
                                     <div class="block-header">
-                                        <h3 class="pricing-title">Package 2</h3>
-                                        <span class="pricing-subtitle">10-50 products</span>
+                                        <h3 class="pricing-title">Gold</h3>
+                                        <span class="pricing-subtitle"></span>
                                     </div>
                                     <div class="block-body">
                                         <ul>
-                                            <li><a href="#">25 Projects</a></li>
-                                            <li><a href="#">50 GB Storage</a></li>
-                                            <li><a href="#">with 1 Domain</a></li>
-                                            <li><a href="#">10 Users</a></li>
-                                            <li><a href="#">Unlimited bandwidth</a></li>
+                                            <li><a >11-50 products</a></li>
+                                            <li><a>5 Users</a></li>
+                                            <li><a >unlimited ICSR storgae</a></li>
+                                            <li><a >E2B complinet </a></li>
+                                            <li><a >duplication detetciton</a></li>
                                         </ul>
-                                        <h3 class="price-tag text-center">9,99$<span>/m</span></h3>
                                     </div>
                                     <div class="block-footer">
-                                        <a href="#request-form" class="btn btn-lg btn-base-2 scroll-me" onclick="$('#request-message').val('i would like to request package 2');">Request</a>
+                                        <a href="#request-form" class="btn btn-lg btn-base-2 scroll-me" onclick="$('#request-message').val('i would like to request Gold package'); setTimeout(function() {$('#email').focus()},100);">Request</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4 scroll-on slideInRight" data-wow-duration=".5s" data-wow-offset="200">
                                 <div class="block block-pricing style-1 bg-base-1 mt-20">
                                     <div class="block-header">
-                                        <h3 class="pricing-title">Package 3</h3>
-                                        <span class="pricing-subtitle"> 51-100 products</span>
+                                        <h3 class="pricing-title">Platinum</h3>
+
                                     </div>
                                     <div class="block-body">
                                         <ul>
-                                            <li><a href="#">25 Projects</a></li>
-                                            <li><a href="#">50 GB Storage</a></li>
-                                            <li><a href="#">with 1 Domain</a></li>
-                                            <li><a href="#">10 Users</a></li>
-                                            <li><a href="#">Unlimited bandwidth</a></li>
+                                            <li><a >51-100 products</a></li>
+                                            <li><a>5 Users</a></li>
+                                            <li><a >unlimited ICSR storgae</a></li>
+                                            <li><a >E2B complinet </a></li>
+                                            <li><a >duplication detetciton</a></li>
                                         </ul>
-                                        <h3 class="price-tag text-center">12,99$<span>/m</span></h3>
+
                                     </div>
                                     <div class="block-footer">
-                                        <a href="#request-form" class="btn btn-lg btn-base-1 scroll-me" onclick="$('#request-message').val('i would like to request package 3');">Request</a>
+                                        <a href="#request-form" class="btn btn-lg btn-base-1 scroll-me" onclick="$('#request-message').val('i would like to request Platinum package'); setTimeout(function() {$('#email').focus()},100);">Request</a>
                                     </div>
                                 </div>
                             </div>
@@ -352,21 +329,19 @@ $this->title = 'PV-Radar';
                                 <!-- Contact form -->
                                     <?php  $form= ActiveForm::begin(['action' => ['site/send-mail'],'options' => ['id' => 'request-form','class'=> 'form-base-1 form-opaque mt-20']]) ?>
                                     <div class="form-group">
-                                        <input type="text" name="userName" class="form-control input-lg" placeholder="Your name">
+                                        <input id="email" name="email" type="email" class="form-control input-lg" placeholder="Your email">
+                                    </div>
 
-                                    </div>
                                     <div class="form-group">
-                                        <input name="company" type="text" class="form-control input-lg" placeholder="Your company">
+                                        <input name="number" type="text" class="form-control input-lg" placeholder="Your phone number">
                                     </div>
-                                    <div class="form-group">
-                                        <input name="email" type="text" class="form-control input-lg" placeholder="Your email">
-                                    </div>
+
                                     <div class="form-group">
                                         <textarea id="request-message" name="message" class="form-control" rows="5" placeholder="Enter you message here ..."></textarea>
                                     </div>
 
                                     <button type="submit" class="btn btn-lg btn-block btn-base-1">Send Request</button>
-                                <? ActiveForm::end()?>
+                                <?php ActiveForm::end()?>
                             </div>
                         </div>
                     </div>
@@ -399,19 +374,7 @@ $this->title = 'PV-Radar';
                                     </div>
                                 </div>
 
-                                <div class="clearfix"></div>
 
-                                <div class="block style-5 v3 mb-10">
-                                    <div class="block-icon">
-                                        <i class="fa fa-circle"></i>
-                                    </div>
-                                    <div class="block-content">
-                                        <h3 class="block-title-2">This is a title3</h3>
-                                        <p>
-                                            Lorem ipsum dolor sit amet consectetur adipiscing elit eiusmod.
-                                        </p>
-                                    </div>
-                                </div>
                             </div>
 
                             <div class="col-md-4 scroll-on rollIn" data-wow-duration=".3s" data-wow-delay=".3s">
@@ -425,33 +388,6 @@ $this->title = 'PV-Radar';
                                     </div>
                                 </div>
 
-                                <div class="clearfix"></div>
-
-                                <div class="block style-5 v3 mb-10">
-                                    <div class="block-icon">
-                                        <i class="fa fa-long-arrow-right"></i>
-                                    </div>
-                                    <div class="block-content">
-                                        <h3 class="block-title-2">This is a title2</h3>
-                                        <p>
-                                            Lorem ipsum dolor sit amet consectetur adipiscing elit eiusmod.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="clearfix"></div>
-
-                                <div class="block style-5 v3 mb-10">
-                                    <div class="block-icon">
-                                        <i class="fa fa-long-arrow-right"></i>
-                                    </div>
-                                    <div class="block-content">
-                                        <h3 class="block-title-2">This is a title</h3>
-                                        <p>
-                                            Lorem ipsum dolor sit amet consectetur adipiscing elit eiusmod.
-                                        </p>
-                                    </div>
-                                </div>
                             </div>
 
                             <div class="col-md-4 scroll-on rollIn" data-wow-duration=".3s" data-wow-delay=".6s">
@@ -465,33 +401,6 @@ $this->title = 'PV-Radar';
                                     </div>
                                 </div>
 
-                                <div class="clearfix"></div>
-
-                                <div class="block style-5 v3 mb-10">
-                                    <div class="block-icon">
-                                        <i class="fa fa-edit"></i>
-                                    </div>
-                                    <div class="block-content">
-                                        <h3 class="block-title-2">This is a title</h3>
-                                        <p>
-                                            Lorem ipsum dolor sit amet consectetur adipiscing elit eiusmod.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="clearfix"></div>
-
-                                <div class="block style-5 v3 mb-10">
-                                    <div class="block-icon">
-                                        <i class="fa fa-edit"></i>
-                                    </div>
-                                    <div class="block-content">
-                                        <h3 class="block-title-2">This is a title</h3>
-                                        <p>
-                                            Lorem ipsum dolor sit amet consectetur adipiscing elit eiusmod.
-                                        </p>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
