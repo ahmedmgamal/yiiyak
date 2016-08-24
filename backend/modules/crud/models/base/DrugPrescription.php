@@ -190,5 +190,10 @@ abstract class DrugPrescription extends \yii\db\ActiveRecord
             return $this->hasOne(\backend\modules\crud\models\LkpTimeUnit::className(), ['id' => 'duration_of_use_unit']);
         }
 
+    public function getLkpDrugAction()
+    {
+        return $this->hasOne(\backend\modules\crud\models\LkpDrugAction::className(),['id' => 'lkp_drug_action_id']);
+    }
+
 
 }
