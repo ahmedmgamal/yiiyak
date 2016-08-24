@@ -32,7 +32,7 @@ $this->title = 'PV-Radar';
 
                             <?= Html::a('Login',Url::toRoute(['site/login']),['class' => 'btn btn-lg btn-b-white ls-l' ,  'style' => "top: 70%; left: 40%;" ,'data-ls' =>"offsetxin: 0; offsetyin: 250; durationin: 1000; delayin: 1000; offsetxout: 0; offsetyout:-8;easingout:easeInOutQuart;scalexout:1.2;scaleyout:1.2;"]); ?>
 
-                            <a href="#section-7" class="btn btn-lg btn-base-1  ls-l scroll-me" style="top: 70%; left: 55%;" data-ls="offsetxin: 0; offsetyin: 250; durationin: 1000; delayin: 1000; offsetxout: 0; offsetyout:-8;easingout:easeInOutQuart;scalexout:1.2;scaleyout:1.2;">
+                            <a href="#section-7" class="btn btn-lg btn-base-1  ls-l scroll-me" style="top: 70%; left: 55%;" data-ls="offsetxin: 0; offsetyin: 250; durationin: 1000; delayin: 1000; offsetxout: 0; offsetyout:-8;easingout:easeInOutQuart;scalexout:1.2;scaleyout:1.2;" onclick="setTimeout(function() {$('#email').focus()},100);">
                               <?= Yii::t('app','Request Quotation') ?>
                             </a>
                         </div>
@@ -213,35 +213,35 @@ $this->title = 'PV-Radar';
                         <div class="row">
                             <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 scroll-on rotateInDownLeft" data-wow-duration=".15s" data-wow-offset="250">
                                 <div class="client-logo style-1 block-shadow">
-                                    <?= Html::img('@web/images/prv/clients/client-1.png',['class' => 'img-responsive']) ?>
+                                    <?= Html::img('@web/images/logos/hygint.jpg',['class' => 'img-responsive']) ?>
                                 </div>
                             </div>
                             <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 scroll-on rotateInDownLeft" data-wow-duration=".15s" data-wow-delay=".15s" data-wow-offset="250">
                                 <div class="client-logo style-1 block-shadow">
-                                    <?= Html::img('@web/images/prv/clients/client-2.png',['class' => 'img-responsive']) ?>
+                                    <?= Html::img('@web/images/logos/pharma.jpg',['class' => 'img-responsive']) ?>
 
                                 </div>
                             </div>
                             <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 scroll-on rotateInDownLeft" data-wow-duration=".15s" data-wow-delay=".30s" data-wow-offset="250">
                                 <div class="client-logo style-1 block-shadow">
-                                    <?= Html::img('@web/images/prv/clients/client-3.png',['class' => 'img-responsive']) ?>
+                                    <?= Html::img('@web/images/logos/artimis.png',['class' => 'img-responsive']) ?>
 
                                 </div>
                             </div>
                             <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 scroll-on rotateInDownLeft" data-wow-duration=".15s" data-wow-delay=".45s" data-wow-offset="250">
                                 <div class="client-logo style-1 block-shadow">
-                                    <?= Html::img('@web/images/prv/clients/client-4.png',['class' => 'img-responsive']) ?>
+                                    <?= Html::img('@web/images/logos/Alhuda.jpg',['class' => 'img-responsive']) ?>
 
                                 </div>
                             </div>
                             <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 scroll-on rotateInDownLeft" data-wow-duration=".15s" data-wow-delay=".60s" data-wow-offset="250">
                                 <div class="client-logo style-1 block-shadow">
-                                    <?= Html::img('@web/images/prv/clients/client-5.png',['class' => 'img-responsive']) ?>
+                                    <?= Html::img('@web/images/logos/haier.png',['class' => 'img-responsive']) ?>
                                 </div>
                             </div>
                             <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 scroll-on rotateInDownLeft" data-wow-duration=".15s" data-wow-delay=".75s" data-wow-offset="250">
                                 <div class="client-logo style-1 block-shadow">
-                                    <?= Html::img('@web/images/prv/clients/client-6.png',['class' => 'img-responsive']) ?>
+                                    <?= Html::img('@web/images/logos/bravo-pharma.png',['class' => 'img-responsive']) ?>
 
                                 </div>
                             </div>
@@ -313,7 +313,7 @@ $this->title = 'PV-Radar';
                                     <!-- #cd-zoom-in and #zoom-out will be used to create our custom buttons for zooming-in/out -->
                                     <div id="map-zoom-in"></div>
                                     <div id="map-zoom-out"></div>
-                                    <address>86-90 Paul Street, London, EC2A 4NE</address>
+
                                 </section>
                             </div>
                             <div class="col-md-6 scroll-on bounceInRight" data-wow-duration=".5s" data-wow-offset="100">
