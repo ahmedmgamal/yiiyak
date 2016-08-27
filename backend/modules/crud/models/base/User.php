@@ -140,4 +140,8 @@ abstract class User extends \yii\db\ActiveRecord
     }
 
 
+    public function getRoles() {
+        return $this->hasMany(\backend\modules\crud\models\Role::className(),['id' => 'role_id'])->viaTable('user_role',['role_id' => 'id']);
+    }
+
 }
