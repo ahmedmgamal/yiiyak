@@ -121,6 +121,7 @@ abstract class DrugPrescription extends \yii\db\ActiveRecord
             'drug_action_dose_increased' => Yii::t('app', 'Drug Action Dose Increased'),
             'drug_action_dose_not_changed' => Yii::t('app', 'Drug Action Dose Not Changed'),
             'drug_action_unknown' => Yii::t('app', 'Drug Action Unknown'),
+            'lkp_drug_action_id' => Yii::t('app','Drug Action'),
         ];
     }
 

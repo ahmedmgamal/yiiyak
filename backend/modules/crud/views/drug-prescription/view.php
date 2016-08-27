@@ -82,6 +82,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
         'duration_of_use',
             [
                 'attribute'=>'duration_of_use_unit',
+                'format' => 'html',
                 'value' => ($model->getDurationOfUseUnit()->one() ? Html::a($model->getDurationOfUseUnit()->one()->id, ['lkp-time-unit/view', 'id' => $model->getDurationOfUseUnit()->one()->id,]) : '<span class="label label-warning">?</span>'),
 
             ],
@@ -93,6 +94,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
         'active_substance_names',
             [
                 'attribute'=>'drug_role',
+                'format' => 'html',
                 'value' => ($model->getDrugRole()->one() ? Html::a($model->getDrugRole()->one()->id, ['lkp-drug-role/view', 'id' => $model->getDrugRole()->one()->id,]) : '<span class="label label-warning">?</span>'),
             ],
         'drug_addtional_info',
