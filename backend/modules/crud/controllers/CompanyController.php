@@ -14,8 +14,5 @@ use yii\filters\AccessControl;
  */
 class CompanyController extends \backend\modules\crud\controllers\base\CompanyController
 {
-    public function behaviors() {
-        
-        return [];
-    }
+
 }

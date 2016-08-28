@@ -42,14 +42,19 @@ class CompanyController extends Controller
 			'access' => [
 				'class' => AccessControl::className(),
 				'rules' => [
-					[
-						'allow' => true,
+                    [
 
-						/**
-						 *
-						 */
-						'matchCallback' => function ($rule, $action) {return \Yii::$app->user->can($this->module->id . '_' . $this->id . '_' . $action->id, ['route' => true]);},
-					]
+                        'allow' => true,
+                        'roles' => ['admin'],
+                    ],
+//					[
+//						'allow' => true,
+//
+//						/**
+//						 *
+//						 */
+//						'matchCallback' => function ($rule, $action) {return \Yii::$app->user->can($this->module->id . '_' . $this->id . '_' . $action->id, ['route' => true]);},
+//					]
 				]
 			]
 		];
@@ -62,7 +67,8 @@ class CompanyController extends Controller
 	 * @return mixed
 	 */
 	public function actionIndex() {
-		$searchModel  = new CompanySearch;
+
+        $searchModel  = new CompanySearch;
 		$dataProvider = $searchModel->search($_GET);
 
 		Tabs::clearLocalStorage();

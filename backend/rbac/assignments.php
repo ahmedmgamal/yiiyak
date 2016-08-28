@@ -4,9 +4,10 @@ return [
         'admin',
     ],
     2 => [
-        'company',
+        'testRole',
     ],
     1 => [
         'company',
+        'testRole',
     ],
 ];

@@ -27,8 +27,9 @@ class DrugController extends \backend\modules\crud\controllers\base\DrugControll
 	 *
 	 * @return mixed
 	 */
-    
+
 	public function actionIndex() {
+
 		$searchModel  = new DrugSearch;
                // $criteria = ;
 

@@ -48,7 +48,7 @@ class UserController extends Controller
 						/**
 						 *
 						 */
-						'matchCallback' => function ($rule, $action) {return \Yii::$app->user->can($this->module->id . '_' . $this->id . '_' . $action->id, ['route' => true]);},
+					//	'matchCallback' => function ($rule, $action) {return \Yii::$app->user->can($this->module->id . '_' . $this->id . '_' . $action->id, ['route' => true]);},
 					]
 				]
 			]

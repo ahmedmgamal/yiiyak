@@ -2270,4 +2270,16 @@ return [
     '/crud/base/lkp-time-unit/*' => [
         'type' => 2,
     ],
+    'testRole' => [
+        'type' => 1,
+        'description' => 'This is just a test Role For Users',
+        'children' => [
+            '/crud/drug/index',
+            '/new/folder',
+        ],
+    ],
+    '/new/folder' => [
+        'type' => 2,
+        'description' => 'this is for testing',
+    ],
 ];

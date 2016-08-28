@@ -42,16 +42,14 @@ class DrugController extends Controller
 			'access' => [
 				'class' => AccessControl::className(),
 				'rules' => [
-					[
+				    [
 						'allow' => true,
-
-						/**
-						 *
-						 */
+                        //uncomment to make these actions will be only allowed for testRole role
+                       // 'roles' => ['testRole'],
 						'matchCallback' => function ($rule, $action) {
-              $result = \Yii::$app->user->can( '/' .$this->module->id . '/' . $this->id . '/' . $action->id, ['route' => true]);
-              //die($result);
-              return $result;
+                            $user_id = \Yii::$app->user->id;
+                            $drug_id = \Yii::$app->request->getQueryParam('id');
+                           return Drug::checkAccess($user_id,$drug_id);
                     },
 					]
 				]

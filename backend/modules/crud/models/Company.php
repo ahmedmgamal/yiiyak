@@ -26,4 +26,7 @@ class Company extends BaseCompany
             'license_image_url' => Yii::t('app', 'License Image Url'),
             ]);
     }
+    public function getUser($user_id){
+        return $this->getUsers()->where(['id' => $user_id])->one();
+    }
 }
