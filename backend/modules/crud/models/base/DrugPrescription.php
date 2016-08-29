@@ -196,5 +196,8 @@ abstract class DrugPrescription extends \yii\db\ActiveRecord
         return $this->hasOne(\backend\modules\crud\models\LkpDrugAction::className(),['id' => 'lkp_drug_action_id']);
     }
 
+    public function getCompany() {
+        return $this->icsr->company;
+    }
 
 }

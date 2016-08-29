@@ -4,12 +4,14 @@ namespace backend\modules\crud\models;
 
 use Yii;
 use \backend\modules\crud\models\base\Icsr as BaseIcsr;
-
+use \backend\modules\crud\traits;
 /**
  * This is the model class for table "icsr".
  */
 class Icsr extends BaseIcsr
-{    /**
+{
+    use traits\checkAccess;
+    /**
      * @inheritdoc
      */
     public function attributeHints()

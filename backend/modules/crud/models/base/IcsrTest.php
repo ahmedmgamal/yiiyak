@@ -131,5 +131,8 @@ abstract class IcsrTest extends \yii\db\ActiveRecord
         return new \backend\modules\crud\models\query\IcsrTestQuery(get_called_class());
     }
 
+    public function getCompany() {
+        return $this->icsr->company;
+    }
 
 }

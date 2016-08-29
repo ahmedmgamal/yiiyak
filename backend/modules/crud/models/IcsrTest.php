@@ -4,12 +4,14 @@ namespace backend\modules\crud\models;
 
 use Yii;
 use \backend\modules\crud\models\base\IcsrTest as BaseIcsrTest;
-
+use \backend\modules\crud\traits;
 /**
  * This is the model class for table "icsr_test".
  */
 class IcsrTest extends BaseIcsrTest
-{    public function attributeHints()
+{
+    use traits\checkAccess;
+    public function attributeHints()
     {
                   return array_merge(
             parent::attributeHints(), [

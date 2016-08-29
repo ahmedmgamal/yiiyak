@@ -21,9 +21,7 @@ use dmstr\bootstrap\Tabs;
  */
 class IcsrController extends \backend\modules\crud\controllers\base\IcsrController
 {
-    public function behaviors() {
-        return [];
-    }
+
     	/**
 	 * Creates a new Icsr model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.

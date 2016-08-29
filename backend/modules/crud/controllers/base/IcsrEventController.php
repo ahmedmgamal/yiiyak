@@ -23,6 +23,25 @@ class IcsrEventController extends Controller
 */
 public $enableCsrfValidation = false;
 
+    public function behaviors() {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'matchCallback' => function ($rule, $action) {
+                            $authorization = \Yii::$app->user->can( '/' .$this->module->id . '/' . $this->id . '/' . $action->id);
+                            $user_id = \Yii::$app->user->id;
+                            $event_id = \Yii::$app->request->getQueryParam('id');
+                            return IcsrEvent::checkAccess($user_id,$event_id,$authorization);
+                        },
+                    ]
+                ]
+            ]
+        ];
+    }
+
 
 /**
 * Lists all IcsrEvent models.

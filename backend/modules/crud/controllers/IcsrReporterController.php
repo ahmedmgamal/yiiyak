@@ -13,8 +13,5 @@ namespace backend\modules\crud\controllers;
  */
 class IcsrReporterController extends \backend\modules\crud\controllers\base\IcsrReporterController
 {
-    public function behaviors() {
-        
-        return [];
-    }
+
 }

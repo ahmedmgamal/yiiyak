@@ -13,7 +13,5 @@ namespace backend\modules\crud\controllers;
  */
 class IcsrEventController extends \backend\modules\crud\controllers\base\IcsrEventController
 {
-    public function behaviors() {
-        return [];
-    }
+
 }

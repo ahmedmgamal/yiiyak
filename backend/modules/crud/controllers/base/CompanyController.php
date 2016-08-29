@@ -35,7 +35,7 @@ class CompanyController extends Controller
 	/**
 	 *
 	 * @inheritdoc
-	 * @return unknown
+	 * @return array
 	 */
 	public function behaviors() {
 		return [

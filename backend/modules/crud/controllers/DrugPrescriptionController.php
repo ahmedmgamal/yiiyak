@@ -13,7 +13,5 @@ namespace backend\modules\crud\controllers;
  */
 class DrugPrescriptionController extends \backend\modules\crud\controllers\base\DrugPrescriptionController
 {
-    public function behaviors() {
-        return [];//parent::behaviors();
-    }
+
 }

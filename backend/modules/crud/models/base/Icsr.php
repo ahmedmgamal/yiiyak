@@ -270,7 +270,9 @@ abstract class Icsr extends \yii\db\ActiveRecord
         return $this->hasMany(\backend\modules\crud\models\LkpIcsrType::className(), ['id' => 'icsr_type_lkp_id'])->viaTable('icsr_type', ['icsr_id' => 'id']);
     }
 
-
+public function getCompany() {
+    return $this->drug->company;
+}
 
 
     /**
