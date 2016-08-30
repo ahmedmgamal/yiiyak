@@ -27,7 +27,7 @@ $this->title = 'PV-Radar';
 
                             <!-- Center paragraph -->
                             <p class="ls-l text-standard text-center c-white" style="width: 900px; top: 50%; left: 50%;" data-ls="offsetxin:-250;offsetyin:-;durationin:1000;delayin:1000;offsetxout:0;offsetyout:-8;easingout:easeInOutQuart;scalexout:1.2;scaleyout:1.2;">
-                                <medium ><?= Yii::t('app',' Taking care of your Phamcovigilence')?></medium>
+                                <medium ><?= Yii::t('app',' Taking care of your Pharmacovigilence')?></medium>
 
                             </p>
 
