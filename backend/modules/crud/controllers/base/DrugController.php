@@ -64,6 +64,7 @@ class DrugController extends Controller
 	 * @return mixed
 	 */
 	public function actionIndex() {
+
 		$searchModel  = new DrugSearch;
 		$dataProvider = $searchModel->search($_GET);
 
