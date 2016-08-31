@@ -23,7 +23,7 @@ LandingAsset::register($this);
             m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-        ga('create', 'UA-83150001-1', 'auto');
+        ga('create', <?= \Yii::$app->params['gaId']?>, 'auto');
         ga('send', 'pageview');
 
     </script>
