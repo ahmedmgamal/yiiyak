@@ -46,7 +46,7 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
 				$model->load($_GET);
 			}
 			else{
-                \Yii::$app->getSession()->setFlash('error', 'patient with the same icsr already exist');
+                \Yii::$app->getSession()->setFlash('error', \Yii::t('app','patient with the same icsr already exist'));
             }
 		} catch (\Exception $e) {
 			$msg = (isset($e->errorInfo[2]))?$e->errorInfo[2]:$e->getMessage();
@@ -133,7 +133,7 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
             ]);
         }
         else {
-            \Yii::$app->getSession()->setFlash('error', 'patient with the same icsr already exist');
+            \Yii::$app->getSession()->setFlash('error', \Yii::t('app','patient with the same icsr already exist'));
 
             return $this->render('update', [
                 'model' => $model,
