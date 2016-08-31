@@ -93,11 +93,9 @@ $this->params['breadcrumbs'][] = $this->title;
 				'contentOptions' => ['nowrap'=>'nowrap']
 			],
 			'username',
-			'auth_key',
-			'password_hash',
+
 			'email:email',
-			'created_at',
-			'updated_at',
+
 			'status',
 			/*'password_reset_token'*/
 		],
