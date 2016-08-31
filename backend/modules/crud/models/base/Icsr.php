@@ -322,8 +322,6 @@ abstract class Icsr extends \yii\db\ActiveRecord
     public function beforeSave($insert)
     {
         if (self::checkDuplication($this->drug_id,$this->patient_identifier)){
-
-            \Yii::$app->getSession()->setFlash('error', 'patient with the same icsr already exist');
             return false;
         }
         return true;

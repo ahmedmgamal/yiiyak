@@ -31,7 +31,8 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
 	 * @return mixed
 	 */
 	public function actionCreate() {
-		$model = new Icsr;
+
+        $model = new Icsr;
                 //$_POST['Icsr']
 		try {
 			if ($model->load($_POST) && $model->save()) {
@@ -44,6 +45,9 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
 			} elseif (!\Yii::$app->request->isPost) {
 				$model->load($_GET);
 			}
+			else{
+                \Yii::$app->getSession()->setFlash('error', 'patient with the same icsr already exist');
+            }
 		} catch (\Exception $e) {
 			$msg = (isset($e->errorInfo[2]))?$e->errorInfo[2]:$e->getMessage();
 			$model->addError('_exception', $msg);
@@ -109,4 +113,31 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
         die();
     }
 }
+
+
+    /**
+     * Updates an existing Icsr model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionUpdate($id)
+    {
+        $model = $this->findModel($id);
+
+        if ($model->load($_POST) && $model->save()) {
+            return $this->redirect(Url::previous());
+        } elseif (!\Yii::$app->request->isPost) {
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }
+        else {
+            \Yii::$app->getSession()->setFlash('error', 'patient with the same icsr already exist');
+
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }
+    }
 }
