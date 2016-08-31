@@ -14,23 +14,5 @@ use yii\filters\AccessControl;
  */
 class CompanyController extends \backend\modules\crud\controllers\base\CompanyController
 {
-    /**
-     *
-     * @inheritdoc
-     * @return array
-     */
-    public function behaviors() {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => ['admin'],
-                    ],
 
-                ]
-            ]
-        ];
-    }
 }
