@@ -64,8 +64,8 @@ return [
             'errorAction' => 'site/error',
         ],
          'authManager' => [
-            'class' => 'yii\rbac\PhpManager',
-            'defaultRoles' => ['admin', 'company'],
+            'class' => 'yii\rbac\DbManager',
+            'defaultRoles' => ['normalUser'],
         ],
         'urlManager' => [
             'class' => 'yii\web\UrlManager',

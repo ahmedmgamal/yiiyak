@@ -4,13 +4,13 @@ namespace backend\modules\crud\models;
 
 use Yii;
 use \backend\modules\crud\models\base\DrugPrescription as BaseDrugPrescription;
-
+use \backend\modules\crud\traits;
 /**
  * This is the model class for table "drug_prescription".
  */
 class DrugPrescription extends BaseDrugPrescription
 {
-    
+    use traits\checkAccess;
      public function attributeLabels()
     {
         return array_merge(

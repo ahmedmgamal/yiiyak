@@ -4,12 +4,14 @@ namespace backend\modules\crud\models;
 
 use Yii;
 use \backend\modules\crud\models\base\Drug as BaseDrug;
-
+use \backend\modules\crud\traits;
 /**
  * This is the model class for table "drug".
  */
 class Drug extends BaseDrug
-{    public function attributeHints()
+{
+    use traits\checkAccess;
+    public function attributeHints()
     {
         return array_merge(
             parent::attributeHints(),
@@ -24,4 +26,6 @@ class Drug extends BaseDrug
             'route_lkp_id' => Yii::t('app', 'B.4.k.8 Route of administration'),
             ]);
     }
+
+
 }

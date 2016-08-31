@@ -62,7 +62,7 @@ use yii\helpers\ArrayHelper;
                 $drug_actions_drop_list = ArrayHelper::map($drug_actions,'id','name');
                 ?>
 
-            <?=       $form->field($model, 'lkp_drug_action_id')->dropDownList($drug_actions_drop_list)->label('Drug Action'); ?>
+            <?=       $form->field($model, 'lkp_drug_action_id')->dropDownList($drug_actions_drop_list) ?>
 
         </p>
         <?php $this->endBlock(); ?>

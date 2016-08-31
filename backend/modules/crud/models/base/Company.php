@@ -113,7 +113,7 @@ abstract class Company extends \yii\db\ActiveRecord
      */
     public function getUsers()
     {
-        return $this->hasMany(\backend\modules\crud\models\User::className(), ['id' => 'user_id'])->viaTable('user_company', ['company_id' => 'id']);
+        return $this->hasMany(\backend\modules\crud\models\User::className(), ['company_id' => 'id']);
     }
 
 

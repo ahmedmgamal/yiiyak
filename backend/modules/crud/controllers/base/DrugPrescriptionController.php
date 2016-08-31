@@ -9,7 +9,6 @@ use backend\modules\crud\models\DrugPrescription;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\helpers\Url;
-use yii\filters\AccessControl;
 use dmstr\bootstrap\Tabs;
 
 /**

@@ -16,7 +16,6 @@ use backend\modules\crud\models\search\Company as CompanySearch;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\helpers\Url;
-use yii\filters\AccessControl;
 use dmstr\bootstrap\Tabs;
 
 /**
@@ -32,28 +31,7 @@ class CompanyController extends Controller
 	 */
 	public $enableCsrfValidation = false;
 
-	/**
-	 *
-	 * @inheritdoc
-	 * @return unknown
-	 */
-	public function behaviors() {
-		return [
-			'access' => [
-				'class' => AccessControl::className(),
-				'rules' => [
-					[
-						'allow' => true,
 
-						/**
-						 *
-						 */
-						'matchCallback' => function ($rule, $action) {return \Yii::$app->user->can($this->module->id . '_' . $this->id . '_' . $action->id, ['route' => true]);},
-					]
-				]
-			]
-		];
-	}
 
 
 	/**
@@ -62,7 +40,8 @@ class CompanyController extends Controller
 	 * @return mixed
 	 */
 	public function actionIndex() {
-		$searchModel  = new CompanySearch;
+
+        $searchModel  = new CompanySearch;
 		$dataProvider = $searchModel->search($_GET);
 
 		Tabs::clearLocalStorage();

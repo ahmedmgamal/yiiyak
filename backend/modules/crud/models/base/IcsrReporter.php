@@ -193,4 +193,7 @@ abstract class IcsrReporter extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getCompany() {
+        return $this->icsr->company;
+    }
 }

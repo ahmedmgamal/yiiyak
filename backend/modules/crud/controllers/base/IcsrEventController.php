@@ -5,11 +5,10 @@
 namespace backend\modules\crud\controllers\base;
 
 use backend\modules\crud\models\IcsrEvent;
-    use backend\modules\crud\models\search\IcsrEvent as IcsrEventSearch;
+ use backend\modules\crud\models\search\IcsrEvent as IcsrEventSearch;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\helpers\Url;
-use yii\filters\AccessControl;
 use dmstr\bootstrap\Tabs;
 
 /**
@@ -22,6 +21,8 @@ class IcsrEventController extends Controller
 * CSRF validation is enabled only when both this property and [[Request::enableCsrfValidation]] are true.
 */
 public $enableCsrfValidation = false;
+
+
 
 
 /**

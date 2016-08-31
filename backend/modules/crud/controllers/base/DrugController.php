@@ -16,7 +16,6 @@ use backend\modules\crud\models\search\Drug as DrugSearch;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\helpers\Url;
-use yii\filters\AccessControl;
 use dmstr\bootstrap\Tabs;
 
 /**
@@ -32,32 +31,6 @@ class DrugController extends Controller
 	 */
 	public $enableCsrfValidation = false;
 
-	/**
-	 *
-	 * @inheritdoc
-	 * @return unknown
-	 */
-	public function behaviors() {
-		return [
-			'access' => [
-				'class' => AccessControl::className(),
-				'rules' => [
-					[
-						'allow' => true,
-
-						/**
-						 *
-						 */
-						'matchCallback' => function ($rule, $action) {
-              $result = \Yii::$app->user->can( '/' .$this->module->id . '/' . $this->id . '/' . $action->id, ['route' => true]);
-              //die($result);
-              return $result;
-                    },
-					]
-				]
-			]
-		];
-	}
 
 
 	/**
@@ -66,6 +39,7 @@ class DrugController extends Controller
 	 * @return mixed
 	 */
 	public function actionIndex() {
+
 		$searchModel  = new DrugSearch;
 		$dataProvider = $searchModel->search($_GET);
 

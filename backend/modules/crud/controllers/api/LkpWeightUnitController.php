@@ -1,6 +1,6 @@
 <?php
 
-namespace \api;
+namespace backend\modules\crud\controllers\api;
 
 /**
 * This is the class for REST controller "LkpWeightUnitController".

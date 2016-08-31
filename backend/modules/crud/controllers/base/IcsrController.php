@@ -9,7 +9,6 @@ use backend\modules\crud\models\Icsr;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\helpers\Url;
-use yii\filters\AccessControl;
 use dmstr\bootstrap\Tabs;
 
 /**
@@ -28,21 +27,21 @@ public $enableCsrfValidation = false;
 * Lists all Icsr models.
 * @return mixed
 */
-public function actionIndex()
-{
-    $searchModel  = new IcsrSearch;
-    $dataProvider = $searchModel->search($_GET);
+    public function actionIndex()
+    {
+        $searchModel  = new IcsrSearch;
+        $dataProvider = $searchModel->search($_GET);
 
-Tabs::clearLocalStorage();
+        Tabs::clearLocalStorage();
 
-Url::remember();
-\Yii::$app->session['__crudReturnUrl'] = null;
+        Url::remember();
+        \Yii::$app->session['__crudReturnUrl'] = null;
 
-return $this->render('index', [
-'dataProvider' => $dataProvider,
-    'searchModel' => $searchModel,
-]);
-}
+        return $this->render('index', [
+            'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
+        ]);
+    }
 
 /**
 * Displays a single Icsr model.
@@ -50,38 +49,38 @@ return $this->render('index', [
 *
 * @return mixed
 */
-public function actionView($id)
-{
-\Yii::$app->session['__crudReturnUrl'] = Url::previous();
-Url::remember();
-Tabs::rememberActiveState();
+    public function actionView($id)
+    {
+        \Yii::$app->session['__crudReturnUrl'] = Url::previous();
+        Url::remember();
+        Tabs::rememberActiveState();
 
-return $this->render('view', [
-'model' => $this->findModel($id),
-]);
-}
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
+    }
 
 /**
 * Creates a new Icsr model.
 * If creation is successful, the browser will be redirected to the 'view' page.
 * @return mixed
 */
-public function actionCreate()
-{
-$model = new Icsr;
+    public function actionCreate()
+    {
+        $model = new Icsr;
 
-try {
-if ($model->load($_POST) && $model->save()) {
-return $this->redirect(Url::previous());
-} elseif (!\Yii::$app->request->isPost) {
-$model->load($_GET);
-}
-} catch (\Exception $e) {
-$msg = (isset($e->errorInfo[2]))?$e->errorInfo[2]:$e->getMessage();
-$model->addError('_exception', $msg);
-}
-return $this->render('create', ['model' => $model]);
-}
+        try {
+            if ($model->load($_POST) && $model->save()) {
+                return $this->redirect(Url::previous());
+            } elseif (!\Yii::$app->request->isPost) {
+                $model->load($_GET);
+            }
+        } catch (\Exception $e) {
+            $msg = (isset($e->errorInfo[2]))?$e->errorInfo[2]:$e->getMessage();
+            $model->addError('_exception', $msg);
+        }
+        return $this->render('create', ['model' => $model]);
+    }
 
 /**
 * Updates an existing Icsr model.
@@ -89,18 +88,18 @@ return $this->render('create', ['model' => $model]);
 * @param integer $id
 * @return mixed
 */
-public function actionUpdate($id)
-{
-$model = $this->findModel($id);
+    public function actionUpdate($id)
+    {
+        $model = $this->findModel($id);
 
-if ($model->load($_POST) && $model->save()) {
-return $this->redirect(Url::previous());
-} else {
-return $this->render('update', [
-'model' => $model,
-]);
-}
-}
+        if ($model->load($_POST) && $model->save()) {
+            return $this->redirect(Url::previous());
+        } else {
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }
+    }
 
 /**
 * Deletes an existing Icsr model.
@@ -108,30 +107,30 @@ return $this->render('update', [
 * @param integer $id
 * @return mixed
 */
-public function actionDelete($id)
-{
-try {
-$this->findModel($id)->delete();
-} catch (\Exception $e) {
-$msg = (isset($e->errorInfo[2]))?$e->errorInfo[2]:$e->getMessage();
-\Yii::$app->getSession()->addFlash('error', $msg);
-return $this->redirect(Url::previous());
-}
+    public function actionDelete($id)
+    {
+        try {
+            $this->findModel($id)->delete();
+        } catch (\Exception $e) {
+            $msg = (isset($e->errorInfo[2]))?$e->errorInfo[2]:$e->getMessage();
+            \Yii::$app->getSession()->addFlash('error', $msg);
+            return $this->redirect(Url::previous());
+        }
 
 // TODO: improve detection
-$isPivot = strstr('$id',',');
-if ($isPivot == true) {
-return $this->redirect(Url::previous());
-} elseif (isset(\Yii::$app->session['__crudReturnUrl']) && \Yii::$app->session['__crudReturnUrl'] != '/') {
-Url::remember(null);
-$url = \Yii::$app->session['__crudReturnUrl'];
-\Yii::$app->session['__crudReturnUrl'] = null;
+        $isPivot = strstr('$id',',');
+        if ($isPivot == true) {
+            return $this->redirect(Url::previous());
+        } elseif (isset(\Yii::$app->session['__crudReturnUrl']) && \Yii::$app->session['__crudReturnUrl'] != '/') {
+            Url::remember(null);
+            $url = \Yii::$app->session['__crudReturnUrl'];
+            \Yii::$app->session['__crudReturnUrl'] = null;
 
-return $this->redirect($url);
-} else {
-return $this->redirect(['index']);
-}
-}
+            return $this->redirect($url);
+        } else {
+            return $this->redirect(['index']);
+        }
+    }
 
 /**
 * Finds the Icsr model based on its primary key value.
@@ -140,12 +139,12 @@ return $this->redirect(['index']);
 * @return Icsr the loaded model
 * @throws HttpException if the model cannot be found
 */
-protected function findModel($id)
-{
-if (($model = Icsr::findOne($id)) !== null) {
-return $model;
-} else {
-throw new HttpException(404, 'The requested page does not exist.');
-}
-}
+    protected function findModel($id)
+    {
+        if (($model = Icsr::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new HttpException(404, 'The requested page does not exist.');
+        }
+    }
 }
