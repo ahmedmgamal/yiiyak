@@ -16,7 +16,6 @@ use backend\modules\crud\models\search\Drug as DrugSearch;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\helpers\Url;
-use yii\filters\AccessControl;
 use dmstr\bootstrap\Tabs;
 
 /**
@@ -32,30 +31,6 @@ class DrugController extends Controller
 	 */
 	public $enableCsrfValidation = false;
 
-	/**
-	 *
-	 * @inheritdoc
-	 * @return array
-	 */
-	public function behaviors() {
-		return [
-			'access' => [
-				'class' => AccessControl::className(),
-				'rules' => [
-
-				    [
-						'allow' => true,
-						'matchCallback' => function ($rule, $action) {
-                         $authorization = \Yii::$app->user->can( '/' .$this->module->id . '/' . $this->id . '/' . $action->id);
-                            $user_id = \Yii::$app->user->id;
-                            $drug_id = \Yii::$app->request->getQueryParam('id');
-                           return Drug::checkAccess($user_id,$drug_id,$authorization);
-                    },
-					]
-				]
-			]
-		];
-	}
 
 
 	/**

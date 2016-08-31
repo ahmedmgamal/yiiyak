@@ -22,6 +22,25 @@ use dmstr\bootstrap\Tabs;
 class IcsrController extends \backend\modules\crud\controllers\base\IcsrController
 {
 
+    public function behaviors() {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+
+                    [
+                        'allow' => true,
+                        'matchCallback' => function ($rule, $action) {
+                            $user_id = \Yii::$app->user->id;
+                            $icsr_id = \Yii::$app->request->getQueryParam('id');
+                            return Icsr::checkAccess($user_id,$icsr_id);
+                        },
+                    ]
+                ]
+            ]
+        ];
+    }
+
     	/**
 	 * Creates a new Icsr model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.

@@ -9,7 +9,6 @@ use backend\modules\crud\models\DrugPrescription;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\helpers\Url;
-use yii\filters\AccessControl;
 use dmstr\bootstrap\Tabs;
 
 /**
@@ -23,24 +22,7 @@ class DrugPrescriptionController extends Controller
 */
 public $enableCsrfValidation = false;
 
-    public function behaviors() {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'matchCallback' => function ($rule, $action) {
-                            $authorization = \Yii::$app->user->can( '/' .$this->module->id . '/' . $this->id . '/' . $action->id);
-                            $user_id = \Yii::$app->user->id;
-                            $prescription_id = \Yii::$app->request->getQueryParam('id');
-                            return DrugPrescription::checkAccess($user_id,$prescription_id,$authorization);
-                        },
-                    ]
-                ]
-            ]
-        ];
-    }
+
 /**
 * Lists all DrugPrescription models.
 * @return mixed

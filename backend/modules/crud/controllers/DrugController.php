@@ -22,6 +22,31 @@ use Yii;
  */
 class DrugController extends \backend\modules\crud\controllers\base\DrugController
 {
+
+
+    /**
+     *
+     * @inheritdoc
+     * @return array
+     */
+    public function behaviors() {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+
+                    [
+                        'allow' => true,
+                        'matchCallback' => function ($rule, $action) {
+                            $user_id = \Yii::$app->user->id;
+                            $drug_id = \Yii::$app->request->getQueryParam('id');
+                            return Drug::checkAccess($user_id,$drug_id);
+                        },
+                    ]
+                ]
+            ]
+        ];
+    }
 /**
 	 * Lists all Drug models.
 	 *

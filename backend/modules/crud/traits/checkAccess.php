@@ -3,12 +3,11 @@ namespace backend\modules\crud\traits;
 
 trait checkAccess {
 
-    public static function checkAccess($user_id,$obj_id,$authorized)
+    // you must define getCompany method before using the trait
+
+    public static function checkAccess($user_id,$obj_id)
     {
-        if ( $authorized != 1)
-        {
-            return false;
-        }
+
         if (isset($obj_id) && !empty($obj_id))
         {
             $company = self::findOne($obj_id)->company;

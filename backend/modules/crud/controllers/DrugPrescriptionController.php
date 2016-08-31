@@ -7,11 +7,30 @@
 
 
 namespace backend\modules\crud\controllers;
-
+use backend\modules\crud\models\DrugPrescription;
+use yii\filters\AccessControl;
 /**
  * This is the class for controller "DrugPrescriptionController".
  */
 class DrugPrescriptionController extends \backend\modules\crud\controllers\base\DrugPrescriptionController
 {
+
+    public function behaviors() {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'matchCallback' => function ($rule, $action) {
+                            $user_id = \Yii::$app->user->id;
+                            $prescription_id = \Yii::$app->request->getQueryParam('id');
+                            return DrugPrescription::checkAccess($user_id,$prescription_id);
+                        },
+                    ]
+                ]
+            ]
+        ];
+    }
 
 }
