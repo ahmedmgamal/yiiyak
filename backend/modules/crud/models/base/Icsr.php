@@ -319,6 +319,25 @@ public function getCompany() {
         return $value;
     }
 
- 
+
+
+    public function beforeSave($insert)
+    {
+        if (self::checkDuplication($this->drug_id,$this->patient_identifier)){
+            return false;
+        }
+        return true;
+    }
+
+
+    public static function checkDuplication ($drug_id,$patient_identifier)
+    {
+        $duplicatePatient = self::find()->where(['drug_id' => $drug_id])->where(['patient_identifier' => $patient_identifier])->one();
+
+        if ($duplicatePatient){
+            return true;
+        }
+        return false;
+    }
 
 }
