@@ -43,7 +43,7 @@ use \dmstr\bootstrap\Tabs;
 			<?php echo $form->field($userModel, 'username')->textInput(['maxlength' => true]) ?>
 			<?php echo $form->field($userModel, 'email')->textInput(['maxlength' => true]) ?>
 			<?php echo $form->field($userModel, 'password_hash')->textInput(['maxlength' => true]) ?>
-			<?php echo $form->field($userModel, 'auth_key')->textInput(['maxlength' => true]) ?>
+
 			<?php } ?>
 
 		</p>
