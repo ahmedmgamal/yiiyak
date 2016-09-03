@@ -22,9 +22,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="giiant-crud user-index">
 
-    <?php //             echo $this->render('_search', ['model' =>$searchModel]);
-?>
-
 
     <?php \yii\widgets\Pjax::begin(['id'=>'pjax-main', 'enableReplaceState'=> false, 'linkSelector'=>'#pjax-main ul.pagination a, th a', 'clientOptions' => ['pjax:success'=>'function(){alert("yo")}']]) ?>
 
@@ -96,8 +93,16 @@ $this->params['breadcrumbs'][] = $this->title;
 
 			'email:email',
 
-			'status',
-			/*'password_reset_token'*/
+			[
+				'attribute' => 'status',
+				'value' => function ($data){
+								if ($data->status == 10){
+									return 'Active';
+								}
+								return 'Inactive';
+							}
+			]
+
 		],
 	]); ?>
     </div>

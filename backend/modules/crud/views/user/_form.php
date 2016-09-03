@@ -35,7 +35,11 @@ use \dmstr\bootstrap\Tabs;
         <p>
 
 			<?php echo $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
-			<?php echo $form->field($model, 'password_hash')->textInput(['maxlength' => true]) ?>
+			<?php
+			if ($this->context->action->id == 'create') {
+				echo $form->field($model, 'password_hash')->textInput(['maxlength' => true]);
+			}
+			?>
 			<?php echo $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
         </p>
         <?php $this->endBlock(); ?>
