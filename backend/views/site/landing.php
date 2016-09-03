@@ -47,7 +47,7 @@ $this->title = 'PV-Radar';
                                 <div class="block block-arrow arrow-down">
                                     <div class="block-icon-wrapper scroll-on bounceInLeft" data-wow-duration="1s">
                                         <div class="block-icon">
-                                            <?= Html::img('@web/images/icons/svg/services.png',['class' => 'img-responsive img-center']) ?>
+                                            <?= Html::img('@web/images/icons/svg/services.png',['class' => 'img-responsive img-center', 'alt' => 'PV-Radar Services']) ?>
                                         </div>
                                     </div>
                                     <div class="block-body scroll-on fadeIn" data-wow-duration="1s">
@@ -70,7 +70,7 @@ $this->title = 'PV-Radar';
                                 <div class="block block-arrow arrow-down">
                                     <div class="block-icon-wrapper scroll-on bounceInDown" data-wow-duration="1s">
                                         <div class="block-icon">
-                                            <?= Html::img('@web/images/icons/svg/set-1/book.svg',['class' => 'img-responsive img-center']) ?>
+                                            <?= Html::img('@web/images/icons/svg/set-1/book.svg',['class' => 'img-responsive img-center', 'alt' => 'PV-Radar Regulatroty']) ?>
                                         </div>
                                     </div>
                                     <div class="block-body scroll-on fadeIn" data-wow-duration="1s">
@@ -97,7 +97,7 @@ $this->title = 'PV-Radar';
                                 <div class="block block-arrow arrow-down">
                                     <div class="block-icon-wrapper scroll-on bounceInRight" data-wow-duration="1s">
                                         <div class="block-icon">
-                                            <?= Html::img('@web/images/icons/svg/consult.png',['class' => 'img-responsive img-center']) ?>
+                                            <?= Html::img('@web/images/icons/svg/consult.png',['class' => 'img-responsive img-center','alt' => 'PV-Radar Consultation']) ?>
                                         </div>
                                     </div>
                                     <div class="block-body scroll-on fadeIn" data-wow-duration="1s">
@@ -234,35 +234,35 @@ $this->title = 'PV-Radar';
                         <div class="row">
                             <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 scroll-on rotateInDownLeft" data-wow-duration=".15s" data-wow-offset="250">
                                 <div class="client-logo style-1 block-shadow">
-                                    <?= Html::img('@web/images/logos/hygint.jpg',['class' => 'img-responsive']) ?>
+                                    <?= Html::img('@web/images/logos/hygint.jpg',['class' => 'img-responsive','alt' => 'PV-Radar hygint logo']) ?>
                                 </div>
                             </div>
                             <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 scroll-on rotateInDownLeft" data-wow-duration=".15s" data-wow-delay=".15s" data-wow-offset="250">
                                 <div class="client-logo style-1 block-shadow">
-                                    <?= Html::img('@web/images/logos/pharma.jpg',['class' => 'img-responsive']) ?>
+                                    <?= Html::img('@web/images/logos/pharma.jpg',['class' => 'img-responsive','alt' => 'PV-Radar pharma logo']) ?>
 
                                 </div>
                             </div>
                             <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 scroll-on rotateInDownLeft" data-wow-duration=".15s" data-wow-delay=".30s" data-wow-offset="250">
                                 <div class="client-logo style-1 block-shadow">
-                                    <?= Html::img('@web/images/logos/artimis.png',['class' => 'img-responsive']) ?>
+                                    <?= Html::img('@web/images/logos/artimis.png',['class' => 'img-responsive','alt' => 'PV-Radar artimis logo']) ?>
 
                                 </div>
                             </div>
                             <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 scroll-on rotateInDownLeft" data-wow-duration=".15s" data-wow-delay=".45s" data-wow-offset="250">
                                 <div class="client-logo style-1 block-shadow">
-                                    <?= Html::img('@web/images/logos/Alhuda.jpg',['class' => 'img-responsive']) ?>
+                                    <?= Html::img('@web/images/logos/Alhuda.jpg',['class' => 'img-responsive','alt' => 'PV-Radar Alhuda logo']) ?>
 
                                 </div>
                             </div>
                             <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 scroll-on rotateInDownLeft" data-wow-duration=".15s" data-wow-delay=".60s" data-wow-offset="250">
                                 <div class="client-logo style-1 block-shadow">
-                                    <?= Html::img('@web/images/logos/haier.png',['class' => 'img-responsive']) ?>
+                                    <?= Html::img('@web/images/logos/haier.png',['class' => 'img-responsive','alt' => 'PV-Radar haier logo']) ?>
                                 </div>
                             </div>
                             <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 scroll-on rotateInDownLeft" data-wow-duration=".15s" data-wow-delay=".75s" data-wow-offset="250">
                                 <div class="client-logo style-1 block-shadow">
-                                    <?= Html::img('@web/images/logos/bravo-pharma.png',['class' => 'img-responsive']) ?>
+                                    <?= Html::img('@web/images/logos/bravo-pharma.png',['class' => 'img-responsive','alt' => 'PV-Radar bravo logo']) ?>
 
                                 </div>
                             </div>
