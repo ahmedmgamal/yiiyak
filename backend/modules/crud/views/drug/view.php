@@ -98,11 +98,11 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 <?php $this->beginBlock('Icsrs'); ?>
 <div style='position: relative'><div style='position:absolute; right: 0px; top: 0px;'>
 
-  <?php echo Html::a(
-	'<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('app', 'New') . ' Icsr',
-	['/crud/icsr/create', 'Icsr' => ['drug_id' => $model->id]],
-	['class'=>'btn btn-success btn-xs']
-); ?>
+<a class="btn btn-success btn-xs" href="<?= Url::to(['/crud/icsr/create', 'Icsr' => ['drug_id' => $model->id]])?>">
+
+	<span class="glyphicon glyphicon-plus"></span><?= Yii::t('app','New ').'Icsr'?>
+</a>
+
 </div></div><?php Pjax::begin(['id'=>'pjax-Icsrs', 'enableReplaceState'=> false, 'linkSelector'=>'#pjax-Icsrs ul.pagination a, th a', 'clientOptions' => ['pjax:success'=>'function(){alert("yo")}']]) ?>
 <?php echo '<div class="table-responsive">' . \yii\grid\GridView::widget([
 		'layout' => '{summary}{pager}<br/>{items}{pager}',

@@ -186,4 +186,15 @@ class User extends BaseUser implements IdentityInterface
 
 
     }
+
+    public static function checkSubscription ($user_id) {
+        $user_obj = self::findOne($user_id);
+
+        if ( date("Y-m-d") > $user_obj->company->end_date || empty($user_obj->company->end_date )) {
+            return false;
+        }
+        return true;
+    }
+
+
 }
