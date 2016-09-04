@@ -54,6 +54,7 @@ abstract class Company extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['name'],'required'],
             [['id'], 'integer'],
             [['name', 'adderess', 'reg_no', 'license_no', 'license_image_url'], 'string', 'max' => 45]
         ];

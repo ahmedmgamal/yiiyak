@@ -83,15 +83,26 @@ class CompanyController extends Controller
 	public function actionCreate() {
 		$model = new Company;
         $userModel = new User;
+
+        $request = \Yii::$app->request;
+
+        if ($request->isPost){
+        $connection = \Yii::$app->db;
+        $transaction = $connection->beginTransaction();
+        }
+
 		try {
 			if ($model->load($_POST) && $model->save() && $userModel->load($_POST) &&$userModel->save()) {
 			   $userModel->company_id = $model->id;
                 $userModel->save();
-				return $this->redirect(Url::previous());
+                $transaction->commit();
+                return $this->redirect(Url::previous());
 			} elseif (!\Yii::$app->request->isPost) {
 				$model->load($_GET);
 			}
+
 		} catch (\Exception $e) {
+		    $transaction->rollBack();
 			$msg = (isset($e->errorInfo[2]))?$e->errorInfo[2]:$e->getMessage();
 			$model->addError('_exception', $msg);
 		}
