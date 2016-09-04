@@ -8,11 +8,9 @@ use yii\web\IdentityInterface;
 use backend\modules\crud\models\base\User as BaseUser;
 
 
-
 class User extends BaseUser implements IdentityInterface
 {
-    const STATUS_DELETED = 0;
-    const STATUS_ACTIVE = 10;
+
 
     /**
      * @inheritdoc
@@ -28,20 +26,15 @@ class User extends BaseUser implements IdentityInterface
     public function behaviors()
     {
         return [
+
             TimestampBehavior::className(),
+
         ];
+
+
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return [
-            ['status', 'default', 'value' => self::STATUS_ACTIVE],
-            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
-        ];
-    }
+
 
     /**
      * @inheritdoc
@@ -172,5 +165,25 @@ class User extends BaseUser implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+
+    public function beforeSave($insert)
+    {
+
+        if (parent::beforeSave($insert)) {
+            // in case of insertion
+            if ($this->isNewRecord) {
+
+                $this->generateAuthKey();
+                $this->setPassword($this->password_hash);
+                $this->generatePasswordResetToken();
+            } // in case of update will implement the logic of it
+            else {
+
+            }
+        }
+            return true;
+
+
     }
 }

@@ -34,15 +34,13 @@ use \dmstr\bootstrap\Tabs;
 
         <p>
 
-			<?php echo $form->field($model, 'id')->textInput() ?>
 			<?php echo $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
-			<?php echo $form->field($model, 'auth_key')->textInput(['maxlength' => true]) ?>
-			<?php echo $form->field($model, 'password_hash')->textInput(['maxlength' => true]) ?>
-			<?php echo $form->field($model, 'password_reset_token')->textInput(['maxlength' => true]) ?>
+			<?php
+			if ($this->context->action->id == 'create') {
+				echo $form->field($model, 'password_hash')->textInput(['maxlength' => true]);
+			}
+			?>
 			<?php echo $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
-			<?php echo $form->field($model, 'status')->textInput() ?>
-			<?php echo $form->field($model, 'created_at')->textInput() ?>
-			<?php echo $form->field($model, 'updated_at')->textInput() ?>
         </p>
         <?php $this->endBlock(); ?>
 

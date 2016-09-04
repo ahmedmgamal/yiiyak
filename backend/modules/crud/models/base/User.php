@@ -26,7 +26,8 @@ use Yii;
 abstract class User extends \yii\db\ActiveRecord
 {
 
-
+    const STATUS_DELETED = 0;
+    const STATUS_ACTIVE = 10;
 
     /**
      * @inheritdoc
@@ -56,13 +57,15 @@ abstract class User extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['username', 'auth_key', 'password_hash', 'email', 'created_at', 'updated_at'], 'required'],
-            [['status', 'created_at', 'updated_at'], 'integer'],
+            [['username', 'password_hash', 'email'], 'required'],
+            [['status'], 'integer'],
             [['username', 'password_hash', 'password_reset_token', 'email'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
             [['username'], 'unique'],
             [['email'], 'unique'],
-            [['password_reset_token'], 'unique']
+            [['password_reset_token'], 'unique'],
+            ['status', 'default', 'value' => self::STATUS_ACTIVE],
+            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
         ];
     }
 
@@ -75,7 +78,7 @@ abstract class User extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'username' => Yii::t('app', 'Username'),
             'auth_key' => Yii::t('app', 'Auth Key'),
-            'password_hash' => Yii::t('app', 'Password Hash'),
+            'password_hash' => Yii::t('app', 'Password '),
             'password_reset_token' => Yii::t('app', 'Password Reset Token'),
             'email' => Yii::t('app', 'Email'),
             'status' => Yii::t('app', 'Status'),
@@ -140,8 +143,5 @@ abstract class User extends \yii\db\ActiveRecord
     }
 
 
-    public function getRoles() {
-        return $this->hasMany(\backend\modules\crud\models\Role::className(),['id' => 'role_id'])->viaTable('user_role',['role_id' => 'id']);
-    }
 
 }
