@@ -108,12 +108,11 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 
     <?php $this->beginBlock('DrugPrescriptions'); ?>
     <div style='position: relative'><div style='position:absolute; right: 0px; top: 0px;'>
+            <a class="btn btn-success btn-xs" href="<?= Url::to(['/crud/drug-prescription/create',  'DrugPrescription' => ['icsr_id' => $model->id]])?>">
 
-            <?php
-            echo Html::a(
-                    '<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('app', 'New') . ' Drug Prescription', ['/crud/drug-prescription/create', 'DrugPrescription' => ['icsr_id' => $model->id]], ['class' => 'btn btn-success btn-xs']
-            );
-            ?>
+                <span class="glyphicon glyphicon-plus"></span><?= Yii::t('app','New ').' Drug Prescription'?>
+            </a>
+
         </div></div><?php Pjax::begin(['id' => 'pjax-DrugPrescriptions', 'enableReplaceState' => false, 'linkSelector' => '#pjax-DrugPrescriptions ul.pagination a, th a', 'clientOptions' => ['pjax:success' => 'function(){alert("yo")}']]) ?>
     <?=
     '<div class="table-responsive">' . \yii\grid\GridView::widget([
@@ -184,11 +183,12 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                                     '<span class="glyphicon glyphicon-list"></span> ' . Yii::t('app', 'List All') . ' Icsr Events', ['icsr-event/index'], ['class' => 'btn text-muted btn-xs']
                             )
                             ?>
-                            <?=
-                            Html::a(
-                                    '<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('app', 'New') . ' Icsr Event', ['icsr-event/create', 'IcsrEvent' => ['icsr_id' => $model->id]], ['class' => 'btn btn-success btn-xs']
-                            );
-                            ?>
+
+                            <a class="btn btn-success btn-xs" href="<?= Url::to(['/crud/icsr-event/create', 'IcsrEvent' => ['icsr_id' => $model->id]])?>">
+
+                                <span class="glyphicon glyphicon-plus"></span><?= Yii::t('app','New ').' Icsr Event'?>
+                            </a>
+
                         </div></div><?php Pjax::begin(['id' => 'pjax-IcsrEvents', 'enableReplaceState' => false, 'linkSelector' => '#pjax-IcsrEvents ul.pagination a, th a', 'clientOptions' => ['pjax:success' => 'function(){alert("yo")}']]) ?>
                     <?=
                     '<div class="table-responsive">' . \yii\grid\GridView::widget([
@@ -264,11 +264,13 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                                                     '<span class="glyphicon glyphicon-list"></span> ' . Yii::t('app', 'List All') . ' Icsr Reporters', ['icsr-reporter/index'], ['class' => 'btn text-muted btn-xs']
                                             )
                                             ?>
-                                            <?=
-                                            Html::a(
-                                                    '<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('app', 'New') . ' Icsr Reporter', ['icsr-reporter/create', 'IcsrReporter' => ['icsr_id' => $model->id]], ['class' => 'btn btn-success btn-xs']
-                                            );
-                                            ?>
+
+                                            <a class="btn btn-success btn-xs" href="<?= Url::to(['/crud/icsr-reporter/create', 'IcsrReporter' => ['icsr_id' => $model->id]])?>">
+
+                                                <span class="glyphicon glyphicon-plus"></span><?= Yii::t('app','New ').' Icsr Reporter'?>
+                                            </a>
+
+
                                         </div></div><?php Pjax::begin(['id' => 'pjax-IcsrReporters', 'enableReplaceState' => false, 'linkSelector' => '#pjax-IcsrReporters ul.pagination a, th a', 'clientOptions' => ['pjax:success' => 'function(){alert("yo")}']]) ?>
                                     <?=
                                     '<div class="table-responsive">' . \yii\grid\GridView::widget([
@@ -328,11 +330,11 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                                                             '<span class="glyphicon glyphicon-list"></span> ' . Yii::t('app', 'List All') . ' Icsr Tests', ['icsr-test/index'], ['class' => 'btn text-muted btn-xs']
                                                     )
                                                     ?>
-                                                    <?=
-                                                    Html::a(
-                                                            '<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('app', 'New') . ' Icsr Test', ['icsr-test/create', 'IcsrTest' => ['icsr_id' => $model->id]], ['class' => 'btn btn-success btn-xs']
-                                                    );
-                                                    ?>
+                                                    <a class="btn btn-success btn-xs" href="<?= Url::to(['/crud/icsr-test/create', 'IcsrTest' => ['icsr_id' => $model->id]])?>">
+
+                                                        <span class="glyphicon glyphicon-plus"></span><?= Yii::t('app','New ').' Icsr Test'?>
+                                                    </a>
+
                                                 </div></div><?php Pjax::begin(['id' => 'pjax-IcsrTests', 'enableReplaceState' => false, 'linkSelector' => '#pjax-IcsrTests ul.pagination a, th a', 'clientOptions' => ['pjax:success' => 'function(){alert("yo")}']]) ?>
                                             <?=
                                             '<div class="table-responsive">' . \yii\grid\GridView::widget([
