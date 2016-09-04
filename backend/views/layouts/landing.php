@@ -12,7 +12,7 @@ LandingAsset::register($this);
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content=" pharmcoviglance (pv) or اليقظة الدوائية  is a website to take care of your drugs and icsr ">
+    <meta name="description" content=" pharmcoviglance (pv radar) or اليقظة الدوائية  is a website to take care of your drugs and icsr ">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
