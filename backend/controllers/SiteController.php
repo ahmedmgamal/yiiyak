@@ -7,6 +7,7 @@ use yii\web\Controller;
 use common\models\LoginForm;
 use yii\filters\VerbFilter;
 use yii\helpers\Url;
+use backend\modules\crud\models\User;
 /**
  * Site controller
  */
@@ -66,7 +67,19 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-          return  $this->redirect('@web/crud/drug/index');
+
+            //be careful
+            // the returned user object is from common\models\user
+            $logged_in_user_id = Yii::$app->user->identity->id;
+
+            if (User::checkSubscription($logged_in_user_id)) {
+                return $this->redirect('@web/crud/drug/index');
+            }
+            Yii::$app->user->logout();
+
+            \Yii::$app->getSession()->setFlash('error', \Yii::t('app','Your company have expired please renew the quote'));
+
+            return $this->redirect('@web/site/login');
         } else {
             return $this->render('login', [
                 'model' => $model,
