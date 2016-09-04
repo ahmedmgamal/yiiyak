@@ -101,6 +101,8 @@ $this->params['breadcrumbs'][] = $this->title;
 			'reg_no',
 			'license_no',
 			'license_image_url:url',
+			'end_date',
+			'plan'
 		],
 	]); ?>
     </div>

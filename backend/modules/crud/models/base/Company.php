@@ -24,7 +24,9 @@ use Yii;
 abstract class Company extends \yii\db\ActiveRecord
 {
 
-
+    const PLAN_SILVER = 'silver';
+    const PLAN_GOLD = 'gold';
+    const PLAN_PLATINUM = 'platinum';
 
     /**
      * @inheritdoc
@@ -54,7 +56,7 @@ abstract class Company extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'],'required'],
+            [['name','end_date','plan'],'required'],
             [['id'], 'integer'],
             [['name', 'adderess', 'reg_no', 'license_no', 'license_image_url'], 'string', 'max' => 45]
         ];
