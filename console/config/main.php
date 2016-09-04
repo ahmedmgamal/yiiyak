@@ -12,6 +12,12 @@ return [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'console\controllers',
     'components' => [
+        'user' => [
+            'identityClass' => 'backend\modules\crud\models\User',
+            'enableAutoLogin' => true,
+            'class' => 'backend\modules\crud\models\User'
+        ],
+
         'log' => [
             'targets' => [
                 [
