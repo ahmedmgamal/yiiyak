@@ -17,6 +17,7 @@ use yii\web\Controller;
 use yii\web\HttpException;
 use yii\helpers\Url;
 use dmstr\bootstrap\Tabs;
+use backend\modules\crud\models\User;
 
 /**
  * CompanyController implements the CRUD actions for Company model.
@@ -81,18 +82,31 @@ class CompanyController extends Controller
 	 */
 	public function actionCreate() {
 		$model = new Company;
+        $userModel = new User;
+
+        $request = \Yii::$app->request;
+
+        if ($request->isPost){
+        $connection = \Yii::$app->db;
+        $transaction = $connection->beginTransaction();
+        }
 
 		try {
-			if ($model->load($_POST) && $model->save()) {
-				return $this->redirect(Url::previous());
+			if ($model->load($_POST) && $model->save() && $userModel->load($_POST) &&$userModel->save()) {
+			   $userModel->company_id = $model->id;
+                $userModel->save();
+                $transaction->commit();
+                return $this->redirect(Url::previous());
 			} elseif (!\Yii::$app->request->isPost) {
 				$model->load($_GET);
 			}
+
 		} catch (\Exception $e) {
+		    $transaction->rollBack();
 			$msg = (isset($e->errorInfo[2]))?$e->errorInfo[2]:$e->getMessage();
 			$model->addError('_exception', $msg);
 		}
-		return $this->render('create', ['model' => $model]);
+		return $this->render('create', ['model' => $model , 'userModel' => $userModel]);
 	}
 
 

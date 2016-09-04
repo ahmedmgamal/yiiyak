@@ -33,14 +33,20 @@ use \dmstr\bootstrap\Tabs;
         <?php $this->beginBlock('main'); ?>
 
         <p>
-
-			<?php echo $form->field($model, 'id')->textInput() ?>
 			<?php echo $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 			<?php echo $form->field($model, 'adderess')->textInput(['maxlength' => true]) ?>
 			<?php echo $form->field($model, 'reg_no')->textInput(['maxlength' => true]) ?>
 			<?php echo $form->field($model, 'license_no')->textInput(['maxlength' => true]) ?>
 			<?php echo $form->field($model, 'license_image_url')->textInput(['maxlength' => true]) ?>
-        </p>
+
+			<?php if ($this->context->action->id == 'create') { ?>
+			<?php echo $form->field($userModel, 'username')->textInput(['maxlength' => true]) ?>
+			<?php echo $form->field($userModel, 'email')->textInput(['maxlength' => true]) ?>
+			<?php echo $form->field($userModel, 'password_hash')->textInput(['maxlength' => true]) ?>
+
+			<?php } ?>
+
+		</p>
         <?php $this->endBlock(); ?>
 
         <?php echo
