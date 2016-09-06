@@ -30,7 +30,6 @@ use yii\widgets\ActiveForm;
 
 		<?php echo $form->field($model, 'adderess') ?>
 
-		<?php echo $form->field($model, 'reg_no') ?>
 
 		<?php echo $form->field($model, 'license_no') ?>
 

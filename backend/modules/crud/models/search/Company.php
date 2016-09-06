@@ -27,7 +27,7 @@ class Company extends CompanyModel
 	public function rules() {
 		return [
 			[['id'], 'integer'],
-			[['name', 'adderess', 'reg_no', 'license_no', 'license_image_url'], 'safe'],
+			[['name', 'adderess', 'license_no', 'license_image_url'], 'safe'],
 		];
 	}
 
@@ -71,7 +71,6 @@ class Company extends CompanyModel
 
 		$query->andFilterWhere(['like', 'name', $this->name])
 		->andFilterWhere(['like', 'adderess', $this->adderess])
-		->andFilterWhere(['like', 'reg_no', $this->reg_no])
 		->andFilterWhere(['like', 'license_no', $this->license_no])
 		->andFilterWhere(['like', 'license_image_url', $this->license_image_url]);
 

@@ -65,7 +65,6 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 			'id',
 			'name',
 			'adderess',
-			'reg_no',
 			'license_no',
 			'license_image_url:url',
 		],
