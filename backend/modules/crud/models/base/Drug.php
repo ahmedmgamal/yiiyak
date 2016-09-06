@@ -45,9 +45,9 @@ abstract class Drug extends \yii\db\ActiveRecord
     public function getAliasModel($plural=false)
     {
         if($plural){
-            return Yii::t('app', 'Drugs');
+            return Yii::t('app', 'Products');
         }else{
-            return Yii::t('app', 'Drug');
+            return Yii::t('app', 'Products');
         }
     }
 
@@ -74,7 +74,7 @@ abstract class Drug extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'generic_name' => Yii::t('app', 'Generic Name'),
             'trade_name' => Yii::t('app', 'Trade Name'),
-            'composition' => Yii::t('app', 'Composition'),
+            'composition' => Yii::t('app', 'Dosage Form'),
             'company_id' => Yii::t('app', 'Company ID'),
             'manufacturer' => Yii::t('app', 'Manufacturer'),
             'strength' => Yii::t('app', 'Strength'),
