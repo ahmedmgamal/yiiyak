@@ -44,17 +44,12 @@ use yii\helpers\ArrayHelper;
 			<?php echo $form->field($model, 'expiration_date')->widget(DatePicker::className(),['dateFormat' => 'yyyy-MM-dd']); ?>
 			<?php echo $form->field($model, 'lot_no')->textInput(['maxlength' => true]) ?>
 
-			<?php echo $form->field($model, 'use_date_start')->widget(DatePicker::className(),['dateFormat' => 'yyyy-MM-dd',
-     'clientOptions' => [
-                             'onSelect' => new \yii\web\JsExpression('function(dateText, inst) {  var now =new Date();  console.log( now.getFullYear() - inst.currentYear) }'),
-                         ]
-                ]); ?>
+			<?php echo $form->field($model, 'use_date_start')->widget(DatePicker::className(),['dateFormat' => 'yyyy-MM-dd']); ?>
 			<?php echo $form->field($model, 'use_date_end')->widget(DatePicker::className(),['dateFormat' => 'yyyy-MM-dd']); ?>
-			<?php echo $form->field($model, 'duration_of_use')->textInput(['maxlength' => true]) ?>
+			<?php echo $form->field($model, 'duration_of_use')->textInput(['maxlength' => true, 'onchange'=>'changeDates()']) ?>
 			<?php echo $form->field($model, 'duration_of_use_unit')->dropDownList(                          
-                            \yii\helpers\ArrayHelper::map(backend\modules\crud\models\LkpTimeUnit::find()->all(), 'id', 'name')
-
-                        ); ?>
+                            \yii\helpers\ArrayHelper::map(backend\modules\crud\models\LkpTimeUnit::find()->all(), 'id', 'name'),
+                            ['onchange'=>'changeDates()']); ?>
 			<?php echo $form->field($model, 'reason_of_use')->textInput(['maxlength' => true]) ?>
 			<?php echo $form->field($model, 'problem_went_after_stop')->checkbox(); ?>
 			<?php echo $form->field($model, 'problem_returned_after_reuse')->checkbox(); ?>
