@@ -1,9 +1,9 @@
-$('#drugprescription-use_date_start').datepicker({onSelect: function (dateText,inst){
+$('#drugprescription-use_date_start').datepicker({ dateFormat: 'yy-mm-dd',onSelect: function (dateText,inst){
     changeDurationUseAndUnit($(this).datepicker( 'getDate' ),$('#drugprescription-use_date_end').datepicker('getDate'));
 }});
 
 
-$('#drugprescription-use_date_end').datepicker({onSelect: function (dateText,inst){
+$('#drugprescription-use_date_end').datepicker({dateFormat: 'yy-mm-dd',onSelect: function (dateText,inst){
     changeDurationUseAndUnit($('#drugprescription-use_date_start').datepicker('getDate'),$(this).datepicker( 'getDate' ));
 }});
 
@@ -28,8 +28,8 @@ function changeDates ()
        now.setFullYear(now.getFullYear() + duration_of_use);
     }
 
-    $('#drugprescription-use_date_start').datepicker('setDate',new Date());
-    $('#drugprescription-use_date_end').datepicker('setDate',now);
+    $('#drugprescription-use_date_start').datepicker("setDate",new Date());
+    $('#drugprescription-use_date_end').datepicker("setDate",now);
 
 }
 
