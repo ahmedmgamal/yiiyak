@@ -54,7 +54,6 @@ use yii\helpers\ArrayHelper;
 			<?php echo $form->field($model, 'reason_of_use')->textInput(['maxlength' => true]) ?>
 			<?php echo $form->field($model, 'problem_went_after_stop')->checkbox(); ?>
 			<?php echo $form->field($model, 'problem_returned_after_reuse')->checkbox(); ?>
-			<?php echo  $form->field($model, 'product_avilable')->checkbox(); ?>
 			<?= $form->field($model, 'drug_addtional_info')->textInput(['maxlength' => true]) ?>
 
             <?php

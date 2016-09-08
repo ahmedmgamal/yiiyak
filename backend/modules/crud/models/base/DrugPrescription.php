@@ -23,7 +23,6 @@ use Yii;
  * @property string $reason_of_use
  * @property string $problem_went_after_stop
  * @property string $problem_returned_after_reuse
- * @property string $product_avilable
  * @property string $active_substance_names
  * @property string $drug_role
  * @property string $drug_addtional_info
@@ -78,7 +77,7 @@ abstract class DrugPrescription extends \yii\db\ActiveRecord
             [['icsr_id'], 'required'],
             [['expiration_date', 'use_date_start', 'use_date_end'], 'safe'],
             [['duration_of_use'], 'number'],
-            [['duration_of_use_unit', 'problem_went_after_stop', 'problem_returned_after_reuse', 'product_avilable', 'drug_role'], 'string'],
+            [['duration_of_use_unit', 'problem_went_after_stop', 'problem_returned_after_reuse', 'drug_role'], 'string'],
             [['drug_action_drug_withdrawn', 'drug_action_dose_reduced', 'drug_action_dose_increased', 'drug_action_dose_not_changed', 'drug_action_unknown'], 'boolean'],
             [['dose', 'lot_no'], 'string', 'max' => 45],
             [['reason_of_use'], 'string', 'max' => 60],
@@ -112,7 +111,6 @@ abstract class DrugPrescription extends \yii\db\ActiveRecord
             'reason_of_use' => Yii::t('app', 'Reason Of Use'),
             'problem_went_after_stop' => Yii::t('app', 'Problem Went After Stop'),
             'problem_returned_after_reuse' => Yii::t('app', 'Problem Returned After Reuse'),
-            'product_avilable' => Yii::t('app', 'Product Avilable'),
             'active_substance_names' => Yii::t('app', 'Active Substance Names'),
             'drug_role' => Yii::t('app', 'Drug Role'),
             'drug_addtional_info' => Yii::t('app', 'Drug Addtional Info'),
@@ -147,7 +145,6 @@ abstract class DrugPrescription extends \yii\db\ActiveRecord
             'reason_of_use' => Yii::t('app', '	B.4.k.11 Indication for use in the case'),
             'problem_went_after_stop' => Yii::t('app', 'Problem Went After Stop'),
             'problem_returned_after_reuse' => Yii::t('app', '	B.4.k.17 Effect of rechallenge'),
-            'product_avilable' => Yii::t('app', 'Product Avilable'),
             'active_substance_names' => Yii::t('app', 'B.4.k.2.2 Active substance name(s)'),
             'drug_role' => Yii::t('app', 'B.4.k.1 Characterization of drug role (Suspect/Concomitant/Interacting)'),
             'drug_addtional_info' => Yii::t('app', 'B.4.k.19 Additional information on drug'),
