@@ -12,6 +12,11 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [
+        'audit' => [
+            'class' => 'bedezign\yii2\audit\Audit',
+            'userIdentifierCallback' => ['backend\modules\crud\models\User', 'userIdentifierCallback'],
+        ],
+
         'crud' => [
             'class' => 'backend\modules\crud\Module',
         ],

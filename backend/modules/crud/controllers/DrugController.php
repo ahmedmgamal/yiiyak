@@ -89,4 +89,11 @@ class DrugController extends \backend\modules\crud\controllers\base\DrugControll
 		}
 		return $this->render('create', ['model' => $model]);
         }
+
+
+
+        public function actionHistory ($id) {
+            $model = $this->findModel($id);
+            return $this->render('history', ['model' => $model]);
+        }
 }

@@ -5,6 +5,7 @@ namespace backend\modules\crud\models;
 use Yii;
 use \backend\modules\crud\models\base\Drug as BaseDrug;
 use \backend\modules\crud\traits;
+use bedezign\yii2\audit\models\AuditTrail;
 /**
  * This is the model class for table "drug".
  */
@@ -27,5 +28,19 @@ class Drug extends BaseDrug
             ]);
     }
 
+    public function behaviors()
+    {
+        return [
+            'AuditTrailBehavior' => [
+                'class' => 'bedezign\yii2\audit\AuditTrailBehavior',
+                'ignored' => ['id','company_id'],
 
+            ]
+        ];
+    }
+    public function getAuditTrails()
+    {
+        return $this->hasMany(AuditTrail::className(), ['model_id' => 'id'])
+            ->andOnCondition(['model' => get_class($this)]);
+    }
 }

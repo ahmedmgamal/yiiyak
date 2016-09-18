@@ -7,7 +7,6 @@ use yii\behaviors\TimestampBehavior;
 use yii\web\IdentityInterface;
 use backend\modules\crud\models\base\User as BaseUser;
 
-
 class User extends BaseUser implements IdentityInterface
 {
 
@@ -196,5 +195,10 @@ class User extends BaseUser implements IdentityInterface
         return true;
     }
 
+    public static function userIdentifierCallback($id)
+    {
+        $user = self::findOne($id);
 
+        return $user ? $user->username : $id;
+    }
 }
