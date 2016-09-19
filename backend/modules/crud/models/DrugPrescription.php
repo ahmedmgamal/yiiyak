@@ -45,4 +45,15 @@ class DrugPrescription extends BaseDrugPrescription
             'lkp_drug_action_id' =>   Yii::t('app', 'B.4.k.16 Action(s) taken with drug')
             ]);
     }
+
+    public function behaviors()
+    {
+        return [
+            'AuditTrailBehavior' => [
+                'class' => 'bedezign\yii2\audit\AuditTrailBehavior',
+                'ignored' => ['id','drug_id','icsr_id','drug_action_drug_withdrawn','drug_action_dose_reduced','drug_action_dose_increased','drug_action_dose_not_changed','drug_action_unknown'],
+
+            ]
+        ];
+    }
 }

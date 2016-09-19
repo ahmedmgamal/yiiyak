@@ -41,6 +41,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
         <div class='pull-left'>
             <?php echo Html::a('<span class="glyphicon glyphicon-pencil"></span> ' . Yii::t('app', 'Edit'), ['update', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
             <?php echo Html::a('<span class="glyphicon glyphicon-copy"></span> ' . Yii::t('app', 'Export  Xml'), ['export', 'id' => $model->id], ['class' => 'btn btn-success', 'target' => '_blank']) ?>
+            <?php echo Html::a(Yii::t('app', 'ICSR History'), ['history','id' => $model->id], ['class' => 'btn btn-primary']) ?>
         </div>
 
 
@@ -112,6 +113,11 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 
                 <span class="glyphicon glyphicon-plus"></span><?= Yii::t('app','New ').' Drug Prescription'?>
             </a>
+            <a class="btn btn-primary btn-xs" href="<?= Url::to(['/crud/icsr/drug-prescription-history',  'icsr_id' => $model->id])?>">
+
+                <?= Yii::t('app','Drug ').'Prescriptions History'?>
+            </a>
+
 
         </div></div><?php Pjax::begin(['id' => 'pjax-DrugPrescriptions', 'enableReplaceState' => false, 'linkSelector' => '#pjax-DrugPrescriptions ul.pagination a, th a', 'clientOptions' => ['pjax:success' => 'function(){alert("yo")}']]) ?>
     <?=
@@ -188,7 +194,10 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 
                                 <span class="glyphicon glyphicon-plus"></span><?= Yii::t('app','New ').' Icsr Event'?>
                             </a>
+                            <a class="btn btn-primary btn-xs" href="<?= Url::to(['/crud/icsr/icsr-event-history',  'icsr_id' => $model->id])?>">
 
+                                <?= Yii::t('app','Icsr ').'Events History'?>
+                            </a>
                         </div></div><?php Pjax::begin(['id' => 'pjax-IcsrEvents', 'enableReplaceState' => false, 'linkSelector' => '#pjax-IcsrEvents ul.pagination a, th a', 'clientOptions' => ['pjax:success' => 'function(){alert("yo")}']]) ?>
                     <?=
                     '<div class="table-responsive">' . \yii\grid\GridView::widget([
@@ -271,6 +280,11 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                                             </a>
 
 
+                                            <a class="btn btn-primary btn-xs" href="<?= Url::to(['/crud/icsr/reporter-history',  'icsr_id' => $model->id])?>">
+
+                                                <?= Yii::t('app','Icsr ').'Reporter History'?>
+                                            </a>
+
                                         </div></div><?php Pjax::begin(['id' => 'pjax-IcsrReporters', 'enableReplaceState' => false, 'linkSelector' => '#pjax-IcsrReporters ul.pagination a, th a', 'clientOptions' => ['pjax:success' => 'function(){alert("yo")}']]) ?>
                                     <?=
                                     '<div class="table-responsive">' . \yii\grid\GridView::widget([
@@ -335,6 +349,10 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                                                         <span class="glyphicon glyphicon-plus"></span><?= Yii::t('app','New ').' Icsr Test'?>
                                                     </a>
 
+                                                    <a class="btn btn-primary btn-xs" href="<?= Url::to(['/crud/icsr/icsr-test-history',  'icsr_id' => $model->id])?>">
+
+                                                        <?= Yii::t('app','Icsr ').'Tests History'?>
+                                                    </a>
                                                 </div></div><?php Pjax::begin(['id' => 'pjax-IcsrTests', 'enableReplaceState' => false, 'linkSelector' => '#pjax-IcsrTests ul.pagination a, th a', 'clientOptions' => ['pjax:success' => 'function(){alert("yo")}']]) ?>
                                             <?=
                                             '<div class="table-responsive">' . \yii\grid\GridView::widget([

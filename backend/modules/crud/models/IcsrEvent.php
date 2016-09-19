@@ -11,4 +11,15 @@ use \backend\modules\crud\traits;
 class IcsrEvent extends BaseIcsrEvent
 {
     use traits\checkAccess;
+
+    public function behaviors()
+    {
+        return [
+            'AuditTrailBehavior' => [
+                'class' => 'bedezign\yii2\audit\AuditTrailBehavior',
+                'ignored' => ['id','icsr_id'],
+
+            ]
+        ];
+    }
 }

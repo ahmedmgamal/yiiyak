@@ -10,6 +10,7 @@ namespace backend\modules\crud\controllers;
 use backend\modules\crud\models\Icsr;
 use backend\modules\crud\models\search\Icsr as IcsrSearch;
 use backend\modules\crud\models\DrugPrescription as DrugPrescription;
+use bedezign\yii2\audit\models\AuditTrail;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\helpers\Url;
@@ -82,7 +83,14 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
     \Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
     $headers = \Yii::$app->response->headers;
     $headers->add('Content-Type', 'text/xml');
-     $xml = $this->renderPartial('export', [
+           $audit = new AuditTrail();
+            $audit->user_id = \Yii::$app->user->id;
+            $audit->action = 'EXPORT';
+            $audit->model = \backend\modules\crud\models\Icsr::className();
+            $audit->model_id = $icsr->id;
+            $audit->save();
+
+            $xml = $this->renderPartial('export', [
          'model' => $icsr,
     ]);
  
@@ -156,5 +164,37 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
                 'model' => $model,
             ]);
         }
+    }
+
+
+    public function actionHistory ($id)
+    {
+        $model = $this->findModel($id);
+        return $this->render('history',['model' => $model]);
+    }
+
+    public function actionReporterHistory($icsr_id)
+    {
+        $model = $this->findModel($icsr_id);
+        return $this->render('reporter-history',['model' => $model]);
+
+    }
+
+    public function actionIcsrEventHistory($icsr_id)
+    {
+        $model = $this->findModel($icsr_id);
+        return $this->render('icsr-event-history',['model' => $model]);
+    }
+
+    public function actionDrugPrescriptionHistory($icsr_id)
+    {
+        $model = $this->findModel($icsr_id);
+        return $this->render('drug-prescription-history',['model' => $model]);
+    }
+
+    public function actionIcsrTestHistory ($icsr_id)
+    {
+        $model = $this->findModel($icsr_id);
+        return $this->render('icsr-test-history',['model' => $model]);
     }
 }

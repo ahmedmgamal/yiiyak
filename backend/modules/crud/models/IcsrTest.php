@@ -25,4 +25,15 @@ class IcsrTest extends BaseIcsrTest
             'more_info' => Yii::t('app', 'B.3.2 Results of tests and procedures relevant to the investigation'),
         ]);
     }
+
+    public function behaviors()
+    {
+        return [
+            'AuditTrailBehavior' => [
+                'class' => 'bedezign\yii2\audit\AuditTrailBehavior',
+                'ignored' => ['id','icsr_id'],
+
+            ]
+        ];
+    }
 }

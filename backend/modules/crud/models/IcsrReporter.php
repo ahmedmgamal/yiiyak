@@ -33,5 +33,14 @@ class IcsrReporter extends BaseIcsrReporter
             'health_professional' => Yii::t('app', 'Health Professional'),
             ]);
     }
+    public function behaviors()
+    {
+        return [
+            'AuditTrailBehavior' => [
+                'class' => 'bedezign\yii2\audit\AuditTrailBehavior',
+                'ignored' => ['id','icsr_id'],
 
+            ]
+        ];
+    }
 }
