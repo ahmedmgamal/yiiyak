@@ -15,6 +15,7 @@ return [
         'audit' => [
             'class' => 'bedezign\yii2\audit\Audit',
             'userIdentifierCallback' => ['backend\modules\crud\models\User', 'userIdentifierCallback'],
+            'ignoreActions' => ['debug/*']
         ],
 
         'crud' => [
