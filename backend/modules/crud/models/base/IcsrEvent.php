@@ -100,7 +100,7 @@ abstract class IcsrEvent extends \yii\db\ActiveRecord
             'event_description' => Yii::t('app', 'Event Description'),
             'meddra_llt_id' => Yii::t('app', 'Meddra Llt ID'),
             'meddra_pt_id' => Yii::t('app', 'Meddra Pt ID'),
-            'event_date' => Yii::t('app', 'Event Start Date'),
+            'event_date' => Yii::t('app', 'Event Date'),
             'event_end_date' => Yii::t('app', 'Event End Date'),
             'event_outcome' => Yii::t('app', 'Event Outcome'),
             'meddra_llt_text' => Yii::t('app', 'Meddra Llt Text'),
