@@ -6,6 +6,7 @@
  */
 
 
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use \dmstr\bootstrap\Tabs;
@@ -38,7 +39,7 @@ use yii\jui\DatePicker;
 			<?php echo $form->field($model, 'license_no')->textInput(['maxlength' => true]) ?>
 			<?php echo $form->field($model, 'license_image_url')->textInput(['maxlength' => true]) ?>
 			<?php echo $form->field($model,'end_date')->widget(DatePicker::className(),['dateFormat' => 'yyyy-MM-dd']);?>
-			<?php echo $form->field($model,'plan')->dropDownList($model->getPlans());?>
+			<?php echo $form->field($model,'plan_id')->dropDownList( ArrayHelper::map($model->getPlans(),'id','name'));?>
 
 
 			<?php if ($this->context->action->id == 'create') { ?>
