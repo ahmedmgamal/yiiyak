@@ -17,9 +17,9 @@ class Drug extends BaseDrug
             parent::attributeHints(),
             [
             'id' => Yii::t('app', 'ID'),
-            'generic_name' => Yii::t('app', 'Generic Name'),
+            'generic_name' => Yii::t('app', 'Active substance'),
             'trade_name' => Yii::t('app', '	B.4.k.2 Drug identification'),
-            'composition' => Yii::t('app', 'B.4.k.2.2 Active substance name(s)'),
+            'composition' => Yii::t('app', 'B.4.k.2.2 Dosage Form'),
             'company_id' => Yii::t('app', 'Company Id'),
             'manufacturer' => Yii::t('app', 'Manufacturer'),
             'strength' => Yii::t('app', 'Strength'),

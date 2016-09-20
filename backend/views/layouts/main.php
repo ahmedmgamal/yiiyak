@@ -48,7 +48,7 @@ AppAsset::register($this);
             $menuItems [] =  ['label' => 'Users', 'url' => ['/crud/user/index']];
         }
 
-        $menuItems [] =  ['label' => 'Drugs', 'url' => ['/crud/drug/index']];
+        $menuItems [] =  ['label' => 'Products', 'url' => ['/crud/drug/index']];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
