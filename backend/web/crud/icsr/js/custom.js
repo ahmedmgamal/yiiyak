@@ -15,3 +15,38 @@
        else
        $( "#showSeriousBoxes" ).hide( "drop", { direction: "up" }, "slow" );
    });
+
+
+function changeDates ()
+{
+      var patient_age = parseInt($("#icsr-patient_age").val());
+      var patient_age_unit = $("#icsr-patient_age_unit option:selected").text();
+      var now = new Date();
+
+    if (patient_age_unit == "Day")
+    {
+
+        now.setDate(now.getDate() - patient_age);
+
+        $("#icsr-patient_birth_date").datepicker('option',{ minDate: now , maxDate: new Date()});
+        $("#icsr-patient_birth_date").datepicker("setDate",now);
+    }
+
+    else if (patient_age_unit == "Month")
+    {
+
+        now.setMonth(now.getMonth() - patient_age);
+
+       $("#icsr-patient_birth_date").datepicker('option',{ minDate: now , maxDate: new Date()});
+        $("#icsr-patient_birth_date").datepicker("setDate",now);
+    }
+    else
+    {
+
+        now.setFullYear(now.getFullYear() - patient_age);
+
+        $("#icsr-patient_birth_date").datepicker('option',{ minDate: now , maxDate: new Date()});
+        $("#icsr-patient_birth_date").datepicker("setDate",now );
+
+    }
+}

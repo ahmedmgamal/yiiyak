@@ -98,7 +98,6 @@ $this->params['breadcrumbs'][] = $this->title;
 			'id',
 			'name',
 			'adderess',
-			'reg_no',
 			'license_no',
 			'license_image_url:url',
 			'end_date',

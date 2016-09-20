@@ -35,10 +35,10 @@ use dmstr\bootstrap\Tabs;
 		<safetyreportversion>1.0</safetyreportversion>
 
 		<!--A.1.0.1 Sender’s (case) safety report unique identifier-->
-		<safetyreportid> <?php echo $model->getReactionCountry()->one()->code; ?>-<?php echo $model->getDrug()->one()->getCompany()->one()->name;  ?>-<?php echo $model->id; ?></safetyreportid>
+		<safetyreportid> <?php echo $model->city->name ?>-<?php echo $model->getDrug()->one()->getCompany()->one()->name;  ?>-<?php echo $model->id; ?></safetyreportid>
 
 		<!--     A.1.1 Identification of the country of the primary source -->
-		<primarysourcecountry><?php echo $model->getReactionCountry()->one()->code; ?></primarysourcecountry>
+		<primarysourcecountry><?php echo $model->city->name ?></primarysourcecountry>
 		
 		<!--      A.1.3 Date of this transmission -->
 		<transmissiondateformat>102</transmissiondateformat>
@@ -67,7 +67,7 @@ use dmstr\bootstrap\Tabs;
 		<receiptdate><?php echo date("Ymd"); ?> </receiptdate>
 		
 		<!--A.1.10	Worldwide unique case identification number.      --> 
-		<companynumb> <?php echo $model->getReactionCountry()->one()->code; ?>-<?php echo $model->getDrug()->one()->getCompany()->one()->name;  ?>-<?php echo $model->id; ?></companynumb>
+		<companynumb> <?php echo $model->city->name ?>-<?php echo $model->getDrug()->one()->getCompany()->one()->name;  ?>-<?php echo $model->id; ?></companynumb>
  
 		<?php foreach($model->icsrReporters as $reporter){ ?>
 			<primarysource>
