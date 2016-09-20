@@ -83,19 +83,22 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
     \Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
     $headers = \Yii::$app->response->headers;
     $headers->add('Content-Type', 'text/xml');
-           $audit = new AuditTrail();
-            $audit->user_id = \Yii::$app->user->id;
-            $audit->action = 'EXPORT';
-            $audit->model = \backend\modules\crud\models\Icsr::className();
-            $audit->model_id = $icsr->id;
-            $audit->save();
 
             $xml = $this->renderPartial('export', [
          'model' => $icsr,
     ]);
  
         $dtd = \Yii::$app->getModule('crud')->getViewPath().'/icsr/ich-icsr-v2_1.dtd';
-        $this->validateXML($xml,$dtd );
+       if( $this->validateXML($xml,$dtd ) )
+       {
+           $audit = new AuditTrail();
+           $audit->user_id = \Yii::$app->user->id;
+           $audit->action = 'EXPORT';
+           $audit->model = \backend\modules\crud\models\Icsr::className();
+           $audit->model_id = $icsr->id;
+           $audit->save();
+
+       }
          return $xml;
 
         }
@@ -127,7 +130,7 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
     // Enable user error handling
     libxml_use_internal_errors(true);
     if (@$doc->validate()) {
-       // echo "Valid!\n";
+       return 1;
     } else {
         echo "Not valid:\n";
         file_put_contents(\Yii::$app->getModule('crud')->getViewPath().'/icsr/invalid.xml', $xml);
