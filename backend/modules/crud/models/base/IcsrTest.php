@@ -56,13 +56,12 @@ abstract class IcsrTest extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [[ 'icsr_id', 'test_lkp_id'], 'required'],
-            [['id', 'icsr_id', 'test_lkp_id'], 'integer'],
+            [[ 'icsr_id', 'test_name'], 'required'],
+            [['id', 'icsr_id'], 'integer'],
             [['date'], 'safe'],
             [['result'], 'string', 'max' => 512],
-            [['result_unit', 'normal_low_range', 'normal_high_range', 'more_info'], 'string', 'max' => 45],
+            [['result_unit', 'normal_low_range', 'normal_high_range', 'more_info','test_name'], 'string', 'max' => 45],
             [['icsr_id'], 'exist', 'skipOnError' => true, 'targetClass' => Icsr::className(), 'targetAttribute' => ['icsr_id' => 'id']],
-            [['test_lkp_id'], 'exist', 'skipOnError' => true, 'targetClass' => LkpTest::className(), 'targetAttribute' => ['test_lkp_id' => 'id']]
         ];
     }
 
@@ -74,7 +73,7 @@ abstract class IcsrTest extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'icsr_id' => Yii::t('app', 'Icsr ID'),
-            'test_lkp_id' => Yii::t('app', 'Test Lkp ID'),
+            'test_name' => Yii::t('app', 'Test Name'),
             'date' => Yii::t('app', 'Date'),
             'result' => Yii::t('app', 'Result'),
             'result_unit' => Yii::t('app', 'Result Unit'),
@@ -94,7 +93,7 @@ abstract class IcsrTest extends \yii\db\ActiveRecord
             [
             'id' => Yii::t('app', 'ID'),
             'icsr_id' => Yii::t('app', 'Icsr Id'),
-            'test_lkp_id' => Yii::t('app', 'Test Lkp Id'),
+            'test_name' => Yii::t('app', 'Test Name'),
             'date' => Yii::t('app', 'Date'),
             'result' => Yii::t('app', 'Result'),
             'result_unit' => Yii::t('app', 'Result Unit'),
@@ -112,13 +111,6 @@ abstract class IcsrTest extends \yii\db\ActiveRecord
         return $this->hasOne(\backend\modules\crud\models\Icsr::className(), ['id' => 'icsr_id']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getTestLkp()
-    {
-        return $this->hasOne(\backend\modules\crud\models\LkpTest::className(), ['id' => 'test_lkp_id']);
-    }
 
 
     

@@ -16,7 +16,7 @@ class IcsrTest extends BaseIcsrTest
                   return array_merge(
             parent::attributeHints(), [
    
-            'test_lkp_id' => Yii::t('app', 'B.3.1c Test'),
+            'test_name' => Yii::t('app', 'B.3.1c Test'),
             'date' => Yii::t('app', 'B.3.1b testdate'),
             'result' => Yii::t('app', 'B.3.1d Result'),
             'result_unit' => Yii::t('app', ' B.3.1e Unit Result Unit'),
