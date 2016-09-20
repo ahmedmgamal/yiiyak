@@ -73,35 +73,42 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
 		return $this->render('create', ['model' => $model]);
 	}
 
-        public function actionExport($id) {
+    public function actionExport($id) {
+
+        if ($this->isIcsrExported($id))
+        {
+            \Yii::$app->getSession()->setFlash('error', \Yii::t('app','This Icsr Exported Before'));
+
+            return $this->redirect(\Yii::$app->request->referrer);
+        }
+
         $icsr = $this->findModel($id);
-           //$model->$icsr->getIcsrReporters()->;
-           
         $this->layout = false;
 
-   //set content type xml in response
-    \Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
-    $headers = \Yii::$app->response->headers;
-    $headers->add('Content-Type', 'text/xml');
+        //set content type xml in response
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
+        $headers = \Yii::$app->response->headers;
+        $headers->add('Content-Type', 'text/xml');
 
-            $xml = $this->renderPartial('export', [
-         'model' => $icsr,
-    ]);
- 
+        $xml = $this->renderPartial('export', [
+            'model' => $icsr,
+        ]);
+
         $dtd = \Yii::$app->getModule('crud')->getViewPath().'/icsr/ich-icsr-v2_1.dtd';
-       if( $this->validateXML($xml,$dtd ) )
-       {
-           $audit = new AuditTrail();
-           $audit->user_id = \Yii::$app->user->id;
-           $audit->action = 'EXPORT';
-           $audit->model = \backend\modules\crud\models\Icsr::className();
-           $audit->model_id = $icsr->id;
-           $audit->save();
 
-       }
-         return $xml;
-
+        if( $this->validateXML($xml,$dtd ) )
+        {
+            $this->createTrailForExport($icsr);
         }
+
+        return $xml;
+    }
+
+    private function isIcsrExported($icsr_id)
+    {
+        return  AuditTrail::findOne(['model_id' => $icsr_id , 'action' => 'EXPORT' ]);
+    }
+
 
     public function validateXML($xml, $dtd_realpath=null) {
     $xml ='<!DOCTYPE ichicsr SYSTEM "ich-icsr-v2_1.dtd">\n'.$xml;
@@ -140,6 +147,16 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
         }
         die();
     }
+}
+
+private function createTrailForExport ($icsrObj)
+{
+    $audit = new AuditTrail();
+    $audit->user_id = \Yii::$app->user->id;
+    $audit->action = 'EXPORT';
+    $audit->model = \backend\modules\crud\models\Icsr::className();
+    $audit->model_id = $icsrObj->id;
+    $audit->save();
 }
 
 
