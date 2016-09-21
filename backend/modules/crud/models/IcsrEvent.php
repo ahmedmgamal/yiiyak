@@ -12,6 +12,7 @@ class IcsrEvent extends BaseIcsrEvent
 {
     use traits\checkAccess;
 
+
     public function behaviors()
     {
         return [
@@ -19,7 +20,13 @@ class IcsrEvent extends BaseIcsrEvent
                 'class' => 'bedezign\yii2\audit\AuditTrailBehavior',
                 'ignored' => ['id','icsr_id'],
 
-            ]
+            ]];
+    }
+    public function attributeLabels()
+    {
+        return [
+            'event_date' => Yii::t('app', 'Event Start Date'),
+
         ];
     }
 }
