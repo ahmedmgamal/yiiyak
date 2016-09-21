@@ -13,6 +13,7 @@ class IcsrEvent extends BaseIcsrEvent
     use traits\checkAccess;
 
 
+
     public function behaviors()
     {
         return [
@@ -22,6 +23,7 @@ class IcsrEvent extends BaseIcsrEvent
 
             ]];
     }
+
     public function attributeLabels()
     {
         return [
