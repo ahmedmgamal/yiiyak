@@ -2,10 +2,12 @@
 
 namespace backend\modules\crud\models;
 
+use backend\modules\crud\overrides\TrailChild\AuditTrailChild;
 use Yii;
 use \backend\modules\crud\models\base\Icsr as BaseIcsr;
 use \backend\modules\crud\traits;
 use bedezign\yii2\audit\models\AuditTrail;
+
 use yii\helpers\ArrayHelper;
 
 /**
@@ -49,14 +51,29 @@ class Icsr extends BaseIcsr
     }
     public function getIcsrTrails()
     {
-           return $this->hasMany(AuditTrail::className(), ['model_id' => 'id'])
-               ->andOnCondition(['model' => get_class($this)]);
-
+        return AuditTrailChild::find()
+            ->orOnCondition([
+                'audit_trail.model_id' => $this->id,
+                'audit_trail.model' => get_class($this),
+            ])->orOnCondition([
+                'audit_trail.model_id' => ArrayHelper::map($this->getIcsrReporters()->all(),'id','id'),
+                'audit_trail.model' => \backend\modules\crud\models\IcsrReporter::className(),
+            ])->orOnCondition([
+                'audit_trail.model_id' =>$this->eventsToTrailJsonConverter(),
+                'audit_trail.model' => \backend\modules\crud\models\IcsrEvent::className(),
+            ]) ->orOnCondition([
+                'audit_trail.model_id' => ArrayHelper::map($this->getDrugPrescriptions()->all(),'id','id'),
+                'audit_trail.model' => \backend\modules\crud\models\DrugPrescription::className(),
+            ])->orOnCondition([
+                'audit_trail.model_id' => ArrayHelper::map($this->getIcsrTests()->all(),'id','id'),
+                'audit_trail.model' => \backend\modules\crud\models\IcsrTest::className(),
+            ]);
 
     }
 
     public function getIcsrReportersTrails()
     {
+
         return AuditTrail::find()
             ->orOnCondition([
                 'audit_trail.model_id' => ArrayHelper::map($this->getIcsrReporters()->all(),'id','id'),
@@ -102,4 +119,6 @@ class Icsr extends BaseIcsr
                 'audit_trail.model' => \backend\modules\crud\models\IcsrTest::className(),
             ]);
     }
+
+
 }
