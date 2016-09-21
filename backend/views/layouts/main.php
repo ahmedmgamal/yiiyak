@@ -48,6 +48,10 @@ AppAsset::register($this);
             $menuItems [] =  ['label' => 'Users', 'url' => ['/crud/user/index']];
         }
 
+        if (\Yii::$app->user->can('/crud/lkp-plan/index')){
+            $menuItems[] = ['label' => 'Plans' , 'url' => ['/crud/lkp-plan/index']];
+        }
+
         $menuItems [] =  ['label' => 'Products', 'url' => ['/crud/drug/index']];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')

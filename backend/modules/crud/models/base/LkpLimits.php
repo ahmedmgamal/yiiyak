@@ -49,6 +49,9 @@ abstract class LkpLimits extends \yii\db\ActiveRecord
     }
 
 
-
+public function getPlans ()
+{
+    return $this->hasMany(\backend\modules\crud\models\LkpPlan::className(),['id' => 'plan_id'])->viaTable('plan_limits',['limit_id' => 'id']);
+}
 
 }
