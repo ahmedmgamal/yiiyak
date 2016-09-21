@@ -11,7 +11,12 @@ use \backend\modules\crud\traits;
 class IcsrEvent extends BaseIcsrEvent
 {
     use traits\checkAccess;
-
+    public function attributeLabels()
+    {
+        return [
+            'event_date' => Yii::t('app', 'Event Start Date'),
+        ];
+    }
 
 
     public function behaviors()
@@ -22,13 +27,5 @@ class IcsrEvent extends BaseIcsrEvent
                 'ignored' => ['id','icsr_id'],
 
             ]];
-    }
-
-    public function attributeLabels()
-    {
-        return [
-            'event_date' => Yii::t('app', 'Event Start Date'),
-
-        ];
     }
 }
