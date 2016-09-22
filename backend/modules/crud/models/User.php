@@ -195,10 +195,5 @@ class User extends BaseUser implements IdentityInterface
         return true;
     }
 
-    public static function userIdentifierCallback($id)
-    {
-        $user = self::findOne($id);
 
-        return $user ? $user->username : $id;
-    }
 }

@@ -28,19 +28,5 @@ class Drug extends BaseDrug
             ]);
     }
 
-    public function behaviors()
-    {
-        return [
-            'AuditTrailBehavior' => [
-                'class' => 'bedezign\yii2\audit\AuditTrailBehavior',
-                'ignored' => ['id','company_id'],
 
-            ]
-        ];
-    }
-    public function getAuditTrails()
-    {
-        return $this->hasMany(AuditTrail::className(), ['model_id' => 'id'])
-            ->andOnCondition(['model' => get_class($this)]);
-    }
 }

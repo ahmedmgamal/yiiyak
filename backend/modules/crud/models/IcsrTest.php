@@ -30,7 +30,7 @@ class IcsrTest extends BaseIcsrTest
     {
         return [
             'AuditTrailBehavior' => [
-                'class' => 'bedezign\yii2\audit\AuditTrailBehavior',
+                'class' => 'backend\modules\crud\overrides\TrailChild\AuditTrailBehaviorChild',
                 'ignored' => ['id','icsr_id'],
 
             ]

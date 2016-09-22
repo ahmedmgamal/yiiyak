@@ -6,7 +6,7 @@ use backend\modules\crud\overrides\TrailChild\AuditTrailChild;
 use Yii;
 use \backend\modules\crud\models\base\Icsr as BaseIcsr;
 use \backend\modules\crud\traits;
-use bedezign\yii2\audit\models\AuditTrail;
+
 
 use yii\helpers\ArrayHelper;
 
@@ -67,28 +67,12 @@ class Icsr extends BaseIcsr
             ])->orOnCondition([
                 'audit_trail.model_id' => ArrayHelper::map($this->getIcsrTests()->all(),'id','id'),
                 'audit_trail.model' => \backend\modules\crud\models\IcsrTest::className(),
-            ]);
+            ])->orderBy(['created' =>  SORT_DESC]);
 
     }
 
-    public function getIcsrReportersTrails()
-    {
 
-        return AuditTrail::find()
-            ->orOnCondition([
-                'audit_trail.model_id' => ArrayHelper::map($this->getIcsrReporters()->all(),'id','id'),
-                'audit_trail.model' => \backend\modules\crud\models\IcsrReporter::className(),
-            ]);
-    }
 
-    public function getIcsrtEventsTrails ()
-    {
-        return AuditTrail::find()
-            ->orOnCondition([
-                'audit_trail.model_id' =>$this->eventsToTrailJsonConverter(),
-                'audit_trail.model' => \backend\modules\crud\models\IcsrEvent::className(),
-            ]);
-    }
 
    public function eventsToTrailJsonConverter ()
     {
@@ -102,23 +86,8 @@ class Icsr extends BaseIcsr
         return $temp_arr;
     }
 
-    public function getDrugPrescriptionsTrails ()
-    {
-        return AuditTrail::find()
-            ->orOnCondition([
-                'audit_trail.model_id' => ArrayHelper::map($this->getDrugPrescriptions()->all(),'id','id'),
-                'audit_trail.model' => \backend\modules\crud\models\DrugPrescription::className(),
-            ]);
-    }
 
-    public function getIcsrTestTrails ()
-    {
-        return AuditTrail::find()
-            ->orOnCondition([
-                'audit_trail.model_id' => ArrayHelper::map($this->getIcsrTests()->all(),'id','id'),
-                'audit_trail.model' => \backend\modules\crud\models\IcsrTest::className(),
-            ]);
-    }
+
 
 
 }

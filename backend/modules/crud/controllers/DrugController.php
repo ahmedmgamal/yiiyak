@@ -92,8 +92,5 @@ class DrugController extends \backend\modules\crud\controllers\base\DrugControll
 
 
 
-        public function actionHistory ($id) {
-            $model = $this->findModel($id);
-            return $this->render('history', ['model' => $model]);
-        }
+
 }

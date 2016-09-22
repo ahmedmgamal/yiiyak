@@ -50,8 +50,12 @@ class DrugPrescription extends BaseDrugPrescription
     {
         return [
             'AuditTrailBehavior' => [
-                'class' => 'bedezign\yii2\audit\AuditTrailBehavior',
+                'class' => 'backend\modules\crud\overrides\TrailChild\AuditTrailBehaviorChild',
                 'ignored' => ['id','drug_id','icsr_id','drug_action_drug_withdrawn','drug_action_dose_reduced','drug_action_dose_increased','drug_action_dose_not_changed','drug_action_unknown'],
+                'overRide' => [
+                    'lkp_drug_action_id' => ['table_name' => 'lkp_drug_action' , 'search_field' => 'id' ,'return_field' => 'name'],
+                    'drug_role'=> ['table_name' => 'lkp_drug_role','search_field' => 'id', 'return_field' => 'name'],
+                ]
 
             ]
         ];

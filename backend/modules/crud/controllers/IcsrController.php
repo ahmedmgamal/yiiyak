@@ -187,34 +187,7 @@ private function createTrailForExport ($icsrObj)
     }
 
 
-    public function actionHistory ($id)
-    {
-        $model = $this->findModel($id);
-        return $this->render('history',['model' => $model]);
-    }
 
-    public function actionReporterHistory($icsr_id)
-    {
-        $model = $this->findModel($icsr_id);
-        return $this->render('reporter-history',['model' => $model]);
 
-    }
 
-    public function actionIcsrEventHistory($icsr_id)
-    {
-        $model = $this->findModel($icsr_id);
-        return $this->render('icsr-event-history',['model' => $model]);
-    }
-
-    public function actionDrugPrescriptionHistory($icsr_id)
-    {
-        $model = $this->findModel($icsr_id);
-        return $this->render('drug-prescription-history',['model' => $model]);
-    }
-
-    public function actionIcsrTestHistory ($icsr_id)
-    {
-        $model = $this->findModel($icsr_id);
-        return $this->render('icsr-test-history',['model' => $model]);
-    }
 }

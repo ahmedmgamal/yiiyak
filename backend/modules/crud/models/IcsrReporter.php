@@ -37,8 +37,11 @@ class IcsrReporter extends BaseIcsrReporter
     {
         return [
             'AuditTrailBehavior' => [
-                'class' => 'bedezign\yii2\audit\AuditTrailBehavior',
+                'class' => 'backend\modules\crud\overrides\TrailChild\AuditTrailBehaviorChild',
                 'ignored' => ['id','icsr_id'],
+                'overRide' => ['country_lkp_id' => ['table_name' => 'lkp_country' , 'search_field' => 'id' ,'return_field' => 'name'],
+                    'occupation_lkp_id'=> ['table_name' => 'lkp_occupation','search_field' => 'id', 'return_field' => 'description'],
+                ]
 
             ]
         ];
