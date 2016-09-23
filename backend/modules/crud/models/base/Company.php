@@ -129,4 +129,5 @@ abstract class Company extends \yii\db\ActiveRecord
         return $this->hasOne(\backend\modules\crud\models\LkpPlan::className(),['id' =>'plan_id']);
     }
 
+
 }

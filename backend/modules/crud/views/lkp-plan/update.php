@@ -28,6 +28,7 @@ $this->params['breadcrumbs'][] = 'Edit';
 
     <?php echo $this->render('_form', [
     'model' => $model,
+     'lkpLimitsModel' => $lkpLimitsModel
     ]); ?>
 
 </div>

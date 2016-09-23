@@ -70,8 +70,21 @@ $this->params['breadcrumbs'][] = 'View';
     <?= DetailView::widget([
     'model' => $model,
     'attributes' => [
-            'id',
         'name',
+
+        [
+            'label' => 'drug',
+            'value' =>  $model->getOneLimitAmount('drug'),
+        ],
+        [
+            'label' => 'icsr',
+            'value' =>  $model->getOneLimitAmount('icsr'),
+        ],
+        [
+            'label' => 'user',
+            'value' =>  $model->getOneLimitAmount('user'),
+        ],
+
     ],
     ]); ?>
 

@@ -88,6 +88,31 @@ Yii::$app->view->params['pageButtons'] = Html::a('<span class="glyphicon glyphic
             'contentOptions' => ['nowrap'=>'nowrap']
         ],
 			'name',
+
+            [
+                'label' => 'drug',
+                'value' => function ($model){
+                    return $model->getOneLimitAmount('drug');
+
+                }
+
+            ],
+            [
+                'label' => 'icsr',
+                'value' => function ($model){
+                    return $model->getOneLimitAmount('icsr');
+
+                }
+
+            ],
+            [
+            'label' => 'user',
+            'value' => function ($model){
+                return $model->getOneLimitAmount('user');
+
+            }
+
+        ],
         ],
         ]); ?>
     </div>

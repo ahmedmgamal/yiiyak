@@ -29,6 +29,15 @@ use yii\helpers\StringHelper;
 
         <p>
 			<?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+            <?php
+                    foreach ($lkpLimitsModel->find()->all() as $key => $obj)
+                    {
+                  echo   $form->field($model, "limits[{$obj->id}]")->textInput(['type' => 'number' , 'value' => $model->getOneLimitAmount($obj->name)])->label("{$obj->name} Limit");
+
+            }
+
+            ?>
+
         </p>
         <?php $this->endBlock(); ?>
         
