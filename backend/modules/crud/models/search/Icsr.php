@@ -19,7 +19,7 @@ class Icsr extends IcsrModel
 */
 	public function rules() {
 return [
-[['id', 'drug_id', 'lkp_city_id'], 'integer'],
+[['id', 'drug_id', 'reaction_country_id'], 'integer'],
             [['patient_identifier', 'patient_age_unit', 'patient_birth_date', 'patient_weight_unit', 'extra_history', 'is_serious', 'results_in_death', 'life_threatening', 'requires_hospitalization', 'results_in_disability', 'is_congenital_anomaly', 'others_significant', 'report_type'], 'safe'],
             [['patient_age', 'patient_weight'], 'number'],
 ];
