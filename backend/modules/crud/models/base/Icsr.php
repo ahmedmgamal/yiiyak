@@ -99,13 +99,13 @@ abstract class Icsr extends \yii\db\ActiveRecord
     {
         return [
             [['drug_id'], 'required'],
-            [['drug_id', 'lkp_city_id'], 'integer'],
+            [['drug_id', 'reaction_country_id'], 'integer'],
             [['patient_age', 'patient_weight'], 'number'],
             [['patient_age_unit', 'patient_weight_unit', 'report_type'], 'string'],
             [['is_serious', 'results_in_death', 'life_threatening', 'requires_hospitalization', 'results_in_disability', 'is_congenital_anomaly', 'others_significant'],'boolean'],
             [['patient_birth_date'], 'safe'],
             [['patient_identifier', 'extra_history'], 'string', 'max' => 45],
-            [['lkp_city_id'], 'exist', 'skipOnError' => true, 'targetClass' => LkpCity::className(), 'targetAttribute' => ['lkp_city_id' => 'id']],
+            [['reaction_country_id'], 'exist', 'skipOnError' => true, 'targetClass' => LkpCountry::className(), 'targetAttribute' => ['reaction_country_id' => 'id']],
             [['drug_id'], 'exist', 'skipOnError' => true, 'targetClass' => Drug::className(), 'targetAttribute' => ['drug_id' => 'id']],
  
      
@@ -136,7 +136,7 @@ abstract class Icsr extends \yii\db\ActiveRecord
             'is_congenital_anomaly' => Yii::t('app', 'Is Congenital Anomaly'),
             'others_significant' => Yii::t('app', 'Others Significant'),
             'report_type' => Yii::t('app', 'Report Type'),
-            'lkp_city_id' => Yii::t('app', 'City'),
+            'reaction_country_id' => Yii::t('app', 'Reaction Country'),
         ];
     }
 
@@ -165,7 +165,7 @@ abstract class Icsr extends \yii\db\ActiveRecord
             'is_congenital_anomaly' => Yii::t('app', 'A.1.5.2 Seriousness criteria -'),
             'others_significant' => Yii::t('app', 'A.1.5.2 Seriousness criteria -'),
             'report_type' => Yii::t('app', 'A.1.4 Type of report'),
-            'lkp_city_id' => Yii::t('app', 'A.1.2 Identification of the city where the reaction/event occurred'),
+            'reaction_country_id' => Yii::t('app', 'A.1.2 Identification of the country where the reaction/event occurred'),
             ]);
     }
 
@@ -180,9 +180,9 @@ abstract class Icsr extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCity()
+    public function getReactionCountry()
     {
-        return $this->hasOne(\backend\modules\crud\models\LkpCity::className(), ['id' => 'lkp_city_id']);
+        return $this->hasOne(\backend\modules\crud\models\LkpCountry::className(), ['id' => 'reaction_country_id']);
     }
     public function getAgeUnit()
     {

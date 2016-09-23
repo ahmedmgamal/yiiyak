@@ -92,7 +92,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
             [
                 'format' => 'html',
                 'attribute' => 'lkp_city_id',
-                'value' => ($model->getCity()->one()->name),
+                'value' => ($model->getReactionCountry()->one() ? Html::a($model->getReactionCountry()->one()->name, ['lkp-country/view', 'id' => $model->getReactionCountry()->one()->id,]) : '<span class="label label-warning">?</span>'),
             ],
         ],
     ]);
