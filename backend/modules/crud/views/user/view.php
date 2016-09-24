@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 
     <h1>
         <?php echo $model->getAliasModel() ?>        <small>
-            <?php echo $model->id ?>        </small>
+                 </small>
     </h1>
 
 
@@ -62,7 +62,6 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
     <?php echo DetailView::widget([
 		'model' => $model,
 		'attributes' => [
-			'id',
 			'username',
 			'email:email',
             [
@@ -94,7 +93,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 		'id' => 'relation-tabs',
 		'encodeLabels' => false,
 		'items' => [ [
-				'label'   => '<b class=""># '.$model->id.'</b>',
+				'label'   => '<b class=""># '.$model->username.'</b>',
 				'content' => $this->blocks['backend\modules\crud\models\User'],
 				'active'  => true,
 			],]
