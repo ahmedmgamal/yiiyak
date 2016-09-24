@@ -17,6 +17,7 @@ class IcsrEvent extends BaseIcsrEvent
             'event_date' => Yii::t('app', 'Event Start Date'),
         ];
     }
+//}
     public function behaviors()
     {
         return [
