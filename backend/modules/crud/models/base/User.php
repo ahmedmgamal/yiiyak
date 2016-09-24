@@ -57,8 +57,8 @@ abstract class User extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['username', 'password_hash', 'email'], 'required'],
-            [['status'], 'integer'],
+            [['username', 'password_hash', 'email','company_id'], 'required'],
+            [['status','company_id'], 'integer'],
             [['username', 'password_hash', 'password_reset_token', 'email'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
             [['username'], 'unique'],
@@ -84,6 +84,7 @@ abstract class User extends \yii\db\ActiveRecord
             'status' => Yii::t('app', 'Status'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
+            'company_id' => Yii::t('app','Company')
         ];
     }
 
@@ -115,12 +116,10 @@ abstract class User extends \yii\db\ActiveRecord
         return $this->hasMany(\backend\modules\crud\models\UserCompany::className(), ['user_id' => 'id']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCompanies()
+
+    public function getAllCompanies()
     {
-        return $this->hasMany(\backend\modules\crud\models\Company::className(), ['id' => 'company_id'])->viaTable('user_company', ['user_id' => 'id']);
+         return \backend\modules\crud\models\Company::find()->all();
     }
 
    /**

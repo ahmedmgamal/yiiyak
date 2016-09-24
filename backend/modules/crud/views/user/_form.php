@@ -6,6 +6,7 @@
  */
 
 
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use \dmstr\bootstrap\Tabs;
@@ -41,6 +42,8 @@ use \dmstr\bootstrap\Tabs;
 			}
 			?>
 			<?php echo $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
+            <?php echo $form->field($model,'company_id')->dropDownList(ArrayHelper::map($model->getAllCompanies(),'id','name')); ?>
+
         </p>
         <?php $this->endBlock(); ?>
 

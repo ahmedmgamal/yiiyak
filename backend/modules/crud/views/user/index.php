@@ -32,7 +32,9 @@ $this->params['breadcrumbs'][] = $this->title;
     </h1>
     <div class="clearfix crud-navigation">
 
-
+		<div class="pull-left">
+			<?php echo Html::a('<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('app', 'New'), ['create'], ['class' => 'btn btn-success']) ?>
+		</div>
         <div class="pull-right">
 
 
@@ -47,10 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				'class' => 'dropdown-menu-right'
 			],
 			'encodeLabels' => false,
-			'items' => [            [
-					'url' => ['/crud/user-company/index'],
-					'label' => '<i class="glyphicon glyphicon-arrow-right">&nbsp;' . Yii::t('app', 'User Company') . '</i>',
-				],            [
+			'items' => [[
 					'url' => ['/crud/company/index'],
 					'label' => '<i class="glyphicon glyphicon-arrow-right">&nbsp;' . Yii::t('app', 'Company') . '</i>',
 				], ]
@@ -99,6 +98,14 @@ $this->params['breadcrumbs'][] = $this->title;
 								}
 								return 'Inactive';
 							}
+			],
+			[
+				'attribute' => 'company_id',
+				'value' => function ($model){
+				if (isset($model->company->name)) {
+					return $model->company->name;
+				}
+			}
 			]
 
 		],
