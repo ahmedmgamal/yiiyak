@@ -17,18 +17,4 @@ class IcsrEvent extends BaseIcsrEvent
             'event_date' => Yii::t('app', 'Event Start Date'),
         ];
     }
-    public function behaviors()
-    {
-        return [
-            'AuditTrailBehavior' => [
-                'class' => 'backend\modules\crud\overrides\TrailChild\AuditTrailBehaviorChild',
-                'ignored' => ['id','icsr_id'],
-                'overRide' => ['meddra_llt_id' => ['table_name' => 'lkp_meddra_llt' , 'search_field' => 'id' ,'return_field' => 'description'],
-                    'meddra_pt_id'=> ['table_name' => 'lkp_meddra_pt','search_field' => 'id', 'return_field' => 'description'],
-                    'lkp_icsr_eventoutcome_id'=> ['table_name' => 'lkp_icsr_eventoutcome' , 'search_field' => 'id', 'return_field' => 'name']
-                ]
-
-            ]];
-    }
-
 }
