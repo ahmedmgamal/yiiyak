@@ -93,7 +93,15 @@ $this->params['breadcrumbs'][] = $this->title;
 				},
 				'contentOptions' => ['nowrap'=>'nowrap']
 			],
-			'id',
+			[
+				'attribute' => 'id',
+				'value' => function ($model){
+
+					$misleadingString = hexdec($model->id / .2 . "PVRadar");
+
+					return "PV-Company-{$misleadingString}" ;
+				}
+			],
 			'name',
 			'adderess',
 			'license_no',

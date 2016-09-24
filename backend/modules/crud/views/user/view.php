@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 
     <h1>
         <?php echo $model->getAliasModel() ?>        <small>
-                 </small>
+            <?php echo $model->username ?>     </small>
     </h1>
 
 
