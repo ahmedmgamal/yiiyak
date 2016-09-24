@@ -62,6 +62,10 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
     <?php echo DetailView::widget([
 		'model' => $model,
 		'attributes' => [
+		    [
+		        'attribute' => 'id',
+                'value' => "PV-User-" . hexdec($model->id / .2. "PVRadar")
+            ],
 			'username',
 			'email:email',
             [

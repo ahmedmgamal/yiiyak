@@ -86,6 +86,15 @@ $this->params['breadcrumbs'][] = $this->title;
 				},
 				'contentOptions' => ['nowrap'=>'nowrap']
 			],
+			[
+				'attribute' => 'id',
+				'value' => function ($model){
+
+					$misleadingString = hexdec($model->id / .2 . "PVRadar");
+
+					return "PV-User-{$misleadingString}" ;
+				}
+			],
 			'username',
 
 			'email:email',
@@ -109,6 +118,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			]
 
 		],
+
 	]); ?>
     </div>
 
