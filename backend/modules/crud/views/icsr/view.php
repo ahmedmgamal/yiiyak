@@ -92,7 +92,6 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
             [
                 'format' => 'html',
                 'attribute' => 'lkp_city_id',
-                'value' => ($model->getCity()->one()->name),
             ],
 
         ],
