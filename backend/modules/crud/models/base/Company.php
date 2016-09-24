@@ -24,9 +24,6 @@ use Yii;
 abstract class Company extends \yii\db\ActiveRecord
 {
 
-    const PLAN_SILVER = 'silver';
-    const PLAN_GOLD = 'gold';
-    const PLAN_PLATINUM = 'platinum';
 
     /**
      * @inheritdoc
@@ -56,8 +53,8 @@ abstract class Company extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name','end_date','plan'],'required'],
-            [['id'], 'integer'],
+            [['name','end_date','plan_id'],'required'],
+            [['id','plan_id'], 'integer'],
             [['name', 'adderess', 'license_no', 'license_image_url'], 'string', 'max' => 45]
         ];
     }
@@ -73,6 +70,7 @@ abstract class Company extends \yii\db\ActiveRecord
             'adderess' => Yii::t('app', 'Adderess'),
             'license_no' => Yii::t('app', 'License No'),
             'license_image_url' => Yii::t('app', 'License Image Url'),
+            'plan_id' => Yii::t('app','Plan')
         ];
     }
 
@@ -125,6 +123,10 @@ abstract class Company extends \yii\db\ActiveRecord
     public static function find()
     {
         return new \backend\modules\crud\models\query\CompanyQuery(get_called_class());
+    }
+
+    public function getPlan() {
+        return $this->hasOne(\backend\modules\crud\models\LkpPlan::className(),['id' =>'plan_id']);
     }
 
 

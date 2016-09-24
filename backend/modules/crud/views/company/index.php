@@ -80,6 +80,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			'class' => yii\widgets\LinkPager::className(),
 			'firstPageLabel' => Yii::t('app', 'First'),
 			'lastPageLabel' => Yii::t('app', 'Last')        ],
+
 		'filterModel' => $searchModel,
 		'tableOptions' => ['class' => 'table table-striped table-bordered table-hover'],
 		'headerRowOptions' => ['class'=>'x'],
@@ -101,7 +102,12 @@ $this->params['breadcrumbs'][] = $this->title;
 			'license_no',
 			'license_image_url:url',
 			'end_date',
-			'plan'
+			[
+				'attribute' => 'plan_id',
+				'value' => function ($model,$index,$dataColumn){
+					return $model->plan->name;
+				}
+			]
 		],
 	]); ?>
     </div>

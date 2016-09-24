@@ -48,6 +48,10 @@ AppAsset::register($this);
             $menuItems [] =  ['label' => 'Users', 'url' => ['/crud/user/index']];
         }
 
+        if (\Yii::$app->user->can('/crud/lkp-plan/index')){
+            $menuItems[] = ['label' => 'Plans' , 'url' => ['/crud/lkp-plan/index']];
+        }
+
         $menuItems [] =  ['label' => 'Products', 'url' => ['/crud/drug/index']];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
@@ -58,7 +62,7 @@ AppAsset::register($this);
             . Html::endForm()
             . '</li>';
 
-        $menuItems[] = ['label' =>  Yii::$app->user->identity->getCompany()->one()->name . " (". Yii::$app->user->identity->company->plan . ")"];
+        $menuItems[] = ['label' =>  Yii::$app->user->identity->getCompany()->one()->name . " (". Yii::$app->user->identity->company->plan->name . ")"];
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],

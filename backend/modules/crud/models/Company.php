@@ -24,19 +24,17 @@ class Company extends BaseCompany
             'license_no' => Yii::t('app', 'License No'),
             'license_image_url' => Yii::t('app', 'License Image Url'),
             'end_date' => Yii::t('app','Subscription End Date'),
-             'plan' => Yii::t('app','Plan')
+             'plan_id' => Yii::t('app','Plan')
             ]);
     }
     public function getUser($user_id){
         return $this->getUsers()->where(['id' => $user_id])->one();
     }
 
-    public function getPlans () {
-        return [
-            self::PLAN_SILVER => self::PLAN_SILVER,
-            self::PLAN_GOLD => self::PLAN_GOLD,
-            self::PLAN_PLATINUM => self::PLAN_PLATINUM
-        ];
-    }
+ public function getPlans ()
+ {
+    return LkpPlan::find()->all();
+ }
+
 
 }
