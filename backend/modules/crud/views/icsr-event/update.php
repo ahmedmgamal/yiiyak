@@ -7,16 +7,16 @@ use yii\helpers\Html;
 * @var backend\modules\crud\models\IcsrEvent $model
 */
 
-$this->title = $model->getAliasModel() . $model->id . ', ' . Yii::t('app', 'Edit');
+$this->title = $model->getAliasModel() . ', ' . Yii::t('app', 'Edit');
 $this->params['breadcrumbs'][] = ['label' => $model->getAliasModel(true), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => (string)$model->id, 'url' => ['view', 'id' => $model->id, 'icsr_id' => $model->icsr_id]];
+$this->params['breadcrumbs'][] = ['label' => $model->event_description, 'url' => ['view', 'id' => $model->id, 'icsr_id' => $model->icsr_id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Edit');
 ?>
 <div class="giiant-crud icsr-event-update">
 
     <h1>
         <?= $model->getAliasModel() ?>        <small>
-                        <?= $model->id ?>        </small>
+                   </small>
     </h1>
 
     <div class="crud-navigation">

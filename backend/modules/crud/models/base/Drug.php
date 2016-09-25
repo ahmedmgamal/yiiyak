@@ -75,10 +75,10 @@ abstract class Drug extends \yii\db\ActiveRecord
             'generic_name' => Yii::t('app', 'Generic Name'),
             'trade_name' => Yii::t('app', 'Trade Name'),
             'composition' => Yii::t('app', 'Dosage Form'),
-            'company_id' => Yii::t('app', 'Company ID'),
+            'company_id' => Yii::t('app', 'Company '),
             'manufacturer' => Yii::t('app', 'Manufacturer'),
             'strength' => Yii::t('app', 'Strength'),
-            'route_lkp_id' => Yii::t('app', 'Route Lkp ID'),
+            'route_lkp_id' => Yii::t('app', 'Route Of Administration'),
         ];
     }
 

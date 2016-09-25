@@ -120,7 +120,7 @@ abstract class Icsr extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'drug_id' => Yii::t('app', 'Drug ID'),
+            'drug_id' => Yii::t('app', 'Drug '),
             'patient_identifier' => Yii::t('app', 'Patient Identifier'),
             'patient_age' => Yii::t('app', 'Patient Age'),
             'patient_age_unit' => Yii::t('app', 'Patient Age Unit'),
@@ -149,7 +149,7 @@ abstract class Icsr extends \yii\db\ActiveRecord
             parent::attributeHints(),
             [
             'id' => Yii::t('app', 'ID'),
-            'drug_id' => Yii::t('app', 'Drug Id'),
+            'drug_id' => Yii::t('app', 'Drug '),
             'patient_identifier' => Yii::t('app', 'Patient Identifier'),
             'patient_age' => Yii::t('app', 'Patient Age'),
             'patient_age_unit' => Yii::t('app', 'Patient Age Unit'),

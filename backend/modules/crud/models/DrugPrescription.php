@@ -28,9 +28,9 @@ class DrugPrescription extends BaseDrugPrescription
             parent::attributeHints(),
             [
             'id' => Yii::t('app', 'ID'),
-            'drug_id' => Yii::t('app', 'Drug Id'),
-            'icsr_id' => Yii::t('app', 'Icsr Id'),
-            'frequency_lkp_id' => Yii::t('app', 'Frequency Lkp Id'),
+            'drug_id' => Yii::t('app', 'Drug '),
+            'icsr_id' => Yii::t('app', 'Icsr '),
+            'frequency_lkp_id' => Yii::t('app', 'Frequency '),
             'expiration_date' => Yii::t('app', 'Expiration Date'),
             'lot_no' => Yii::t('app', 'B.4.k.3 Batch/lot number'),
             'ndc' => Yii::t('app', '	B.4.k.19 Additional information on drug'),

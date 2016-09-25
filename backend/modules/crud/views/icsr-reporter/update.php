@@ -13,16 +13,16 @@ use yii\helpers\Html;
  * @var yii\web\View $this
  * @var backend\modules\crud\models\IcsrReporter $model
  */
-$this->title = $model->getAliasModel() . $model->id . ', ' . Yii::t('app', 'Edit');
+$this->title = $model->getAliasModel() . ', ' . Yii::t('app', 'Edit');
 $this->params['breadcrumbs'][] = ['label' => $model->getAliasModel(true), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => (string)$model->id, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => '', 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Edit');
 ?>
 <div class="giiant-crud icsr-reporter-update">
 
     <h1>
         <?php echo $model->getAliasModel() ?>        <small>
-                        <?php echo $model->id ?>        </small>
+                          </small>
     </h1>
 
     <div class="crud-navigation">

@@ -20,9 +20,9 @@ use dmstr\bootstrap\Tabs;
  */
 $copyParams = $model->attributes;
 
-$this->title = $model->getAliasModel() . $model->id;
+$this->title = $model->getAliasModel() . $model->trade_name;
 $this->params['breadcrumbs'][] = ['label' => $model->getAliasModel(true), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => (string)$model->id, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => (string)$model->trade_name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 ?>
 <div class="giiant-crud drug-view">
@@ -63,7 +63,6 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
     <?php echo DetailView::widget([
 		'model' => $model,
 		'attributes' => [
-			'id',
 			'generic_name',
 			'trade_name',
 			'composition',
@@ -125,13 +124,28 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 				],
 				'controller' => '/crud/icsr'
 			],
-			'id',
+			[
+				'attribute' => 'id',
+				'value' => function ($model,$key,$index){
+					return ++$index;
+				}
+			],
 			'patient_identifier',
 			'patient_age',
-			'patient_age_unit',
+			[
+				'attribute' => 'patient_age_unit',
+				'value' => function ($model,$key,$index){
+						return $model-> ageUnit->name;
+				}
+			],
 			'patient_birth_date',
 			'patient_weight',
-			'patient_weight_unit',
+			[
+				'attribute' =>'patient_weight_unit',
+				'value' => function ($model,$key,$index){
+				return $model->patientWeightUnit->name;
+				}
+			],
 			'extra_history',
 		]
 	]) . '</div>' ?>
@@ -144,7 +158,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 		'id' => 'relation-tabs',
 		'encodeLabels' => false,
 		'items' => [ [
-				'label'   => '<b class=""># '.$model->id. '</b>',
+				'label'   => '<b class=""># '.$model->trade_name. '</b>',
 				'content' => $this->blocks['backend\modules\crud\models\Drug'],
 				'active'  => true,
 			],  [

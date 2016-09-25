@@ -96,15 +96,16 @@ abstract class IcsrEvent extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'icsr_id' => Yii::t('app', 'Icsr ID'),
+            'icsr_id' => Yii::t('app', 'Icsr '),
             'event_description' => Yii::t('app', 'Event Description'),
-            'meddra_llt_id' => Yii::t('app', 'Meddra Llt ID'),
-            'meddra_pt_id' => Yii::t('app', 'Meddra Pt ID'),
+            'meddra_llt_id' => Yii::t('app', 'Meddra Llt '),
+            'meddra_pt_id' => Yii::t('app', 'Meddra Pt '),
             'event_date' => Yii::t('app', 'Event Date'),
             'event_end_date' => Yii::t('app', 'Event End Date'),
             'event_outcome' => Yii::t('app', 'Event Outcome'),
             'meddra_llt_text' => Yii::t('app', 'Meddra Llt Text'),
             'meddra_pt_text' => Yii::t('app', 'Meddra Pt Text'),
+            'lkp_icsr_eventoutcome_id' => Yii::t('app', 'Event OutCome'),
         ];
     }
 
@@ -117,7 +118,7 @@ abstract class IcsrEvent extends \yii\db\ActiveRecord
             parent::attributeHints(),
             [
             'id' => Yii::t('app', 'ID'),
-            'icsr_id' => Yii::t('app', 'Icsr Id'),
+            'icsr_id' => Yii::t('app', 'Icsr '),
             'event_description' => Yii::t('app', '    B.2.i.0 Reaction or event as reported by the primary source
 '),
             'meddra_llt_id' => Yii::t('app', 'B.2.i.1 Reaction or event in MedDRA terminology (Lowest Level Term)

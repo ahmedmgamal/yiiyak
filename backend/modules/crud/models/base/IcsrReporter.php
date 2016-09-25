@@ -91,8 +91,8 @@ abstract class IcsrReporter extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'icsr_id' => Yii::t('app', 'Icsr ID'),
-            'country_lkp_id' => Yii::t('app', 'Country Lkp ID'),
+            'icsr_id' => Yii::t('app', 'Icsr '),
+            'country_lkp_id' => Yii::t('app', 'Country '),
             'first_name' => Yii::t('app', 'First Name'),
             'last_name' => Yii::t('app', 'Last Name'),
             'address_line_1' => Yii::t('app', 'Address Line 1'),
@@ -102,7 +102,7 @@ abstract class IcsrReporter extends \yii\db\ActiveRecord
             'zip_code' => Yii::t('app', 'Zip Code'),
             'phone' => Yii::t('app', 'Phone'),
             'email' => Yii::t('app', 'Email'),
-            'occupation_lkp_id' => Yii::t('app', 'Occupation Lkp ID'),
+            'occupation_lkp_id' => Yii::t('app', 'Occupation '),
             'health_professional' => Yii::t('app', 'Health Professional'),
         ];
     }
