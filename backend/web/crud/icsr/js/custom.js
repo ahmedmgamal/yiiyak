@@ -50,3 +50,22 @@ function changeDates ()
 
     }
 }
+
+
+$('#Icsr').on('beforeSubmit', function(e)
+                {
+                    var form = $(this);
+                    alert( form.attr('action').substr(form.attr('action').lastIndexOf('/')));
+                    alert(form.serialize());
+                    if($(form).find('.has-error').length) {
+                        return false;
+                    }
+                    $.ajax({
+                        url: form.attr('action'),
+                        type: 'post',
+                        data: form.serialize(),
+                        success: function(data) {
+                            // do something ...
+                        }});
+
+                });

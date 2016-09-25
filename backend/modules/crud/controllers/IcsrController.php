@@ -143,6 +143,7 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
         $model = $this->findModel($id);
 
         if ($model->load($_POST) && $model->save()) {
+
             return $this->redirect(Url::previous());
         } elseif (!\Yii::$app->request->isPost) {
             return $this->render('update', [

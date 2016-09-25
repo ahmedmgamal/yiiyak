@@ -98,7 +98,7 @@ abstract class Icsr extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['drug_id'], 'required'],
+            [['drug_id','reaction_country_id'], 'required'],
             [['drug_id', 'reaction_country_id'], 'integer'],
             [['patient_age', 'patient_weight'], 'number'],
             [['patient_age_unit', 'patient_weight_unit', 'report_type'], 'string'],
@@ -323,16 +323,32 @@ public function getCompany() {
 
     public function beforeSave($insert)
     {
-        if (self::checkDuplication($this->drug_id,$this->patient_identifier)){
-            return false;
+
+        if (parent::beforeSave($insert)) {
+
+            if ($this->isNewRecord){
+                if (self::checkDuplication($this)) {
+                    return true;
+                }
+
+
+            }
+
+
         }
         return true;
     }
 
 
-    public static function checkDuplication ($drug_id,$patient_identifier)
+    public static function checkDuplication ($icsrObj)
     {
-        $duplicatePatient = self::find()->where(['drug_id' => $drug_id])->where(['patient_identifier' => $patient_identifier])->one();
+        $duplicatePatient = self::find()->where(['drug_id' =>$icsrObj->drug_id])
+            ->where(['patient_identifier' => $icsrObj->patient_identifier])
+            ->where(['patient_birth_date' => $icsrObj->patient_birth_date])
+            ->where(['patient_weight' => $icsrObj->patient_weight])
+            ->where(['patient_weight_unit' => $icsrObj->patient_weight_unit])
+            ->where(['reaction_country_id'=> $icsrObj->reaction_country_id] )
+            ->one();
 
         if ($duplicatePatient){
             return true;
