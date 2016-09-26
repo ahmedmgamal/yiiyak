@@ -2,9 +2,14 @@
 
 namespace backend\modules\crud\models;
 
+use backend\modules\crud\overrides\TrailChild\AuditTrailChild;
 use Yii;
 use \backend\modules\crud\models\base\Icsr as BaseIcsr;
 use \backend\modules\crud\traits;
+
+
+use yii\helpers\ArrayHelper;
+
 /**
  * This is the model class for table "icsr".
  */
@@ -32,4 +37,57 @@ class Icsr extends BaseIcsr
             'extra_history' => Yii::t('app', 'B.1.7.2 Text for relevant medical history and concurrent conditions (not including reaction/event)'),
             ]);
     }
+
+
+    public function behaviors()
+    {
+        return [
+            'AuditTrailBehavior' => [
+                'class' => 'bedezign\yii2\audit\AuditTrailBehavior',
+                'ignored' => ['id','drug_id'],
+
+            ]
+        ];
+    }
+    public function getIcsrTrails()
+    {
+        return AuditTrailChild::find()
+            ->orOnCondition([
+                'audit_trail.model_id' => $this->id,
+                'audit_trail.model' => get_class($this),
+            ])->orOnCondition([
+                'audit_trail.model_id' => ArrayHelper::map($this->getIcsrReporters()->all(),'id','id'),
+                'audit_trail.model' => \backend\modules\crud\models\IcsrReporter::className(),
+            ])->orOnCondition([
+                'audit_trail.model_id' =>$this->eventsToTrailJsonConverter(),
+                'audit_trail.model' => \backend\modules\crud\models\IcsrEvent::className(),
+            ]) ->orOnCondition([
+                'audit_trail.model_id' => ArrayHelper::map($this->getDrugPrescriptions()->all(),'id','id'),
+                'audit_trail.model' => \backend\modules\crud\models\DrugPrescription::className(),
+            ])->orOnCondition([
+                'audit_trail.model_id' => ArrayHelper::map($this->getIcsrTests()->all(),'id','id'),
+                'audit_trail.model' => \backend\modules\crud\models\IcsrTest::className(),
+            ])->orderBy(['created' =>  SORT_DESC]);
+
+    }
+
+
+
+
+   public function eventsToTrailJsonConverter ()
+    {
+        $temp_arr = [];
+        foreach ($this->getIcsrEvents()->all() as $key => $value)
+        {
+            $temp_arr[] = "{\"id\":$value->id,\"icsr_id\":\"$this->id\"}";
+
+
+        }
+        return $temp_arr;
+    }
+
+
+
+
+
 }

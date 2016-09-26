@@ -7,7 +7,6 @@ use yii\behaviors\TimestampBehavior;
 use yii\web\IdentityInterface;
 use backend\modules\crud\models\base\User as BaseUser;
 
-
 class User extends BaseUser implements IdentityInterface
 {
 

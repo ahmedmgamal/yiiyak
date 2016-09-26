@@ -115,6 +115,8 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                 <span class="glyphicon glyphicon-plus"></span><?= Yii::t('app','New ').' Drug Prescription'?>
             </a>
 
+
+
         </div></div><?php Pjax::begin(['id' => 'pjax-DrugPrescriptions', 'enableReplaceState' => false, 'linkSelector' => '#pjax-DrugPrescriptions ul.pagination a, th a', 'clientOptions' => ['pjax:success' => 'function(){alert("yo")}']]) ?>
     <?=
     '<div class="table-responsive">' . \yii\grid\GridView::widget([
@@ -273,6 +275,8 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                                             </a>
 
 
+
+
                                         </div></div><?php Pjax::begin(['id' => 'pjax-IcsrReporters', 'enableReplaceState' => false, 'linkSelector' => '#pjax-IcsrReporters ul.pagination a, th a', 'clientOptions' => ['pjax:success' => 'function(){alert("yo")}']]) ?>
                                     <?=
                                     '<div class="table-responsive">' . \yii\grid\GridView::widget([
@@ -326,6 +330,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 
 
                                                     <?php $this->beginBlock('IcsrTests'); ?>
+
                                             <div style='position: relative'><div style='position:absolute; right: 0px; top: 0px;'>
                                                     <?=
                                                     Html::a(
@@ -336,6 +341,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 
                                                         <span class="glyphicon glyphicon-plus"></span><?= Yii::t('app','New ').' Icsr Test'?>
                                                     </a>
+
 
                                                 </div></div><?php Pjax::begin(['id' => 'pjax-IcsrTests', 'enableReplaceState' => false, 'linkSelector' => '#pjax-IcsrTests ul.pagination a, th a', 'clientOptions' => ['pjax:success' => 'function(){alert("yo")}']]) ?>
                                             <?=
@@ -376,6 +382,27 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 
 
 
+                                        <?php $this->beginBlock('IcsrHistory'); ?>
+
+                                        <div style='position: relative'><div style='position:absolute; right: 0px; top: 0px;'>
+
+                                            </div></div><?php Pjax::begin(['id' => 'pjax-IcsrHistory', 'enableReplaceState' => false, 'linkSelector' => '#pjax-IcsrHistory ul.pagination a, th a', 'clientOptions' => ['pjax:success' => 'function(){alert("yo")}']]) ?>
+                                        <?=
+                                        '<div class="table-responsive">' . \yii\grid\GridView::widget([
+                                            'layout' => '{summary}{pager}<br/>{items}{pager}',
+                                            'dataProvider' => new \yii\data\ActiveDataProvider(['query' => $model->getIcsrTrails(), 'pagination' => ['pageSize' => 20, 'pageParam' => 'page-icsrhistories']]),
+                                            'pager' => [
+                                                'class' => yii\widgets\LinkPager::className(),
+                                                'firstPageLabel' => Yii::t('app', 'First'),
+                                                'lastPageLabel' => Yii::t('app', 'Last')
+                                            ],
+                                            'columns' => ['user_id',  'action', 'model','model_id','field','old_value', 'new_value', 'created']
+                                        ]) . '</div>'
+                                        ?>
+                                        <?php Pjax::end() ?>
+                                        <?php $this->endBlock() ?>
+
+
                                                     <?php
                                                     echo Tabs::widget(
                                                             [
@@ -402,7 +429,13 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                                                                         'content' => $this->blocks['IcsrReporters'],
                                                                         'label' => '<small>Icsr Reporters <span class="badge badge-default">' . count($model->getIcsrReporters()->asArray()->all()) . '</span></small>',
                                                                         'active' => false,
-                                                                    ],]
+                                                                    ],[
+                                                                        'content' => $this->blocks['IcsrHistory'],
+                                                                        'label' => '<small>Icsr History <span class="badge badge-default">' . count($model->getIcsrTrails()->asArray()->all()) . '</span></small>',
+                                                                        'active' => false,
+
+                                                                    ]
+                                                                ]
                                                             ]
                                                     );
                                                     ?>

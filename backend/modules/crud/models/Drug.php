@@ -5,6 +5,7 @@ namespace backend\modules\crud\models;
 use Yii;
 use \backend\modules\crud\models\base\Drug as BaseDrug;
 use \backend\modules\crud\traits;
+use bedezign\yii2\audit\models\AuditTrail;
 /**
  * This is the model class for table "drug".
  */

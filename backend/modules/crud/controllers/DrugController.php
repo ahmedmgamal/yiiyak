@@ -89,4 +89,8 @@ class DrugController extends \backend\modules\crud\controllers\base\DrugControll
 		}
 		return $this->render('create', ['model' => $model]);
         }
+
+
+
+
 }
