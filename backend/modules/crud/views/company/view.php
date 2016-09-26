@@ -62,7 +62,10 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
     <?php echo DetailView::widget([
 		'model' => $model,
 		'attributes' => [
-			'id',
+			[
+				'attribute' => 'id',
+				'value' => "PV-Company-" . hexdec($model->id / .2. "PVRadar")
+			],
 			'name',
 			'adderess',
 			'license_no',
@@ -253,7 +256,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 		'id' => 'relation-tabs',
 		'encodeLabels' => false,
 		'items' => [ [
-				'label'   => '<b class=""># '.$model->id.'</b>',
+				'label'   => '<b class=""># '.$model->name.'</b>',
 				'content' => $this->blocks['backend\modules\crud\models\Company'],
 				'active'  => true,
 			], [

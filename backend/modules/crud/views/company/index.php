@@ -55,10 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			'items' => [            [
 					'url' => ['/crud/drug/index'],
 					'label' => '<i class="glyphicon glyphicon-arrow-right">&nbsp;' . Yii::t('app', 'Drug') . '</i>',
-				],            [
-					'url' => ['/crud/user-company/index'],
-					'label' => '<i class="glyphicon glyphicon-arrow-right">&nbsp;' . Yii::t('app', 'User Company') . '</i>',
-				],            [
+				],[
 					'url' => ['/crud/user/index'],
 					'label' => '<i class="glyphicon glyphicon-arrow-right">&nbsp;' . Yii::t('app', 'User') . '</i>',
 				], ]
@@ -96,7 +93,15 @@ $this->params['breadcrumbs'][] = $this->title;
 				},
 				'contentOptions' => ['nowrap'=>'nowrap']
 			],
-			'id',
+			[
+				'attribute' => 'id',
+				'value' => function ($model){
+
+					$misleadingString = hexdec($model->id / .2 . "PVRadar");
+
+					return "PV-Company-{$misleadingString}" ;
+				}
+			],
 			'name',
 			'adderess',
 			'license_no',
