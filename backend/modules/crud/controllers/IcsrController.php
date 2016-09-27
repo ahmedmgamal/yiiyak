@@ -63,9 +63,9 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
 			} elseif (!\Yii::$app->request->isPost) {
 				$model->load($_GET);
 			}
-
-
-
+			else{
+                \Yii::$app->getSession()->setFlash('error', \Yii::t('app','patient with the same icsr already exist'));
+            }
 		} catch (\Exception $e) {
 			$msg = (isset($e->errorInfo[2]))?$e->errorInfo[2]:$e->getMessage();
 			$model->addError('_exception', $msg);
@@ -178,13 +178,14 @@ private function createTrailForExport ($icsrObj)
             ]);
         }
         else {
-
+            \Yii::$app->getSession()->setFlash('error', \Yii::t('app','patient with the same icsr already exist'));
 
             return $this->render('update', [
                 'model' => $model,
             ]);
         }
     }
+
 
 
     public function actionCheckDuplicateIcsr ()
@@ -206,6 +207,5 @@ private function createTrailForExport ($icsrObj)
             'status' => 'unique'
         ];
     }
-
 
 }
