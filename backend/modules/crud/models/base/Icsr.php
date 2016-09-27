@@ -320,34 +320,14 @@ public function getCompany() {
     }
 
 
-
-    public function beforeSave($insert)
+    public  function isDuplicate ()
     {
-
-        if (parent::beforeSave($insert)) {
-
-            if ($this->isNewRecord){
-                if (self::checkDuplication($this)) {
-                    return true;
-                }
-
-
-            }
-
-
-        }
-        return true;
-    }
-
-
-    public static function checkDuplication ($icsrObj)
-    {
-        $duplicatePatient = self::find()->where(['drug_id' =>$icsrObj->drug_id])
-            ->where(['patient_identifier' => $icsrObj->patient_identifier])
-            ->where(['patient_birth_date' => $icsrObj->patient_birth_date])
-            ->where(['patient_weight' => $icsrObj->patient_weight])
-            ->where(['patient_weight_unit' => $icsrObj->patient_weight_unit])
-            ->where(['reaction_country_id'=> $icsrObj->reaction_country_id] )
+        $duplicatePatient = self::find()->where(['drug_id' =>$this->drug_id])
+            ->andWhere(['patient_identifier' => $this->patient_identifier])
+            ->andWhere(['patient_birth_date' => $this->patient_birth_date])
+            ->andWhere(['patient_weight' => $this->patient_weight])
+            ->andWhere(['patient_weight_unit' => $this->patient_weight_unit])
+            ->andWhere(['reaction_country_id'=> $this->reaction_country_id] )
             ->one();
 
         if ($duplicatePatient){

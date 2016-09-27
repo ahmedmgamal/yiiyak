@@ -55,17 +55,32 @@ function changeDates ()
 $('#Icsr').on('beforeSubmit', function(e)
                 {
                     var form = $(this);
-                    alert( form.attr('action').substr(form.attr('action').lastIndexOf('/')));
-                    alert(form.serialize());
-                    if($(form).find('.has-error').length) {
+
+                    if ($(form).find('.has-error').length) {
                         return false;
                     }
-                    $.ajax({
-                        url: form.attr('action'),
-                        type: 'post',
-                        data: form.serialize(),
-                        success: function(data) {
-                            // do something ...
-                        }});
 
+                    var url = form.attr('action');
+                    var actionWithQueryParams = url.substr(url.lastIndexOf('/')+1);
+                    var actionName = actionWithQueryParams.substring(0,actionWithQueryParams.indexOf('?'));
+
+                    if (actionName == 'create') {
+                        var urlToController = url.substr(0, url.lastIndexOf('/'));
+
+                        $.ajax({
+                            url: urlToController + '/check-duplicate-icsr',
+                            type: 'post',
+                            data: form.serialize(),
+                            success: function (data) {
+                                if (data.status == 'duplicate') {
+                                    alert(data.message);
+                                }
+                            },
+                            error: function (err)
+                            {
+                                alert('something went wrong please try again');
+
+                            }
+                        });
+                    }
                 });
