@@ -9,12 +9,13 @@
 namespace backend\modules\crud\controllers;
 use backend\modules\crud\models\DrugPrescription;
 use yii\filters\AccessControl;
+use backend\modules\crud\traits;
 /**
  * This is the class for controller "DrugPrescriptionController".
  */
 class DrugPrescriptionController extends \backend\modules\crud\controllers\base\DrugPrescriptionController
 {
-
+    use traits\checkIcsrExported;
     public function behaviors() {
         return [
             'access' => [

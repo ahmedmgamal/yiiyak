@@ -75,15 +75,15 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
 
     public function actionExport($id) {
 
-        if ($this->isIcsrExported($id))
+        $icsr = $this->findModel($id);
+        $this->layout = false;
+
+        if ($icsr->isIcsrExported($icsr->id))
         {
             \Yii::$app->getSession()->setFlash('error', \Yii::t('app','This Icsr Exported Before'));
 
             return $this->redirect(\Yii::$app->request->referrer);
         }
-
-        $icsr = $this->findModel($id);
-        $this->layout = false;
 
         //set content type xml in response
         \Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
@@ -104,10 +104,7 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
         return $xml;
     }
 
-    private function isIcsrExported($icsr_id)
-    {
-        return  AuditTrail::findOne(['model_id' => $icsr_id , 'action' => 'EXPORT' ]);
-    }
+
 
 
     public function validateXML($xml, $dtd_realpath=null) {

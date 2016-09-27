@@ -9,11 +9,15 @@
 namespace backend\modules\crud\controllers;
 use yii\filters\AccessControl;
 use backend\modules\crud\models\IcsrReporter;
+
+use backend\modules\crud\traits;
+
 /**
  * This is the class for controller "IcsrReporterController".
  */
 class IcsrReporterController extends \backend\modules\crud\controllers\base\IcsrReporterController
 {
+    use traits\checkIcsrExported;
     /**
      *
      * @inheritdoc
@@ -36,4 +40,8 @@ class IcsrReporterController extends \backend\modules\crud\controllers\base\Icsr
             ]
         ];
     }
+
+
+
+
 }
