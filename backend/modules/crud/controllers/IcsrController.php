@@ -10,6 +10,7 @@ namespace backend\modules\crud\controllers;
 use backend\modules\crud\models\Icsr;
 use backend\modules\crud\models\search\Icsr as IcsrSearch;
 use backend\modules\crud\models\DrugPrescription as DrugPrescription;
+use bedezign\yii2\audit\models\AuditTrail;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\helpers\Url;
@@ -63,6 +64,8 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
 				$model->load($_GET);
 			}
 
+
+
 		} catch (\Exception $e) {
 			$msg = (isset($e->errorInfo[2]))?$e->errorInfo[2]:$e->getMessage();
 			$model->addError('_exception', $msg);
@@ -70,25 +73,42 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
 		return $this->render('create', ['model' => $model]);
 	}
 
-        public function actionExport($id) {
+    public function actionExport($id) {
+
+        if ($this->isIcsrExported($id))
+        {
+            \Yii::$app->getSession()->setFlash('error', \Yii::t('app','This Icsr Exported Before'));
+
+            return $this->redirect(\Yii::$app->request->referrer);
+        }
+
         $icsr = $this->findModel($id);
-           //$model->$icsr->getIcsrReporters()->;
-           
         $this->layout = false;
 
-   //set content type xml in response
-    \Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
-    $headers = \Yii::$app->response->headers;
-    $headers->add('Content-Type', 'text/xml');
-     $xml = $this->renderPartial('export', [
-         'model' => $icsr,
-    ]);
- 
-        $dtd = \Yii::$app->getModule('crud')->getViewPath().'/icsr/ich-icsr-v2_1.dtd';
-        $this->validateXML($xml,$dtd );
-         return $xml;
+        //set content type xml in response
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
+        $headers = \Yii::$app->response->headers;
+        $headers->add('Content-Type', 'text/xml');
 
+        $xml = $this->renderPartial('export', [
+            'model' => $icsr,
+        ]);
+
+        $dtd = \Yii::$app->getModule('crud')->getViewPath().'/icsr/ich-icsr-v2_1.dtd';
+
+        if( $this->validateXML($xml,$dtd ) )
+        {
+            $this->createTrailForExport($icsr);
         }
+
+        return $xml;
+    }
+
+    private function isIcsrExported($icsr_id)
+    {
+        return  AuditTrail::findOne(['model_id' => $icsr_id , 'action' => 'EXPORT' ]);
+    }
+
 
     public function validateXML($xml, $dtd_realpath=null) {
     $xml ='<!DOCTYPE ichicsr SYSTEM "ich-icsr-v2_1.dtd">\n'.$xml;
@@ -117,7 +137,7 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
     // Enable user error handling
     libxml_use_internal_errors(true);
     if (@$doc->validate()) {
-       // echo "Valid!\n";
+       return 1;
     } else {
         echo "Not valid:\n";
         file_put_contents(\Yii::$app->getModule('crud')->getViewPath().'/icsr/invalid.xml', $xml);
@@ -127,6 +147,16 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
         }
         die();
     }
+}
+
+private function createTrailForExport ($icsrObj)
+{
+    $audit = new AuditTrail();
+    $audit->user_id = \Yii::$app->user->id;
+    $audit->action = 'EXPORT';
+    $audit->model = \backend\modules\crud\models\Icsr::className();
+    $audit->model_id = $icsrObj->id;
+    $audit->save();
 }
 
 
@@ -141,7 +171,6 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
         $model = $this->findModel($id);
 
         if ($model->load($_POST) && $model->save()) {
-
             return $this->redirect(Url::previous());
         } elseif (!\Yii::$app->request->isPost) {
             return $this->render('update', [
@@ -150,40 +179,12 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
         }
         else {
 
+
             return $this->render('update', [
                 'model' => $model,
             ]);
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     public function actionCheckDuplicateIcsr ()
@@ -192,17 +193,19 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
 
         \Yii::$app->response->format = 'json';
 
-            if ($model->load($_POST) &&  $model->isDuplicate())
-            {
-                return  [
-                    'status' => 'duplicate',
-                    'message' => 'this icsr is duplicated but it will get inserted',
+        if ($model->load($_POST) &&  $model->isDuplicate())
+        {
+            return  [
+                'status' => 'duplicate',
+                'message' => 'this icsr is duplicated but it will get inserted',
 
-                ];
-            }
+            ];
+        }
 
-         return [
-             'status' => 'unique'
-         ];
+        return [
+            'status' => 'unique'
+        ];
     }
+
+
 }
