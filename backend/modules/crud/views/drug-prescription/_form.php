@@ -31,6 +31,7 @@ use yii\helpers\ArrayHelper;
         <p>
             
  <?php  echo       Html::activeHiddenInput($model, 'icsr_id') ; ?>
+ <?php  echo       Html::activeHiddenInput($model, 'drug_id') ; ?>
 			<?=                         $form->field($model, 'drug_role')->dropDownList(
                             
                             \yii\helpers\ArrayHelper::map(backend\modules\crud\models\LkpDrugRole::find()->all(), 'id', 'name')

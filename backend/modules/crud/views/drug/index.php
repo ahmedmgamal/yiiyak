@@ -66,7 +66,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 'visibleButtons' => [ 'delete' => false]
 			],
 
+			[
+				'attribute' => 'id',
+				'value' => function ($model,$key,$index){
+					return ++$index;
+				}
 
+			],
 			'generic_name',
 			'trade_name',
 			'composition',

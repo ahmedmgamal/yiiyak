@@ -13,9 +13,9 @@ class IcsrEvent extends BaseIcsrEvent
     use traits\checkAccess;
     public function attributeLabels()
     {
-        return [
+        return array_merge(parent::attributeLabels(), [
             'event_date' => Yii::t('app', 'Event Start Date'),
-        ];
+        ]);
     }
 
     public function behaviors()

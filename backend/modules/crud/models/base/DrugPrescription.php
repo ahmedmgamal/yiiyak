@@ -98,10 +98,10 @@ abstract class DrugPrescription extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'drug_id' => Yii::t('app', 'Drug ID'),
-            'icsr_id' => Yii::t('app', 'Icsr ID'),
+            'drug_id' => Yii::t('app', 'Drug '),
+            'icsr_id' => Yii::t('app', 'Icsr '),
             'dose' => Yii::t('app', 'Dose'),
-            'frequency_lkp_id' => Yii::t('app', 'Frequency Lkp ID'),
+            'frequency_lkp_id' => Yii::t('app', 'Frequency '),
             'expiration_date' => Yii::t('app', 'Expiration Date'),
             'lot_no' => Yii::t('app', 'Lot No'),
             'use_date_start' => Yii::t('app', 'Use Date Start'),
