@@ -4,13 +4,15 @@ namespace backend\modules\crud\models;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
+use yii\helpers\StringHelper;
 use yii\web\IdentityInterface;
 use backend\modules\crud\models\base\User as BaseUser;
+use backend\modules\crud\traits;
 
 class User extends BaseUser implements IdentityInterface
 {
 
-
+    use traits\checkLimit;
     /**
      * @inheritdoc
      */
@@ -172,7 +174,6 @@ class User extends BaseUser implements IdentityInterface
         if (parent::beforeSave($insert)) {
             // in case of insertion
             if ($this->isNewRecord) {
-
                 $this->generateAuthKey();
                 $this->setPassword($this->password_hash);
                 $this->generatePasswordResetToken();
@@ -185,6 +186,8 @@ class User extends BaseUser implements IdentityInterface
 
 
     }
+
+
 
     public static function checkSubscription ($user_id) {
         $user_obj = self::findOne($user_id);

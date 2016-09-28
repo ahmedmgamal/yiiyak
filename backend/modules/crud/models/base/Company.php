@@ -5,6 +5,7 @@
 namespace backend\modules\crud\models\base;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the base-model class for table "company".
@@ -129,5 +130,19 @@ abstract class Company extends \yii\db\ActiveRecord
         return $this->hasOne(\backend\modules\crud\models\LkpPlan::className(),['id' =>'plan_id']);
     }
 
+    public function getIcsrs(){
 
+      $companyDrugs = $this->getDrugs()->with('icsrs')->all();
+
+        $icsrsArr = [];
+        foreach ($companyDrugs as $drug)
+        {
+          $icsrsArr =   ArrayHelper::merge($icsrsArr,$drug->icsrs);
+
+        }
+
+
+        return $icsrsArr;
+
+    }
 }
