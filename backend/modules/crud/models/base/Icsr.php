@@ -98,7 +98,7 @@ abstract class Icsr extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['drug_id'], 'required'],
+            [['drug_id','reaction_country_id'], 'required'],
             [['drug_id', 'reaction_country_id'], 'integer'],
             [['patient_age', 'patient_weight'], 'number'],
             [['patient_age_unit', 'patient_weight_unit', 'report_type'], 'string'],
@@ -321,18 +321,16 @@ public function getCompany() {
 
 
 
-    public function beforeSave($insert)
-    {
-        if (self::checkDuplication($this->drug_id,$this->patient_identifier)){
-            return false;
-        }
-        return true;
-    }
 
-
-    public static function checkDuplication ($drug_id,$patient_identifier)
+    public  function isDuplicate ()
     {
-        $duplicatePatient = self::find()->where(['drug_id' => $drug_id])->where(['patient_identifier' => $patient_identifier])->one();
+        $duplicatePatient = self::find()->where(['drug_id' =>$this->drug_id])
+            ->andWhere(['patient_identifier' => $this->patient_identifier])
+            ->andWhere(['patient_birth_date' => $this->patient_birth_date])
+            ->andWhere(['patient_weight' => $this->patient_weight])
+            ->andWhere(['patient_weight_unit' => $this->patient_weight_unit])
+            ->andWhere(['reaction_country_id'=> $this->reaction_country_id] )
+            ->one();
 
         if ($duplicatePatient){
             return true;

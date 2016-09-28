@@ -33,7 +33,7 @@ class AuditTrailBehaviorChild extends AuditTrailBehavior{
                 {
                     $attributes[$field] =   $this->getCommaSeparatedString($newOverRideValues,$queryParams['return_field']);
                 }
-                else{
+                elseif(count($newOverRideValues) == 1){
 
                     $attributes[$field] = $newOverRideValues[0][$queryParams['return_field']];
                 }
