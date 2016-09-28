@@ -9,11 +9,14 @@
 namespace backend\modules\crud\controllers;
 use yii\filters\AccessControl;
 use backend\modules\crud\models\IcsrEvent;
+use backend\modules\crud\traits;
 /**
  * This is the class for controller "IcsrEventController".
  */
 class IcsrEventController extends \backend\modules\crud\controllers\base\IcsrEventController
 {
+
+    use traits\checkIcsrExported;
     public function behaviors() {
         return [
             'access' => [

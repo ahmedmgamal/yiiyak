@@ -3,6 +3,7 @@
 namespace backend\modules\crud\models;
 
 use backend\modules\crud\overrides\TrailChild\AuditTrailChild;
+use bedezign\yii2\audit\models\AuditTrail;
 use Yii;
 use \backend\modules\crud\models\base\Icsr as BaseIcsr;
 use \backend\modules\crud\traits;
@@ -88,7 +89,10 @@ class Icsr extends BaseIcsr
     }
 
 
-
+public function  isIcsrExported($icsr_id)
+    {
+        return  AuditTrail::findOne(['model_id' => $icsr_id , 'action' => 'EXPORT' ]);
+    }
 
 
 }

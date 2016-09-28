@@ -7,14 +7,16 @@
 
 
 namespace backend\modules\crud\controllers;
+use backend\modules\crud\models\Icsr;
 use yii\filters\AccessControl;
 use backend\modules\crud\models\IcsrTest;
+use backend\modules\crud\traits;
 /**
  * This is the class for controller "IcsrTestController".
  */
 class IcsrTestController extends \backend\modules\crud\controllers\base\IcsrTestController
 {
-
+    use traits\checkIcsrExported;
     /**
      *
      * @inheritdoc
@@ -39,5 +41,8 @@ class IcsrTestController extends \backend\modules\crud\controllers\base\IcsrTest
             ]
         ];
     }
+
+
+
 
 }
