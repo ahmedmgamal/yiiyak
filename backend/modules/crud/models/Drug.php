@@ -12,6 +12,8 @@ use bedezign\yii2\audit\models\AuditTrail;
 class Drug extends BaseDrug
 {
     use traits\checkAccess;
+    use traits\checkLimit;
+
     public function attributeHints()
     {
         return array_merge(

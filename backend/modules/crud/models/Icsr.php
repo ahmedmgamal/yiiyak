@@ -16,6 +16,7 @@ use yii\helpers\ArrayHelper;
 class Icsr extends BaseIcsr
 {
     use traits\checkAccess;
+    use traits\checkLimit;
     /**
      * @inheritdoc
      */

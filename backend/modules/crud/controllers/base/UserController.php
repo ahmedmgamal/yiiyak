@@ -104,8 +104,17 @@ class UserController extends Controller
 		$model = new User;
 
 		try {
-			if ($model->load($_POST) && $model->save()) {
-				return $this->redirect(Url::previous());
+			if ($model->load($_POST)) {
+
+			    if (!($model->isBeyondLimit()) && $model->save()) {
+                    return $this->redirect(Url::previous());
+                }
+                else
+                    {
+                        \Yii::$app->getSession()->setFlash('error', \Yii::t('app',"you have exceeded your users limit upgrade {$model->company->name} plan to add more users "));
+
+                    }
+
 			} elseif (!\Yii::$app->request->isPost) {
 				$model->load($_GET);
 			}

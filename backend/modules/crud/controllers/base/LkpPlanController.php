@@ -118,6 +118,10 @@ class LkpPlanController extends Controller
             $this->findModel($id)->delete();
         } catch (\Exception $e) {
             $msg = (isset($e->errorInfo[2]))?$e->errorInfo[2]:$e->getMessage();
+            if ($e->getName() == 'Integrity constraint violation')
+            {
+                $msg = 'Delete Company Or Change It\'s Plan First Before Deleting The Plan';
+            }
             \Yii::$app->getSession()->addFlash('error', $msg);
             return $this->redirect(Url::previous());
         }
