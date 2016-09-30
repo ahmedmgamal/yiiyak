@@ -71,10 +71,24 @@ class LkpPlanController extends Controller
     {
         $model = new LkpPlan;
         $lkpLimitsModel = new LkpLimits;
+        $request = \Yii::$app->request;
+
+        if ($request->isPost){
+            $connection = \Yii::$app->db;
+            $transaction = $connection->beginTransaction();
+        }
 
         try {
 
-            if ($model->load($_POST) && $model->save()  && $model->saveLimits($_POST['LkpPlan']['limits'])) {
+            if ($model->load($_POST) && $model->save()  ) {
+
+                if (!($model->saveLimits($_POST['LkpPlan']['limits'])))
+                {
+                    \Yii::$app->getSession()->setFlash('error', \Yii::t('app','All limits must be filled with values'));
+
+                    return $this->redirect(\Yii::$app->request->referrer);
+                }
+                $transaction->commit();
                 return $this->redirect(['view', 'id' => $model->id]);
             } elseif (!\Yii::$app->request->isPost) {
                 $model->load($_GET);
@@ -94,16 +108,8 @@ class LkpPlanController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
-        $lkpLimitsModel = new LkpLimits;
-        if ($model->load($_POST) && $model->save() && $model->saveLimits($_POST['LkpPlan']['limits']) ) {
-            return $this->redirect(Url::previous());
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-                'lkpLimitsModel' => $lkpLimitsModel
-            ]);
-        }
+        return $this->redirect(['view', 'id' => $id]);
+
     }
 
     /**
@@ -114,31 +120,7 @@ class LkpPlanController extends Controller
      */
     public function actionDelete($id)
     {
-        try {
-            $this->findModel($id)->delete();
-        } catch (\Exception $e) {
-            $msg = (isset($e->errorInfo[2]))?$e->errorInfo[2]:$e->getMessage();
-            if ($e->getName() == 'Integrity constraint violation')
-            {
-                $msg = 'Delete Company Or Change It\'s Plan First Before Deleting The Plan';
-            }
-            \Yii::$app->getSession()->addFlash('error', $msg);
-            return $this->redirect(Url::previous());
-        }
-
-// TODO: improve detection
-        $isPivot = strstr('$id',',');
-        if ($isPivot == true) {
-            return $this->redirect(Url::previous());
-        } elseif (isset(\Yii::$app->session['__crudReturnUrl']) && \Yii::$app->session['__crudReturnUrl'] != '/') {
-            Url::remember(null);
-            $url = \Yii::$app->session['__crudReturnUrl'];
-            \Yii::$app->session['__crudReturnUrl'] = null;
-
-            return $this->redirect($url);
-        } else {
-            return $this->redirect(['index']);
-        }
+        return $this->redirect(['view', 'id' => $id]);
     }
 
     /**

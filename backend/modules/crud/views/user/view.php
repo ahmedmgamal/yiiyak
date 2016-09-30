@@ -20,9 +20,9 @@ use dmstr\bootstrap\Tabs;
  */
 $copyParams = $model->attributes;
 
-$this->title = $model->getAliasModel() . $model->id;
+$this->title = $model->getAliasModel() . $model->username;
 $this->params['breadcrumbs'][] = ['label' => $model->getAliasModel(true), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => (string)$model->id, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => (string)$model->username, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 ?>
 <div class="giiant-crud user-view">
@@ -49,9 +49,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
             <?php echo Html::a('<span class="glyphicon glyphicon-copy"></span> ' . Yii::t('app', 'Copy'), ['create', 'id' => $model->id, 'User            '=>$copyParams], ['class' => 'btn btn-success']) ?>
             <?php echo Html::a('<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('app', 'New'), ['create'], ['class' => 'btn btn-success']) ?>
         </div>
-        <div class="pull-right">
-            <?php echo Html::a('<span class="glyphicon glyphicon-list"></span> ' . Yii::t('app', 'Full list'), ['index'], ['class'=>'btn btn-default']) ?>
-        </div>
+
 
     </div>
 
@@ -80,12 +78,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 
     <hr/>
 
-    <?php echo Html::a('<span class="glyphicon glyphicon-trash"></span> ' . Yii::t('app', 'Delete'), ['delete', 'id' => $model->id],
-	[
-		'class' => 'btn btn-danger',
-		'data-confirm' => '' . Yii::t('app', 'Are you sure to delete this item?') . '',
-		'data-method' => 'post',
-	]); ?>
+
     <?php $this->endBlock(); ?>
 
 

@@ -38,28 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="pull-right">
 
 
-            <?php echo
-\yii\bootstrap\ButtonDropdown::widget(
-	[
-		'id' => 'giiant-relations',
-		'encodeLabel' => false,
-		'label' => '<span class="glyphicon glyphicon-paperclip"></span> ' . Yii::t('app', 'Relations'),
-		'dropdown' => [
-			'options' => [
-				'class' => 'dropdown-menu-right'
-			],
-			'encodeLabels' => false,
-			'items' => [[
-					'url' => ['/crud/company/index'],
-					'label' => '<i class="glyphicon glyphicon-arrow-right">&nbsp;' . Yii::t('app', 'Company') . '</i>',
-				], ]
-		],
-		'options' => [
-			'class' => 'btn-default'
-		]
-	]
-);
-?>        </div>
+                    </div>
     </div>
 
 
@@ -84,13 +63,14 @@ $this->params['breadcrumbs'][] = $this->title;
 					$params[0] = \Yii::$app->controller->id ? \Yii::$app->controller->id . '/' . $action : $action;
 					return Url::toRoute($params);
 				},
-				'contentOptions' => ['nowrap'=>'nowrap']
+				'contentOptions' => ['nowrap'=>'nowrap'],
+				'visibleButtons' => [ 'delete' => false]
 			],
 			[
 				'attribute' => 'id',
 				'value' => function ($model){
 
-					$misleadingString = hexdec($model->id / .2 . "PVRadar");
+					$misleadingString = hexdec($model->id / .5 . "PVRadar");
 
 					return "PV-User-{$misleadingString}" ;
 				}

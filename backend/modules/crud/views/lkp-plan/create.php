@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="giiant-crud lkp-plan-create">
 
     <h1>
-        <?= Yii::t('app', 'LkpPlan') ?>        <small>
+        <?= Yii::t('app', 'Plan') ?>        <small>
                         <?= $model->name ?>        </small>
     </h1>
 

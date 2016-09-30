@@ -7,7 +7,11 @@ trait checkAccess {
 
     public static function checkAccess($user_id,$obj_id)
     {
-
+        $userRole = \Yii::$app->authManager->getRolesByUser(\Yii::$app->user->id);
+        if (isset($userRole['admin']))
+        {
+            return false;
+        }
         if (isset($obj_id) && !empty($obj_id))
         {
             $company = self::findOne($obj_id)->company;

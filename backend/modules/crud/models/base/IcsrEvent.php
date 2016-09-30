@@ -69,14 +69,12 @@ abstract class IcsrEvent extends \yii\db\ActiveRecord
     {
         return [
             [['icsr_id'], 'required'],
-            [['icsr_id', 'meddra_llt_id', 'meddra_pt_id','lkp_icsr_eventoutcome_id'], 'integer'],
+            [['icsr_id','lkp_icsr_eventoutcome_id'], 'integer'],
             [['event_date', 'event_end_date'], 'safe'],
             [['event_outcome'], 'string'],
             [['event_description'], 'string', 'max' => 512],
             [['meddra_llt_text', 'meddra_pt_text'], 'string', 'max' => 45],
-            [['meddra_llt_id'], 'exist', 'skipOnError' => true, 'targetClass' => LkpMeddraLlt::className(), 'targetAttribute' => ['meddra_llt_id' => 'id']],
-            [['meddra_pt_id'], 'exist', 'skipOnError' => true, 'targetClass' => LkpMeddraPt::className(), 'targetAttribute' => ['meddra_pt_id' => 'id']],
-            [['icsr_id'], 'exist', 'skipOnError' => true, 'targetClass' => Icsr::className(), 'targetAttribute' => ['icsr_id' => 'id']],
+             [['icsr_id'], 'exist', 'skipOnError' => true, 'targetClass' => Icsr::className(), 'targetAttribute' => ['icsr_id' => 'id']],
             ['event_outcome', 'in', 'range' => [
                     self::EVENT_OUTCOME_RECOVEREDRESOLVED,
                     self::EVENT_OUTCOME_RECOVERINGRESOLVING,
@@ -98,13 +96,11 @@ abstract class IcsrEvent extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'icsr_id' => Yii::t('app', 'Icsr '),
             'event_description' => Yii::t('app', 'Event Description'),
-            'meddra_llt_id' => Yii::t('app', 'Meddra Llt '),
-            'meddra_pt_id' => Yii::t('app', 'Meddra Pt '),
-            'event_date' => Yii::t('app', 'Event Date'),
+              'event_date' => Yii::t('app', 'Event Date'),
             'event_end_date' => Yii::t('app', 'Event End Date'),
             'event_outcome' => Yii::t('app', 'Event Outcome'),
-            'meddra_llt_text' => Yii::t('app', 'Meddra Llt Text'),
-            'meddra_pt_text' => Yii::t('app', 'Meddra Pt Text'),
+            'meddra_llt_text' => Yii::t('app', 'Meddra Llt '),
+            'meddra_pt_text' => Yii::t('app', 'Meddra Pt '),
             'lkp_icsr_eventoutcome_id' => Yii::t('app', 'Event OutCome'),
         ];
     }
@@ -121,10 +117,7 @@ abstract class IcsrEvent extends \yii\db\ActiveRecord
             'icsr_id' => Yii::t('app', 'Icsr '),
             'event_description' => Yii::t('app', '    B.2.i.0 Reaction or event as reported by the primary source
 '),
-            'meddra_llt_id' => Yii::t('app', 'B.2.i.1 Reaction or event in MedDRA terminology (Lowest Level Term)
-'),
-            'meddra_pt_id' => Yii::t('app', 'B.2.i.2 Reaction or event in MedDRA terminology (Preferred Term)'),
-            'event_date' => Yii::t('app', 'B.2.i.4 Date of start of reaction or event'),
+                'event_date' => Yii::t('app', 'B.2.i.4 Date of start of reaction or event'),
             'event_end_date' => Yii::t('app', 'B.2.i.5 Date of end of reaction or event'),
             'event_outcome' => Yii::t('app', 'B.2.i.8 Outcome of reaction or event at the time of last observation'),
             'meddra_llt_text' => Yii::t('app', 'B.2.i.1 Reaction or event in MedDRA terminology (Lowest Level Term)'),

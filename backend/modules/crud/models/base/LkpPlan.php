@@ -80,7 +80,14 @@ abstract class LkpPlan extends \yii\db\ActiveRecord
             $planLimitObj->plan_id = $this->id;
 
             $planLimitObj->limit_id = $limitId;
-             $planLimitObj->limit = $value;
+
+            if (isset($value) && !empty($value)) {
+                $planLimitObj->limit = $value;
+            }
+            else
+            {
+                return 0;
+            }
 
               $similarObj = $planLimitObj->getSimilar();
 

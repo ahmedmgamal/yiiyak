@@ -15,7 +15,7 @@ trait checkLimit {
 
         $limitNamePluralized = Inflector::pluralize($limitName);
 
-        if (count($this->company->$limitNamePluralized) > $limitAmount)
+        if (count($this->company->$limitNamePluralized) >= $limitAmount)
         {
 
             return 1;

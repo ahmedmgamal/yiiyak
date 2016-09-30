@@ -7,7 +7,7 @@ use yii\helpers\Html;
 * @var backend\modules\crud\models\LkpPlan $model
 */
 
-$this->title = Yii::t('app', 'LkpPlan') . $model->name . ', ' . 'Edit';
+$this->title = Yii::t('app', 'Plan') . $model->name . ', ' . 'Edit';
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'LkpPlans'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => (string)$model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Edit';
@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = 'Edit';
 <div class="giiant-crud lkp-plan-update">
 
     <h1>
-        <?= Yii::t('app', 'LkpPlan') ?>
+        <?= Yii::t('app', 'Plan') ?>
         <small>
                         <?= $model->name ?>        </small>
     </h1>

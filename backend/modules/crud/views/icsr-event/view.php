@@ -42,9 +42,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
             <?= Html::a('<span class="glyphicon glyphicon-copy"></span> ' . Yii::t('app', 'Copy'), ['create', 'id' => $model->id, 'icsr_id' => $model->icsr_id, 'IcsrEvent            '=>$copyParams],['class' => 'btn btn-success']) ?>
             <?= Html::a('<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('app', 'New'), ['create'], ['class' => 'btn btn-success']) ?>
         </div>
-        <div class="pull-right">
-            <?= Html::a('<span class="glyphicon glyphicon-list"></span> ' . Yii::t('app', 'Full list'), ['index'], ['class'=>'btn btn-default']) ?>
-        </div>
+
 
     </div>
 

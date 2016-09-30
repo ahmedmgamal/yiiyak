@@ -13,7 +13,7 @@ use dmstr\bootstrap\Tabs;
 */
 $copyParams = $model->attributes;
 
-$this->title = Yii::t('app', 'LkpPlan');
+$this->title = Yii::t('app', 'Plan');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'LkpPlans'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => (string)$model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'View';
@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = 'View';
     <?php endif; ?>
 
     <h1>
-        <?= Yii::t('app', 'LkpPlan') ?>        <small>
+        <?= Yii::t('app', 'Plan') ?>        <small>
             <?= $model->name ?>        </small>
     </h1>
 
@@ -39,15 +39,9 @@ $this->params['breadcrumbs'][] = 'View';
 
         <!-- menu buttons -->
         <div class='pull-left'>
-            <?= Html::a(
-            '<span class="glyphicon glyphicon-pencil"></span> ' . 'Edit',
-            [ 'update', 'id' => $model->id],
-            ['class' => 'btn btn-info']) ?>
 
-            <?= Html::a(
-            '<span class="glyphicon glyphicon-copy"></span> ' . 'Copy',
-            ['create', 'id' => $model->id, 'LkpPlan'=>$copyParams],
-            ['class' => 'btn btn-success']) ?>
+
+
 
             <?= Html::a(
             '<span class="glyphicon glyphicon-plus"></span> ' . 'New',
@@ -55,10 +49,6 @@ $this->params['breadcrumbs'][] = 'View';
             ['class' => 'btn btn-success']) ?>
         </div>
 
-        <div class="pull-right">
-            <?= Html::a('<span class="glyphicon glyphicon-list"></span> '
-            . 'Full list', ['index'], ['class'=>'btn btn-default']) ?>
-        </div>
 
     </div>
 
@@ -76,10 +66,7 @@ $this->params['breadcrumbs'][] = 'View';
             'label' => 'drug',
             'value' =>  $model->getOneLimitAmount('drug'),
         ],
-        [
-            'label' => 'icsr',
-            'value' =>  $model->getOneLimitAmount('icsr'),
-        ],
+
         [
             'label' => 'user',
             'value' =>  $model->getOneLimitAmount('user'),
@@ -91,12 +78,6 @@ $this->params['breadcrumbs'][] = 'View';
     
     <hr/>
 
-    <?= Html::a('<span class="glyphicon glyphicon-trash"></span> ' . 'Delete', ['delete', 'id' => $model->id],
-    [
-    'class' => 'btn btn-danger',
-    'data-confirm' => '' . 'Are you sure to delete this item?' . '',
-    'data-method' => 'post',
-    ]); ?>
     <?php $this->endBlock(); ?>
 
 
@@ -154,7 +135,7 @@ $this->params['breadcrumbs'][] = 'View';
                      'id' => 'relation-tabs',
                      'encodeLabels' => false,
                      'items' => [ [
-    'label'   => '<b class=""># '.$model->id.'</b>',
+    'label'   => '<b class=""># '.$model->name.'</b>',
     'content' => $this->blocks['backend\modules\crud\models\LkpPlan'],
     'active'  => true,
 ],[
