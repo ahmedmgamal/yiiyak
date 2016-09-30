@@ -17,7 +17,6 @@ use yii\helpers\ArrayHelper;
 class Icsr extends BaseIcsr
 {
     use traits\checkAccess;
-    use traits\checkLimit;
     /**
      * @inheritdoc
      */
@@ -45,10 +44,14 @@ class Icsr extends BaseIcsr
     {
         return [
             'AuditTrailBehavior' => [
-                'class' => 'bedezign\yii2\audit\AuditTrailBehavior',
-                'ignored' => ['id','drug_id'],
-
-            ]
+                'class' => 'backend\modules\crud\overrides\TrailChild\AuditTrailBehaviorChild',
+                'ignored' => ['id','icsr_id'],
+                'overRide' => ['patient_age_unit' => ['table_name' => 'lkp_age_unit' , 'search_field' => 'id' ,'return_field' => 'name'],
+                    'patient_weight_unit'=> ['table_name' => 'lkp_weight_unit','search_field' => 'id', 'return_field' => 'name'],
+                    'reaction_country_id'=> ['table_name' => 'lkp_icsr_eventoutcome' , 'search_field' => 'id', 'return_field' => 'name'],
+                    'report_type' => ['table_name' => 'lkp_icsr_type','search_field' => 'id' , 'return_field' => 'description']
+                ]
+                ]
         ];
     }
     public function getIcsrTrails()

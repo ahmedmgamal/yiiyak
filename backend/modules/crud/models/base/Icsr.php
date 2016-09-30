@@ -98,7 +98,7 @@ abstract class Icsr extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['drug_id','reaction_country_id'], 'required'],
+            [['drug_id','reaction_country_id','report_type'], 'required'],
             [['drug_id', 'reaction_country_id'], 'integer'],
             [['patient_age', 'patient_weight'], 'number'],
             [['patient_age_unit', 'patient_weight_unit', 'report_type'], 'string'],

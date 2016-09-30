@@ -54,7 +54,7 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
                 //$_POST['Icsr']
 		try {
 			if ($model->load($_POST) ) {
-                if (!($model->isBeyondLimit()) && $model->save()) {
+                if ( $model->save()) {
                     $pres = new DrugPrescription;
                     $pres->drug_id =($model->getDrug()->one()->id);
                     $pres->drug_role = '1';//value of suspect
@@ -62,12 +62,6 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
                     $pres->save();
                     return $this->redirect(Url::previous());
                 }
-                if ($model->isBeyondLimit())
-                {
-                    \Yii::$app->getSession()->setFlash('error', \Yii::t('app',"you have exceeded your icsrs limit upgrade {$model->company->name} plan to add more users "));
-
-                }
-
 
 			} elseif (!\Yii::$app->request->isPost) {
 				$model->load($_GET);

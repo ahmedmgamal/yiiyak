@@ -54,6 +54,7 @@ class DrugPrescription extends BaseDrugPrescription
                 'overRide' => [
                     'lkp_drug_action_id' => ['table_name' => 'lkp_drug_action' , 'search_field' => 'id' ,'return_field' => 'name'],
                     'drug_role'=> ['table_name' => 'lkp_drug_role','search_field' => 'id', 'return_field' => 'name'],
+                    'duration_of_use_unit' => ['table_name' => 'lkp_time_unit','search_field' => 'id' , 'return_field' => 'name']
                 ]
 
             ]

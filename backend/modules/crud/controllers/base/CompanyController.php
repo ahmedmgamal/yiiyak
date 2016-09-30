@@ -92,7 +92,7 @@ class CompanyController extends Controller
         }
 
 		try {
-			if ($model->load($_POST) && $model->save() && $userModel->load($_POST) &&$userModel->save()) {
+			if ($model->load($_POST) && $model->save() && $userModel->load($_POST) ) {
 			   $userModel->company_id = $model->id;
                 $userModel->save();
                 $transaction->commit();

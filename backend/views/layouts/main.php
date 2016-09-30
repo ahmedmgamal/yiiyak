@@ -52,7 +52,10 @@ AppAsset::register($this);
             $menuItems[] = ['label' => 'Plans' , 'url' => ['/crud/lkp-plan/index']];
         }
 
-        $menuItems [] =  ['label' => 'Products', 'url' => ['/crud/drug/index']];
+        $userRole = \Yii::$app->authManager->getRolesByUser(\Yii::$app->user->id);
+        if (\Yii::$app->user->can('/crud/drug/index') && !isset($userRole['admin'])){
+            $menuItems [] =  ['label' => 'Products', 'url' => ['/crud/drug/index']];
+        }
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(

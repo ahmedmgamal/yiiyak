@@ -15,7 +15,7 @@ $actionColumnTemplate = implode(' ', $actionColumnTemplates);
     $actionColumnTemplateString = $actionColumnTemplate;
 } else {
 Yii::$app->view->params['pageButtons'] = Html::a('<span class="glyphicon glyphicon-plus"></span> ' . 'New', ['create'], ['class' => 'btn btn-success']);
-    $actionColumnTemplateString = "{view} {update} {delete}";
+    $actionColumnTemplateString = "{view} ";
 }
 ?>
 <div class="giiant-crud lkp-plan-index">
@@ -26,7 +26,7 @@ Yii::$app->view->params['pageButtons'] = Html::a('<span class="glyphicon glyphic
     <?php \yii\widgets\Pjax::begin(['id'=>'pjax-main', 'enableReplaceState'=> false, 'linkSelector'=>'#pjax-main ul.pagination a, th a', 'clientOptions' => ['pjax:success'=>'function(){alert("yo")}']]) ?>
 
     <h1>
-        <?= Yii::t('app', 'LkpPlans') ?>        <small>
+        <?= Yii::t('app', 'Plans') ?>        <small>
             List
         </small>
     </h1>
@@ -35,31 +35,7 @@ Yii::$app->view->params['pageButtons'] = Html::a('<span class="glyphicon glyphic
             <?= Html::a('<span class="glyphicon glyphicon-plus"></span> ' . 'New', ['create'], ['class' => 'btn btn-success']) ?>
         </div>
 
-        <div class="pull-right">
 
-                                                    
-            <?= 
-            \yii\bootstrap\ButtonDropdown::widget(
-            [
-            'id' => 'giiant-relations',
-            'encodeLabel' => false,
-            'label' => '<span class="glyphicon glyphicon-paperclip"></span> ' . 'Relations',
-            'dropdown' => [
-            'options' => [
-            'class' => 'dropdown-menu-right'
-            ],
-            'encodeLabels' => false,
-            'items' => [            [
-                'url' => ['company/index'],
-                'label' => '<i class="glyphicon glyphicon-arrow-right">&nbsp;' . 'Company' . '</i>',
-            ],]
-            ],
-            'options' => [
-            'class' => 'btn-default'
-            ]
-            ]
-            );
-            ?>        </div>
     </div>
 
     <hr />
@@ -97,14 +73,7 @@ Yii::$app->view->params['pageButtons'] = Html::a('<span class="glyphicon glyphic
                 }
 
             ],
-            [
-                'label' => 'icsr',
-                'value' => function ($model){
-                    return $model->getOneLimitAmount('icsr');
 
-                }
-
-            ],
             [
             'label' => 'user',
             'value' => function ($model){
