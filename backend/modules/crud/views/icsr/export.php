@@ -32,7 +32,7 @@ use dmstr\bootstrap\Tabs;
 		<messagedate><?php echo date("Ymd"); ?> </messagedate>
 	</ichicsrmessageheader>
 	<safetyreport>
-		<safetyreportversion>1.0</safetyreportversion>
+		<safetyreportversion><?php echo $model->getVersion(); ?></safetyreportversion>
 
 		<!--A.1.0.1 Sender’s (case) safety report unique identifier-->
 		<safetyreportid> <?php echo $model->getReactionCountry()->one()->code; ?>-<?php echo $model->getDrug()->one()->getCompany()->one()->name;  ?>-<?php echo $model->id; ?></safetyreportid>
