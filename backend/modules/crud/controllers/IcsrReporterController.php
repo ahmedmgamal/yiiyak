@@ -17,7 +17,7 @@ use backend\modules\crud\traits;
  */
 class IcsrReporterController extends \backend\modules\crud\controllers\base\IcsrReporterController
 {
-    use traits\checkIcsrExported;
+
     /**
      *
      * @inheritdoc

@@ -40,6 +40,19 @@ return [
         ]
     ],
     'components' => [
+
+        'fileStorage' => [
+            'class' => 'yii2tech\filestorage\local\Storage',
+            'basePath' => '@webroot/files',
+            'baseUrl' => '@web/files',
+            'filePermission' => 0777,
+            'buckets' => [
+                'tempFiles' => [
+                    'baseSubPath' => 'icsrsVersions',
+                ],
+            ]
+        ],
+
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
             'transport' => [

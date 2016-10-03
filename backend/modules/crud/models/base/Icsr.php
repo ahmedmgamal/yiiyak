@@ -261,7 +261,9 @@ abstract class Icsr extends \yii\db\ActiveRecord
     }
 
 
-
+    public function getIcsrVersions(){
+        return $this->hasMany(\backend\modules\crud\models\IcsrVersion::className(),['icsr_id' => 'id']);
+    }
     /**
      * @return \yii\db\ActiveQuery
      */

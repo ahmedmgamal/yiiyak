@@ -16,7 +16,7 @@ use backend\modules\crud\traits;
 class IcsrEventController extends \backend\modules\crud\controllers\base\IcsrEventController
 {
 
-    use traits\checkIcsrExported;
+
     public function behaviors() {
         return [
             'access' => [
