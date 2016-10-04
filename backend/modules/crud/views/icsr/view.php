@@ -411,22 +411,25 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                                                 'lastPageLabel' => Yii::t('app', 'Last')
                                             ],
                                             'columns' => [
-                                                [
-                                                    'attribute' => 'id',
-                                                    'value' => function ($model,$key,$index){
 
-                                                        return ++$index;
-                                                    }
-
-                                                ],
                                                 [
                                                     'attribute' => 'file_url',
                                                     'format' => 'raw',
                                                     'value' => function ($model,$key,$index)
                                                     {
 
-                                                        $url = '<a href='.$model->file_url.'> Icsr Version '. ++$index. '</a>';
+                                                        $url = '<a href='.$model->file_url.'> Icsr Version </a>';
                                                         return   $url;
+                                                    }
+                                                ]
+                                                ,
+                                                'version_no',
+                                                'export_date',
+                                                [
+                                                   'attribute' => 'exported_by',
+                                                    'value' => function ($model,$key,$index)
+                                                    {
+                                                      return  $model->user->username;
                                                     }
                                                 ]
 

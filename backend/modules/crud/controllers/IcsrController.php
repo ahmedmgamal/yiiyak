@@ -165,7 +165,10 @@ private function createExportFile ($icsrObj,$content)
     $icsrVersion->icsr_id =$icsrObj->id;
     $icsrVersion->file_name = $fileName;
     $icsrVersion->file_url  = $fileUrl;
+    $icsrVersion->exported_by = \Yii::$app->user->id;
+    $icsrVersion->version_no = $icsrObj->getVersion();
     try{
+
         $icsrVersion->save();
     }
     catch(Exception $e)

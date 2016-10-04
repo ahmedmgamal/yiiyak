@@ -35,7 +35,7 @@ abstract class IcsrVersion extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['icsr_id','file_url'], 'required'],
+            [['icsr_id','file_url','exported_by'], 'required'],
             [['icsr_id'], 'integer'],
             [['file_name', 'file_url'], 'string', 'max' => 255],
             [['icsr_id'], 'exist', 'skipOnError' => true, 'targetClass' => Icsr::className(), 'targetAttribute' => ['icsr_id' => 'id']]
@@ -52,7 +52,13 @@ abstract class IcsrVersion extends \yii\db\ActiveRecord
             'icsr_id' => 'Icsr ID',
             'file_name' => 'File Name',
             'file_url' => 'File ',
+            'export_date' => 'Export Date'
         ];
+    }
+
+    public function getUser ()
+    {
+        return $this->hasOne(\backend\modules\crud\models\User::className(), ['id' => 'exported_by']);
     }
 
 
