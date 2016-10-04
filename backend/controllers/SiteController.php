@@ -61,6 +61,13 @@ class SiteController extends Controller
 
     public function actionLogin()
     {
+
+        $userRole = \Yii::$app->authManager->getRolesByUser(\Yii::$app->user->id);
+
+        if (isset($userRole['admin']))
+        {
+            return $this->redirect('@web/crud/company/index');
+        }
         if (!\Yii::$app->user->isGuest) {
             return $this->redirect('@web/crud/drug/index');
         }
@@ -73,6 +80,12 @@ class SiteController extends Controller
             $logged_in_user_id = Yii::$app->user->identity->id;
 
             if (User::checkSubscription($logged_in_user_id)) {
+                $userRole =\Yii::$app->authManager->getRolesByUser(\Yii::$app->user->id);
+
+                if (isset($userRole['admin']))
+                {
+                    return $this->redirect('@web/crud/company/index');
+                }
                 return $this->redirect('@web/crud/drug/index');
             }
             Yii::$app->user->logout();

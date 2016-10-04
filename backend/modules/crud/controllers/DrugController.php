@@ -86,7 +86,7 @@ class DrugController extends \backend\modules\crud\controllers\base\DrugControll
 
                 if ($model->isBeyondLimit())
                 {
-                    \Yii::$app->getSession()->setFlash('error', \Yii::t('app',"you have exceeded your drugs limit upgrade {$model->company->name} plan to add more users "));
+                    \Yii::$app->getSession()->setFlash('error', \Yii::t('app',"you have exceeded your drugs limit upgrade {$model->company->name} plan to add more drugs "));
 
                 }
 
