@@ -7,6 +7,7 @@
 
 
 namespace backend\modules\crud\controllers;
+use Aws\CloudFront\Exception\Exception;
 use backend\modules\crud\models\Icsr;
 use backend\modules\crud\models\search\Icsr as IcsrSearch;
 use backend\modules\crud\models\DrugPrescription as DrugPrescription;
@@ -155,8 +156,8 @@ private function createTrailForExport ($icsrObj)
 
 private function createExportFile ($icsrObj,$content)
 {
-    $bucket = \Yii::$app->fileStorage->getBucket('tempFiles');
-    $fileName = 'IcsrVersion_'.strtotime("now").'.xml';
+    $bucket = \Yii::$app->fileStorage->getBucket('icsrVersions');
+    $fileName = 'IcsrVersion_IcsrId'.$icsrObj->id.'_DrugId'.$icsrObj->drug->id.'_'.strtotime("now").'.xml';
     $bucket->saveFileContent($fileName, $content);
     $fileUrl = $bucket->getFileUrl($fileName);
 
@@ -164,9 +165,17 @@ private function createExportFile ($icsrObj,$content)
     $icsrVersion->icsr_id =$icsrObj->id;
     $icsrVersion->file_name = $fileName;
     $icsrVersion->file_url  = $fileUrl;
+    try{
+        $icsrVersion->save();
+    }
+    catch(Exception $e)
+    {
+        \Yii::$app->getSession()->setFlash('error', 'The XML File not saved please try again later');
+        return $this->redirect(\Yii::$app->request->referrer);
+    }
 
-    $icsrVersion->save();
 }
+
 
     /**
      * Updates an existing Icsr model.
