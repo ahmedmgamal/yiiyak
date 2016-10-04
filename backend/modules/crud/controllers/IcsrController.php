@@ -74,7 +74,7 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
 		return $this->render('create', ['model' => $model]);
 	}
 
-    public function actionExport($id) {
+    public function actionExport($id,$case) {
 
         $icsr = $this->findModel($id);
         $this->layout = false;
@@ -91,9 +91,20 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
         $headers = \Yii::$app->response->headers;
         $headers->add('Content-Type', 'text/xml');
 
-        $xml = $this->renderPartial('export', [
-            'model' => $icsr,
-        ]);
+        if ($case == 'null')
+        {
+            $request = \Yii::$app->request;
+
+            $nullReason = $request->post('nullReason');
+            $xml = $this->renderPartial('export-null-case',['model' => $icsr , 'nullReason' => $nullReason]);
+
+        }
+        else {
+            $xml = $this->renderPartial('export', [
+                'model' => $icsr,
+            ]);
+        }
+
 
         $dtd = \Yii::$app->getModule('crud')->getViewPath().'/icsr/ich-icsr-v2_1.dtd';
 
@@ -205,6 +216,10 @@ private function createTrailForExport ($icsrObj)
         ];
     }
 
-
+    public function actionExportNullCase($id)
+    {
+        $icsr = $this->findModel($id);
+        return $this->render('null-case-reason',['model' => $icsr]);
+    }
 
 }
