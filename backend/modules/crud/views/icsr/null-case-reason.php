@@ -24,7 +24,7 @@
     <p>
         <label class="control-label col-sm-3" for="null-reason">Nullification Reason</label>
     <div class="col-sm-6">
-     <?php echo Html::input('text','nullReason','',['class' => 'form-control' , 'id' => 'null-reason']); ?>
+     <?php echo Html::input('text','nullReason','',['class' => 'form-control' , 'id' => 'null-reason' , 'required' => true]); ?>
     </div>
 
 

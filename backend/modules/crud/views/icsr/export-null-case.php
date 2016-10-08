@@ -33,8 +33,7 @@ $formatter = \Yii::$app->formatter;
     </ichicsrmessageheader>
     <safetyreport>
         <safetyreportversion><?php echo $model->getVersion(); ?></safetyreportversion>
-        <casenullification>1</casenullification>
-        <nullificationreason><?php echo $nullReason; ?></nullificationreason>
+
         <!--A.1.0.1 Sender’s (case) safety report unique identifier-->
         <safetyreportid> <?php echo $model->getReactionCountry()->one()->code; ?>-<?php echo $model->getDrug()->one()->getCompany()->one()->name;  ?>-<?php echo $model->id; ?></safetyreportid>
 
@@ -69,6 +68,12 @@ $formatter = \Yii::$app->formatter;
 
         <!--A.1.10	Worldwide unique case identification number.      -->
         <companynumb> <?php echo $model->getReactionCountry()->one()->code; ?>-<?php echo $model->getDrug()->one()->getCompany()->one()->name;  ?>-<?php echo $model->id; ?></companynumb>
+
+        <!--A.1.13	 -->
+        <casenullification>1</casenullification>
+
+        <!--A.1.13.1	    -->
+        <nullificationreason><?php echo $nullReason; ?></nullificationreason>
 
         <?php foreach($model->icsrReporters as $reporter){ ?>
             <primarysource>
