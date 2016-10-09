@@ -41,7 +41,8 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
         <div class='pull-left'>
 
             <?php echo Html::a('<span class="glyphicon glyphicon-pencil"></span> ' . Yii::t('app', 'Edit'), ['update', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
-            <?php echo Html::a('<span class="glyphicon glyphicon-copy"></span> ' . Yii::t('app', 'Export  Xml'), ['export', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
+            <?php echo Html::a('<span class="glyphicon glyphicon-copy"></span> ' . Yii::t('app', 'Export  Xml'), ['export', 'id' => $model->id  ,'case' => 'normal'], ['class' => 'btn btn-success']) ?>
+            <?php echo Html::a('<span class="glyphicon glyphicon-copy"></span> ' . Yii::t('app', 'Export  Null Case'), ['export-null-case', 'id' => $model->id ], ['class' => 'btn btn-default']) ?>
 
         </div>
 
