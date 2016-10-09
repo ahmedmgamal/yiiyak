@@ -158,7 +158,14 @@ private function createExportFile ($icsrObj,$content)
 {
     $bucket = \Yii::$app->fileStorage->getBucket('icsrVersions');
     $fileName = 'IcsrVersion_IcsrId'.$icsrObj->id.'_DrugId'.$icsrObj->drug->id.'_'.strtotime("now").'.xml';
+       try{
     $bucket->saveFileContent($fileName, $content);
+        }
+           catch(Exception $e)
+    {
+        \Yii::$app->getSession()->setFlash('error', 'The XML File not saved please try again later');
+        return $this->redirect(\Yii::$app->request->referrer);
+    }
     $fileUrl = $bucket->getFileUrl($fileName);
 
     $icsrVersion = new IcsrVersion();
@@ -167,15 +174,11 @@ private function createExportFile ($icsrObj,$content)
     $icsrVersion->file_url  = $fileUrl;
     $icsrVersion->exported_by = \Yii::$app->user->id;
     $icsrVersion->version_no = $icsrObj->getVersion();
-    try{
+ 
 
         $icsrVersion->save();
-    }
-    catch(Exception $e)
-    {
-        \Yii::$app->getSession()->setFlash('error', 'The XML File not saved please try again later');
-        return $this->redirect(\Yii::$app->request->referrer);
-    }
+
+ 
 
 }
 
