@@ -18,12 +18,6 @@ $this->params['breadcrumbs'][] = ['label' => $model->getDrug()->one()->trade_nam
 $this->params['breadcrumbs'][] = ['label' => $model->getAliasModel(true), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => (string) $model->patient_identifier, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'View');
-$icsrIsExported = $model->isIcsrExported($model->id);
-$updateTemplate = '';
-if (!$icsrIsExported)
-{
-    $updateTemplate = '{update}';
-}
 ?>
 <div class="giiant-crud icsr-view">
 
@@ -45,10 +39,10 @@ if (!$icsrIsExported)
     <div class="clearfix crud-navigation">
         <!-- menu buttons -->
         <div class='pull-left'>
-            <?php if (!$icsrIsExported) {?>
+
             <?php echo Html::a('<span class="glyphicon glyphicon-pencil"></span> ' . Yii::t('app', 'Edit'), ['update', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
-            <?php echo Html::a('<span class="glyphicon glyphicon-copy"></span> ' . Yii::t('app', 'Export  Xml'), ['export', 'id' => $model->id], ['class' => 'btn btn-success', 'target' => '_blank']) ?>
-            <?php } ?>
+            <?php echo Html::a('<span class="glyphicon glyphicon-copy"></span> ' . Yii::t('app', 'Export  Xml'), ['export', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
+
         </div>
 
 
@@ -119,13 +113,13 @@ if (!$icsrIsExported)
     <?php $this->beginBlock('DrugPrescriptions'); ?>
 
     <div style='position: relative'><div style='position:absolute; right: 0px; top: 0px;'>
-            <?php if (!$icsrIsExported){?>
+
             <a class="btn btn-success btn-xs" href="<?= Url::to(['/crud/drug-prescription/create',  'DrugPrescription' => ['icsr_id' => $model->id]])?>">
 
                 <span class="glyphicon glyphicon-plus"></span>
 
-              <?=  Yii::t('app','New ').' Drug Prescription';
-                }?>
+              <?=  Yii::t('app','New ').' Drug Prescription';?>
+
             </a>
 
 
@@ -142,7 +136,7 @@ if (!$icsrIsExported)
         ],
         'columns' => [[
         'class' => 'yii\grid\ActionColumn',
-        'template' => '{view}  '.$updateTemplate,
+        'template' => '{view}  {update}',
         'contentOptions' => ['nowrap' => 'nowrap'],
         /**
          *
@@ -188,10 +182,6 @@ if (!$icsrIsExported)
             ],
                 'active_substance_names'
 ,                        
-                        
-                        
-                        
-
 
                         ]
                     ]) . '</div>'
@@ -203,12 +193,12 @@ if (!$icsrIsExported)
                     <?php $this->beginBlock('IcsrEvents'); ?>
                     <div style='position: relative'><div style='position:absolute; right: 0px; top: 0px;'>
 
-                            <?php if (!$icsrIsExported){?>
+
                             <a class="btn btn-success btn-xs" href="<?= Url::to(['/crud/icsr-event/create', 'IcsrEvent' => ['icsr_id' => $model->id]])?>">
 
                                 <span class="glyphicon glyphicon-plus"></span><?= Yii::t('app','New ').' Icsr Event'?>
                             </a>
-                            <?php }?>
+
 
                         </div></div><?php Pjax::begin(['id' => 'pjax-IcsrEvents', 'enableReplaceState' => false, 'linkSelector' => '#pjax-IcsrEvents ul.pagination a, th a', 'clientOptions' => ['pjax:success' => 'function(){alert("yo")}']]) ?>
                     <?=
@@ -222,7 +212,7 @@ if (!$icsrIsExported)
                         ],
                         'columns' => [[
                         'class' => 'yii\grid\ActionColumn',
-                        'template' => '{view} '.$updateTemplate,
+                        'template' => '{view} {update}',
                         'contentOptions' => ['nowrap' => 'nowrap'],
                         'urlCreator' => function ($action, $model, $key, $index) {
                     // using the column name as key, not mapping to 'id' like the standard generator
@@ -262,12 +252,12 @@ if (!$icsrIsExported)
                                             <?php $this->beginBlock('IcsrReporters'); ?>
                                     <div style='position: relative'><div style='position:absolute; right: 0px; top: 0px;'>
 
-                                            <?php if (!$icsrIsExported){?>
+
                                             <a class="btn btn-success btn-xs" href="<?= Url::to(['/crud/icsr-reporter/create', 'IcsrReporter' => ['icsr_id' => $model->id]])?>">
 
                                                 <span class="glyphicon glyphicon-plus"></span><?= Yii::t('app','New ').' Icsr Reporter'?>
                                             </a>
-                                            <?php }?>
+
 
 
 
@@ -283,7 +273,7 @@ if (!$icsrIsExported)
                                         ],
                                         'columns' => [[
                                         'class' => 'yii\grid\ActionColumn',
-                                        'template' => '{view} '.$updateTemplate,
+                                        'template' => '{view} {update}',
                                         'contentOptions' => ['nowrap' => 'nowrap'],
                                         'urlCreator' => function ($action, $model, $key, $index) {
                                     // using the column name as key, not mapping to 'id' like the standard generator
@@ -333,12 +323,12 @@ if (!$icsrIsExported)
 
                                             <div style='position: relative'><div style='position:absolute; right: 0px; top: 0px;'>
 
-                                                    <?php if (!$icsrIsExported){?>
+
                                                     <a class="btn btn-success btn-xs" href="<?= Url::to(['/crud/icsr-test/create', 'IcsrTest' => ['icsr_id' => $model->id]])?>">
 
                                                         <span class="glyphicon glyphicon-plus"></span><?= Yii::t('app','New ').' Icsr Test'?>
                                                     </a>
-                                                    <?php } ?>
+
 
                                                 </div></div><?php Pjax::begin(['id' => 'pjax-IcsrTests', 'enableReplaceState' => false, 'linkSelector' => '#pjax-IcsrTests ul.pagination a, th a', 'clientOptions' => ['pjax:success' => 'function(){alert("yo")}']]) ?>
                                             <?=
@@ -352,7 +342,7 @@ if (!$icsrIsExported)
                                                 ],
                                                 'columns' => [[
                                                 'class' => 'yii\grid\ActionColumn',
-                                                'template' => '{view} '.$updateTemplate,
+                                                'template' => '{view} {update}',
                                                 'contentOptions' => ['nowrap' => 'nowrap'],
                                                 'urlCreator' => function ($action, $model, $key, $index) {
                                             // using the column name as key, not mapping to 'id' like the standard generator
@@ -405,6 +395,51 @@ if (!$icsrIsExported)
                                         <?php $this->endBlock() ?>
 
 
+
+                                        <?php $this->beginBlock('IcsrVersions'); ?>
+
+                                        <div style='position: relative'><div style='position:absolute; right: 0px; top: 0px;'>
+
+                                            </div></div><?php Pjax::begin(['id' => 'pjax-IcsrVersions', 'enableReplaceState' => false, 'linkSelector' => '#pjax-IcsrVersions ul.pagination a, th a', 'clientOptions' => ['pjax:success' => 'function(){alert("yo")}']]) ?>
+                                        <?=
+                                        '<div class="table-responsive">' . \yii\grid\GridView::widget([
+                                            'layout' => '{summary}{pager}<br/>{items}{pager}',
+                                            'dataProvider' => new \yii\data\ActiveDataProvider(['query' => $model->getIcsrVersions(), 'pagination' => ['pageSize' => 20, 'pageParam' => 'page-icsrversions']]),
+                                            'pager' => [
+                                                'class' => yii\widgets\LinkPager::className(),
+                                                'firstPageLabel' => Yii::t('app', 'First'),
+                                                'lastPageLabel' => Yii::t('app', 'Last')
+                                            ],
+                                            'columns' => [
+
+                                                [
+                                                    'attribute' => 'file_url',
+                                                    'format' => 'raw',
+                                                    'value' => function ($model,$key,$index)
+                                                    {
+
+                                                        $url = '<a href='.$model->file_url.'> Icsr Version </a>';
+                                                        return   $url;
+                                                    }
+                                                ]
+                                                ,
+                                                'version_no',
+                                                'export_date',
+                                                [
+                                                   'attribute' => 'exported_by',
+                                                    'value' => function ($model,$key,$index)
+                                                    {
+                                                      return  $model->user->username;
+                                                    }
+                                                ]
+
+                                            ]
+                                        ]) . '</div>'
+                                        ?>
+                                        <?php Pjax::end() ?>
+                                        <?php $this->endBlock() ?>
+
+
                                                     <?php
                                                     echo Tabs::widget(
                                                             [
@@ -434,6 +469,11 @@ if (!$icsrIsExported)
                                                                     ],[
                                                                         'content' => $this->blocks['IcsrHistory'],
                                                                         'label' => '<small>Icsr History <span class="badge badge-default">' . count($model->getIcsrTrails()->asArray()->all()) . '</span></small>',
+                                                                        'active' => false,
+
+                                                                    ],[
+                                                                        'content' => $this->blocks['IcsrVersions'],
+                                                                        'label' => '<small>Icsr Versions <span class="badge badge-default">' . count($model->getIcsrVersions()->asArray()->all()) . '</span></small>',
                                                                         'active' => false,
 
                                                                     ]

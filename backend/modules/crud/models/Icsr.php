@@ -98,4 +98,11 @@ public function  isIcsrExported($icsr_id)
     }
 
 
+    public function getVersion()
+    {
+        return count($this->icsrVersions)+1;
+    }
+
+
+
 }

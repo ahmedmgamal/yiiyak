@@ -6,7 +6,7 @@ $params = array_merge(
     require(__DIR__ . '/params-local.php')
 );
 
-return [
+$config = [
     'id' => 'app-backend',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
@@ -40,6 +40,8 @@ return [
         ]
     ],
     'components' => [
+
+
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
             'transport' => [
@@ -91,3 +93,23 @@ return [
     'params' => $params,
     'defaultRoute' => 'site/landing'
 ];
+
+if (YII_ENV_DEV)
+{
+    $config['components'][ 'fileStorage'] =
+
+       [
+            'class' => 'yii2tech\filestorage\local\Storage',
+            'basePath' => '@webroot/files',
+            'baseUrl' => '@web/files',
+            'filePermission' => 0777,
+            'buckets' => [
+                'icsrVersions' => [
+                 'baseSubPath' => 'icsrsVersions',
+                                ],
+                ]
+            ];
+
+
+}
+return $config;

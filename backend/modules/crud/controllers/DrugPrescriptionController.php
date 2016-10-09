@@ -15,7 +15,7 @@ use backend\modules\crud\traits;
  */
 class DrugPrescriptionController extends \backend\modules\crud\controllers\base\DrugPrescriptionController
 {
-    use traits\checkIcsrExported;
+
     public function behaviors() {
         return [
             'access' => [

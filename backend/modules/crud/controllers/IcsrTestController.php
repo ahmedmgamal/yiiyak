@@ -16,7 +16,7 @@ use backend\modules\crud\traits;
  */
 class IcsrTestController extends \backend\modules\crud\controllers\base\IcsrTestController
 {
-    use traits\checkIcsrExported;
+
     /**
      *
      * @inheritdoc

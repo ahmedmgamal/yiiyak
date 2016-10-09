@@ -7,6 +7,7 @@
 
 
 namespace backend\modules\crud\controllers;
+use Aws\CloudFront\Exception\Exception;
 use backend\modules\crud\models\Icsr;
 use backend\modules\crud\models\search\Icsr as IcsrSearch;
 use backend\modules\crud\models\DrugPrescription as DrugPrescription;
@@ -16,6 +17,7 @@ use yii\web\HttpException;
 use yii\helpers\Url;
 use yii\filters\AccessControl;
 use dmstr\bootstrap\Tabs;
+use backend\modules\crud\models\IcsrVersion;
 
 /**
  * This is the class for controller "IcsrController".
@@ -79,13 +81,6 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
         $icsr = $this->findModel($id);
         $this->layout = false;
 
-        if ($icsr->isIcsrExported($icsr->id))
-        {
-            \Yii::$app->getSession()->setFlash('error', \Yii::t('app','This Icsr Exported Before'));
-
-            return $this->redirect(\Yii::$app->request->referrer);
-        }
-
         //set content type xml in response
         \Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
         $headers = \Yii::$app->response->headers;
@@ -100,6 +95,7 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
         if( $this->validateXML($xml,$dtd ) )
         {
             $this->createTrailForExport($icsr);
+            $this->createExportFile($icsr,$xml);
         }
 
         return $xml;
@@ -158,6 +154,35 @@ private function createTrailForExport ($icsrObj)
 }
 
 
+private function createExportFile ($icsrObj,$content)
+{
+    $bucket = \Yii::$app->fileStorage->getBucket('icsrVersions');
+    $fileName = 'IcsrVersion_IcsrId'.$icsrObj->id.'_DrugId'.$icsrObj->drug->id.'_'.strtotime("now").'.xml';
+       try{
+    $bucket->saveFileContent($fileName, $content);
+        }
+           catch(Exception $e)
+    {
+        \Yii::$app->getSession()->setFlash('error', 'The XML File not saved please try again later');
+        return $this->redirect(\Yii::$app->request->referrer);
+    }
+    $fileUrl = $bucket->getFileUrl($fileName);
+
+    $icsrVersion = new IcsrVersion();
+    $icsrVersion->icsr_id =$icsrObj->id;
+    $icsrVersion->file_name = $fileName;
+    $icsrVersion->file_url  = $fileUrl;
+    $icsrVersion->exported_by = \Yii::$app->user->id;
+    $icsrVersion->version_no = $icsrObj->getVersion();
+ 
+
+        $icsrVersion->save();
+
+ 
+
+}
+
+
     /**
      * Updates an existing Icsr model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -176,8 +201,6 @@ private function createTrailForExport ($icsrObj)
             ]);
         }
         else {
-
-
             return $this->render('update', [
                 'model' => $model,
             ]);

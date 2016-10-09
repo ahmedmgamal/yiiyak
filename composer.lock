@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "39985bb2164b96c81734b19b87eb9472",
-    "content-hash": "10f0bc903651a60c34d7188c30c5a1db",
+    "hash": "2b5628f4022831253c94c24f8cddde07",
+    "content-hash": "79386f17e0d826e19ad80c837a03ce48",
     "packages": [
         {
             "name": "2amigos/yii2-chartjs-widget",
@@ -149,6 +149,69 @@
                 "web"
             ],
             "time": "2016-08-04 23:22:06"
+        },
+        {
+            "name": "aws/aws-sdk-php",
+            "version": "2.8.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aws/aws-sdk-php.git",
+                "reference": "64fa4b07f056e338a5f0f29eece75babaa83af68"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/64fa4b07f056e338a5f0f29eece75babaa83af68",
+                "reference": "64fa4b07f056e338a5f0f29eece75babaa83af68",
+                "shasum": ""
+            },
+            "require": {
+                "guzzle/guzzle": "~3.7",
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "doctrine/cache": "~1.0",
+                "ext-openssl": "*",
+                "monolog/monolog": "~1.4",
+                "phpunit/phpunit": "~4.0",
+                "phpunit/phpunit-mock-objects": "2.3.1",
+                "symfony/yaml": "~2.1"
+            },
+            "suggest": {
+                "doctrine/cache": "Adds support for caching of credentials and responses",
+                "ext-apc": "Allows service description opcode caching, request and response caching, and credentials caching",
+                "ext-openssl": "Allows working with CloudFront private distributions and verifying received SNS messages",
+                "monolog/monolog": "Adds support for logging HTTP requests and responses",
+                "symfony/yaml": "Eases the ability to write manifests for creating jobs in AWS Import/Export"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Aws": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Amazon Web Services",
+                    "homepage": "http://aws.amazon.com"
+                }
+            ],
+            "description": "AWS SDK for PHP - Use Amazon Web Services in your PHP project",
+            "homepage": "http://aws.amazon.com/sdkforphp",
+            "keywords": [
+                "amazon",
+                "aws",
+                "cloud",
+                "dynamodb",
+                "ec2",
+                "glacier",
+                "s3",
+                "sdk"
+            ],
+            "time": "2016-07-25 18:03:20"
         },
         {
             "name": "bedezign/yii2-audit",
@@ -554,12 +617,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cebe/markdown.git",
-                "reference": "c30eb5e01fe021cc5bba2f9ee0eeef96d4931166"
+                "reference": "2c368a9329cde1fdaac30b75d74e20b5c85f70a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cebe/markdown/zipball/c30eb5e01fe021cc5bba2f9ee0eeef96d4931166",
-                "reference": "c30eb5e01fe021cc5bba2f9ee0eeef96d4931166",
+                "url": "https://api.github.com/repos/cebe/markdown/zipball/2c368a9329cde1fdaac30b75d74e20b5c85f70a8",
+                "reference": "2c368a9329cde1fdaac30b75d74e20b5c85f70a8",
                 "shasum": ""
             },
             "require": {
@@ -606,7 +669,7 @@
                 "markdown",
                 "markdown-extra"
             ],
-            "time": "2016-09-14 20:40:20"
+            "time": "2016-09-27 13:35:10"
         },
         {
             "name": "cebe/yii2-gravatar",
@@ -799,12 +862,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/dmstr/yii2-db.git",
-                "reference": "ac428df1492b3a97de09c352c29d545830b55c55"
+                "reference": "dafbe2b21469427ff448e320a67419c560a55f27"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dmstr/yii2-db/zipball/ac428df1492b3a97de09c352c29d545830b55c55",
-                "reference": "ac428df1492b3a97de09c352c29d545830b55c55",
+                "url": "https://api.github.com/repos/dmstr/yii2-db/zipball/dafbe2b21469427ff448e320a67419c560a55f27",
+                "reference": "dafbe2b21469427ff448e320a67419c560a55f27",
                 "shasum": ""
             },
             "require": {
@@ -837,7 +900,7 @@
                 "extension",
                 "yii2"
             ],
-            "time": "2016-08-25 22:13:36"
+            "time": "2016-09-27 11:41:10"
         },
         {
             "name": "dmstr/yii2-helpers",
@@ -845,12 +908,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/dmstr/yii2-helpers.git",
-                "reference": "5ca0584e6be20e2539cdd511636347a6b84eef60"
+                "reference": "e8259dd4972f244cd3c278b33843ad8a63dab2b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dmstr/yii2-helpers/zipball/5ca0584e6be20e2539cdd511636347a6b84eef60",
-                "reference": "5ca0584e6be20e2539cdd511636347a6b84eef60",
+                "url": "https://api.github.com/repos/dmstr/yii2-helpers/zipball/e8259dd4972f244cd3c278b33843ad8a63dab2b6",
+                "reference": "e8259dd4972f244cd3c278b33843ad8a63dab2b6",
                 "shasum": ""
             },
             "require": {
@@ -881,7 +944,7 @@
                 "extension",
                 "yii2"
             ],
-            "time": "2016-05-10 17:16:40"
+            "time": "2016-09-26 16:52:23"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -933,12 +996,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfPHP/PHP-CS-Fixer.git",
-                "reference": "490ee2bbafe5e7f512cf26b263f2942e39704fde"
+                "reference": "13a21d85789f4e6534610722842019b864980bec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/490ee2bbafe5e7f512cf26b263f2942e39704fde",
-                "reference": "490ee2bbafe5e7f512cf26b263f2942e39704fde",
+                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/13a21d85789f4e6534610722842019b864980bec",
+                "reference": "13a21d85789f4e6534610722842019b864980bec",
                 "shasum": ""
             },
             "require": {
@@ -989,7 +1052,103 @@
                 }
             ],
             "description": "A tool to automatically fix PHP code style",
-            "time": "2016-09-14 07:50:23"
+            "time": "2016-09-26 20:57:02"
+        },
+        {
+            "name": "guzzle/guzzle",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/guzzle3.git",
+                "reference": "b3f5050cb6270c7a728a0b74ac2de50a262b3e02"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/guzzle3/zipball/b3f5050cb6270c7a728a0b74ac2de50a262b3e02",
+                "reference": "b3f5050cb6270c7a728a0b74ac2de50a262b3e02",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.3.3",
+                "symfony/event-dispatcher": "~2.1"
+            },
+            "replace": {
+                "guzzle/batch": "self.version",
+                "guzzle/cache": "self.version",
+                "guzzle/common": "self.version",
+                "guzzle/http": "self.version",
+                "guzzle/inflection": "self.version",
+                "guzzle/iterator": "self.version",
+                "guzzle/log": "self.version",
+                "guzzle/parser": "self.version",
+                "guzzle/plugin": "self.version",
+                "guzzle/plugin-async": "self.version",
+                "guzzle/plugin-backoff": "self.version",
+                "guzzle/plugin-cache": "self.version",
+                "guzzle/plugin-cookie": "self.version",
+                "guzzle/plugin-curlauth": "self.version",
+                "guzzle/plugin-error-response": "self.version",
+                "guzzle/plugin-history": "self.version",
+                "guzzle/plugin-log": "self.version",
+                "guzzle/plugin-md5": "self.version",
+                "guzzle/plugin-mock": "self.version",
+                "guzzle/plugin-oauth": "self.version",
+                "guzzle/service": "self.version",
+                "guzzle/stream": "self.version"
+            },
+            "require-dev": {
+                "doctrine/cache": "~1.3",
+                "monolog/monolog": "~1.0",
+                "phpunit/phpunit": "3.7.*",
+                "psr/log": "~1.0",
+                "symfony/class-loader": "~2.1",
+                "zendframework/zend-cache": "2.*,<2.3",
+                "zendframework/zend-log": "2.*,<2.3"
+            },
+            "suggest": {
+                "guzzlehttp/guzzle": "Guzzle 5 has moved to a new package name. The package you have installed, Guzzle 3, is deprecated."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.9-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Guzzle": "src/",
+                    "Guzzle\\Tests": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                },
+                {
+                    "name": "Guzzle Community",
+                    "homepage": "https://github.com/guzzle/guzzle/contributors"
+                }
+            ],
+            "description": "PHP HTTP client. This library is deprecated in favor of https://packagist.org/packages/guzzlehttp/guzzle",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "client",
+                "curl",
+                "framework",
+                "http",
+                "http client",
+                "rest",
+                "web service"
+            ],
+            "abandoned": "guzzlehttp/guzzle",
+            "time": "2015-04-29 17:06:53"
         },
         {
             "name": "ikimea/browser",
@@ -1219,12 +1378,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "d8e60a5619fff77f9669da8997697443ef1a1d7e"
+                "reference": "607ce1d4005af32dd866c4a402459494c168d555"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/d8e60a5619fff77f9669da8997697443ef1a1d7e",
-                "reference": "d8e60a5619fff77f9669da8997697443ef1a1d7e",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/607ce1d4005af32dd866c4a402459494c168d555",
+                "reference": "607ce1d4005af32dd866c4a402459494c168d555",
                 "shasum": ""
             },
             "require": {
@@ -1258,7 +1417,7 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2016-01-06 21:40:42"
+            "time": "2016-09-25 13:41:54"
         },
         {
             "name": "rmrevin/yii2-fontawesome",
@@ -1526,12 +1685,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "c1ca699a28543ccd880713a412daa3d11b257e65"
+                "reference": "03d010b5b2242ce065ffb0f3f15a218f8137eb4c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/c1ca699a28543ccd880713a412daa3d11b257e65",
-                "reference": "c1ca699a28543ccd880713a412daa3d11b257e65",
+                "url": "https://api.github.com/repos/symfony/console/zipball/03d010b5b2242ce065ffb0f3f15a218f8137eb4c",
+                "reference": "03d010b5b2242ce065ffb0f3f15a218f8137eb4c",
                 "shasum": ""
             },
             "require": {
@@ -1581,7 +1740,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2016-09-14 22:49:28"
+            "time": "2016-09-28 00:11:20"
         },
         {
             "name": "symfony/debug",
@@ -1642,27 +1801,27 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "dev-master",
+            "version": "2.8.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "9558911a4071ace3523c70ba4d0c6315b567f460"
+                "reference": "889983a79a043dfda68f38c38b6dba092dd49cd8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/9558911a4071ace3523c70ba4d0c6315b567f460",
-                "reference": "9558911a4071ace3523c70ba4d0c6315b567f460",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/889983a79a043dfda68f38c38b6dba092dd49cd8",
+                "reference": "889983a79a043dfda68f38c38b6dba092dd49cd8",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5.9"
+                "php": ">=5.3.9"
             },
             "require-dev": {
                 "psr/log": "~1.0",
-                "symfony/config": "~2.8|~3.0",
-                "symfony/dependency-injection": "~2.8|~3.0",
-                "symfony/expression-language": "~2.8|~3.0",
-                "symfony/stopwatch": "~2.8|~3.0"
+                "symfony/config": "~2.0,>=2.0.5|~3.0.0",
+                "symfony/dependency-injection": "~2.6|~3.0.0",
+                "symfony/expression-language": "~2.6|~3.0.0",
+                "symfony/stopwatch": "~2.3|~3.0.0"
             },
             "suggest": {
                 "symfony/dependency-injection": "",
@@ -1671,7 +1830,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.2-dev"
+                    "dev-master": "2.8-dev"
                 }
             },
             "autoload": {
@@ -1698,7 +1857,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2016-09-17 14:23:22"
+            "time": "2016-07-28 16:56:28"
         },
         {
             "name": "symfony/filesystem",
@@ -1755,12 +1914,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "5142fb011981ddb63ea263dee1abdc9d2906fb43"
+                "reference": "df6823821a90eec42c3040b4b06ba8b2af89ae30"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/finder/zipball/5142fb011981ddb63ea263dee1abdc9d2906fb43",
-                "reference": "5142fb011981ddb63ea263dee1abdc9d2906fb43",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/df6823821a90eec42c3040b4b06ba8b2af89ae30",
+                "reference": "df6823821a90eec42c3040b4b06ba8b2af89ae30",
                 "shasum": ""
             },
             "require": {
@@ -1796,7 +1955,7 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
-            "time": "2016-09-14 22:49:28"
+            "time": "2016-09-28 00:11:20"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -1921,12 +2080,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "7f20312aa0c870e583db353cc2e9759edbdc3873"
+                "reference": "fbaacdfc701a0ad50622eee45cfa2112f0ee144e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/7f20312aa0c870e583db353cc2e9759edbdc3873",
-                "reference": "7f20312aa0c870e583db353cc2e9759edbdc3873",
+                "url": "https://api.github.com/repos/symfony/process/zipball/fbaacdfc701a0ad50622eee45cfa2112f0ee144e",
+                "reference": "fbaacdfc701a0ad50622eee45cfa2112f0ee144e",
                 "shasum": ""
             },
             "require": {
@@ -1962,7 +2121,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2016-09-06 11:07:23"
+            "time": "2016-10-01 14:21:27"
         },
         {
             "name": "symfony/stopwatch",
@@ -2260,17 +2419,66 @@
             "time": "2016-08-05 07:11:59"
         },
         {
+            "name": "yii2tech/file-storage",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yii2tech/file-storage.git",
+                "reference": "7afab0ae59604b70d6f48f84da3d97b5edb16ba0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yii2tech/file-storage/zipball/7afab0ae59604b70d6f48f84da3d97b5edb16ba0",
+                "reference": "7afab0ae59604b70d6f48f84da3d97b5edb16ba0",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "yii2tech\\filestorage\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Paul Klimov",
+                    "email": "klimov.paul@gmail.com"
+                }
+            ],
+            "description": "File storage abstraction layer for Yii2",
+            "keywords": [
+                "abstraction",
+                "amazon",
+                "file",
+                "s3",
+                "storage",
+                "yii2"
+            ],
+            "time": "2016-04-25 07:51:49"
+        },
+        {
             "name": "yiisoft/yii2",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "e03cc75502d2c54c627d187d5d7ec4907d058693"
+                "reference": "36f940e182f69e29a3bd06bb13ee19bc8defbe89"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/e03cc75502d2c54c627d187d5d7ec4907d058693",
-                "reference": "e03cc75502d2c54c627d187d5d7ec4907d058693",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/36f940e182f69e29a3bd06bb13ee19bc8defbe89",
+                "reference": "36f940e182f69e29a3bd06bb13ee19bc8defbe89",
                 "shasum": ""
             },
             "require": {
@@ -2351,7 +2559,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2016-09-17 15:12:16"
+            "time": "2016-10-01 19:04:52"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -2658,12 +2866,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "4e81236d14da84c86f3e96561d689845bcf559ef"
+                "reference": "57d1666335f24fbf9c60c6f1bb75c8b2dbc17052"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/4e81236d14da84c86f3e96561d689845bcf559ef",
-                "reference": "4e81236d14da84c86f3e96561d689845bcf559ef",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/57d1666335f24fbf9c60c6f1bb75c8b2dbc17052",
+                "reference": "57d1666335f24fbf9c60c6f1bb75c8b2dbc17052",
                 "shasum": ""
             },
             "require": {
@@ -2700,7 +2908,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2016-09-13 12:22:34"
+            "time": "2016-09-20 07:47:47"
         },
         {
             "name": "yiisoft/yii2-codeception",
