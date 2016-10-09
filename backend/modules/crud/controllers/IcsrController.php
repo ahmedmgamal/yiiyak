@@ -96,7 +96,7 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
             $request = \Yii::$app->request;
 
             $nullReason = $request->post('nullReason');
-            $xml = $this->renderPartial('export-null-case',['model' => $icsr , 'nullReason' => $nullReason]);
+            $xml = $this->renderPartial('export',['model' => $icsr , 'nullReason' => $nullReason]);
 
         }
         else {

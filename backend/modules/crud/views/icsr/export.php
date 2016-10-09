@@ -68,7 +68,15 @@ use dmstr\bootstrap\Tabs;
 		
 		<!--A.1.10	Worldwide unique case identification number.      -->
 		<companynumb> <?php echo $model->getReactionCountry()->one()->code; ?>-<?php echo $model->getDrug()->one()->getCompany()->one()->name;  ?>-<?php echo $model->id; ?></companynumb>
- 
+
+		<?php if (isset($nullReason)){?>
+		<!--A.1.13	 -->
+		<casenullification>1</casenullification>
+
+		<!--A.1.13.1	    -->
+		<nullificationreason><?php echo $nullReason; ?></nullificationreason>
+		<?php }?>
+
 		<?php foreach($model->icsrReporters as $reporter){ ?>
 			<primarysource>
 				<!--A.2.1.1	Reporter identifier (name or initials)       -->
