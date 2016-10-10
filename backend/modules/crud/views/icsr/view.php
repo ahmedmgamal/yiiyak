@@ -6,6 +6,7 @@ use yii\grid\GridView;
 use yii\widgets\DetailView;
 use yii\widgets\Pjax;
 use dmstr\bootstrap\Tabs;
+use yii\helpers\StringHelper;
 
 /**
  * @var yii\web\View $this
@@ -432,7 +433,46 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                                                     {
                                                       return  $model->user->username;
                                                     }
+                                                ],
+                                                [
+                                                    'label' => Yii::t('app','Response'),
+                                                    'format' => 'raw',
+                                                    'value' => function ($model,$key,$index)
+                                                    {
+                                                        $url = '<a class="btn btn-warning btn-sm" href='. Yii::getAlias('@web').'/crud/icsr-version-response/create?icsr_version_id='.$model->id.'&icsr_id='.$model->icsr_id.'> Choose Response Type </a>';
+
+                                                        if (isset($model->icsrVersionResponse->response))
+                                                        {
+                                                            $bucket = Yii::$app->fileStorage->getBucket('icsrVersionsResponse');
+
+                                                            $responseFileName = StringHelper::basename( $model->icsrVersionResponse->response);
+
+                                                            if ($bucket->fileExists($responseFileName))
+                                                            {
+                                                               $url = "<a href={$model->icsrVersionResponse->response}> Response File </a>";
+                                                            }
+                                                            else{
+                                                                return $model->icsrVersionResponse->response;
+
+                                                            }
+                                                        }
+
+                                                        return $url;
+                                                    }
+                                                ],
+
+                                                [
+                                                    'label' => Yii::t('app','Response Date'),
+                                                    'value' => function ($model){
+                                                        if (isset($model->icsrVersionResponse->response_date)) {
+
+                                                            return $model->icsrVersionResponse->response_date;
+                                                        }
+                                                        return Yii::t('app','response not received yet');
+                                                    }
+
                                                 ]
+
 
                                             ]
                                         ]) . '</div>'

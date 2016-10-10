@@ -62,6 +62,9 @@ abstract class IcsrVersion extends \yii\db\ActiveRecord
     }
 
 
-
+    public function getIcsrVersionResponse ()
+    {
+        return $this->hasOne(\backend\modules\crud\models\IcsrVersionResponse::className(),['icsr_version_id' => 'id']);
+    }
 
 }
