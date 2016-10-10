@@ -107,6 +107,9 @@ if (YII_ENV_DEV)
                 'icsrVersions' => [
                  'baseSubPath' => 'icsrsVersions',
                                 ],
+                'icsrVersionsResponse' => [
+                    'baseSubPath' =>'icsrsVersionsReponse'
+                ],
                 ]
             ];
 
