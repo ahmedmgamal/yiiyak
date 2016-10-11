@@ -104,5 +104,16 @@ public function  isIcsrExported($icsr_id)
     }
 
 
+    public function canExported ()
+    {
+        if (count($this->drugPrescriptions) < 1 || count($this->icsrEvents) <1 ||
+            count($this->icsrReporters) <1)
+        {
+            return 0;
+        }
+
+        return 1;
+    }
+
 
 }
