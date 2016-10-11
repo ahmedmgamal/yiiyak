@@ -56,7 +56,9 @@ class Icsr extends BaseIcsr
     }
     public function getIcsrTrails()
     {
-        return AuditTrailChild::find()
+        return AuditTrailChild::find()->select('user_id,model_id,model,entry_id,created,action,GROUP_CONCAT(field) as field,
+                                                GROUP_CONCAT(`old_value`) as old_value,
+                                                 GROUP_CONCAT(`new_value`) as new_value')
             ->orOnCondition([
                 'audit_trail.model_id' => $this->id,
                 'audit_trail.model' => get_class($this),
@@ -72,7 +74,8 @@ class Icsr extends BaseIcsr
             ])->orOnCondition([
                 'audit_trail.model_id' => ArrayHelper::map($this->getIcsrTests()->all(),'id','id'),
                 'audit_trail.model' => \backend\modules\crud\models\IcsrTest::className(),
-            ])->orderBy(['created' =>  SORT_DESC]);
+            ])->groupBy('model , action , created')
+            ->orderBy(['created' =>  SORT_DESC]);
 
     }
 

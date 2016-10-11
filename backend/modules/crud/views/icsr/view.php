@@ -1,6 +1,7 @@
 <?php
 
 use dmstr\helpers\Html;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\grid\GridView;
 use yii\widgets\DetailView;
@@ -397,7 +398,30 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                                                 'firstPageLabel' => Yii::t('app', 'First'),
                                                 'lastPageLabel' => Yii::t('app', 'Last')
                                             ],
-                                            'columns' => ['user_id',  'action', 'model','field','old_value', 'new_value', 'created']
+                                            'columns' => ['user_id',  'action', 'model',
+                                                [
+                                                    'attribute' => 'field',
+                                                    'format' =>'raw',
+                                                    'value' => function ($model){
+                                                    return str_replace(",",'<br>',$model->field);
+                                                    }
+                                                ],
+                                                [
+                                                'attribute' => 'old_value',
+                                                'format' =>'raw',
+                                                'value' => function ($model){
+                                                    return str_replace(",",'<br>',$model->old_value);
+                                                }
+                                                ],
+                                                [
+                                                  'attribute' => 'new_value',
+                                                  'format' =>'raw',
+                                                   'value' => function ($model){
+                                                            return str_replace(",",'<br>',$model->new_value);
+                                                        }
+
+                                                ]
+                                                , 'created']
                                         ]) . '</div>'
                                         ?>
                                         <?php Pjax::end() ?>
@@ -528,7 +552,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                                                                         'active' => false,
                                                                     ],[
                                                                         'content' => $this->blocks['IcsrHistory'],
-                                                                        'label' => '<small>Icsr History <span class="badge badge-default">' . count($model->getIcsrTrails()->asArray()->all()) . '</span></small>',
+                                                                        'label' => '<small>'.Yii::t('app','Audit Trail').' <span class="badge badge-default">' . count($model->getIcsrTrails()->asArray()->all()) . '</span></small>',
                                                                         'active' => false,
 
                                                                     ],[
