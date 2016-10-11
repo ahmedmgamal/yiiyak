@@ -229,7 +229,7 @@ private function createExportFile ($icsrObj,$content)
         {
             return  [
                 'status' => 'duplicate',
-                'message' => 'this icsr is duplicated but it will get inserted',
+                'message' => 'this icsr is duplicated for the same patient , want to save or not',
 
             ];
         }

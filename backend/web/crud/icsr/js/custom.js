@@ -69,20 +69,42 @@ $('#Icsr').on('beforeSubmit', function(e)
     if (actionName == 'create') {
         var urlToController = url.substr(0, url.lastIndexOf('/'));
 
-        $.ajax({
-            url: urlToController + '/check-duplicate-icsr',
-            type: 'post',
-            data: form.serialize(),
-            success: function (data) {
-                if (data.status == 'duplicate') {
-                    alert(data.message);
-                }
-            },
-            error: function (err)
-            {
-                alert('something went wrong please try again');
+        if (!saveOnDuplicate(form,urlToController))
+        {
+            return false;
+        }
 
-            }
-        });
     }
+
 });
+
+function saveOnDuplicate (form,urlToController)
+{
+    submit = true;
+    $.ajax({
+        url: urlToController + '/check-duplicate-icsr',
+        type: 'post',
+        async:false,
+        data: form.serialize(),
+        success: function (data) {
+
+            if (data.status == 'duplicate') {
+                if(confirm(data.message))
+                {
+                    submit  = true;
+                }
+                else {
+                    submit  = false;
+
+                }
+            }
+        },
+        error: function (err)
+        {
+            alert('something went wrong please try again');
+
+        }
+    });
+
+    return submit;
+}
