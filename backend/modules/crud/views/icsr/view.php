@@ -42,8 +42,15 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
         <div class='pull-left'>
 
             <?php echo Html::a('<span class="glyphicon glyphicon-pencil"></span> ' . Yii::t('app', 'Edit'), ['update', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
-            <?php echo Html::a('<span class="glyphicon glyphicon-copy"></span> ' . Yii::t('app', 'Export  Xml'), ['export', 'id' => $model->id  ,'case' => 'normal'], ['class' => 'btn btn-success']) ?>
-            <?php echo Html::a('<span class="glyphicon glyphicon-copy"></span> ' . Yii::t('app', 'Export  Null Case'), ['export-null-case', 'id' => $model->id ], ['class' => 'btn btn-default']) ?>
+            <?php if ($model->canExported()) { ?>
+                <?php echo Html::a('<span class="glyphicon glyphicon-copy"></span> ' . Yii::t('app', 'Export  Xml'), ['export', 'id' => $model->id  ,'case' => 'normal'], ['class' => 'btn btn-success']) ?>
+                <?php echo Html::a('<span class="glyphicon glyphicon-copy"></span> ' . Yii::t('app', 'Export  Null Case'), ['export-null-case', 'id' => $model->id ], ['class' => 'btn btn-default']) ?>
+            <?php }
+            else{
+                echo "<button type='button' class='btn btn-success' disabled><span class='glyphicon glyphicon-copy'></span> ". Yii::t('app','Export  Xml')." </button> ";
+                echo "<button type='button' class='btn btn-default' disabled><span class='glyphicon glyphicon-copy'></span> ". Yii::t('app','Export  Null Case')." </button>";
+            }
+            ?>
 
         </div>
 
@@ -492,12 +499,20 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                                                                         'active' => true,
                                                                     ], [
                                                                         'content' => $this->blocks['DrugPrescriptions'],
-                                                                        'label' => '<small>Drug Prescriptions <span class="badge badge-default">' . count($model->getDrugPrescriptions()->asArray()->all()) . '</span></small>',
+                                                                    'label' => count($model->getDrugPrescriptions()->asArray()->all()) <1 ?
+                                                                                '<small>Drug Prescriptions <span class="badge badge-default">' . count($model->getDrugPrescriptions()->asArray()->all()) . '</span> <span class="glyphicon glyphicon-warning-sign " style="color: #b94a48"></span></small>'
+                                                                                 :
+                                                                                '<small>Drug Prescriptions <span class="badge badge-default">' . count($model->getDrugPrescriptions()->asArray()->all()) . '</span></small>'
+                                                                    ,
                                                                         'active' => false,
                                                                     ],
                                                                     [
                                                                         'content' => $this->blocks['IcsrEvents'],
-                                                                        'label' => '<small>Icsr Events <span class="badge badge-default">' . count($model->getIcsrEvents()->asArray()->all()) . '</span></small>',
+                                                                        'label' => count($model->getIcsrEvents()->asArray()->all()) <1 ?
+                                                                            '<small>Icsr Events <span class="badge badge-default">'.count($model->getIcsrEvents()->asArray()->all()).'  </span> <span class="glyphicon glyphicon-warning-sign " style="color: #b94a48"></span></small>'
+                                                                            :
+                                                                            '<small>Icsr Events <span class="badge badge-default">'.count($model->getIcsrEvents()->asArray()->all()) . '</span></small>'
+                                                                        ,
                                                                         'active' => false,
                                                                     ], [
                                                                         'content' => $this->blocks['IcsrTests'],
@@ -505,7 +520,11 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                                                                         'active' => false,
                                                                     ], [
                                                                         'content' => $this->blocks['IcsrReporters'],
-                                                                        'label' => '<small>Icsr Reporters <span class="badge badge-default">' . count($model->getIcsrReporters()->asArray()->all()) . '</span></small>',
+                                                                        'label' => count($model->getIcsrReporters()->asArray()->all()) <1 ?
+                                                                            '<small>Icsr Reporters <span class="badge badge-default">' . count($model->getIcsrReporters()->asArray()->all()) . '</span> <span class="glyphicon glyphicon-warning-sign " style="color: #b94a48"></span></small>'
+                                                                            :
+                                                                            '<small>Icsr Reporters <span class="badge badge-default">' . count($model->getIcsrReporters()->asArray()->all()) . '</span></small>'
+                                                                        ,
                                                                         'active' => false,
                                                                     ],[
                                                                         'content' => $this->blocks['IcsrHistory'],
