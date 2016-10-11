@@ -329,8 +329,6 @@ public function getCompany() {
         $duplicatePatient = self::find()->where(['drug_id' =>$this->drug_id])
             ->andWhere(['patient_identifier' => $this->patient_identifier])
             ->andWhere(['patient_birth_date' => $this->patient_birth_date])
-            ->andWhere(['patient_weight' => $this->patient_weight])
-            ->andWhere(['patient_weight_unit' => $this->patient_weight_unit])
             ->andWhere(['reaction_country_id'=> $this->reaction_country_id] )
             ->one();
 
