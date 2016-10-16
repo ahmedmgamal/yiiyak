@@ -11,7 +11,8 @@
     <?php $form = ActiveForm::begin([
         'id' => 'IcsrNullReason',
         'layout' => 'horizontal',
-        'action' => ['export?id='.$model->id.'&case=null']
+        'action' => ['export?id='.$model->id.'&case=null'],
+           'options' => ['target' =>'_blank']
 
     ]
 );
