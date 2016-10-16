@@ -106,7 +106,8 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
         if( $this->validateXML($xml,$dtd ) )
         {
             $this->createTrailForExport($icsr);
-            $this->createExportFile($icsr,$xml);
+            $fileUrl =  $this->createExportFile($icsr,$xml);
+            return $this->redirect($fileUrl);
         }
 
         return $xml;
@@ -188,7 +189,7 @@ private function createExportFile ($icsrObj,$content)
  
 
         $icsrVersion->save();
-
+    return $fileUrl;
  
 
 }

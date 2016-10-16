@@ -53,9 +53,15 @@ AppAsset::register($this);
         }
 
         $userRole = \Yii::$app->authManager->getRolesByUser(\Yii::$app->user->id);
+
+        if (\Yii::$app->user->can('/crud/psmf-section/index') && !isset($userRole['admin'])){
+            $menuItems [] =  ['label' => 'PSMF', 'url' => ['/crud/psmf-section/index']];
+        }
+
         if (\Yii::$app->user->can('/crud/drug/index') && !isset($userRole['admin'])){
             $menuItems [] =  ['label' => 'Products', 'url' => ['/crud/drug/index']];
         }
+
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
