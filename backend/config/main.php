@@ -110,6 +110,12 @@ if (YII_ENV_DEV)
                 'icsrVersionsResponse' => [
                     'baseSubPath' =>'icsrsVersionsReponse'
                 ],
+                'psmfImages' => [
+                    'baseSubPath' => 'psmfImages'
+                ],
+                'psmfHtml' => [
+                    'baseSubPath' => 'psmfHtml'
+                ]
                 ]
             ];
 

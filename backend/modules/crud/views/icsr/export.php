@@ -19,7 +19,6 @@ use dmstr\bootstrap\Tabs;
  $formatter = \Yii::$app->formatter;
   
 ?>
-
 <ichicsr lang="en">
 	<ichicsrmessageheader>
 		<messagetype>ICSR</messagetype>
