@@ -40,7 +40,7 @@ use yii\helpers\StringHelper;
                  [
                    'encodeLabels' => false,
                      'items' => [ [
-    'label'   => Yii::t('app', StringHelper::basename('backend\modules\crud\models\Psmf')),
+    'label'   => Yii::t('app', 'BSMF'),
     'content' => $this->blocks['main'],
     'active'  => true,
 ], ]

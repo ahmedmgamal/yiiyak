@@ -26,8 +26,8 @@ Yii::$app->view->params['pageButtons'] = Html::a('<span class="glyphicon glyphic
     <?php \yii\widgets\Pjax::begin(['id'=>'pjax-main', 'enableReplaceState'=> false, 'linkSelector'=>'#pjax-main ul.pagination a, th a', 'clientOptions' => ['pjax:success'=>'function(){alert("yo")}']]) ?>
 
     <h1>
-        <?= Yii::t('app', 'Psmfs') ?>        <small>
-            List
+        <?= Yii::t('app', 'BSMF  Versions') ?>        <small>
+
         </small>
     </h1>
     <div class="clearfix crud-navigation">
@@ -63,7 +63,7 @@ Yii::$app->view->params['pageButtons'] = Html::a('<span class="glyphicon glyphic
             ,
 			[
 			    'attribute' => 'user_id',
-                'label' => Yii::t('app','Exported By'),
+                'label' => Yii::t('app','Created By'),
                 'value' => function ($model)
                 {
                     return $model->user->username;

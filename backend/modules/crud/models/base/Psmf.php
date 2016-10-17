@@ -75,7 +75,7 @@ abstract class Psmf extends \yii\db\ActiveRecord
             'comment' => 'Comment',
             'version' => 'Version',
             'file_url' => 'File Url',
-            'created_at' => 'Exported At',
+            'created_at' => 'Created At',
         ];
     }
 

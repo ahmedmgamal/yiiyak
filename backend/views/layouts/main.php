@@ -55,7 +55,7 @@ AppAsset::register($this);
         $userRole = \Yii::$app->authManager->getRolesByUser(\Yii::$app->user->id);
 
         if (\Yii::$app->user->can('/crud/psmf/index') && !isset($userRole['admin'])){
-            $menuItems [] =  ['label' => 'PSMF', 'url' => ['/crud/psmf/index']];
+            $menuItems [] =  ['label' => 'BSMF', 'url' => ['/crud/psmf/index']];
         }
 
         if (\Yii::$app->user->can('/crud/drug/index') && !isset($userRole['admin'])){

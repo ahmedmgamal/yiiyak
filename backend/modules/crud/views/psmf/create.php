@@ -8,14 +8,14 @@ use yii\helpers\Html;
 */
 
 $this->title = 'Create';
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Psmfs'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'BSMFS'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="giiant-crud psmf-create">
 
     <h1>
-        <?= Yii::t('app', 'Psmf') ?>        <small>
-                        <?= $model->id ?>        </small>
+        <?= Yii::t('app', 'BSMF Versions') ?>        <small>
+                              </small>
     </h1>
 
     <div class="clearfix crud-navigation">
