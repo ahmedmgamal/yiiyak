@@ -115,10 +115,40 @@ if (YII_ENV_DEV)
                 ],
                 'psmfHtml' => [
                     'baseSubPath' => 'psmfHtml'
-                ]
+                ],
+                'psmfFile' => [
+                    'baseSubPath' => 'psmfFiles'
+                ],
                 ]
             ];
 
 
+}
+else{
+    $config['components'][ 'fileStorage'] =
+
+        [
+            'class' => 'yii2tech\filestorage\local\Storage',
+            'basePath' => '@webroot/files',
+            'baseUrl' => '@web/files',
+            'filePermission' => 0777,
+            'buckets' => [
+                'icsrVersions' => [
+                    'baseSubPath' => 'icsrsVersions',
+                ],
+                'icsrVersionsResponse' => [
+                    'baseSubPath' =>'icsrsVersionsReponse'
+                ],
+                'psmfImages' => [
+                    'baseSubPath' => 'psmfImages'
+                ],
+                'psmfHtml' => [
+                    'baseSubPath' => 'psmfHtml'
+                ],
+                'psmfFile' => [
+                    'baseSubPath' => 'psmfFiles'
+                ],
+            ]
+        ];
 }
 return $config;
