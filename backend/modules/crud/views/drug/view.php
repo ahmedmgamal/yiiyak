@@ -49,6 +49,11 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
             <?php echo Html::a('<span class="glyphicon glyphicon-pencil"></span> ' . Yii::t('app', 'Edit'), ['update', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
             <?php echo Html::a('<span class="glyphicon glyphicon-copy"></span> ' . Yii::t('app', 'Copy'), ['create', 'id' => $model->id, 'Drug            '=>$copyParams], ['class' => 'btn btn-success']) ?>
             <?php echo Html::a('<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('app', 'New'), ['create'], ['class' => 'btn btn-success']) ?>
+			<?php
+			if ($model->isSignaled()) {
+				 echo '<span style="color: #b94a48"> <span class="glyphicon glyphicon-warning-sign "></span> '.Yii::t('app','Signal Detected Check Icsrs Below').'</span>';
+			}
+			?>
         </div>
         <div class="pull-right">
             <?php echo Html::a('<span class="glyphicon glyphicon-list"></span> ' . Yii::t('app', 'Full list'), ['index'], ['class'=>'btn btn-default']) ?>
@@ -107,7 +112,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 		],
 		'columns' => [[
 				'class'      => 'yii\grid\ActionColumn',
-				'template'   => '{view} {update}',
+				'template'   => '{view} {update} {signal}',
 				'contentOptions' => ['nowrap'=>'nowrap'],
 
 				/**
@@ -120,6 +125,16 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 					return $params;
 				},
 				'buttons'    => [
+					'signal' => function ($url,$model) use ($signaledIcsrs){
+						foreach ($signaledIcsrs as $key => $row)
+						{
+							if ($row['icsr_id'] == $model->id)
+							{
+								return '<small  style="color: #b94a48"><span class="glyphicon glyphicon-warning-sign "></span> '.Yii::t('app','Signal Detected'). '</small>';
+							}
+						}
+						return '';
+					}
 
 				],
 				'controller' => '/crud/icsr'

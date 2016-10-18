@@ -59,7 +59,7 @@ class DrugController extends \backend\modules\crud\controllers\base\DrugControll
                // $criteria = ;
 
         $_GET['Drug']['company_id'] = Yii::$app->user->identity->getCompany()->one()->id;
-
+        $signaledDrugs =  Yii::$app->user->identity->company->getSignaledDrugs();
  		$dataProvider = $searchModel->search($_GET);
 
 		Tabs::clearLocalStorage();
@@ -70,6 +70,7 @@ class DrugController extends \backend\modules\crud\controllers\base\DrugControll
 		return $this->render('index', [
 				'dataProvider' => $dataProvider,
 				'searchModel' => $searchModel,
+                'signaledDrugs' => $signaledDrugs
 			]);
 	}
 

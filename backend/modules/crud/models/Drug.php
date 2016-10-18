@@ -30,5 +30,33 @@ class Drug extends BaseDrug
             ]);
     }
 
+    public function isSignaled()
+    {
+        $connection = Yii::$app->getDb();
+        $command = $connection
+            ->createCommand("SELECT icsr_id,drug_id,icsr_event.id,meddra_pt_text FROM `icsr_event` 
+                                   join icsr on icsr.id=icsr_event.icsr_id 
+                                   where `icsr`.drug_id = {$this->id} 
+                                   group by meddra_pt_text,drug_id having count(icsr_event.id)>=3");
+
+        $result = $command->queryAll();
+
+        return $result;
+    }
+
+    public function getSignaledIcsrs ($meddraPtText)
+    {
+        $connection = Yii::$app->getDb();
+        $command = $connection
+            ->createCommand("SELECT `icsr_event`.`icsr_id` from `icsr_event`
+                                    join icsr on `icsr`.`id` = `icsr_event`.`icsr_id` 
+                                    where meddra_pt_text = '{$meddraPtText}' AND `icsr`.`drug_id` = {$this->id}");
+
+
+        $result = $command->queryAll();
+
+        return $result;
+    }
+
 
 }
