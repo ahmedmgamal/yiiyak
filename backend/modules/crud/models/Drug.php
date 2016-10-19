@@ -46,11 +46,12 @@ class Drug extends BaseDrug
 
     public function getSignaledIcsrs ($meddraPtText)
     {
+        $meddraPtText = implode("','",$meddraPtText);
         $connection = Yii::$app->getDb();
         $command = $connection
             ->createCommand("SELECT `icsr_event`.`icsr_id` from `icsr_event`
                                     join icsr on `icsr`.`id` = `icsr_event`.`icsr_id` 
-                                    where meddra_pt_text = '{$meddraPtText}' AND `icsr`.`drug_id` = {$this->id}");
+                                    where meddra_pt_text IN ('{$meddraPtText}') AND `icsr`.`drug_id` = {$this->id}");
 
 
         $result = $command->queryAll();

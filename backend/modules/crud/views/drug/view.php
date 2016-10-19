@@ -126,6 +126,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 				},
 				'buttons'    => [
 					'signal' => function ($url,$model) use ($signaledIcsrs){
+
 						foreach ($signaledIcsrs as $key => $row)
 						{
 							if ($row['icsr_id'] == $model->id)

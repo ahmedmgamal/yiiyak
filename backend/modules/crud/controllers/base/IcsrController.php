@@ -54,9 +54,12 @@ public $enableCsrfValidation = false;
         \Yii::$app->session['__crudReturnUrl'] = Url::previous();
         Url::remember();
         Tabs::rememberActiveState();
+        $model = $this->findModel($id);
+        $signaledIcsrsAndIcsrsEvents = $model->getSignaledIcsrsAndIcsrsEvents();
 
-        return $this->render('view', [
-            'model' => $this->findModel($id),
+       return $this->render('view', [
+            'model' => $model,
+            'signaledIcsrsAndIcsrsEvents' => $signaledIcsrsAndIcsrsEvents
         ]);
     }
 

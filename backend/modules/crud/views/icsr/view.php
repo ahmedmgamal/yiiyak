@@ -53,6 +53,14 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
             }
             ?>
 
+            <?php
+			if (count($signaledIcsrsAndIcsrsEvents) >= 3) {
+                echo '<span style="color: #b94a48"> <span class="glyphicon glyphicon-warning-sign "></span> '.Yii::t('app','Signal Detected Check Icsrs Events Tab').'</span>';
+            }
+			?>
+
+
+
         </div>
 
 
@@ -222,7 +230,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                         ],
                         'columns' => [[
                         'class' => 'yii\grid\ActionColumn',
-                        'template' => '{view} {update}',
+                        'template' => '{view} {update} {signal}',
                         'contentOptions' => ['nowrap' => 'nowrap'],
                         'urlCreator' => function ($action, $model, $key, $index) {
                     // using the column name as key, not mapping to 'id' like the standard generator
@@ -231,6 +239,16 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                     return $params;
                 },
                         'buttons' => [
+                            'signal' => function ($url,$model) use ($signaledIcsrsAndIcsrsEvents) {
+                                if (count($signaledIcsrsAndIcsrsEvents) >= 3) {
+                                foreach ($signaledIcsrsAndIcsrsEvents as $key => $row) {
+                                    if ($row['id'] == $model->id) {
+                                        return '<small  style="color: #b94a48"><span class="glyphicon glyphicon-warning-sign "></span> ' . Yii::t('app', 'Signal Detected') . '</small>';
+                                    }
+                                }
+                            }
+                                return '';
+                            }
                         ],
                         'controller' => 'icsr-event'
                             ],
