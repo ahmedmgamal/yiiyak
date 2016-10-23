@@ -67,8 +67,11 @@ class DrugController extends Controller
 		Tabs::rememberActiveState();
         $model = $this->findModel($id);
         $signaledDrugs =  \Yii::$app->user->identity->company->getSignaledDrugs();
+
         $meddra_pt_text = [];
+
         $signaledIcsrs = [];
+
         if ($signaledDrugs) {
             foreach ($signaledDrugs as $key => $row) {
                 if ($row['drug_id'] == $model->id) {

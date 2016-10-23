@@ -51,7 +51,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
             <?php echo Html::a('<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('app', 'New'), ['create'], ['class' => 'btn btn-success']) ?>
 			<?php
 			if ($model->isSignaled()) {
-				 echo '<span style="color: #b94a48"> <span class="glyphicon glyphicon-warning-sign "></span> '.Yii::t('app','Signal Detected Check Icsrs Below').'</span>';
+				 echo '<span class="alert-signal-color"> <span class="glyphicon glyphicon-warning-sign "></span> '.Yii::t('app','Signal Detected Check Icsrs Below').'</span>';
 			}
 			?>
         </div>
@@ -127,14 +127,13 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 				'buttons'    => [
 					'signal' => function ($url,$model) use ($signaledIcsrs){
 
-						foreach ($signaledIcsrs as $key => $row)
+						if ($model->isInSignaledIcsrs($signaledIcsrs))
 						{
-							if ($row['icsr_id'] == $model->id)
-							{
-								return '<small  style="color: #b94a48"><span class="glyphicon glyphicon-warning-sign "></span> '.Yii::t('app','Signal Detected'). '</small>';
-							}
+							return '<small class="alert-signal-color"><span class="glyphicon glyphicon-warning-sign "></span> '.Yii::t('app','Signal Detected'). '</small>';
+
 						}
 						return '';
+
 					}
 
 				],
@@ -186,3 +185,5 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 );
 ?>
 </div>
+
+<?php $this->registerCssFile('@web/crud/global/global.css');?>

@@ -59,5 +59,17 @@ class Drug extends BaseDrug
         return $result;
     }
 
+    public function isInSignaledDrugs($signaledDrugs)
+    {
+        foreach ($signaledDrugs as $key => $row)
+        {
+            if ($row['drug_id'] == $this->id)
+            {
+               return 1;
+            }
+        }
+
+        return 0;
+    }
 
 }

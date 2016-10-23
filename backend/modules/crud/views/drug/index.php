@@ -68,13 +68,11 @@ $this->params['breadcrumbs'][] = $this->title;
 				'buttons' => [
 					'signal' => function ($url,$model) use ($signaledDrugs){
 
-							foreach ($signaledDrugs as $key => $row)
-							{
-								if ($row['drug_id'] == $model->id)
-								{
-									return '<small  style="color: #b94a48"><span class="glyphicon glyphicon-warning-sign "></span> '.Yii::t('app','Signal Detected'). '</small>';
-								}
-							}
+						if ($model->isInSignaledDrugs($signaledDrugs))
+						{
+							return '<small  class="alert-signal-color"><span class="glyphicon glyphicon-warning-sign "></span> '.Yii::t('app','Signal Detected'). '</small>';
+						}
+
 							return '';
 					}
 				]
@@ -100,3 +98,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 <?php \yii\widgets\Pjax::end() ?>
+
+
+
+<?php $this->registerCssFile('@web/crud/global/global.css');?>

@@ -55,7 +55,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 
             <?php
 			if (count($signaledIcsrsAndIcsrsEvents) >= 3) {
-                echo '<span style="color: #b94a48"> <span class="glyphicon glyphicon-warning-sign "></span> '.Yii::t('app','Signal Detected Check Icsrs Events Tab').'</span>';
+                echo '<span class="alert-signal-color"> <span class="glyphicon glyphicon-warning-sign "></span> '.Yii::t('app','Signal Detected Check Icsrs Events Tab').'</span>';
             }
 			?>
 
@@ -243,7 +243,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                                 if (count($signaledIcsrsAndIcsrsEvents) >= 3) {
                                 foreach ($signaledIcsrsAndIcsrsEvents as $key => $row) {
                                     if ($row['id'] == $model->id) {
-                                        return '<small  style="color: #b94a48"><span class="glyphicon glyphicon-warning-sign "></span> ' . Yii::t('app', 'Signal Detected') . '</small>';
+                                        return '<small  class="alert-signal-color"><span class="glyphicon glyphicon-warning-sign "></span> ' . Yii::t('app', 'Signal Detected') . '</small>';
                                     }
                                 }
                             }
@@ -542,7 +542,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                                                                     ], [
                                                                         'content' => $this->blocks['DrugPrescriptions'],
                                                                     'label' => count($model->getDrugPrescriptions()->asArray()->all()) <1 ?
-                                                                                '<small>Drug Prescriptions <span class="badge badge-default">' . count($model->getDrugPrescriptions()->asArray()->all()) . '</span> <span class="glyphicon glyphicon-warning-sign " style="color: #b94a48"></span></small>'
+                                                                                '<small>Drug Prescriptions <span class="badge badge-default">' . count($model->getDrugPrescriptions()->asArray()->all()) . '</span> <span class="glyphicon glyphicon-warning-sign alert-signal-color" ></span></small>'
                                                                                  :
                                                                                 '<small>Drug Prescriptions <span class="badge badge-default">' . count($model->getDrugPrescriptions()->asArray()->all()) . '</span></small>'
                                                                     ,
@@ -551,7 +551,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                                                                     [
                                                                         'content' => $this->blocks['IcsrEvents'],
                                                                         'label' => count($model->getIcsrEvents()->asArray()->all()) <1 ?
-                                                                            '<small>Icsr Events <span class="badge badge-default">'.count($model->getIcsrEvents()->asArray()->all()).'  </span> <span class="glyphicon glyphicon-warning-sign " style="color: #b94a48"></span></small>'
+                                                                            '<small>Icsr Events <span class="badge badge-default">'.count($model->getIcsrEvents()->asArray()->all()).'  </span> <span class="glyphicon glyphicon-warning-sign alert-signal-color" ></span></small>'
                                                                             :
                                                                             '<small>Icsr Events <span class="badge badge-default">'.count($model->getIcsrEvents()->asArray()->all()) . '</span></small>'
                                                                         ,
@@ -563,7 +563,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                                                                     ], [
                                                                         'content' => $this->blocks['IcsrReporters'],
                                                                         'label' => count($model->getIcsrReporters()->asArray()->all()) <1 ?
-                                                                            '<small>Icsr Reporters <span class="badge badge-default">' . count($model->getIcsrReporters()->asArray()->all()) . '</span> <span class="glyphicon glyphicon-warning-sign " style="color: #b94a48"></span></small>'
+                                                                            '<small>Icsr Reporters <span class="badge badge-default">' . count($model->getIcsrReporters()->asArray()->all()) . '</span> <span class="glyphicon glyphicon-warning-sign alert-signal-color" ></span></small>'
                                                                             :
                                                                             '<small>Icsr Reporters <span class="badge badge-default">' . count($model->getIcsrReporters()->asArray()->all()) . '</span></small>'
                                                                         ,
@@ -584,3 +584,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                                                     );
                                                     ?>
 </div>
+
+
+
+<?php $this->registerCssFile('@web/crud/global/global.css');?>

@@ -133,4 +133,16 @@ public function  isIcsrExported($icsr_id)
         return $result;
     }
 
+    public function isInSignaledIcsrs ($signaledIcsrs)
+    {
+        foreach ($signaledIcsrs as $key => $row)
+        {
+            if ($row['icsr_id'] == $this->id)
+            {
+                return 1;
+            }
+        }
+        return 0;
+    }
+
 }
