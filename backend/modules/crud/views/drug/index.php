@@ -68,7 +68,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				'buttons' => [
 					'signal' => function ($url,$model) use ($signaledDrugs){
 
-						if ($model->isInSignaledDrugs($signaledDrugs))
+						if ($model->isSignaled($signaledDrugs,'drug_id'))
 						{
 							return '<small  class="alert-signal-color"><span class="glyphicon glyphicon-warning-sign "></span> '.Yii::t('app','Signal Detected'). '</small>';
 						}

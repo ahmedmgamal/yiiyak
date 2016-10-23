@@ -16,7 +16,9 @@ use yii\helpers\ArrayHelper;
  */
 class Icsr extends BaseIcsr
 {
-    use traits\checkAccess;
+    use traits\checkAccess,traits\checkSignal;
+
+
     /**
      * @inheritdoc
      */
@@ -119,30 +121,8 @@ public function  isIcsrExported($icsr_id)
     }
 
 
-    public function getSignaledIcsrsAndIcsrsEvents()
-    {
-        $connection = Yii::$app->getDb();
-        $command = $connection
-            ->createCommand("SELECT icsr_id,drug_id,icsr_event.id FROM `icsr_event` 
-                                   join icsr on icsr.id=icsr_event.icsr_id 
-                                   where `icsr`.drug_id = {$this->drug_id} 
-                                   AND meddra_pt_text = (select meddra_pt_text from icsr_event where icsr_id={$this->id})");
 
-        $result = $command->queryAll();
 
-        return $result;
-    }
 
-    public function isInSignaledIcsrs ($signaledIcsrs)
-    {
-        foreach ($signaledIcsrs as $key => $row)
-        {
-            if ($row['icsr_id'] == $this->id)
-            {
-                return 1;
-            }
-        }
-        return 0;
-    }
 
 }

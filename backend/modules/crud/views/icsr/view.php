@@ -54,7 +54,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
             ?>
 
             <?php
-			if (count($signaledIcsrsAndIcsrsEvents) >= 3) {
+			if ($model->isSignaled($signaledIcsrsAndIcsrsEvents,'icsr_id')) {
                 echo '<span class="alert-signal-color"> <span class="glyphicon glyphicon-warning-sign "></span> '.Yii::t('app','Signal Detected Check Icsrs Events Tab').'</span>';
             }
 			?>
@@ -240,13 +240,12 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                 },
                         'buttons' => [
                             'signal' => function ($url,$model) use ($signaledIcsrsAndIcsrsEvents) {
-                                if (count($signaledIcsrsAndIcsrsEvents) >= 3) {
-                                foreach ($signaledIcsrsAndIcsrsEvents as $key => $row) {
-                                    if ($row['id'] == $model->id) {
-                                        return '<small  class="alert-signal-color"><span class="glyphicon glyphicon-warning-sign "></span> ' . Yii::t('app', 'Signal Detected') . '</small>';
-                                    }
+                                if ($model->isSignaled($signaledIcsrsAndIcsrsEvents,'id')) {
+
+                                    return '<small  class="alert-signal-color"><span class="glyphicon glyphicon-warning-sign "></span> ' . Yii::t('app', 'Signal Detected') . '</small>';
+
                                 }
-                            }
+
                                 return '';
                             }
                         ],

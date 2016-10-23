@@ -55,7 +55,11 @@ public $enableCsrfValidation = false;
         Url::remember();
         Tabs::rememberActiveState();
         $model = $this->findModel($id);
-        $signaledIcsrsAndIcsrsEvents = $model->getSignaledIcsrsAndIcsrsEvents();
+        $signaledDrugs =  \Yii::$app->user->identity->company->getSignaledDrugs();
+
+        $signaledIcsrsAndIcsrsEvents = $model->drug->getSignaledIcsrsAndIcsrEvenets($signaledDrugs);
+
+
 
        return $this->render('view', [
             'model' => $model,

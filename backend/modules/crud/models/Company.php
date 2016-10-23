@@ -43,9 +43,9 @@ class Company extends BaseCompany
         $command = $connection
                 ->createCommand("SELECT icsr_id,drug_id,icsr_event.id,meddra_pt_text FROM `icsr_event` 
                                    join icsr on icsr.id=icsr_event.icsr_id 
-                                   where `icsr`.drug_id IN 
-                                          (select id from drug where company_id={$this->id}) group by meddra_pt_text,drug_id having count(icsr_event.id)>=3");
-
+									join drug on `icsr`.drug_id = `drug`.id
+									where `drug`.company_id={$this->id}
+									 group by meddra_pt_text,drug_id having count(icsr_event.id)>=3");
         $result = $command->queryAll();
         //returns array of rows like
         //  [[icsr_id] => 155 [drug_id] => 41 [id] => 93 [meddra_pt_text] => medra pt test ]

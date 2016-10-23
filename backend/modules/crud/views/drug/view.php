@@ -50,7 +50,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
             <?php echo Html::a('<span class="glyphicon glyphicon-copy"></span> ' . Yii::t('app', 'Copy'), ['create', 'id' => $model->id, 'Drug            '=>$copyParams], ['class' => 'btn btn-success']) ?>
             <?php echo Html::a('<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('app', 'New'), ['create'], ['class' => 'btn btn-success']) ?>
 			<?php
-			if ($model->isSignaled()) {
+			if ($model->isSignaled($signaledDrugs,'drug_id')) {
 				 echo '<span class="alert-signal-color"> <span class="glyphicon glyphicon-warning-sign "></span> '.Yii::t('app','Signal Detected Check Icsrs Below').'</span>';
 			}
 			?>
@@ -127,7 +127,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 				'buttons'    => [
 					'signal' => function ($url,$model) use ($signaledIcsrs){
 
-						if ($model->isInSignaledIcsrs($signaledIcsrs))
+						if ($model->isSignaled($signaledIcsrs,'icsr_id'))
 						{
 							return '<small class="alert-signal-color"><span class="glyphicon glyphicon-warning-sign "></span> '.Yii::t('app','Signal Detected'). '</small>';
 

@@ -10,7 +10,7 @@ use \backend\modules\crud\traits;
  */
 class IcsrEvent extends BaseIcsrEvent
 {
-    use traits\checkAccess;
+    use traits\checkAccess,traits\checkSignal;
     public function attributeLabels()
     {
         return array_merge(parent::attributeLabels(), [
@@ -31,5 +31,7 @@ class IcsrEvent extends BaseIcsrEvent
 
             ]];
     }
+
+
 
 }

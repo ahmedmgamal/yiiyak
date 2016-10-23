@@ -12,7 +12,7 @@ use bedezign\yii2\audit\models\AuditTrail;
 class Drug extends BaseDrug
 {
     use traits\checkAccess;
-    use traits\checkLimit;
+    use traits\checkLimit,traits\checkSignal;
 
     public function attributeHints()
     {
@@ -30,26 +30,27 @@ class Drug extends BaseDrug
             ]);
     }
 
-    public function isSignaled()
+
+
+    public function getSignaledIcsrsAndIcsrEvenets ($signaledDrugs)
     {
-        $connection = Yii::$app->getDb();
-        $command = $connection
-            ->createCommand("SELECT icsr_id,drug_id,icsr_event.id,meddra_pt_text FROM `icsr_event` 
-                                   join icsr on icsr.id=icsr_event.icsr_id 
-                                   where `icsr`.drug_id = {$this->id} 
-                                   group by meddra_pt_text,drug_id having count(icsr_event.id)>=3");
+        $meddra_pt_text = [];
+        foreach ($signaledDrugs as $key => $row) {
+            if ($row['drug_id'] == $this->id) {
+                $meddra_pt_text [] = $row['meddra_pt_text'];
+            }
+        }
 
-        $result = $command->queryAll();
+        return $this->getSignaledIcsrsQueryByMeddraPt($meddra_pt_text);
 
-        return $result;
     }
 
-    public function getSignaledIcsrs ($meddraPtText)
+    public function getSignaledIcsrsQueryByMeddraPt ($meddraPtText)
     {
         $meddraPtText = implode("','",$meddraPtText);
         $connection = Yii::$app->getDb();
         $command = $connection
-            ->createCommand("SELECT `icsr_event`.`icsr_id` from `icsr_event`
+            ->createCommand("SELECT `icsr_event`.`icsr_id` , `icsr_event`.`id` , `meddra_pt_text` from `icsr_event`
                                     join icsr on `icsr`.`id` = `icsr_event`.`icsr_id` 
                                     where meddra_pt_text IN ('{$meddraPtText}') AND `icsr`.`drug_id` = {$this->id}");
 
@@ -59,17 +60,6 @@ class Drug extends BaseDrug
         return $result;
     }
 
-    public function isInSignaledDrugs($signaledDrugs)
-    {
-        foreach ($signaledDrugs as $key => $row)
-        {
-            if ($row['drug_id'] == $this->id)
-            {
-               return 1;
-            }
-        }
 
-        return 0;
-    }
 
 }
