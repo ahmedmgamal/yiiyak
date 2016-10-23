@@ -68,11 +68,9 @@ class DrugController extends Controller
         $model = $this->findModel($id);
         $signaledDrugs =  \Yii::$app->user->identity->company->getSignaledDrugs();
 
-        $signaledIcsrs = [];
 
-        if ($signaledDrugs) {
-            $signaledIcsrs  = $model->getSignaledIcsrsAndIcsrEvenets($signaledDrugs);
-        }
+        $signaledIcsrs  = $model->getSignaledIcsrsAndIcsrEvenets($signaledDrugs);
+
 
 		return $this->render('view', [
 				'model' => $model,
