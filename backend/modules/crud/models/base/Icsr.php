@@ -276,6 +276,10 @@ public function getCompany() {
     return $this->drug->company;
 }
 
+    public function getNarrative()
+    {
+        return $this->hasOne(\backend\modules\crud\models\IcsrNarritive::className(),['icsr_id' => 'id']);
+    }
 
     /**
      * get column patient_age_unit enum value label

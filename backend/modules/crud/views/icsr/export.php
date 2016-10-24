@@ -225,7 +225,18 @@ use dmstr\bootstrap\Tabs;
 				<drugadditional><?php echo $drug->drug_addtional_info ; ?></drugadditional>
 			</drug>
 	<?php } ?>
+		<?php if (isset($model->narrative->id)){ ?>
+			<!-- B.5 Narrative case summary and further information-->
+			<summary>
+				<!-- B.5.1 Case narrative including clinical course, therapeutic measures, outcome and additional relevant information -->
+				<narrativeincludeclinical><?php echo $model->narrative->narritive ?></narrativeincludeclinical>
+				<!-- B.5.2 Reporter's comments -->
+				<reportercomment><?php echo $model->narrative->reporter_comment ?></reportercomment>
+				<!-- B.5.4 Sender's comments -->
+				<sendercomment><?php echo $model->narrative->sender_comment?></sendercomment>
 
+			</summary>
+			<?php }?>
  		</patient>
 	</safetyreport>
 </ichicsr>
