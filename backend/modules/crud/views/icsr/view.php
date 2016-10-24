@@ -605,7 +605,15 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                                                                             '<small>Icsr Reporters <span class="badge badge-default">' . count($model->getIcsrReporters()->asArray()->all()) . '</span></small>'
                                                                         ,
                                                                         'active' => false,
-                                                                    ],[
+                                                                    ],
+                                                                    [
+                                                                        'content' => $this->blocks['Narrative'],
+                                                                        'label' => '<small>'.Yii::t('app','Narrative').'</small>',
+                                                                        'url' => ['icsr-narritive/update?id='.$model->narrative->id] ,
+                                                                        'active' => false,
+
+                                                                    ],
+                                                                    [
                                                                         'content' => $this->blocks['IcsrHistory'],
                                                                         'label' => '<small>'.Yii::t('app','Audit Trail').' <span class="badge badge-default">' . count($model->getIcsrTrails()->asArray()->all()) . '</span></small>',
                                                                         'active' => false,
@@ -616,12 +624,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                                                                         'active' => false,
 
                                                                     ],
-                                                                    [
-                                                                        'content' => $this->blocks['Narrative'],
-                                                                        'label' => '<small>'.Yii::t('app','Narrative').' <span class="badge badge-default">' . count($model->getNarrative()->asArray()->all()) . '</span></small>',
-                                                                        'active' => false,
 
-                                                                    ]
                                                                 ]
                                                             ]
                                                     );

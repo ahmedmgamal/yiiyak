@@ -18,6 +18,7 @@ use yii\helpers\Url;
 use yii\filters\AccessControl;
 use dmstr\bootstrap\Tabs;
 use backend\modules\crud\models\IcsrVersion;
+use backend\modules\crud\models\IcsrNarritive;
 
 /**
  * This is the class for controller "IcsrController".
@@ -57,6 +58,10 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
 		try {
 			if ($model->load($_POST) ) {
                 if ( $model->save()) {
+                    $narritive = new IcsrNarritive();
+                    $narritive->icsr_id = $model->id;
+
+                    $narritive->save();
                     $pres = new DrugPrescription;
                     $pres->drug_id =($model->getDrug()->one()->id);
                     $pres->drug_role = '1';//value of suspect

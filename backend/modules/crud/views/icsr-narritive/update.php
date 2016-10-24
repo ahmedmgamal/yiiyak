@@ -18,9 +18,6 @@ $this->params['breadcrumbs'][] = 'Edit';
                                 </small>
     </h1>
 
-    <div class="crud-navigation">
-        <?= Html::a('<span class="glyphicon glyphicon-eye-open"></span> ' . 'View', ['view', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
-    </div>
 
     <hr />
 
