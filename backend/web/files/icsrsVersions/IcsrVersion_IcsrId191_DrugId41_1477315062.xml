@@ -1,0 +1,177 @@
+<ichicsr lang="en">
+	<ichicsrmessageheader>
+		<messagetype>ICSR</messagetype>
+		<messageformatversion>2.1</messageformatversion>
+		<messageformatrelease>1.0</messageformatrelease>
+		<messagenumb>191</messagenumb>
+		<messagesenderidentifier>normal 3 company</messagesenderidentifier>
+		<messagereceiveridentifier>EPVC</messagereceiveridentifier>
+		<messagedateformat>102</messagedateformat>
+		<messagedate>20161024 </messagedate>
+	</ichicsrmessageheader>
+	<safetyreport>
+		<safetyreportversion>3</safetyreportversion>
+
+		<!--A.1.0.1 Sender’s (case) safety report unique identifier-->
+		<safetyreportid> EG-normal 3 company-191</safetyreportid>
+
+		<!--     A.1.1 Identification of the country of the primary source -->
+		<primarysourcecountry>EG</primarysourcecountry>
+		
+		<!--      A.1.3 Date of this transmission -->
+		<transmissiondateformat>102</transmissiondateformat>
+		<transmissiondate>20161024 </transmissiondate>
+
+		<!--     A.1.4 Type of report --> 
+		<reporttype>1</reporttype>
+ 		
+ 		<!--A.1.5 Seriousness -->
+ 		<serious>1</serious>
+
+		<!--A.1.5.2. Seriousness criteria-->
+		<seriousnessdeath>1</seriousnessdeath>
+		<seriousnesslifethreatening>1</seriousnesslifethreatening>
+		<seriousnesshospitalization>1</seriousnesshospitalization>
+		<seriousnessdisabling>1</seriousnessdisabling>
+		<seriousnesscongenitalanomali>1</seriousnesscongenitalanomali>
+		<seriousnessother>1</seriousnessother>
+		
+		<!--*** A.1.6 Date report was first received from source-->
+		<receivedateformat>102</receivedateformat>
+		<receivedate>19970102</receivedate>
+
+        <!--*** A.1.7	Date of receipt of the most recent information for this report --> 
+        <receiptdateformat>102</receiptdateformat>
+		<receiptdate>20161024 </receiptdate>
+		
+		<!--A.1.10	Worldwide unique case identification number.      -->
+		<companynumb> EG-normal 3 company-191</companynumb>
+
+		
+					<primarysource>
+				<!--A.2.1.1	Reporter identifier (name or initials)       -->
+				<reportergivename>asdf</reportergivename>
+				<reporterfamilyname></reporterfamilyname>
+				
+				<!-- A.2.1.2	Reporter’s address          -->
+				<reporterstreet>  </reporterstreet>
+				<reportercity></reportercity>
+				<reporterstate></reporterstate>
+				<reporterpostcode></reporterpostcode>
+			
+				<!--  A.2.1.3	Country           -->
+				<reportercountry>us</reportercountry>
+				
+				<!-- A.2.1.4	Qualification           -->
+				<qualification> 1 </qualification>
+
+			</primarysource>  
+	 
+		 
+	
+	<!-- A.3	Sender	and reviver          -->
+		<sender>
+ 			
+<!-- A.3.1.1	Sender Type          -->
+			<sendertype>1</sendertype>
+					
+<!--	A.3.1.2	Sender identifier          -->
+			<senderorganization>normal 3 company</senderorganization>
+
+<!--***	A.3.1.3	Person responsible for sending the report      -->
+			<sendergivename>normal3</sendergivename>
+
+<!-- A.3.1.4l E-mail address -->
+ 			<senderemailaddress>normal3@yahoo.com</senderemailaddress>
+
+ 		</sender>
+ 
+
+		<receiver>
+			 <!--	A.3.2.1	Receiver Type          -->
+			<receivertype>6</receivertype>
+		</receiver>
+
+		<patient>
+<!--  B.1.1	Patient (name or initials)        -->
+			<patientinitial></patientinitial>
+
+<!--  B.1.2.1	Date of birth         -->
+			<patientbirthdateformat>102</patientbirthdateformat>
+            <patientbirthdate>19700101</patientbirthdate>
+<!--  B.1.2.2	Age at time of onset of reaction / event   -->
+			<patientonsetage></patientonsetage>
+			<patientonsetageunit>803</patientonsetageunit>
+<!--  B.1.3	Weight (kg)          -->
+			<patientweight></patientweight>
+
+<!--  B.1.7.2	Text for relevant medical history and concurrent conditions (not including reaction/event) -->
+			<patientmedicalhistorytext></patientmedicalhistorytext>
+
+				<reaction>
+<!--  B.2.i.0	Reaction or event as reported by the primary source   -->
+				<primarysourcereaction>asdf</primarysourcereaction>
+
+<!--  B.2.i.1	Reaction or event in MedDRA terminology (Lowest Level Term)   -->
+				<reactionmeddraversionllt> v. 2.3 </reactionmeddraversionllt>
+				<reactionmeddrallt></reactionmeddrallt>
+<!--  B.2.i.2	Reaction or event in MedDRA terminology (Preferred Term)    -->
+				<reactionmeddraversionpt>  v. 2.3 </reactionmeddraversionpt>
+				<reactionmeddrapt></reactionmeddrapt>
+<!--  B.2.i.4	Date of start of reaction or event     -->
+				<reactionstartdateformat>102</reactionstartdateformat>
+				<reactionstartdate>19700101</reactionstartdate>
+<!--  B.2.i.5	Date of end of reaction or event     -->
+				<reactionenddateformat>102</reactionenddateformat>
+				<reactionenddate>19700101</reactionenddate>
+
+<!--  B.2.i.8	Outcome of reaction or event at the time of last observation (Recovered/resolved,Recovering/resolving,Not-->
+				<reactionoutcome>1</reactionoutcome>
+
+
+			</reaction>
+	
+
+					<drug>
+<!--  B.4.k.1	Characterization of drug role (Suspect/Concomitant/Interacting)    -->   
+				<drugcharacterization>1</drugcharacterization>
+
+<!--  B.4.k.2	Drug identification           -->
+
+ 
+				<medicinalproduct>This is a test product</medicinalproduct>
+
+				 <!--  B.4.k.3	Batch/lot number           -->
+				<drugbatchnumb></drugbatchnumb>
+
+<!--  B.4.k.6	Dosage text           -->
+				<drugdosagetext></drugdosagetext>
+
+<!--  B.4.k.8	Route of administration   -->       
+				<drugadministrationroute>11</drugadministrationroute>
+
+<!--  B.4.k.11	Indication for use in the case       -->
+				<drugindication></drugindication>
+<!--  B.4.k.12	Date of start of drug        -->
+				<drugstartdateformat>102</drugstartdateformat>
+				<drugstartdate>19700101</drugstartdate>
+<!--  B.4.k.14	Date of last administration      -->  
+ 				<drugenddateformat>102</drugenddateformat>
+				<drugenddate>19700101</drugenddate>
+<!--  B.4.k.15	Duration of drug administration      -->   
+				<drugtreatmentduration></drugtreatmentduration>
+				<drugtreatmentdurationunit></drugtreatmentdurationunit>
+<!--  B.4.k.16	Action(s) taken with drug (− Drug withdrawn,− Dose reduced,− Dose increased,− Dose -->
+
+			<actiondrug>1</actiondrug>
+
+
+<!--  B.4.k.17	Effect of rechallenge          -->
+				<drugrecurreadministration></drugrecurreadministration>
+
+<!--  B.4.k.19	Additional information on drug     -->    
+				<drugadditional></drugadditional>
+			</drug>
+			 		</patient>
+	</safetyreport>
+</ichicsr>
