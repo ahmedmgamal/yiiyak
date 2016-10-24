@@ -24,7 +24,8 @@ class Company extends BaseCompany
             'license_no' => Yii::t('app', 'License No'),
             'license_image_url' => Yii::t('app', 'License Image Url'),
             'end_date' => Yii::t('app','Subscription End Date'),
-             'plan_id' => Yii::t('app','Plan')
+             'plan_id' => Yii::t('app','Plan'),
+              'short_name' => Yii::t('app','Short Name')
             ]);
     }
     public function getUser($user_id){

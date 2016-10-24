@@ -35,6 +35,7 @@ use yii\jui\DatePicker;
 
         <p>
 			<?php echo $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+			<?php echo $form->field($model,'short_name')->textInput(['maxlength' => true])?>
 			<?php echo $form->field($model, 'adderess')->textInput(['maxlength' => true]) ?>
 			<?php echo $form->field($model, 'license_no')->textInput(['maxlength' => true]) ?>
 			<?php echo $form->field($model, 'license_image_url')->textInput(['maxlength' => true]) ?>
