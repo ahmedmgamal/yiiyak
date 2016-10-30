@@ -57,6 +57,7 @@ abstract class Company extends \yii\db\ActiveRecord
             [['name','end_date','plan_id','short_name'],'required'],
             [['id','plan_id'], 'integer'],
             [['short_name'],'string','max' => 4],
+            [['short_name'],'unique'],
             [['name', 'adderess', 'license_no', 'license_image_url'], 'string', 'max' => 45]
         ];
     }
