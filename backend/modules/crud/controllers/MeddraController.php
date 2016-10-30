@@ -2,6 +2,7 @@
 
 namespace backend\modules\crud\controllers;
 
+use Exception;
 use Yii;
 
 class MeddraController extends \yii\web\Controller
@@ -19,11 +20,26 @@ class MeddraController extends \yii\web\Controller
                                  'soc' => 'soc.asc',
                                  'soc_hlgt' =>'soc_hlgt.asc'];
 
+    private  $MEDDRA_MODELS = [   'hlgt' => 'MeddraHlgt',
+                                 'hlgt_hlt' =>  'MeddraHlgtHlt',
+                                 'hlt' =>'MeddraHlt',
+                                 'hlt_pt' => 'MeddraHltPt',
+                                 'intl_ord' => 'MeddraIntlOrd',
+                                 'llt' => 'MeddraLlt',
+                                 'mdhier' => 'MeddraMdhier',
+                                 'pt' => 'MeddraPt',
+                                 'SMQ_Content' => 'MeddraSmqContent',
+                                 'SMQ_List' => 'MeddraSmqList',
+                                 'soc' => 'MeddraSoc',
+                                 'soc_hlgt' =>'MeddraSocHlgt'];
+
+
+
+
     public function actionCreate()
     {
 
-
-            if (Yii::$app->request->isPost)
+        if (Yii::$app->request->isPost)
             {
                 $message = $this->checkFiles($_FILES['Meddra']);
                 if ($message['status'] == 'failed')
@@ -32,6 +48,13 @@ class MeddraController extends \yii\web\Controller
                     return $this->redirect(['create']);
                 }
 
+                  $saveUploadedFiles =$this->saveUploadedFiles($_FILES['Meddra']);
+
+                if ($saveUploadedFiles['status'] == 'failed')
+                {
+                    \Yii::$app->getSession()->setFlash('error', \Yii::t('app',$saveUploadedFiles['message']));
+                    return $this->redirect(['create']);
+                }
             }
 
 
@@ -66,5 +89,44 @@ class MeddraController extends \yii\web\Controller
 
         }
        return ['status' => 'success'];
+    }
+
+
+    private function saveUploadedFiles ($meddraFiles)
+    {
+        $bucket = Yii::$app->fileStorage->getBucket('meddra-files');
+
+        foreach ($meddraFiles['tmp_name'] as $key => $value)
+        {
+            try {
+                $fileName = $key . '_' . strtotime("now") . '.asci';
+                $bucket->copyFileIn($value, $fileName) ;
+
+                $modelClassName =  '\backend\modules\crud\models\\'.$this->MEDDRA_MODELS[$key];
+
+                $handle = fopen(Yii::getAlias('@webroot')."/files/MeddrFiles/".$fileName, "r") or die("Couldn't get handle");
+                $rows = [];
+                if ($handle) {
+                    while (!feof($handle)) {
+                        $buffer = fgets($handle, 4096);
+                        $row = str_getcsv($buffer, '$');
+                        array_pop($row);
+                        $rows []= $row;
+                    }
+                    fclose($handle);
+                }
+                array_pop($rows);
+
+                $model = new $modelClassName;
+                Yii::$app->db->createCommand()->batchInsert($model->tableName(),$model->attributes(),$rows)->execute();
+
+            }
+
+            catch (Exception $e)
+            {
+                return ['status' => 'failed' , 'message' => Yii::t('app','File with name "'.$key.'" Can`t be saved')];
+            }
+        }
+        return ['status' => 'success'];
     }
 }

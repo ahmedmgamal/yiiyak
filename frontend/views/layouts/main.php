@@ -70,9 +70,13 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="pull-left">&copy; PV-RADAR <?= date('Y') ?></p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
+        <?php if (file_exists(Yii::getAlias('@webroot').'/test-check.txt'))
+        {
+            echo "<p>".file_get_contents(Yii::getAlias('@webroot').'/test-check.txt')."</p>";
+        }
+        ?>
     </div>
 </footer>
 
