@@ -47,13 +47,24 @@ class MeddraController extends \yii\web\Controller
                     \Yii::$app->getSession()->setFlash('error', \Yii::t('app',$message['message']));
                     return $this->redirect(['create']);
                 }
+                $connection = \Yii::$app->db;
+                $transaction = $connection->beginTransaction();
 
-                  $saveUploadedFiles =$this->saveUploadedFiles($_FILES['Meddra']);
+                 $saveUploadedFiles =$this->saveUploadedFiles($_FILES['Meddra']);
 
                 if ($saveUploadedFiles['status'] == 'failed')
                 {
+                    $transaction->rollBack();
                     \Yii::$app->getSession()->setFlash('error', \Yii::t('app',$saveUploadedFiles['message']));
                     return $this->redirect(['create']);
+                }
+
+                if ($saveUploadedFiles['status'] == 'success')
+                {
+                    $transaction->commit();
+                    \Yii::$app->getSession()->setFlash('success', \Yii::t('app',$saveUploadedFiles['message']));
+                    return $this->redirect(['create']);
+
                 }
             }
 
@@ -118,6 +129,8 @@ class MeddraController extends \yii\web\Controller
                 array_pop($rows);
 
                 $model = new $modelClassName;
+
+                Yii::$app->db->createCommand()->truncateTable($model->tableName())->execute();
                 Yii::$app->db->createCommand()->batchInsert($model->tableName(),$model->attributes(),$rows)->execute();
 
             }
@@ -127,6 +140,6 @@ class MeddraController extends \yii\web\Controller
                 return ['status' => 'failed' , 'message' => Yii::t('app','File with name "'.$key.'" Can`t be saved')];
             }
         }
-        return ['status' => 'success'];
+        return ['status' => 'success' ,'message' => Yii::t('app','all files have been uploaded and saved')];
     }
 }
