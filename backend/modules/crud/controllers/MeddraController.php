@@ -38,7 +38,7 @@ class MeddraController extends \yii\web\Controller
 
     public function actionCreate()
     {
-
+        ini_set('max_execution_time', 2000);
         if (Yii::$app->request->isPost)
             {
                 $message = $this->checkFiles($_FILES['Meddra']);
@@ -117,8 +117,19 @@ class MeddraController extends \yii\web\Controller
 
                 $handle = fopen(Yii::getAlias('@webroot')."/files/MeddrFiles/".$fileName, "r") or die("Couldn't get handle");
                 $rows = [];
+                $rowCount = 0;
+                $model = new $modelClassName;
+                Yii::$app->db->createCommand()->truncateTable($model->tableName())->execute();
+
                 if ($handle) {
                     while (!feof($handle)) {
+                        $rowCount ++;
+                        if ($rowCount >= 600)
+                        {
+                            Yii::$app->db->createCommand()->batchInsert($model->tableName(), $model->attributes(), $rows)->execute();
+                            $rowCount = 0;
+                            $rows = [];
+                        }
                         $buffer = fgets($handle, 4096);
                         $row = str_getcsv($buffer, '$');
                         array_pop($row);
@@ -130,7 +141,6 @@ class MeddraController extends \yii\web\Controller
 
                 $model = new $modelClassName;
 
-                Yii::$app->db->createCommand()->truncateTable($model->tableName())->execute();
                 Yii::$app->db->createCommand()->batchInsert($model->tableName(),$model->attributes(),$rows)->execute();
 
             }
