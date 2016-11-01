@@ -39,6 +39,8 @@ class MeddraController extends \yii\web\Controller
     public function actionCreate()
     {
         ini_set('max_execution_time', 2000);
+        ini_set('memory_limit',-1);
+
         if (Yii::$app->request->isPost)
             {
                 $message = $this->checkFiles($_FILES['Meddra']);

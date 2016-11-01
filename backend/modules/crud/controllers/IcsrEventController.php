@@ -7,6 +7,8 @@
 
 
 namespace backend\modules\crud\controllers;
+use backend\modules\crud\models\base\Icsr;
+use Yii;
 use yii\filters\AccessControl;
 use backend\modules\crud\models\IcsrEvent;
 use backend\modules\crud\traits;
@@ -33,5 +35,24 @@ class IcsrEventController extends \backend\modules\crud\controllers\base\IcsrEve
                 ]
             ]
         ];
+    }
+
+
+    public function actionSearchLlt ($term)
+    {
+
+        $connection = Yii::$app->getDb();
+
+        $command = $connection->createCommand("
+             SELECT term FROM meddra_pt WHERE MATCH (term) AGAINST ('+{$term}*'IN BOOLEAN MODE ) LIMIT 10 ");
+
+        $result = $command->queryAll();
+        $response = [];
+        foreach ($result as $key => $value)
+        {
+         $response [] = $value['term'];
+        }
+        return json_encode($response);
+
     }
 }

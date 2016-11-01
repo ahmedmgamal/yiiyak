@@ -33,7 +33,10 @@ use yii\helpers\ArrayHelper;
 			<?php echo       Html::activeHiddenInput($model, 'icsr_id') ;?>
 			<?php echo $form->field($model, 'event_description')->textInput(['maxlength' => true]) ?>
  			<?= $form->field($model, 'meddra_llt_text')->textInput(['maxlength' => true]) ?>
-             <?= $form->field($model, 'meddra_pt_text')->textInput(['maxlength' => true]) ?>
+             <?= $form->field($model, 'meddra_pt_text')->textInput(['maxlength' => true])->widget(\yii\jui\AutoComplete::classname(), [
+                'model' => $model,
+                'attribute' => 'country',
+            ])?>
  
 
 
