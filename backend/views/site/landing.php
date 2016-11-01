@@ -46,72 +46,88 @@ use yii\bootstrap\Nav;
                 <section class="slice sct-color-2 bb">
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="block block-arrow arrow-down">
-                                    <div class="block-icon-wrapper scroll-on bounceInLeft" data-wow-duration="1s">
-                                        <div class="block-icon">
-                                            <?= Html::img('@web/images/icons/svg/services.png',['class' => 'img-responsive img-center', 'alt' => 'PV-Radar Services']) ?>
-                                        </div>
+                            <div class="col-md-4 block2">
+                                <div class="block block-arrow ">
+                                    <div class="block-icon-wrapper-ovverride scroll-on bounceInDown" data-wow-duration="1s">
+                                        <p class="circle2">
+                                            <span><?= Yii::t('app','PV-Radar Software');?></span>
+                                        </p>
                                     </div>
                                     <div class="block-body scroll-on fadeIn" data-wow-duration="1s">
-                                        <h1 class="block-title">Services PV-Radar </h1>
-                                        <p class="text-center">
-                                          <?= Yii::t('app','unlimited ICSR storgae ') ?>
-
+                                         <p class="text-center">
+                                            <?= Yii::t('app','ICSR E28 reporting support')?>
                                         </p>
                                         <p class="text-center">
-                                            <?= Yii::t('app','E2B complinet  ') ?>
+                                            <?= Yii::t('app','XML validate ICSR')?>
                                         </p>
-
                                         <p class="text-center">
-                                            <?= Yii::t('app','duplication detetciton') ?>
+                                            <?= Yii::t('app','Null case ICSR support')?>
+                                        </p>
+                                        <p class="text-center">
+                                            <?= Yii::t('app','Duplication check')?>
+                                        </p>
+                                        <p class="text-center">
+                                            <?= Yii::t('app','Signal detection')?>
                                         </p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="block block-arrow arrow-down">
-                                    <div class="block-icon-wrapper scroll-on bounceInDown" data-wow-duration="1s">
-                                        <div class="block-icon">
-                                            <?= Html::img('@web/images/icons/svg/set-1/book.svg',['class' => 'img-responsive img-center', 'alt' => 'PV-Radar Regulatroty']) ?>
-                                        </div>
+                            <div class="col-md-4 block2">
+                                <div class="block block-arrow ">
+                                    <div class="block-icon-wrapper-ovverride scroll-on bounceInDown" data-wow-duration="1s">
+                                        <p class="circle2 blue-light-color">
+                                            <span><?= Yii::t('app','PV-Radar Regulatory Services');?></span>
+                                        </p>
                                     </div>
                                     <div class="block-body scroll-on fadeIn" data-wow-duration="1s">
-                                        <h1 class="block-title"> PV regulatroty Follow UP  </h1>
-                                        <p class="text-center">
-                                           <?= Yii::t('app','Write and Submission and follow up diffrent PV regualtory requiremented')?>
+
+                                         <p class="text-center">
+                                           <?= Yii::t('app','Preparation and submission to PSMF')?>
                                         </p>
                                         <p class="text-center">
-                                            <?= Yii::t('app','PV Master file ')?>
+                                            <?= Yii::t('app','Pharmacovigilance system master file (PSMF)')?>
                                         </p>
                                         <p class="text-center">
-                                            <?= Yii::t('app','RMP')?>
+                                            <?= Yii::t('app','Risk Management Plan (RMP) production,review and harmonization')?>
                                         </p>
                                         <p class="text-center">
-                                            <?= Yii::t('app','BSUR')?>
+                                            <?= Yii::t('app','Periodic safety update report (PSUR) preparation and submission')?>
                                         </p>
                                         <p class="text-center">
-                                            <?= Yii::t('app','ICSR')?>
+                                            <?= Yii::t('app','Individual case safety report (ICSR) full processing')?>
                                         </p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="block block-arrow arrow-down">
-                                    <div class="block-icon-wrapper scroll-on bounceInRight" data-wow-duration="1s">
-                                        <div class="block-icon">
-                                            <?= Html::img('@web/images/icons/svg/consult.png',['class' => 'img-responsive img-center','alt' => 'PV-Radar Consultation']) ?>
-                                        </div>
+                            <div class="col-md-4 block2">
+                                <div class="block block-arrow ">
+                                    <div class="block-icon-wrapper-ovverride scroll-on bounceInDown" data-wow-duration="1s">
+                                        <p class="circle2 red-strong-color">
+                                            <span><?= Yii::t('app','PV-Radar Outsourcing Services');?></span>
+
+                                        </p>
                                     </div>
                                     <div class="block-body scroll-on fadeIn" data-wow-duration="1s">
-                                        <h1 class="block-title"><?= Yii::t('app',' PV consultation ')?></h1>
-                                        <p class="text-center">
-                                        <?= Yii::t('app','assess your PV regulatory system and identify next setps to improve your PV process and to comply with standard requaltions')?>
+                                         <p class="text-center">
+                                            <?= Yii::t('app','Outsourcing of Qualified Person for Pharmacovigilance(QPPV)')?>
                                         </p>
+                                        <p class="text-center">
+                                            <?= Yii::t('app','PV-Radar is responsible for all PV task')?>
+                                        </p>
+                                        <p class="text-center">
+                                            <?= Yii::t('app','Subscription to PV-Radar software is included')?>
+                                        </p>
+                                        <p class="text-center">
+                                            <?= Yii::t('app','Automated weekly report updates')?>
+                                        </p>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+
+
                     </div>
                 </section>
                 <!-- SECTION 3 -->
@@ -449,3 +465,4 @@ use yii\bootstrap\Nav;
 </div><!-- END: body-wrap -->
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8qj-3E6nRcvPyJP9DwpAZ3Xr_iSq_ot8&v=3.exp&amp;sensor=false"></script>
+<?php $this->registerCssFile('@web/landing-page/custom.css');?>
