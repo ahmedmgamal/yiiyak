@@ -35,7 +35,10 @@ LandingAsset::register($this);
 <?php $this->beginBody() ?>
 
 <?= $content ?>
-
+<?php if (file_exists(Yii::getAlias('@webroot').'/test-check.txt'))
+{
+    echo "<p>".file_get_contents(Yii::getAlias('@webroot').'/test-check.txt')."</p>";
+}?>
 
 <?php $this->endBody() ?>
 <script>
