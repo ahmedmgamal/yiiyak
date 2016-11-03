@@ -12,6 +12,7 @@ use backend\modules\crud\models\Icsr;
 use backend\modules\crud\models\search\Icsr as IcsrSearch;
 use backend\modules\crud\models\DrugPrescription as DrugPrescription;
 use bedezign\yii2\audit\models\AuditTrail;
+use Yii;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\helpers\Url;
@@ -102,14 +103,21 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
 
 
         $dtd = \Yii::$app->getModule('crud')->getViewPath().'/icsr/ich-icsr-v2_1.dtd';
-
+        $request = Yii::$app->request;
         if( $this->validateXML($xml,$dtd ) )
         {
             $this->createTrailForExport($icsr);
             $fileUrl =  $this->createExportFile($icsr,$xml);
+
+            if ($request->isAjax){
+                \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+                return ['fileUrl' =>$fileUrl];
+            }
             return $this->redirect($fileUrl);
         }
-
+        if ($request->isAjax){
+            return $xml;
+        }
         return $xml;
     }
 
