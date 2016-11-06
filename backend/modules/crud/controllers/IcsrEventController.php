@@ -46,11 +46,17 @@ class IcsrEventController extends \backend\modules\crud\controllers\base\IcsrEve
 
         if (isset($term) && !empty($term))
         {
+
+        
         $connection = Yii::$app->getDb();
-
-        $command = $connection->createCommand("
-             SELECT term FROM meddra_pt WHERE MATCH (term) AGAINST ('+{$term}*'IN BOOLEAN MODE ) LIMIT 10 ");
-
+           
+        $term = '+' . $term . '*';
+        
+            $command = $connection->createCommand('
+             SELECT term FROM meddra_pt WHERE MATCH (term) AGAINST (:term IN BOOLEAN MODE ) LIMIT 10 ')
+             ->bindValue(':term',$term);
+            
+              
         $result = $command->queryAll();
         $response = [];
         foreach ($result as $key => $value)
@@ -80,11 +86,14 @@ class IcsrEventController extends \backend\modules\crud\controllers\base\IcsrEve
         if (isset($searchTerm) && !empty($searchTerm))
         {
             $connection = Yii::$app->getDb();
+            
+            $searchTerm = '+' . $searchTerm . '*';
 
             $command = $connection->createCommand("
              SELECT `meddra_llt`.term FROM meddra_llt 
              join meddra_pt on `meddra_llt`.pt_id = `meddra_pt`.id
-             WHERE MATCH (`meddra_llt`.term) AGAINST ('+{$searchTerm}*'IN BOOLEAN MODE ) ".$whereCondition."  LIMIT 10 ");
+             WHERE MATCH (`meddra_llt`.term) AGAINST (:searchTerm IN BOOLEAN MODE ) ".$whereCondition."  LIMIT 10 ")
+             ->bindValue(':searchTerm',$searchTerm);
 
             $result = $command->queryAll();
 
@@ -112,9 +121,10 @@ class IcsrEventController extends \backend\modules\crud\controllers\base\IcsrEve
 
             $command = $connection->createCommand("
             SELECT term FROM meddra_pt where id = (
-            SELECT pt_id FROM meddra_llt WHERE term = '{$lltTerm}'
+            SELECT pt_id FROM meddra_llt WHERE term = :lltTerm
             )
-            ");
+            ")
+            ->bindValue(':lltTerm',$lltTerm);
 
             $result = $command->queryAll();
 
@@ -137,9 +147,10 @@ class IcsrEventController extends \backend\modules\crud\controllers\base\IcsrEve
 
             $command = $connection->createCommand("
             SELECT term FROM meddra_llt where pt_id = (
-            SELECT id FROM meddra_pt WHERE term = '{$ptTerm}'
+            SELECT id FROM meddra_pt WHERE term = :ptTerm
             )
-            ");
+            ")
+            ->bindValue("ptTerm",$ptTerm);
 
             $result = $command->queryAll();
 
