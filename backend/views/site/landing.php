@@ -24,8 +24,8 @@ use yii\bootstrap\Nav;
                             <!-- Slide background -->
                             <?= Html::img('@web/images/backgrounds/full-bg-7.jpg',['class' => 'ls-bg' , 'style' => 'width: 100%' , 'alt' => 'Slide background']); ?>
                             <!-- Center title -->
-                            <h3 class="ls-l title-lg c-white text-uppercase text-center strong-700" style="width:100%; top:35%; left:50%;" data-ls="offsetxin:0;offsetyin:250;durationin:1000;delayin:500;offsetxout:0;offsetyout:-8;easingout:easeInOutQuart;scalexout:1.2;scaleyout:1.2;">
-                              <?= Yii::t('app','PV-Radar '); ?>
+                            <h3 class="ls-l title-lg c-white text-center strong-700" style="width:100%; top:35%; left:50%;" data-ls="offsetxin:0;offsetyin:250;durationin:1000;delayin:500;offsetxout:0;offsetyout:-8;easingout:easeInOutQuart;scalexout:1.2;scaleyout:1.2;">
+                              <?= Yii::t('app','PV-Radar'); ?>
                             </h3>
 
                             <!-- Center paragraph -->
