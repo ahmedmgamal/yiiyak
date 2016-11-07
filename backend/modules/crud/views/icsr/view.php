@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = ['label' => $model->getAliasModel(true), 'url' 
 $this->params['breadcrumbs'][] = ['label' => (string) $model->patient_identifier, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 ?>
-<div class="giiant-crud icsr-view">
+<div id="icsr-view" class="giiant-crud icsr-view">
 
     <!-- flash message -->
     <?php if (\Yii::$app->session->getFlash('deleteError') !== null) : ?>
@@ -32,10 +32,14 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
         </span>
     <?php endif; ?>
 
-    <h1>
-        <?= $model->getAliasModel() ?>        <small>
+    <h1 id="modelAlias">
+        <?= $model->getAliasModel() ?>
+        <small id='validating' style="color: #337ab7; display: none;"> validating xml
                  </small>
+        <small id="failedValidation" style="color: red; display:none">failed to pass the validation</small>
     </h1>
+    <div id="progressbar" style="display: none;"></div>
+    <br>
 
 
     <div class="clearfix crud-navigation">
@@ -44,7 +48,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 
             <?php echo Html::a('<span class="glyphicon glyphicon-pencil"></span> ' . Yii::t('app', 'Edit'), ['update', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
             <?php if ($model->canExported()) { ?>
-                <?php echo Html::a('<span class="glyphicon glyphicon-copy"></span> ' . Yii::t('app', 'Export  Xml'), ['export', 'id' => $model->id  ,'case' => 'normal'], ['class' => 'btn btn-success' ]) ?>
+                <?php echo Html::a('<span class="glyphicon glyphicon-copy"></span> ' . Yii::t('app', 'Export  Xml'), ['export', 'id' => $model->id  ,'case' => 'normal'], ['class' => 'btn btn-success'  ,'id' => 'exportXml']) ?>
                 <?php echo Html::a('<span class="glyphicon glyphicon-copy"></span> ' . Yii::t('app', 'Export  Null Case'), ['export-null-case', 'id' => $model->id ], ['class' => 'btn btn-default']) ?>
             <?php }
             else{
@@ -566,3 +570,4 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                                                     );
                                                     ?>
 </div>
+<?php $this->registerJsFile('@web/crud/icsr/js/view.js', ['depends' => [\yii\web\JqueryAsset::className()]]);?>
