@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = ['label' => $model->getAliasModel(true), 'url' 
 $this->params['breadcrumbs'][] = ['label' => (string) $model->patient_identifier, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 ?>
-<div class="giiant-crud icsr-view">
+<div id="icsr-view" class="giiant-crud icsr-view">
 
     <!-- flash message -->
     <?php if (\Yii::$app->session->getFlash('deleteError') !== null) : ?>
@@ -32,10 +32,14 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
         </span>
     <?php endif; ?>
 
-    <h1>
-        <?= $model->getAliasModel() ?>        <small>
+    <h1 id="modelAlias">
+        <?= $model->getAliasModel() ?>
+        <small id='validating' style="color: #337ab7; display: none;"> validating xml
                  </small>
+        <small id="failedValidation" style="color: red; display:none">failed to pass the validation</small>
     </h1>
+    <div id="progressbar" style="display: none;"></div>
+    <br>
 
 
     <div class="clearfix crud-navigation">
@@ -44,7 +48,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 
             <?php echo Html::a('<span class="glyphicon glyphicon-pencil"></span> ' . Yii::t('app', 'Edit'), ['update', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
             <?php if ($model->canExported()) { ?>
-                <?php echo Html::a('<span class="glyphicon glyphicon-copy"></span> ' . Yii::t('app', 'Export  Xml'), ['export', 'id' => $model->id  ,'case' => 'normal'], ['class' => 'btn btn-success' ]) ?>
+                <?php echo Html::a('<span class="glyphicon glyphicon-copy"></span> ' . Yii::t('app', 'Export  Xml'), ['export', 'id' => $model->id  ,'case' => 'normal'], ['class' => 'btn btn-success'  ,'id' => 'exportXml']) ?>
                 <?php echo Html::a('<span class="glyphicon glyphicon-copy"></span> ' . Yii::t('app', 'Export  Null Case'), ['export-null-case', 'id' => $model->id ], ['class' => 'btn btn-default']) ?>
             <?php }
             else{
@@ -52,14 +56,6 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                 echo "<button type='button' class='btn btn-default' disabled><span class='glyphicon glyphicon-copy'></span> ". Yii::t('app','Export  Null Case')." </button>";
             }
             ?>
-
-            <?php
-			if ($model->isSignaled($signaledIcsrsAndIcsrsEvents,'icsr_id')) {
-                echo '<span class="alert-signal-color"> <span class="glyphicon glyphicon-warning-sign "></span> '.Yii::t('app','Signal Detected Check Icsrs Events Tab').'</span>';
-            }
-			?>
-
-
 
         </div>
 
@@ -239,15 +235,6 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                     return $params;
                 },
                         'buttons' => [
-                            'signal' => function ($url,$model) use ($signaledIcsrsAndIcsrsEvents) {
-                                if ($model->isSignaled($signaledIcsrsAndIcsrsEvents,'id')) {
-
-                                    return '<small  class="alert-signal-color"><span class="glyphicon glyphicon-warning-sign "></span> ' . Yii::t('app', 'Signal Detected') . '</small>';
-
-                                }
-
-                                return '';
-                            }
                         ],
                         'controller' => 'icsr-event'
                             ],
@@ -541,7 +528,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                                                                     ], [
                                                                         'content' => $this->blocks['DrugPrescriptions'],
                                                                     'label' => count($model->getDrugPrescriptions()->asArray()->all()) <1 ?
-                                                                                '<small>Drug Prescriptions <span class="badge badge-default">' . count($model->getDrugPrescriptions()->asArray()->all()) . '</span> <span class="glyphicon glyphicon-warning-sign alert-signal-color" ></span></small>'
+                                                                                '<small>Drug Prescriptions <span class="badge badge-default">' . count($model->getDrugPrescriptions()->asArray()->all()) . '</span> <span class="glyphicon glyphicon-warning-sign " style="color: #b94a48"></span></small>'
                                                                                  :
                                                                                 '<small>Drug Prescriptions <span class="badge badge-default">' . count($model->getDrugPrescriptions()->asArray()->all()) . '</span></small>'
                                                                     ,
@@ -583,6 +570,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                                                     );
                                                     ?>
 </div>
+<?php $this->registerJsFile('@web/crud/icsr/js/view.js', ['depends' => [\yii\web\JqueryAsset::className()]]);?>
 
 
 
