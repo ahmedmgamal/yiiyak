@@ -79,24 +79,18 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 
 
 
-<?php $this->beginBlock('Drugs'); ?>
-<div style='position: relative'><div style='position:absolute; right: 0px; top: 0px;'>
-  <?php echo Html::a(
-	'<span class="glyphicon glyphicon-list"></span> ' . Yii::t('app', 'List All') . ' Drugs',
-	['/crud/drug/index'],
-	['class'=>'btn text-muted btn-xs']
-) ?>
-  <?php echo Html::a(
-	'<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('app', 'New') . ' Drug',
-	['/crud/drug/create', 'Drug' => ['company_id' => $model->id]],
-	['class'=>'btn btn-success btn-xs']
-); ?>
-</div></div>
-<?php $this->endBlock() ?>
+
 
 
 <?php $this->beginBlock('Users'); ?>
 <div style='position: relative'><div style='position:absolute; right: 0px; top: 0px;'>
+		<a class="btn btn-success btn-xs" href="<?= Url::to(['/crud/user/create',  'Company' => ['company_id' => $model->id]])?>">
+
+			<span class="glyphicon glyphicon-plus"></span>
+
+			<?=  Yii::t('app','New User');?>
+
+		</a>
 
 </div></div><?php Pjax::begin(['id'=>'pjax-Users', 'enableReplaceState'=> false, 'linkSelector'=>'#pjax-Users ul.pagination a, th a', 'clientOptions' => ['pjax:success'=>'function(){alert("yo")}']]) ?>
 <?php echo '<div class="table-responsive">' . \yii\grid\GridView::widget([
