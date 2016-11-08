@@ -19,6 +19,7 @@ use yii\helpers\Url;
 use yii\filters\AccessControl;
 use dmstr\bootstrap\Tabs;
 use backend\modules\crud\models\IcsrVersion;
+use backend\modules\crud\models\IcsrNarritive;
 
 /**
  * This is the class for controller "IcsrController".
@@ -54,16 +55,33 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
 	public function actionCreate() {
 
         $model = new Icsr;
-                //$_POST['Icsr']
+
 		try {
 			if ($model->load($_POST) ) {
+                $connection = \Yii::$app->db;
+                $transaction = $connection->beginTransaction();
+
                 if ( $model->save()) {
+
+                    $narritive = new IcsrNarritive();
+                    $narritive->icsr_id = $model->id;
+
+
                     $pres = new DrugPrescription;
                     $pres->drug_id =($model->getDrug()->one()->id);
                     $pres->drug_role = '1';//value of suspect
                     $pres->icsr_id = $model->id;
-                    $pres->save();
-                    return $this->redirect(Url::previous());
+
+                    if ($narritive->save() && $pres->save()) {
+                        $transaction->commit();
+                        return $this->redirect(Url::previous());
+                    }
+
+                    else {
+                        \Yii::$app->getSession()->setFlash('error', \Yii::t('app',"Something Went Wrong Please Try Again"));
+                        return $this->redirect(['create']);
+
+                    }
                 }
 
 			} elseif (!\Yii::$app->request->isPost) {

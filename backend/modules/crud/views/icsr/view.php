@@ -515,7 +515,62 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                                         <?php Pjax::end() ?>
                                         <?php $this->endBlock() ?>
 
+                                        <?php $this->beginBlock('Narrative'); ?>
+                                         <div style='position: relative'><div style='position:absolute; right: 0px; top: 0px;'>
+                                                 <?php if (count($model->narrative) < 1 ){?>
+                                        <a class="btn btn-success btn-xs" href="<?= Url::to(['/crud/icsr-narritive/create', 'icsr_id' => $model->id])?>">
 
+                                            <span class="glyphicon glyphicon-plus"></span><?= Yii::t('app','New Narrative')?>
+                                        </a>
+                                                 <?php }?>
+
+
+
+
+                                             </div></div><?php Pjax::begin(['id' => 'pjax-IcsrVersions', 'enableReplaceState' => false, 'linkSelector' => '#pjax-IcsrNarrative ul.pagination a, th a', 'clientOptions' => ['pjax:success' => 'function(){alert("yo")}']]) ?>
+    <?=
+    '<div class="table-responsive">' . \yii\grid\GridView::widget([
+        'layout' => '{summary}{pager}<br/>{items}{pager}',
+        'dataProvider' => new \yii\data\ActiveDataProvider(['query' => $model->getNarrative(), 'pagination' => ['pageSize' => 20, 'pageParam' => 'page-icsrnarrative']]),
+        'pager' => [
+            'class' => yii\widgets\LinkPager::className(),
+            'firstPageLabel' => Yii::t('app', 'First'),
+            'lastPageLabel' => Yii::t('app', 'Last')
+        ],
+        'columns' => [
+
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view}  {update}',
+                'contentOptions' => ['nowrap' => 'nowrap'],
+                /**
+                 *
+                 */
+                'urlCreator' => function ($action, $model, $key, $index) {
+                    // using the column name as key, not mapping to 'id' like the standard generator
+                    $params = is_array($key) ? $key : [$model->primaryKey()[0] => (string) $key];
+                    $params[0] = '/crud/icsr-narritive' . '/' . $action;
+                    return $params;
+                },
+                'buttons' => [
+                ],
+                'controller' => '/crud/drug-prescription'
+            ],
+
+            'narritive',
+                'reporter_comment',
+                'sender_comment'
+
+        ]
+    ]) . '</div>'
+    ?>
+    <?php Pjax::end() ?>
+
+
+
+
+
+                                         <?php $this->endBlock()?>
                                                     <?php
                                                     echo Tabs::widget(
                                                             [
@@ -554,7 +609,15 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                                                                             '<small>Icsr Reporters <span class="badge badge-default">' . count($model->getIcsrReporters()->asArray()->all()) . '</span></small>'
                                                                         ,
                                                                         'active' => false,
-                                                                    ],[
+                                                                    ],
+                                                                    [
+                                                                        'content' => $this->blocks['Narrative'],
+                                                                        'label' => '<small>'.Yii::t('app','Narrative').'</small>',
+                                                                        'url' => ['icsr-narritive/update?id='.$model->narrative->id] ,
+                                                                        'active' => false,
+
+                                                                    ],
+                                                                    [
                                                                         'content' => $this->blocks['IcsrHistory'],
                                                                         'label' => '<small>'.Yii::t('app','Audit Trail').' <span class="badge badge-default">' . count($model->getIcsrTrails()->asArray()->all()) . '</span></small>',
                                                                         'active' => false,
@@ -564,7 +627,8 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                                                                         'label' => '<small>Icsr Versions <span class="badge badge-default">' . count($model->getIcsrVersions()->asArray()->all()) . '</span></small>',
                                                                         'active' => false,
 
-                                                                    ]
+                                                                    ],
+
                                                                 ]
                                                             ]
                                                     );

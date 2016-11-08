@@ -25,7 +25,7 @@ use dmstr\bootstrap\Tabs;
 		<messageformatversion>2.1</messageformatversion>
 		<messageformatrelease>1.0</messageformatrelease>
 		<messagenumb><?php echo $model->id; ?></messagenumb>
-		<messagesenderidentifier><?php echo $model->getDrug()->one()->getCompany()->one()->name;  ?></messagesenderidentifier>
+		<messagesenderidentifier><?php echo $model->getDrug()->one()->getCompany()->one()->short_name;  ?></messagesenderidentifier>
 		<messagereceiveridentifier><?php echo $config['messagereceiveridentifier'] ?></messagereceiveridentifier>
 		<messagedateformat>102</messagedateformat>
 		<messagedate><?php echo date("Ymd"); ?> </messagedate>
@@ -34,7 +34,7 @@ use dmstr\bootstrap\Tabs;
 		<safetyreportversion><?php echo $model->getVersion(); ?></safetyreportversion>
 
 		<!--A.1.0.1 Sender’s (case) safety report unique identifier-->
-		<safetyreportid> <?php echo $model->getReactionCountry()->one()->code; ?>-<?php echo $model->getDrug()->one()->getCompany()->one()->name;  ?>-<?php echo $model->id; ?></safetyreportid>
+		<safetyreportid> <?php echo $model->getReactionCountry()->one()->code; ?>-<?php echo $model->getDrug()->one()->getCompany()->one()->short_name;  ?>-<?php echo $model->id; ?></safetyreportid>
 
 		<!--     A.1.1 Identification of the country of the primary source -->
 		<primarysourcecountry><?php echo $model->getReactionCountry()->one()->code; ?></primarysourcecountry>
@@ -66,7 +66,7 @@ use dmstr\bootstrap\Tabs;
 		<receiptdate><?php echo date("Ymd"); ?> </receiptdate>
 		
 		<!--A.1.10	Worldwide unique case identification number.      -->
-		<companynumb> <?php echo $model->getReactionCountry()->one()->code; ?>-<?php echo $model->getDrug()->one()->getCompany()->one()->name;  ?>-<?php echo $model->id; ?></companynumb>
+		<companynumb> <?php echo $model->getReactionCountry()->one()->code; ?>-<?php echo $model->getDrug()->one()->getCompany()->one()->short_name;  ?>-<?php echo $model->id; ?></companynumb>
 
 		<?php if (isset($nullReason)){?>
 		<!--A.1.13	 -->
@@ -106,7 +106,7 @@ use dmstr\bootstrap\Tabs;
 			<sendertype>1</sendertype>
 					
 <!--	A.3.1.2	Sender identifier          -->
-			<senderorganization><?php echo Yii::$app->user->identity->getCompany()->one()->name;  ?></senderorganization>
+			<senderorganization><?php echo Yii::$app->user->identity->getCompany()->one()->short_name;  ?></senderorganization>
 
 <!--***	A.3.1.3	Person responsible for sending the report      -->
 			<sendergivename><?php echo Yii::$app->user->identity->username;  ?></sendergivename>
@@ -225,7 +225,18 @@ use dmstr\bootstrap\Tabs;
 				<drugadditional><?php echo $drug->drug_addtional_info ; ?></drugadditional>
 			</drug>
 	<?php } ?>
+		<?php if (isset($model->narrative->id)){ ?>
+			<!-- B.5 Narrative case summary and further information-->
+			<summary>
+				<!-- B.5.1 Case narrative including clinical course, therapeutic measures, outcome and additional relevant information -->
+				<narrativeincludeclinical><?php echo $model->narrative->narritive ?></narrativeincludeclinical>
+				<!-- B.5.2 Reporter's comments -->
+				<reportercomment><?php echo $model->narrative->reporter_comment ?></reportercomment>
+				<!-- B.5.4 Sender's comments -->
+				<sendercomment><?php echo $model->narrative->sender_comment?></sendercomment>
 
+			</summary>
+			<?php }?>
  		</patient>
 	</safetyreport>
 </ichicsr>

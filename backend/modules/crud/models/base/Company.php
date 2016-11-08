@@ -54,8 +54,10 @@ abstract class Company extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name','end_date','plan_id'],'required'],
+            [['name','end_date','plan_id','short_name'],'required'],
             [['id','plan_id'], 'integer'],
+            [['short_name'],'string','max' => 4],
+            [['short_name'],'unique'],
             [['name', 'adderess', 'license_no', 'license_image_url'], 'string', 'max' => 45]
         ];
     }
@@ -71,7 +73,8 @@ abstract class Company extends \yii\db\ActiveRecord
             'adderess' => Yii::t('app', 'Adderess'),
             'license_no' => Yii::t('app', 'License No'),
             'license_image_url' => Yii::t('app', 'License Image Url'),
-            'plan_id' => Yii::t('app','Plan')
+            'plan_id' => Yii::t('app','Plan'),
+            'short_name' => Yii::t('app','Short Name')
         ];
     }
 

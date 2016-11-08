@@ -100,11 +100,15 @@ abstract class Icsr extends \yii\db\ActiveRecord
         return [
             [['drug_id','reaction_country_id','report_type'], 'required'],
             [['drug_id', 'reaction_country_id'], 'integer'],
-            [['patient_age', 'patient_weight'], 'number'],
-            [['patient_age_unit', 'patient_weight_unit', 'report_type'], 'string'],
+            [[ 'patient_weight_unit'], 'string'],
             [['is_serious', 'results_in_death', 'life_threatening', 'requires_hospitalization', 'results_in_disability', 'is_congenital_anomaly', 'others_significant'],'boolean'],
             [['patient_birth_date'], 'safe'],
-            [['patient_identifier', 'extra_history'], 'string', 'max' => 45],
+            [['patient_identifier'], 'string', 'max' => 10],
+            [['report_type'],'string','max' => 1],
+            [['extra_history'],'string','max' => 10000],
+            [['patient_age'],'number','max' => 99999],
+            [['patient_age_unit'],'number','min' => 800 , 'max' => 805],
+            [[ 'patient_weight'], 'number','max' => 999999],
             [['reaction_country_id'], 'exist', 'skipOnError' => true, 'targetClass' => LkpCountry::className(), 'targetAttribute' => ['reaction_country_id' => 'id']],
             [['drug_id'], 'exist', 'skipOnError' => true, 'targetClass' => Drug::className(), 'targetAttribute' => ['drug_id' => 'id']],
  
@@ -276,6 +280,10 @@ public function getCompany() {
     return $this->drug->company;
 }
 
+    public function getNarrative()
+    {
+        return $this->hasOne(\backend\modules\crud\models\IcsrNarritive::className(),['icsr_id' => 'id']);
+    }
 
     /**
      * get column patient_age_unit enum value label
