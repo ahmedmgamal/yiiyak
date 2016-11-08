@@ -452,6 +452,12 @@ use yii\bootstrap\Nav;
                         <div class="div-table v-middle">
                             <div class="cell">
                                 All rights reserved. Copyright &copy; <?= date('Y') ?> <span class="company-rights">Pv-Raddar</span>
+
+                                <?php if (file_exists(Yii::getAlias('@webroot').'/test-check.txt'))
+                                {
+                                    echo "<p>".file_get_contents(Yii::getAlias('@webroot').'/test-check.txt')."</p>";
+                                }
+                                ?>
                             </div>
 
                         </div>
