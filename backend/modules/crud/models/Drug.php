@@ -12,7 +12,7 @@ use bedezign\yii2\audit\models\AuditTrail;
 class Drug extends BaseDrug
 {
     use traits\checkAccess;
-    use traits\checkLimit;
+    use traits\checkLimit,traits\checkSignal;
 
     public function attributeHints()
     {
@@ -29,6 +29,37 @@ class Drug extends BaseDrug
             'route_lkp_id' => Yii::t('app', 'B.4.k.8 Route of administration'),
             ]);
     }
+
+
+
+    public function getSignaledIcsrsAndIcsrEvenets ($signaledDrugs)
+    {
+        $meddra_pt_text = [];
+        foreach ($signaledDrugs as $key => $row) {
+            if ($row['drug_id'] == $this->id) {
+                $meddra_pt_text [] = $row['meddra_pt_text'];
+            }
+        }
+
+        return $this->getSignaledIcsrsQueryByMeddraPt($meddra_pt_text);
+
+    }
+
+    public function getSignaledIcsrsQueryByMeddraPt ($meddraPtText)
+    {
+        $meddraPtText = implode("','",$meddraPtText);
+        $connection = Yii::$app->getDb();
+        $command = $connection
+            ->createCommand("SELECT `icsr_event`.`icsr_id` , `icsr_event`.`id` , `meddra_pt_text` from `icsr_event`
+                                    join icsr on `icsr`.`id` = `icsr_event`.`icsr_id` 
+                                    where meddra_pt_text IN ('{$meddraPtText}') AND `icsr`.`drug_id` = {$this->id}");
+
+
+        $result = $command->queryAll();
+
+        return $result;
+    }
+
 
 
 }

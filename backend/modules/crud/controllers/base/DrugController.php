@@ -65,9 +65,17 @@ class DrugController extends Controller
 		\Yii::$app->session['__crudReturnUrl'] = Url::previous();
 		Url::remember();
 		Tabs::rememberActiveState();
+        $model = $this->findModel($id);
+        $signaledDrugs =  \Yii::$app->user->identity->company->getSignaledDrugs();
+
+
+        $signaledIcsrs  = $model->getSignaledIcsrsAndIcsrEvenets($signaledDrugs);
+
 
 		return $this->render('view', [
-				'model' => $this->findModel($id),
+				'model' => $model,
+                'signaledDrugs' => $signaledDrugs,
+                'signaledIcsrs' => $signaledIcsrs,
 			]);
 	}
 

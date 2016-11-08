@@ -16,7 +16,9 @@ use yii\helpers\ArrayHelper;
  */
 class Icsr extends BaseIcsr
 {
-    use traits\checkAccess;
+    use traits\checkAccess,traits\checkSignal;
+
+
     /**
      * @inheritdoc
      */
@@ -117,6 +119,10 @@ public function  isIcsrExported($icsr_id)
 
         return 1;
     }
+
+
+
+
 
 
 }

@@ -226,7 +226,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                         ],
                         'columns' => [[
                         'class' => 'yii\grid\ActionColumn',
-                        'template' => '{view} {update}',
+                        'template' => '{view} {update} {signal}',
                         'contentOptions' => ['nowrap' => 'nowrap'],
                         'urlCreator' => function ($action, $model, $key, $index) {
                     // using the column name as key, not mapping to 'id' like the standard generator
@@ -537,7 +537,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                                                                     [
                                                                         'content' => $this->blocks['IcsrEvents'],
                                                                         'label' => count($model->getIcsrEvents()->asArray()->all()) <1 ?
-                                                                            '<small>Icsr Events <span class="badge badge-default">'.count($model->getIcsrEvents()->asArray()->all()).'  </span> <span class="glyphicon glyphicon-warning-sign " style="color: #b94a48"></span></small>'
+                                                                            '<small>Icsr Events <span class="badge badge-default">'.count($model->getIcsrEvents()->asArray()->all()).'  </span> <span class="glyphicon glyphicon-warning-sign alert-signal-color" ></span></small>'
                                                                             :
                                                                             '<small>Icsr Events <span class="badge badge-default">'.count($model->getIcsrEvents()->asArray()->all()) . '</span></small>'
                                                                         ,
@@ -549,7 +549,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                                                                     ], [
                                                                         'content' => $this->blocks['IcsrReporters'],
                                                                         'label' => count($model->getIcsrReporters()->asArray()->all()) <1 ?
-                                                                            '<small>Icsr Reporters <span class="badge badge-default">' . count($model->getIcsrReporters()->asArray()->all()) . '</span> <span class="glyphicon glyphicon-warning-sign " style="color: #b94a48"></span></small>'
+                                                                            '<small>Icsr Reporters <span class="badge badge-default">' . count($model->getIcsrReporters()->asArray()->all()) . '</span> <span class="glyphicon glyphicon-warning-sign alert-signal-color" ></span></small>'
                                                                             :
                                                                             '<small>Icsr Reporters <span class="badge badge-default">' . count($model->getIcsrReporters()->asArray()->all()) . '</span></small>'
                                                                         ,

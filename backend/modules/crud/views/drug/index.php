@@ -15,6 +15,7 @@ use yii\grid\GridView;
  * @var yii\web\View $this
  * @var yii\data\ActiveDataProvider $dataProvider
  * @var backend\modules\crud\models\search\Drug $searchModel
+ * @var $signaledDrugs
  */
 $this->title = $searchModel->getAliasModel(true);
 $this->params['breadcrumbs'][] = $this->title;
@@ -56,6 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 			[
 				'class' => 'yii\grid\ActionColumn',
+				'template' => '{view} {update} {signal}',
 				'urlCreator' => function($action, $model, $key, $index) {
 					// using the column name as key, not mapping to 'id' like the standard generator
 					$params = is_array($key) ? $key : [$model->primaryKey()[0] => (string) $key];
@@ -63,7 +65,17 @@ $this->params['breadcrumbs'][] = $this->title;
 					return Url::toRoute($params);
 				},
 				'contentOptions' => ['nowrap'=>'nowrap'] ,
-                'visibleButtons' => [ 'delete' => false]
+				'buttons' => [
+					'signal' => function ($url,$model) use ($signaledDrugs){
+
+						if ($model->isSignaled($signaledDrugs,'drug_id'))
+						{
+							return '<small  class="alert-signal-color"><span class="glyphicon glyphicon-warning-sign "></span> '.Yii::t('app','Signal Detected'). '</small>';
+						}
+
+							return '';
+					}
+				]
 			],
 
 			[
@@ -86,3 +98,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 <?php \yii\widgets\Pjax::end() ?>
+
+
+
+<?php $this->registerCssFile('@web/crud/global/global.css');?>
