@@ -23,13 +23,21 @@ $config = [
  	'admin' => [
             'class' => 'mdm\admin\Module',
             'layout' => 'left-menu',
+        'as access'=>[
+            'class'=>'yii\filters\AccessControl',
+            'rules' => [
+                [
+
+                    'allow' => true,
+                    'actions' => ['index','view','create','store','update','edit','assign','remove'],
+                    'roles' => ['admin'],
+                ]
+            ],
+        ],
         ]
 
     ],
-'as access' => [
-        'class' => 'mdm\admin\components\AccessControl',
 
-    ],
     'components' => [
 
 
