@@ -26,7 +26,7 @@ Yii::$app->view->params['pageButtons'] = Html::a('<span class="glyphicon glyphic
     <?php \yii\widgets\Pjax::begin(['id'=>'pjax-main', 'enableReplaceState'=> false, 'linkSelector'=>'#pjax-main ul.pagination a, th a', 'clientOptions' => ['pjax:success'=>'function(){alert("yo")}']]) ?>
 
     <h1>
-        <?= Yii::t('app', 'BSMF  Versions') ?>        <small>
+        <?= Yii::t('app', 'PSMF  Versions') ?>        <small>
 
         </small>
     </h1>

@@ -8,13 +8,13 @@ use yii\helpers\Html;
 */
 
 $this->title = 'Create';
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'BSMFS'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'PSMFS'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="giiant-crud psmf-create">
 
     <h1>
-        <?= Yii::t('app', 'BSMF Versions') ?>        <small>
+        <?= Yii::t('app', 'PSMF Versions') ?>        <small>
                               </small>
     </h1>
 

@@ -27,7 +27,7 @@ class Psmf extends BasePsmf
     public function attributeLabels()
     {
         return array_merge(parent::attributeLabels(),[
-            'psmfFile' => Yii::t('app',' upload new BSMF version')
+            'psmfFile' => Yii::t('app',' upload new PSMF version')
         ]);
     }
 
