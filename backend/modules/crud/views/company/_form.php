@@ -11,6 +11,8 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use \dmstr\bootstrap\Tabs;
 use yii\jui\DatePicker;
+use kartik\password\PasswordInput;
+
 /**
  *
  * @var yii\web\View $this
@@ -45,7 +47,12 @@ use yii\jui\DatePicker;
 			<?php if ($this->context->action->id == 'create') { ?>
 			<?php echo $form->field($userModel, 'username')->textInput(['maxlength' => true]) ?>
 			<?php echo $form->field($userModel, 'email')->textInput(['maxlength' => true]) ?>
-			<?php echo $form->field($userModel, 'password_hash')->textInput(['maxlength' => true]) ?>
+			<?php echo $form->field($userModel, 'password_hash')->textInput(['maxlength' => true])->widget(PasswordInput::classname(), [
+					'pluginOptions' => [
+						'showMeter' => true,
+						'toggleMask' => true
+					]
+				]); ?>
 
 			<?php } ?>
 

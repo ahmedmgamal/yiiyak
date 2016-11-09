@@ -4,6 +4,7 @@
 
 namespace backend\modules\crud\models\base;
 
+use kartik\password\StrengthValidator;
 use Yii;
 
 /**
@@ -66,6 +67,8 @@ abstract class User extends \yii\db\ActiveRecord
             [['password_reset_token'], 'unique'],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+            [['password_hash'], StrengthValidator::className(), 'min'=>8, 'digit'=>3 ,'upper' => 0 , 'special' => 0]
+
         ];
     }
 
