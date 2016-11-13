@@ -34,9 +34,10 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 
     <h1 id="modelAlias">
         <?= $model->getAliasModel() ?>
-        <small id='validating' style="color: #337ab7; display: none;"> validating xml
+        <small id='validating' style="color: #337ab7; display: none;"> generating xml with E2B guide <a style="color: #3b9db7; " href="<?php echo Url::to(['/files/validationFiles/e2bGuide.pdf']);?>" target="_blank"> Click Here</a>
                  </small>
         <small id="failedValidation" style="color: red; display:none">failed to pass the validation</small>
+        <small id="dtdValidating" style="color:#10802d; display:none;">validating against DTD <a style="color:#078072;" href="<?php echo Url::to('download-dtd'); ?>">Click Here To Download</a></small>
     </h1>
     <div id="progressbar" style="display: none;"></div>
     <br>

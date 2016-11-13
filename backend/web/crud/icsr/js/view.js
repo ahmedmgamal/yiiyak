@@ -46,7 +46,19 @@ $('#exportXml').on('click',function (e) {
 
     var startTime = new Date().getTime();
     var interval = setInterval(function(){
+
+        if(new Date().getTime() - startTime > 5000)
+        {
+            $('#validating').hide();
+            $('#dtdValidating').show().fadeTo(1000, 0.5).fadeTo(500, 1.0);
+        }
+        else
+            {
+                $('#validating').show().fadeTo(1000, 0.5).fadeTo(500, 1.0);
+        }
+
         if(new Date().getTime() - startTime > 10000){
+
             clearInterval(interval);
             if (passedValidation) {
                 $(location).attr("href", baseUrl + redirectUrl);
@@ -54,13 +66,14 @@ $('#exportXml').on('click',function (e) {
 
             else
             {
-                $('#failedValidation').show();
+                $('#dtdValidating').hide();
                 progressBar.hide();
                 $('#validating').hide();
+                $('#failedValidation').show();
             }
             return;
         }
-        $('#validating').show().fadeTo(1000, 0.5).fadeTo(500, 1.0);
+
         progressVal = progressVal +10;
         progressBar.progressbar({
             value: progressVal

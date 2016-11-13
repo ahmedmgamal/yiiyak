@@ -272,4 +272,13 @@ private function createExportFile ($icsrObj,$content)
         return $this->render('null-case-reason',['model' => $icsr]);
     }
 
+    public function actionDownloadDtd ()
+    {
+        $path = Yii::getAlias('@webroot').'/files/validationFiles/xmlDtd.dtd';
+        if (file_exists($path))
+        {
+            return Yii::$app->response->sendFile($path);
+        }
+    }
+
 }
