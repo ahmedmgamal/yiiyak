@@ -18,7 +18,7 @@ use \dmstr\bootstrap\Tabs;
  * @var yii\widgets\ActiveForm $form
  */
 ?>
-
+<?php $company_id = isset($_GET['Company']['company_id']) ? $_GET['Company']['company_id'] : 0;  ?>
 <div class="user-form">
 
     <?php $form = ActiveForm::begin([
@@ -42,7 +42,7 @@ use \dmstr\bootstrap\Tabs;
 			}
 			?>
 			<?php echo $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
-            <?php echo $form->field($model,'company_id')->dropDownList(ArrayHelper::map($model->getAllCompanies(),'id','name')); ?>
+            <?php echo $form->field($model,'company_id')->dropDownList(ArrayHelper::map($model->getAllCompanies(),'id','name'),['options'=>[$company_id=>['Selected'=>true]]]); ?>
 
         </p>
         <?php $this->endBlock(); ?>
