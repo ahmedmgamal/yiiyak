@@ -24,14 +24,14 @@ use dmstr\bootstrap\Tabs;
 		<messagetype>ICSR</messagetype>
 		<messageformatversion>2.1</messageformatversion>
 		<messageformatrelease>1.0</messageformatrelease>
-		<messagenumb><?php echo $model->id; ?></messagenumb>
+		<messagenumb><?php echo $model->getReactionCountry()->one()->code.'-'.$model->getDrug()->one()->getCompany()->one()->short_name.'-'.$model->id; ?></messagenumb>
 		<messagesenderidentifier><?php echo $model->getDrug()->one()->getCompany()->one()->short_name;  ?></messagesenderidentifier>
 		<messagereceiveridentifier><?php echo $config['messagereceiveridentifier'] ?></messagereceiveridentifier>
 		<messagedateformat>102</messagedateformat>
 		<messagedate><?php echo date("Ymd"); ?> </messagedate>
 	</ichicsrmessageheader>
 	<safetyreport>
-		<safetyreportversion><?php echo $model->getVersion(); ?></safetyreportversion>
+
 
 		<!--A.1.0.1 Sender’s (case) safety report unique identifier-->
 		<safetyreportid> <?php echo $model->getReactionCountry()->one()->code; ?>-<?php echo $model->getDrug()->one()->getCompany()->one()->short_name;  ?>-<?php echo $model->id; ?></safetyreportid>
@@ -39,9 +39,6 @@ use dmstr\bootstrap\Tabs;
 		<!--     A.1.1 Identification of the country of the primary source -->
 		<primarysourcecountry><?php echo $model->getReactionCountry()->one()->code; ?></primarysourcecountry>
 		
-		<!--      A.1.3 Date of this transmission -->
-		<transmissiondateformat>102</transmissiondateformat>
-		<transmissiondate><?php echo date("Ymd"); ?> </transmissiondate>
 
 		<!--     A.1.4 Type of report --> 
 		<reporttype><?php echo $model->getIcsrType()->one()->id; ?></reporttype>
@@ -64,9 +61,7 @@ use dmstr\bootstrap\Tabs;
         <!--*** A.1.7	Date of receipt of the most recent information for this report --> 
         <receiptdateformat>102</receiptdateformat>
 		<receiptdate><?php echo date("Ymd"); ?> </receiptdate>
-		
-		<!--A.1.10	Worldwide unique case identification number.      -->
-		<companynumb> <?php echo $model->getReactionCountry()->one()->code; ?>-<?php echo $model->getDrug()->one()->getCompany()->one()->short_name;  ?>-<?php echo $model->id; ?></companynumb>
+		<authoritynumb><?php echo $model->getReactionCountry()->one()->code.'-'.$model->getDrug()->one()->getCompany()->one()->short_name.'-'.$model->id; ?></authoritynumb>
 
 		<?php if (isset($nullReason)){?>
 		<!--A.1.13	 -->
@@ -78,19 +73,6 @@ use dmstr\bootstrap\Tabs;
 
 		<?php foreach($model->icsrReporters as $reporter){ ?>
 			<primarysource>
-				<!--A.2.1.1	Reporter identifier (name or initials)       -->
-				<reportergivename><?php echo $reporter->first_name ?></reportergivename>
-				<reporterfamilyname><?php echo $reporter->last_name ?></reporterfamilyname>
-				
-				<!-- A.2.1.2	Reporter’s address          -->
-				<reporterstreet><?php echo $reporter->address_line_1  ?> <?php echo $reporter->address_line_2  ?> </reporterstreet>
-				<reportercity><?php echo $reporter->city  ?></reportercity>
-				<reporterstate><?php echo $reporter->state  ?></reporterstate>
-				<reporterpostcode><?php echo $reporter->zip_code  ?></reporterpostcode>
-			
-				<!--  A.2.1.3	Country           -->
-				<reportercountry><?php echo $reporter->getCountryLkp()->one()->code; ?></reportercountry>
-				
 				<!-- A.2.1.4	Qualification           -->
 				<qualification> <?php echo $reporter->getOccupationLkp()->one()->id ?> </qualification>
 
@@ -108,23 +90,15 @@ use dmstr\bootstrap\Tabs;
 <!--	A.3.1.2	Sender identifier          -->
 			<senderorganization><?php echo Yii::$app->user->identity->getCompany()->one()->short_name;  ?></senderorganization>
 
-<!--***	A.3.1.3	Person responsible for sending the report      -->
-			<sendergivename><?php echo Yii::$app->user->identity->username;  ?></sendergivename>
-
 <!-- A.3.1.4l E-mail address -->
  			<senderemailaddress><?php echo Yii::$app->user->identity->email;  ?></senderemailaddress>
 
  		</sender>
- 
 
-		<receiver>
-			 <!--	A.3.2.1	Receiver Type          -->
-			<receivertype>6</receivertype>
-		</receiver>
+
+		<receiver/>
 
 		<patient>
-<!--  B.1.1	Patient (name or initials)        -->
-			<patientinitial><?php echo $model->patient_identifier  ?></patientinitial>
 
 <!--  B.1.2.1	Date of birth         -->
 			<patientbirthdateformat>102</patientbirthdateformat>
@@ -146,9 +120,7 @@ use dmstr\bootstrap\Tabs;
 <!--  B.2.i.1	Reaction or event in MedDRA terminology (Lowest Level Term)   -->
 				<reactionmeddraversionllt> <?php echo $config['meddraversion'] ?> </reactionmeddraversionllt>
 				<reactionmeddrallt><?php echo isset($event->meddra_llt_id)?$event->getMeddraLlt()->one()->code:$event->meddra_llt_text ; ?></reactionmeddrallt>
-<!--  B.2.i.2	Reaction or event in MedDRA terminology (Preferred Term)    -->
-				<reactionmeddraversionpt>  <?php echo $config['meddraversion'] ?> </reactionmeddraversionpt>
-				<reactionmeddrapt><?php echo isset($event->meddra_pt_id)?$event->getMeddraPt()->one()->code:$event->meddra_pt_text ; ?></reactionmeddrapt>
+
 <!--  B.2.i.4	Date of start of reaction or event     -->
 				<reactionstartdateformat>102</reactionstartdateformat>
 				<reactionstartdate><?php echo date('Ymd',strtotime($event->event_date)) ; ?></reactionstartdate>
@@ -164,20 +136,7 @@ use dmstr\bootstrap\Tabs;
 	<?php } ?>
 
 
-	<?php foreach($model->icsrTests as $test){ ?>
-		<test>
-			<!--B.3.1	Structured information (repeat as necessary)       -->
-				<testdateformat>102</testdateformat>
-				<testdate><?php echo date('Ymd',strtotime($test->date)) ; ?></testdate>
-				<testname>	<?php echo isset($test->test_lkp_id)?$test->getTestLkp()->one()->name:$test->test_name ; ?></testname>
-				<testresult><?php echo $test->result ; ?></testresult>
-				<testunit><?php echo $test->result_unit ; ?></testunit>
-				<lowtestrange><?php echo $test->normal_low_range ; ?></lowtestrange>
-				<hightestrange><?php echo $test->normal_high_range ; ?></hightestrange>
-				<moreinformation><?php echo $test->more_info ; ?></moreinformation>
-			
-		</test>
-	<?php } ?>
+
 		<?php foreach($model->drugPrescriptions as $drug){ ?>
 		<drug>
 <!--  B.4.k.1	Characterization of drug role (Suspect/Concomitant/Interacting)    -->   
@@ -193,48 +152,14 @@ use dmstr\bootstrap\Tabs;
 				<medicinalproduct><?php echo $drug->active_substance_names ; ?></medicinalproduct>
 
 		<?php }?>
- <!--  B.4.k.3	Batch/lot number           -->
-				<drugbatchnumb><?php echo $drug->lot_no ; ?></drugbatchnumb>
 
-<!--  B.4.k.6	Dosage text           -->
-				<drugdosagetext><?php echo $drug->dose ; ?></drugdosagetext>
-
-<!--  B.4.k.8	Route of administration   -->       
-				<drugadministrationroute><?php echo empty($drug->active_substance_names) ? $model->drug->route_lkp_id:'' ; ?></drugadministrationroute>
-
-<!--  B.4.k.11	Indication for use in the case       -->
-				<drugindication><?php echo $drug->reason_of_use ; ?></drugindication>
-<!--  B.4.k.12	Date of start of drug        -->
-				<drugstartdateformat>102</drugstartdateformat>
-				<drugstartdate><?php echo date('Ymd',strtotime($drug->use_date_start)) ; ?></drugstartdate>
-<!--  B.4.k.14	Date of last administration      -->  
- 				<drugenddateformat>102</drugenddateformat>
-				<drugenddate><?php echo date('Ymd',strtotime($drug->use_date_end)) ; ?></drugenddate>
-<!--  B.4.k.15	Duration of drug administration      -->   
-				<drugtreatmentduration><?php echo $drug->duration_of_use ; ?></drugtreatmentduration>
-				<drugtreatmentdurationunit><?php echo $drug->duration_of_use_unit ; ?></drugtreatmentdurationunit>
-<!--  B.4.k.16	Action(s) taken with drug (− Drug withdrawn,− Dose reduced,− Dose increased,− Dose -->
-
-			<actiondrug><?= $drug->lkp_drug_action_id ?></actiondrug>
-
-
-<!--  B.4.k.17	Effect of rechallenge          -->
-				<drugrecurreadministration><?php echo  $drug->problem_returned_after_reuse ; ?></drugrecurreadministration>
-
-<!--  B.4.k.19	Additional information on drug     -->    
-				<drugadditional><?php echo $drug->drug_addtional_info ; ?></drugadditional>
-			</drug>
+		</drug>
 	<?php } ?>
 		<?php if (isset($model->narrative->id)){ ?>
 			<!-- B.5 Narrative case summary and further information-->
 			<summary>
 				<!-- B.5.1 Case narrative including clinical course, therapeutic measures, outcome and additional relevant information -->
 				<narrativeincludeclinical><?php echo $model->narrative->narritive ?></narrativeincludeclinical>
-				<!-- B.5.2 Reporter's comments -->
-				<reportercomment><?php echo $model->narrative->reporter_comment ?></reportercomment>
-				<!-- B.5.4 Sender's comments -->
-				<sendercomment><?php echo $model->narrative->sender_comment?></sendercomment>
-
 			</summary>
 			<?php }?>
  		</patient>

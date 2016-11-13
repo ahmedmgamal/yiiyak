@@ -635,3 +635,4 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                                                     ?>
 </div>
 <?php $this->registerJsFile('@web/crud/icsr/js/view.js', ['depends' => [\yii\web\JqueryAsset::className()]]);?>
+<?php $this->registerCssFile('@web/crud/global/global.css');?>

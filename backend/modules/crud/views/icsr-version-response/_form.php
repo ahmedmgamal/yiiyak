@@ -34,7 +34,7 @@ use yii\helpers\StringHelper;
 
                 <label class="control-label col-sm-3" for="responseType"><?= Yii::t('app','Response Type'); ?></label>
             <div class="col-sm-6">
-            <?= Html::dropDownList('responseType',null,['file' => Yii::t('app','Upload File') , 'id' => Yii::t('app','Write ID') , 'received' => Yii::t('app','Received')],['class' => 'form-control' , 'id' => 'responseType']); ?>
+            <?= Html::dropDownList('responseType',null,['file' => Yii::t('app','Upload File') , 'id' => Yii::t('app','Acknowledgement Id') , 'received' => Yii::t('app','Received')],['class' => 'form-control' , 'id' => 'responseType']); ?>
             </div>
 
         </div>

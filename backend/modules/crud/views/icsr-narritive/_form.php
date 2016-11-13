@@ -30,7 +30,7 @@ use yii\helpers\StringHelper;
         <p>
             
 
-			<?= $form->field($model, 'narritive')->textInput(['maxlength' => true]) ?>
+			<?= $form->field($model, 'narritive')->textarea(['maxlength' => true]) ?>
 			<?= $form->field($model, 'reporter_comment')->textInput(['maxlength' => true]) ?>
 			<?= $form->field($model, 'sender_comment')->textInput(['maxlength' => true]) ?>
         </p>

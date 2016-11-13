@@ -10,4 +10,14 @@ use \backend\modules\crud\models\base\IcsrNarritive as BaseIcsrNarritive;
  */
 class IcsrNarritive extends BaseIcsrNarritive
 {
+
+    public function behaviors()
+    {
+        return [
+            'AuditTrailBehavior' => [
+                'class' =>  'backend\modules\crud\overrides\TrailChild\AuditTrailBehaviorChild',
+                'ignored' => ['id','icsr_id'],
+            ]
+            ];
+    }
 }
