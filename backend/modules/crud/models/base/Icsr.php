@@ -285,6 +285,11 @@ public function getCompany() {
         return $this->hasOne(\backend\modules\crud\models\IcsrNarritive::className(),['icsr_id' => 'id']);
     }
 
+    public function getCreatedBy()
+    {
+        return $this->hasOne(\backend\modules\crud\models\User::className(),['id' => 'created_by']);
+    }
+
     /**
      * get column patient_age_unit enum value label
      * @param string $value

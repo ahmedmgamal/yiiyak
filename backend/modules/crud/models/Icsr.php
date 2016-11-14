@@ -7,8 +7,9 @@ use bedezign\yii2\audit\models\AuditTrail;
 use Yii;
 use \backend\modules\crud\models\base\Icsr as BaseIcsr;
 use \backend\modules\crud\traits;
+use yii\behaviors\TimestampBehavior;
 
-
+use yii\db\Expression;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -52,8 +53,17 @@ class Icsr extends BaseIcsr
                     'patient_weight_unit'=> ['table_name' => 'lkp_weight_unit','search_field' => 'id', 'return_field' => 'name'],
                     'reaction_country_id'=> ['table_name' => 'lkp_icsr_eventoutcome' , 'search_field' => 'id', 'return_field' => 'name'],
                     'report_type' => ['table_name' => 'lkp_icsr_type','search_field' => 'id' , 'return_field' => 'description']
-                ]
-                ]
+                ],
+
+            ],
+
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => new Expression('NOW()'),
+            ],
+
         ];
     }
     public function getIcsrTrails()
@@ -124,6 +134,13 @@ public function  isIcsrExported($icsr_id)
     }
 
 
+    public function getMeddraLltFromEvents ()
+    {
+        $connection = Yii::$app->getDb();
+        $command = $connection->createCommand("select group_concat(meddra_llt_text SEPARATOR '|') as llt from icsr_event where icsr_id={$this->id};");
+        $result = $command->queryAll();
+        return $result;
+    }
 
 
 

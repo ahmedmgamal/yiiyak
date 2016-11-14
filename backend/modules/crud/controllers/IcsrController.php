@@ -58,6 +58,7 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
 
 		try {
 			if ($model->load($_POST) ) {
+			    $model->created_by = Yii::$app->user->identity->id;
                 $connection = \Yii::$app->db;
                 $transaction = $connection->beginTransaction();
 
@@ -230,7 +231,6 @@ private function createExportFile ($icsrObj,$content)
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
         if ($model->load($_POST) && $model->save()) {
             return $this->redirect(Url::previous());
         } elseif (!\Yii::$app->request->isPost) {

@@ -7,6 +7,7 @@
 
 
 use dmstr\helpers\Html;
+use yii\grid\SerialColumn;
 use yii\helpers\Url;
 use yii\grid\GridView;
 use yii\widgets\DetailView;
@@ -140,28 +141,33 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 				'controller' => '/crud/icsr'
 			],
 			[
-				'attribute' => 'id',
-				'value' => function ($model,$key,$index){
-					return ++$index;
-				}
+				'header' => Yii::t('app','ID'),
+				'class' => SerialColumn::className()
 			],
 			'patient_identifier',
-			'patient_age',
+
 			[
-				'attribute' => 'patient_age_unit',
+				'label' => Yii::t('app','Safety Report ID'),
 				'value' => function ($model,$key,$index){
-						return $model-> ageUnit->name;
+					return $model->getReactionCountry()->one()->code . '-'.$model->getDrug()->one()->getCompany()->one()->short_name . '-'.$model->id;
 				}
 			],
-			'patient_birth_date',
-			'patient_weight',
+
+			 [
+			 	'label' => Yii::t('app','Event Llt'),
+				 'format' =>'raw',
+				 'value' => function ($model,$key,$index){
+			 				$meddraLltValues =$model->getMeddraLltFromEvents();
+							return isset($meddraLltValues[0]['llt']) ? str_replace("|",'<br>',$meddraLltValues[0]['llt']) : '';
+			 	}
+			 ],
 			[
-				'attribute' =>'patient_weight_unit',
+				'attribute' => 'created_by',
 				'value' => function ($model,$key,$index){
-				return $model->patientWeightUnit->name;
+				return $model->createdBy->username;
 				}
 			],
-			'extra_history',
+			'created_at'
 		]
 	]) . '</div>' ?>
 <?php Pjax::end() ?>
