@@ -105,7 +105,8 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 </div></div><?php Pjax::begin(['id'=>'pjax-Icsrs', 'enableReplaceState'=> false, 'linkSelector'=>'#pjax-Icsrs ul.pagination a, th a', 'clientOptions' => ['pjax:success'=>'function(){alert("yo")}']]) ?>
 <?php echo '<div class="table-responsive">' . \yii\grid\GridView::widget([
 		'layout' => '{summary}{pager}<br/>{items}{pager}',
-		'dataProvider' => new \yii\data\ActiveDataProvider(['query' => $model->getIcsrs(), 'pagination' => ['pageSize' => 20, 'pageParam'=>'page-icsrs']]),
+		'dataProvider' => $icsrDataProvider,
+		'filterModel' => $icsrSeachModel,
 		'pager'        => [
 			'class'          => yii\widgets\LinkPager::className(),
 			'firstPageLabel' => Yii::t('app', 'First'),
@@ -145,13 +146,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 				'class' => SerialColumn::className()
 			],
 			'patient_identifier',
-
-			[
-				'label' => Yii::t('app','Safety Report ID'),
-				'value' => function ($model,$key,$index){
-					return $model->getReactionCountry()->one()->code . '-'.$model->getDrug()->one()->getCompany()->one()->short_name . '-'.$model->id;
-				}
-			],
+			'safetyReportId',
 
 			 [
 			 	'label' => Yii::t('app','Event Llt'),

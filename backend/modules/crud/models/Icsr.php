@@ -20,6 +20,15 @@ class Icsr extends BaseIcsr
     use traits\checkAccess,traits\checkSignal;
 
 
+    public function attributeLabels()
+    {
+        return array_merge(
+            parent::attributeHints(),
+        [
+            'safetyReportId' => Yii::t('app', 'Safety Report ID')
+        ]);
+    }
+
     /**
      * @inheritdoc
      */
@@ -30,8 +39,6 @@ class Icsr extends BaseIcsr
             [
             'id' => Yii::t('app', 'A.1.0.1 Sender’s (case) safety report unique identifier safetyreport>   safetyreportid'),
             'drug_id' => Yii::t('app', 'Drug Id'),
-                
-    
             'patient_identifier' => Yii::t('app', 'B.1.1 Patient (name or initials)'),
             'patient_age' => Yii::t('app', 'B.1.2.2a Age at time of onset of reaction or event'),
             'patient_age_unit' => Yii::t('app', 'B.1.2.2b Age at time of onset of reaction / event unit'),
@@ -110,7 +117,7 @@ class Icsr extends BaseIcsr
     }
 
 
-public function  isIcsrExported($icsr_id)
+    public function  isIcsrExported($icsr_id)
     {
         return  AuditTrail::findOne(['model_id' => $icsr_id , 'action' => 'EXPORT' ]);
     }
@@ -141,6 +148,8 @@ public function  isIcsrExported($icsr_id)
         $result = $command->queryAll();
         return $result;
     }
+
+
 
 
 

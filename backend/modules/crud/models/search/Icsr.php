@@ -12,6 +12,7 @@ use backend\modules\crud\models\Icsr as IcsrModel;
 */
 class Icsr extends IcsrModel
 {
+    public $safetyReportId;
 /**
 	 *
 * @inheritdoc
@@ -20,7 +21,7 @@ class Icsr extends IcsrModel
 	public function rules() {
 return [
 [['id', 'drug_id', 'reaction_country_id'], 'integer'],
-            [['patient_identifier', 'patient_age_unit', 'patient_birth_date', 'patient_weight_unit', 'extra_history', 'is_serious', 'results_in_death', 'life_threatening', 'requires_hospitalization', 'results_in_disability', 'is_congenital_anomaly', 'others_significant', 'report_type'], 'safe'],
+            [['safetyReportId','created_by','created_at','patient_identifier', 'patient_age_unit', 'patient_birth_date', 'patient_weight_unit', 'extra_history', 'is_serious', 'results_in_death', 'life_threatening', 'requires_hospitalization', 'results_in_disability', 'is_congenital_anomaly', 'others_significant', 'report_type'], 'safe'],
             [['patient_age', 'patient_weight'], 'number'],
 ];
 }
@@ -33,35 +34,38 @@ return [
 return Model::scenarios();
 }
 
-/**
-* Creates data provider instance with search query applied
-*
-* @param array $params
-*
-* @return ActiveDataProvider
-*/
-	public function search($params) {
-$query = IcsrModel::find();
+    /**
+     * Creates data provider instance with search query applied
+     *
+     * @param array $params
+     *
+     * @return ActiveDataProvider
+     */
+    public function search($params) {
 
-$dataProvider = new ActiveDataProvider([
-'query' => $query,
-]);
+        $this->drug_id = (isset($params['id']))? $params['id'] : '';
+        $query = IcsrModel::find();
 
-$this->load($params);
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
 
-if (!$this->validate()) {
+        $this->load($params);
+
+        if (!$this->validate()) {
 // uncomment the following line if you do not want to any records when validation fails
 // $query->where('0=1');
-return $dataProvider;
-}
-
-$query->andFilterWhere([
+            return $dataProvider;
+        }
+        $query->joinWith('createdBy');
+        $query->joinWith(['reactionCountry']);
+        $query->andFilterWhere([
             'id' => $this->id,
             'drug_id' => $this->drug_id,
             'patient_age' => $this->patient_age,
             'patient_birth_date' => $this->patient_birth_date,
             'patient_weight' => $this->patient_weight,
-            'lkp_city_id' => $this->lkp_city_id,
+
         ]);
 
         $query->andFilterWhere(['like', 'patient_identifier', $this->patient_identifier])
@@ -75,8 +79,13 @@ $query->andFilterWhere([
             ->andFilterWhere(['like', 'results_in_disability', $this->results_in_disability])
             ->andFilterWhere(['like', 'is_congenital_anomaly', $this->is_congenital_anomaly])
             ->andFilterWhere(['like', 'others_significant', $this->others_significant])
-            ->andFilterWhere(['like', 'report_type', $this->report_type]);
+            ->andFilterWhere(['like', 'report_type', $this->report_type])
+            ->andFilterWhere(['like','created_at',$this->created_at])
+            ->andFilterWhere(['like', 'user.username', $this->created_by]);
 
-return $dataProvider;
-}
+
+            $query->andWhere('`icsr`.id LIKE "%' . $this->safetyReportId . '%" ' .
+                'OR `lkp_country`.code LIKE "%' . $this->safetyReportId . '%"');
+        return $dataProvider;
+    }
 }

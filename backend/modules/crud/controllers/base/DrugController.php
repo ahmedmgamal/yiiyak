@@ -17,7 +17,7 @@ use yii\web\Controller;
 use yii\web\HttpException;
 use yii\helpers\Url;
 use dmstr\bootstrap\Tabs;
-
+use backend\modules\crud\models\search\Icsr as IcsrSearch;
 /**
  * DrugController implements the CRUD actions for Drug model.
  */
@@ -70,12 +70,14 @@ class DrugController extends Controller
 
 
         $signaledIcsrs  = $model->getSignaledIcsrsAndIcsrEvenets($signaledDrugs);
-
-
+        $icsrSeachModel = new IcsrSearch();
+        $icsrDataProvider = $icsrSeachModel->search($_GET);
 		return $this->render('view', [
 				'model' => $model,
                 'signaledDrugs' => $signaledDrugs,
                 'signaledIcsrs' => $signaledIcsrs,
+                'icsrSeachModel' => $icsrSeachModel,
+                'icsrDataProvider' => $icsrDataProvider
 			]);
 	}
 
