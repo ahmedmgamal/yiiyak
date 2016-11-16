@@ -55,13 +55,21 @@ $('#exportXml').on('click',function (e) {
         else
             {
                 $('#validating').show().fadeTo(1000, 0.5).fadeTo(500, 1.0);
-        }
+            }
 
         if(new Date().getTime() - startTime > 10000){
-
             clearInterval(interval);
             if (passedValidation) {
-                $(location).attr("href", baseUrl + redirectUrl);
+                controllerUrl = targetUrl.substr(0,(targetUrl.lastIndexOf('/')+1));
+
+                //this will get the path from /files to the end
+                filePathFromSlashFile = redirectUrl.substr(redirectUrl.lastIndexOf('/web')+4);
+
+                $('#dtdValidating').hide();
+                progressBar.hide();
+                $('#validating').hide();
+                $('#downloadFileAnchorTag').attr('href',baseUrl+controllerUrl+'download-xml-file?path='+filePathFromSlashFile);
+                $('#downloadFile').show();
             }
 
             else
