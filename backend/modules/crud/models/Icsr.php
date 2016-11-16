@@ -25,7 +25,8 @@ class Icsr extends BaseIcsr
         return array_merge(
             parent::attributeHints(),
         [
-            'safetyReportId' => Yii::t('app', 'Safety Report ID')
+            'safetyReportId' => Yii::t('app', 'Safety Report ID'),
+            'meddraLltFromEvents' => Yii::t('app','Event Llt')
         ]);
     }
 
@@ -110,8 +111,6 @@ class Icsr extends BaseIcsr
         foreach ($this->getIcsrEvents()->all() as $key => $value)
         {
             $temp_arr[] = "{\"id\":$value->id,\"icsr_id\":\"$this->id\"}";
-
-
         }
         return $temp_arr;
     }
@@ -146,7 +145,9 @@ class Icsr extends BaseIcsr
         $connection = Yii::$app->getDb();
         $command = $connection->createCommand("select group_concat(meddra_llt_text SEPARATOR '|') as llt from icsr_event where icsr_id={$this->id};");
         $result = $command->queryAll();
-        return $result;
+
+       return  isset($result[0]['llt']) ? str_replace("|",'<br>',$result[0]['llt']) : '';
+
     }
 
 

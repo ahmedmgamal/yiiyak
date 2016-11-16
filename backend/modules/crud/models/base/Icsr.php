@@ -111,9 +111,7 @@ abstract class Icsr extends \yii\db\ActiveRecord
             [[ 'patient_weight'], 'number','max' => 999999],
             [['reaction_country_id'], 'exist', 'skipOnError' => true, 'targetClass' => LkpCountry::className(), 'targetAttribute' => ['reaction_country_id' => 'id']],
             [['drug_id'], 'exist', 'skipOnError' => true, 'targetClass' => Drug::className(), 'targetAttribute' => ['drug_id' => 'id']],
- 
-     
- 
+
         ];
     }
 

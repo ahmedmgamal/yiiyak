@@ -13,6 +13,7 @@ use backend\modules\crud\models\Icsr as IcsrModel;
 class Icsr extends IcsrModel
 {
     public $safetyReportId;
+    public $meddraLltFromEvents;
 /**
 	 *
 * @inheritdoc
@@ -21,7 +22,7 @@ class Icsr extends IcsrModel
 	public function rules() {
 return [
 [['id', 'drug_id', 'reaction_country_id'], 'integer'],
-            [['safetyReportId','created_by','created_at','patient_identifier', 'patient_age_unit', 'patient_birth_date', 'patient_weight_unit', 'extra_history', 'is_serious', 'results_in_death', 'life_threatening', 'requires_hospitalization', 'results_in_disability', 'is_congenital_anomaly', 'others_significant', 'report_type'], 'safe'],
+            [['meddraLltFromEvents','safetyReportId','created_by','created_at','patient_identifier', 'patient_age_unit', 'patient_birth_date', 'patient_weight_unit', 'extra_history', 'is_serious', 'results_in_death', 'life_threatening', 'requires_hospitalization', 'results_in_disability', 'is_congenital_anomaly', 'others_significant', 'report_type'], 'safe'],
             [['patient_age', 'patient_weight'], 'number'],
 ];
 }
@@ -58,8 +59,9 @@ return Model::scenarios();
             return $dataProvider;
         }
         $query->joinWith('createdBy');
-        $query->joinWith(['reactionCountry']);
+        $query->joinWith('reactionCountry');
         $query->joinWith('drug');
+        $query->joinWith('icsrEvents');
         $query->andFilterWhere([
             'id' => $this->id,
             'drug_id' => $this->drug_id,
@@ -82,7 +84,8 @@ return Model::scenarios();
             ->andFilterWhere(['like', 'others_significant', $this->others_significant])
             ->andFilterWhere(['like', 'report_type', $this->report_type])
             ->andFilterWhere(['like','created_at',$this->created_at])
-            ->andFilterWhere(['like', 'user.username', $this->created_by]);
+            ->andFilterWhere(['like', 'user.username', $this->created_by])
+            ->andFilterWhere(['like','icsr_event.meddra_llt_text',$this->meddraLltFromEvents]);
 
             $query->leftJoin('company','`drug`.company_id = `company`.id');
             $query->andWhere('`icsr`.id LIKE "%' . $this->safetyReportId . '%" ' .

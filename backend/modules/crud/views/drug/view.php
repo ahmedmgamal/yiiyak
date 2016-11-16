@@ -147,15 +147,10 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 			],
 			'patient_identifier',
 			'safetyReportId',
-
-			 [
-			 	'label' => Yii::t('app','Event Llt'),
-				 'format' =>'raw',
-				 'value' => function ($model,$key,$index){
-			 				$meddraLltValues =$model->getMeddraLltFromEvents();
-							return isset($meddraLltValues[0]['llt']) ? str_replace("|",'<br>',$meddraLltValues[0]['llt']) : '';
-			 	}
-			 ],
+			[
+			 'attribute' =>'meddraLltFromEvents',
+				'format' => 'raw',
+			],
 			[
 				'attribute' => 'created_by',
 				'value' => function ($model,$key,$index){
