@@ -59,6 +59,7 @@ return Model::scenarios();
         }
         $query->joinWith('createdBy');
         $query->joinWith(['reactionCountry']);
+        $query->joinWith('drug');
         $query->andFilterWhere([
             'id' => $this->id,
             'drug_id' => $this->drug_id,
@@ -83,9 +84,11 @@ return Model::scenarios();
             ->andFilterWhere(['like','created_at',$this->created_at])
             ->andFilterWhere(['like', 'user.username', $this->created_by]);
 
-
+            $query->leftJoin('company','`drug`.company_id = `company`.id');
             $query->andWhere('`icsr`.id LIKE "%' . $this->safetyReportId . '%" ' .
-                'OR `lkp_country`.code LIKE "%' . $this->safetyReportId . '%"');
+                'OR `lkp_country`.code LIKE "%' . $this->safetyReportId . '%"' .
+                'OR `company`.short_name LIKE "%' . $this->safetyReportId . '%"'
+            );
         return $dataProvider;
     }
 }
