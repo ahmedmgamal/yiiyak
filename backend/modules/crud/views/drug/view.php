@@ -7,6 +7,7 @@
 
 
 use dmstr\helpers\Html;
+use yii\grid\SerialColumn;
 use yii\helpers\Url;
 use yii\grid\GridView;
 use yii\widgets\DetailView;
@@ -104,7 +105,8 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 </div></div><?php Pjax::begin(['id'=>'pjax-Icsrs', 'enableReplaceState'=> false, 'linkSelector'=>'#pjax-Icsrs ul.pagination a, th a', 'clientOptions' => ['pjax:success'=>'function(){alert("yo")}']]) ?>
 <?php echo '<div class="table-responsive">' . \yii\grid\GridView::widget([
 		'layout' => '{summary}{pager}<br/>{items}{pager}',
-		'dataProvider' => new \yii\data\ActiveDataProvider(['query' => $model->getIcsrs(), 'pagination' => ['pageSize' => 20, 'pageParam'=>'page-icsrs']]),
+		'dataProvider' => $icsrDataProvider,
+		'filterModel' => $icsrSeachModel,
 		'pager'        => [
 			'class'          => yii\widgets\LinkPager::className(),
 			'firstPageLabel' => Yii::t('app', 'First'),
@@ -140,28 +142,22 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 				'controller' => '/crud/icsr'
 			],
 			[
-				'attribute' => 'id',
-				'value' => function ($model,$key,$index){
-					return ++$index;
-				}
+				'header' => Yii::t('app','ID'),
+				'class' => SerialColumn::className()
 			],
 			'patient_identifier',
-			'patient_age',
+			'safetyReportId',
 			[
-				'attribute' => 'patient_age_unit',
+			 'attribute' =>'meddraLltFromEvents',
+				'format' => 'raw',
+			],
+			[
+				'attribute' => 'created_by',
 				'value' => function ($model,$key,$index){
-						return $model-> ageUnit->name;
+				return $model->createdBy->username;
 				}
 			],
-			'patient_birth_date',
-			'patient_weight',
-			[
-				'attribute' =>'patient_weight_unit',
-				'value' => function ($model,$key,$index){
-				return $model->patientWeightUnit->name;
-				}
-			],
-			'extra_history',
+			'created_at'
 		]
 	]) . '</div>' ?>
 <?php Pjax::end() ?>
