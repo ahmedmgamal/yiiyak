@@ -1,8 +1,5 @@
 $( document ).ready(function() {
 
-
-
-continueFlag = false;
 $('#exportXml').on('click',function (e) {
 
     progressVal = 1;
@@ -34,11 +31,14 @@ $('#exportXml').on('click',function (e) {
            }
            else {
                passedValidation = false;
+               $('#failedValidation').text(response.failedMessage);
            }
 
         },
         'error' : function (error){
             passedValidation = false;
+            //in case internal server error
+            $('#failedValidation').text('can\'t export xml now please try again later');
         }
     });
 

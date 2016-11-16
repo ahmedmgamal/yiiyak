@@ -134,7 +134,8 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
             return $this->redirect($fileUrl);
         }
         if ($request->isAjax){
-            return $xml;
+            \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return ['failedMessage' => Yii::t('app','failed to pass ICH DTD validation')];
         }
         return $xml;
     }
