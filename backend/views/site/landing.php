@@ -58,7 +58,7 @@ use yii\bootstrap\Nav;
                                             <?= Yii::t('app','ICSRs E2B reporting support')?>
                                         </p>
                                         <p class="text-center">
-                                            <?= Yii::t('app','XML validate ICSRs')?>
+                                            <?= Yii::t('app','XML validated ICSRs')?>
                                         </p>
                                         <p class="text-center">
                                             <?= Yii::t('app','Null case ICSR support')?>
