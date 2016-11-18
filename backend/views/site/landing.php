@@ -82,16 +82,14 @@ use yii\bootstrap\Nav;
                                     <div class="block-body scroll-on fadeIn" data-wow-duration="1s">
 
                                          <p class="text-center">
-                                           <?= Yii::t('app','Preparation and submission to PSMF')?>
+                                           <?= Yii::t('app','Preparation & submission to PSMF')?>
                                         </p>
-                                        <p class="text-center">
-                                            <?= Yii::t('app','Pharmacovigilance system master file (PSMF)')?>
-                                        </p>
+
                                         <p class="text-center">
                                             <?= Yii::t('app','Risk Management Plan (RMP) production,review and harmonization')?>
                                         </p>
                                         <p class="text-center">
-                                            <?= Yii::t('app','Periodic safety update report (PSUR) preparation and submission')?>
+                                            <?= Yii::t('app','Periodic Benefit Risk Evaluation Reports (PBRERs)')?>
                                         </p>
                                         <p class="text-center">
                                             <?= Yii::t('app','Individual case safety report (ICSR) full processing')?>
