@@ -28,7 +28,7 @@ function changeDates ()
 
         now.setDate(now.getDate() - patient_age);
 
-        $("#icsr-patient_birth_date").datepicker('option',{ minDate: now , maxDate: new Date()});
+        $("#icsr-patient_birth_date").datepicker('option',{  maxDate: new Date()});
         $("#icsr-patient_birth_date").datepicker("setDate",now);
     }
 
@@ -37,7 +37,7 @@ function changeDates ()
 
         now.setMonth(now.getMonth() - patient_age);
 
-       $("#icsr-patient_birth_date").datepicker('option',{ minDate: now , maxDate: new Date()});
+       $("#icsr-patient_birth_date").datepicker('option',{  maxDate: new Date()});
         $("#icsr-patient_birth_date").datepicker("setDate",now);
     }
     else
@@ -45,7 +45,7 @@ function changeDates ()
 
         now.setFullYear(now.getFullYear() - patient_age);
 
-        $("#icsr-patient_birth_date").datepicker('option',{ minDate: now , maxDate: new Date()});
+        $("#icsr-patient_birth_date").datepicker('option',{  maxDate: new Date()});
         $("#icsr-patient_birth_date").datepicker("setDate",now );
 
     }

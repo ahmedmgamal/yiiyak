@@ -53,7 +53,7 @@ $form->field($model, 'report_type')->dropDownList(
                         );
             ?>
 
-            <?php echo $form->field($model, 'patient_birth_date')->widget(DatePicker::className(),['dateFormat' => 'yyyy-MM-dd']); ?>
+            <?php echo $form->field($model, 'patient_birth_date')->widget(DatePicker::className(),['dateFormat' => 'yyyy-MM-dd','clientOptions' => ['maxDate' => 0]]); ?>
 			<?php echo $form->field($model, 'patient_weight')->textInput(['maxlength' => true , 'type' => 'number']) ?>
 			<?php echo $form->field($model, 'patient_weight_unit')->dropDownList(
                             \yii\helpers\ArrayHelper::map(backend\modules\crud\models\LkpWeightUnit::find()->all(), 'id', 'name')
