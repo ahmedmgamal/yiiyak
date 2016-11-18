@@ -55,10 +55,10 @@ use yii\bootstrap\Nav;
                                     </div>
                                     <div class="block-body scroll-on fadeIn" data-wow-duration="1s">
                                          <p class="text-center">
-                                            <?= Yii::t('app','ICSR E28 reporting support')?>
+                                            <?= Yii::t('app','ICSRs E28 reporting support')?>
                                         </p>
                                         <p class="text-center">
-                                            <?= Yii::t('app','XML validate ICSR')?>
+                                            <?= Yii::t('app','XML validate ICSRs')?>
                                         </p>
                                         <p class="text-center">
                                             <?= Yii::t('app','Null case ICSR support')?>
