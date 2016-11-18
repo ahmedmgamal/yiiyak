@@ -355,7 +355,7 @@ use yii\bootstrap\Nav;
                                 <div class="section-title-wrapper style-1 v1 v2 mb-40">
                                     <h3 class="section-title section-title-sm left">
                                         <span><?= Yii::t('app','Our office')?></span>
-                                        <small class="section-subtitle">زهراء مدينة نصر  </small>
+                                        <small class="section-subtitle"><?= Yii::t('app','Building 5A, block 4, Manteqat El-Cinema, Nasr city, Cairo, Egypt')?></small>
                                     </h3>
 
                                 </div>
@@ -415,7 +415,7 @@ use yii\bootstrap\Nav;
                                     </div>
                                     <div class="block-content">
                                         <h3 class="block-title-2">Our Office</h3>
-                                        <p> زهراء مدينة نصر </p>
+                                        <p> <?= Yii::t('app','Building 5A, block 4, Manteqat El-Cinema, Nasr city, Cairo, Egypt')?> </p>
                                     </div>
                                 </div>
 
@@ -427,7 +427,7 @@ use yii\bootstrap\Nav;
                                     </div>
                                     <div class="block-content">
                                         <h3 class="block-title-2">Email</h3>
-                                        <p>pv@emcoegypt.com </p>
+                                        <p>pv@emcoegypt.org </p>
                                     </div>
                                 </div>
 
