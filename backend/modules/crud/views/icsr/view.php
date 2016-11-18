@@ -592,7 +592,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                                                                     [
                                                                         'content' => $this->blocks['IcsrEvents'],
                                                                         'label' => count($model->getIcsrEvents()->asArray()->all()) <1 ?
-                                                                            '<small>Icsr Events <span class="badge badge-default">'.count($model->getIcsrEvents()->asArray()->all()).'  </span> <span class="glyphicon glyphicon-warning-sign alert-signal-color" ></span></small>'
+                                                                            '<small data-toggle="tooltip" title="'.Yii::t('app',' there is no events for this icsr . you need to add at least one event to be able to export e2b icsr').'">Icsr Events <span class="badge badge-default">'.count($model->getIcsrEvents()->asArray()->all()).'  </span> <span class="glyphicon glyphicon-warning-sign alert-signal-color" ></span></small>'
                                                                             :
                                                                             '<small>Icsr Events <span class="badge badge-default">'.count($model->getIcsrEvents()->asArray()->all()) . '</span></small>'
                                                                         ,
@@ -604,7 +604,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                                                                     ], [
                                                                         'content' => $this->blocks['IcsrReporters'],
                                                                         'label' => count($model->getIcsrReporters()->asArray()->all()) <1 ?
-                                                                            '<small>Icsr Reporters <span class="badge badge-default">' . count($model->getIcsrReporters()->asArray()->all()) . '</span> <span class="glyphicon glyphicon-warning-sign alert-signal-color" ></span></small>'
+                                                                            '<small data-toggle="tooltip" title="'.Yii::t('app',' there is no reports for this icsr . you need to add at least one report to be able to export e2b icsr').'">Icsr Reporters <span class="badge badge-default">' . count($model->getIcsrReporters()->asArray()->all()) . '</span> <span class="glyphicon glyphicon-warning-sign alert-signal-color" ></span></small>'
                                                                             :
                                                                             '<small>Icsr Reporters <span class="badge badge-default">' . count($model->getIcsrReporters()->asArray()->all()) . '</span></small>'
                                                                         ,
