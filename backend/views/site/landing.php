@@ -273,12 +273,12 @@ use yii\bootstrap\Nav;
                         </div>
 
                         <div class="row">
-                            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 scroll-on rotateInDownLeft" data-wow-duration=".15s" data-wow-offset="250">
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 scroll-on rotateInDownLeft" data-wow-duration=".15s" data-wow-offset="250">
                                 <div class="client-logo style-1 block-shadow">
                                     <?= Html::img('@web/images/logos/hygint.jpg',['class' => 'img-responsive','alt' => 'PV-Radar hygint logo']) ?>
                                 </div>
                             </div>
-                            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 scroll-on rotateInDownLeft" data-wow-duration=".15s" data-wow-delay=".15s" data-wow-offset="250">
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 scroll-on rotateInDownLeft" data-wow-duration=".15s" data-wow-delay=".15s" data-wow-offset="250">
                                 <div class="client-logo style-1 block-shadow">
                                     <?= Html::img('@web/images/logos/pharma.jpg',['class' => 'img-responsive','alt' => 'PV-Radar pharma logo']) ?>
 
@@ -290,12 +290,7 @@ use yii\bootstrap\Nav;
 
                                 </div>
                             </div>
-                            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 scroll-on rotateInDownLeft" data-wow-duration=".15s" data-wow-delay=".45s" data-wow-offset="250">
-                                <div class="client-logo style-1 block-shadow">
-                                    <?= Html::img('@web/images/logos/Alhuda.jpg',['class' => 'img-responsive','alt' => 'PV-Radar Alhuda logo']) ?>
 
-                                </div>
-                            </div>
                             <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 scroll-on rotateInDownLeft" data-wow-duration=".15s" data-wow-delay=".60s" data-wow-offset="250">
                                 <div class="client-logo style-1 block-shadow">
                                     <?= Html::img('@web/images/logos/haier.png',['class' => 'img-responsive','alt' => 'PV-Radar haier logo']) ?>
