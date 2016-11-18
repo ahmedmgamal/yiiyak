@@ -63,7 +63,7 @@ $form->field($model, 'report_type')->dropDownList(
 
 
  <fieldset>
-            <legend><?= $form->field($model, 'is_serious')->checkbox() ?></legend>
+            <legend class="legend-font-size"><?= $form->field($model, 'is_serious')->checkbox() ?></legend>
             <div id="showSeriousBoxes">
 <?= $form->field($model, 'results_in_death')->checkbox() ?>
 <?= $form->field($model, 'life_threatening')->checkbox() ?>
