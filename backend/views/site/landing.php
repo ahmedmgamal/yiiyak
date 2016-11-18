@@ -166,74 +166,99 @@ use yii\bootstrap\Nav;
                     <div class="container">
                         <div class="section-title-wrapper style-1 v1 scroll-on bounceInDown" data-wow-duration="1s" data-wow-offset="100">
                             <h3 class="section-title center">
-                                <span><?= Yii::t('app','3 packages are available (Contracts for 2 years only)')?></span>
+                                <span><?= Yii::t('app','4 plans are available (Contracts for minimum 2 years)')?></span>
                                 <span class="section-subtitle"><?= Yii::t('app','To be the best means to make each customer your friend and give him what he needs')?></span>
                             </h3>
                         </div>
 
                         <div class="row">
-                            <div class="col-md-4 scroll-on slideInLeft" data-wow-duration=".5s" data-wow-offset="200">
+                            <div class="col-md-3 scroll-on slideInLeft" data-wow-duration=".5s" data-wow-offset="200">
                                 <div class="block block-pricing style-1 bg-base-1 mt-20">
                                     <div class="block-header">
-                                        <h3 class="pricing-title">Silver</h3>
+                                        <h3 class="pricing-title"><?= Yii::t('app' ,'Plan I')?></h3>
                                         <span class="pricing-subtitle"></span>
                                     </div>
                                     <div class="block-body">
                                         <ul>
-                                            <li><a>< 10 products</a></li>
-                                            <li><a>2 Users</a></li>
-                                            <li><a >unlimited ICSR storgae</a></li>
-                                            <li><a >E2B complinet </a></li>
-                                            <li><a >duplication detetciton</a></li>
+                                            <li><a>< 10 <?= Yii::t('app','products')?></a></li>
+                                            <li><a>1 <?= Yii::t('app','user')?></a></li>
+                                            <li><a><?= Yii::t('app','unlimited ICSR storage')?></a></li>
+                                            <li><a><?=Yii::t('app','E2B complaint')?> </a></li>
+                                            <li><a><?=Yii::t('app','duplication detection')?></a></li>
                                         </ul>
 
                                     </div>
                                     <div class="block-footer">
-                                        <a href="#request-form" class="btn btn-lg btn-base-1 scroll-me" onclick="$('#request-message').val('i would like to request Silver package'); setTimeout(function() {$('#email').focus()},100);">Request</a>
+                                        <a href="#request-form" class="btn btn-lg btn-base-1 scroll-me" onclick="$('#request-message').val('i would like to request Plan I'); setTimeout(function() {$('#email').focus()},100);">Request</a>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 scroll-on zoomIn" data-wow-duration=".5s" data-wow-delay=".5s" data-wow-offset="100">
+                            <div class="col-md-3 scroll-on zoomIn" data-wow-duration=".5s" data-wow-delay=".5s" data-wow-offset="100">
                                 <div class="block block-pricing style-1 bg-base-2">
                                     <div class="block-header">
-                                        <h3 class="pricing-title">Gold</h3>
+                                        <h3 class="pricing-title"><?= Yii::t('app','Plan II')?></h3>
                                         <span class="pricing-subtitle"></span>
                                     </div>
                                     <div class="block-body">
                                         <ul>
-                                            <li><a >11-50 products</a></li>
-                                            <li><a>5 Users</a></li>
-                                            <li><a >unlimited ICSR storgae</a></li>
-                                            <li><a >E2B complinet </a></li>
-                                            <li><a >duplication detetciton</a></li>
+                                            <li><a>10-50 <?= Yii::t('app','products')?></a></li>
+                                            <li><a>2 <?= Yii::t('app','users')?></a></li>
+                                            <li><a><?= Yii::t('app','unlimited ICSR storage')?></a></li>
+                                            <li><a><?=Yii::t('app','E2B complaint')?> </a></li>
+                                            <li><a><?=Yii::t('app','duplication detection')?></a></li>
                                         </ul>
                                     </div>
                                     <div class="block-footer">
-                                        <a href="#request-form" class="btn btn-lg btn-base-2 scroll-me" onclick="$('#request-message').val('i would like to request Gold package'); setTimeout(function() {$('#email').focus()},100);">Request</a>
+                                        <a href="#request-form" class="btn btn-lg btn-base-2 scroll-me" onclick="$('#request-message').val('i would like to request Plan II'); setTimeout(function() {$('#email').focus()},100);">Request</a>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 scroll-on slideInRight" data-wow-duration=".5s" data-wow-offset="200">
+                            <div class="col-md-3 scroll-on slideInRight" data-wow-duration=".5s" data-wow-offset="200">
                                 <div class="block block-pricing style-1 bg-base-1 mt-20">
                                     <div class="block-header">
-                                        <h3 class="pricing-title">Platinum</h3>
+                                        <h3 class="pricing-title"><?= Yii::t('app','Plan III')?></h3>
 
                                     </div>
                                     <div class="block-body">
                                         <ul>
-                                            <li><a >51-100 products</a></li>
-                                            <li><a>10 Users</a></li>
-                                            <li><a >unlimited ICSR storgae</a></li>
-                                            <li><a >E2B complinet </a></li>
-                                            <li><a >duplication detetciton</a></li>
+                                            <li><a>51-150 <?= Yii::t('app','products') ?></a></li>
+                                            <li><a>3 <?= Yii::t('app','users')?></a></li>
+                                            <li><a><?= Yii::t('app','unlimited ICSR storage')?></a></li>
+                                            <li><a><?=Yii::t('app','E2B complaint')?></a></li>
+                                            <li><a><?=Yii::t('app','duplication detection')?></a></li>
                                         </ul>
 
                                     </div>
                                     <div class="block-footer">
-                                        <a href="#request-form" class="btn btn-lg btn-base-1 scroll-me" onclick="$('#request-message').val('i would like to request Platinum package'); setTimeout(function() {$('#email').focus()},100);">Request</a>
+                                        <a href="#request-form" class="btn btn-lg btn-base-1 scroll-me" onclick="$('#request-message').val('i would like to request Plan III'); setTimeout(function() {$('#email').focus()},100);">Request</a>
                                     </div>
                                 </div>
                             </div>
+
+
+                            <div class="col-md-3 scroll-on slideInRight" data-wow-duration=".5s" data-wow-offset="200">
+                                <div class="block block-pricing style-1 bg-base-1 mt-20">
+                                    <div class="block-header">
+                                        <h3 class="pricing-title"><?= Yii::t('app','Plan IV')?></h3>
+
+                                    </div>
+                                    <div class="block-body">
+                                        <ul>
+                                            <li><a>> 150 <?= Yii::t('app','products') ?></a></li>
+                                            <li><a>5 <?= Yii::t('app','users')?></a></li>
+                                            <li><a><?= Yii::t('app','unlimited ICSR storage')?></a></li>
+                                            <li><a><?=Yii::t('app','E2B complaint')?></a></li>
+                                            <li><a><?=Yii::t('app','duplication detection')?></a></li>
+                                        </ul>
+
+                                    </div>
+                                    <div class="block-footer">
+                                        <a href="#request-form" class="btn btn-lg btn-base-1 scroll-me" onclick="$('#request-message').val('i would like to request Plan IV'); setTimeout(function() {$('#email').focus()},100);">Request</a>
+                                    </div>
+                                </div>
+                            </div>
+
+
                         </div>
                     </div>
                 </section>
