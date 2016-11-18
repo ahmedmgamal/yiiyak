@@ -86,7 +86,7 @@ abstract class DrugPrescription extends \yii\db\ActiveRecord
             [['icsr_id'], 'exist', 'skipOnError' => true, 'targetClass' => Icsr::className(), 'targetAttribute' => ['icsr_id' => 'id']],
             [['frequency_lkp_id'], 'exist', 'skipOnError' => true, 'targetClass' => LkpFrequency::className(), 'targetAttribute' => ['frequency_lkp_id' => 'id']],
             [['drug_role'], 'exist', 'skipOnError' => true, 'targetClass' =>  \backend\modules\crud\models\LkpDrugRole::className(), 'targetAttribute' => ['drug_role' => 'id']],
-            
+            [['use_date_start'],'compare','compareAttribute' => 'use_date_end' ,'operator' => '<']
          
         ];
     }
