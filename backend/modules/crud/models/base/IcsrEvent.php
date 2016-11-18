@@ -83,7 +83,9 @@ abstract class IcsrEvent extends \yii\db\ActiveRecord
                     self::EVENT_OUTCOME_FATAL,
                     self::EVENT_OUTCOME_UNKNOWN,
                 ]
-            ]
+            ],
+            [['event_date'],'compare','compareAttribute' => 'event_end_date' ,'operator' => '<']
+
         ];
     }
 
