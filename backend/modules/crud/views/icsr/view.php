@@ -33,13 +33,13 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 
     <h1 id="modelAlias">
         <?= $model->getAliasModel() ?>
-        <small id='validating' style="color: #337ab7; display: none;"> <?= Yii::t('app','generating according to ICH specification')?> <a style="color: #3b9db7; " href="http://estri.ich.org/e2br22/index.htm" target="_blank"> <?= Yii::t('app','Click Here');?> </a>
+        <small id='validating' class="small-validating"> <?= Yii::t('app','generating according to ICH specification')?> <a class="small-validation-a" href="<?= Yii::$app->params['ich']?>" target="_blank"> <?= Yii::t('app','Click Here');?> </a>
                  </small>
 
-        <small id="downloadFile" style="color:#10802d; display:none"> <a href="#" id="downloadFileAnchorTag"  target="_blank"><?= Yii::t('app','Download File')?></a></small>
+        <small id="downloadFile" class="downloadFile" > <a href="#" id="downloadFileAnchorTag"  target="_blank"><?= Yii::t('app','Download File')?></a></small>
 
-        <small id="failedValidation" style="color: red; display:none"></small>
-        <small id="dtdValidating" style="color:#10802d; display:none;"><?= Yii::t('app','validating according to ICH DTD');?> <a style="color:#078072;" href="http://estri.ich.org/e2br22/ich-icsrack-v1_1_dtd.zip" target="_blank"><?= Yii::t('app','Click Here To Download');?></a></small>
+        <small id="failedValidation" class="failedValidation" ></small>
+        <small id="dtdValidating" class="downloadFile" ><?= Yii::t('app','validating according to ICH DTD');?> <a class="dtd"  href="<?= Yii::$app->params['dtd']?>" target="_blank"><?= Yii::t('app','Click Here To Download');?></a></small>
     </h1>
     <div id="progressbar" style="display: none;"></div>
     <br>
