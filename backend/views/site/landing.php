@@ -167,7 +167,6 @@ use yii\bootstrap\Nav;
                         <div class="section-title-wrapper style-1 v1 scroll-on bounceInDown" data-wow-duration="1s" data-wow-offset="100">
                             <h3 class="section-title center">
                                 <span><?= Yii::t('app','4 plans are available (Contracts for minimum 2 years)')?></span>
-                                <span class="section-subtitle"><?= Yii::t('app','To be the best means to make each customer your friend and give him what he needs')?></span>
                             </h3>
                         </div>
 
