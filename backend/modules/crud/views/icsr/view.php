@@ -458,7 +458,8 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                                                     'value' => function ($model,$key,$index)
                                                     {
 
-                                                        $url = '<a href='.$model->file_url.'> Icsr Version </a>';
+                                                        $url = '<a href=download-xml-file?path='.substr($model->file_url,strpos($model->file_url,'/files')) .'>'.Yii::t('app','Download ').'</a>';
+
                                                         return   $url;
                                                     }
                                                 ]
