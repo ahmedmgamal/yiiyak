@@ -111,7 +111,7 @@ abstract class Icsr extends \yii\db\ActiveRecord
             [[ 'patient_weight'], 'number','max' => 999999],
             [['reaction_country_id'], 'exist', 'skipOnError' => true, 'targetClass' => LkpCountry::className(), 'targetAttribute' => ['reaction_country_id' => 'id']],
             [['drug_id'], 'exist', 'skipOnError' => true, 'targetClass' => Drug::className(), 'targetAttribute' => ['drug_id' => 'id']],
-            [['patient_birth_date'],'compare','compareValue' => date('Y-m-d') ,'operator' => '<'],
+
         ];
     }
 
@@ -274,13 +274,23 @@ abstract class Icsr extends \yii\db\ActiveRecord
         return $this->hasMany(\backend\modules\crud\models\LkpIcsrType::className(), ['id' => 'icsr_type_lkp_id'])->viaTable('icsr_type', ['icsr_id' => 'id']);
     }
 
-public function getCompany() {
-    return $this->drug->company;
-}
+    public function getCompany() {
+        return $this->drug->company;
+    }
 
     public function getNarrative()
     {
         return $this->hasOne(\backend\modules\crud\models\IcsrNarritive::className(),['icsr_id' => 'id']);
+    }
+
+    public function getCreatedBy()
+    {
+        return $this->hasOne(\backend\modules\crud\models\User::className(),['id' => 'created_by']);
+    }
+
+    public function getSafetyReportId()
+    {
+        return  $this->getReactionCountry()->one()->code . '-'.$this->getDrug()->one()->getCompany()->one()->short_name . '-'.$this->id;
     }
 
     /**
