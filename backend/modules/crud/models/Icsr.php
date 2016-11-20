@@ -23,7 +23,7 @@ class Icsr extends BaseIcsr
     public function attributeLabels()
     {
         return array_merge(
-            parent::attributeHints(),
+            parent::attributeLabels(),
         [
             'safetyReportId' => Yii::t('app', 'Safety Report ID'),
             'meddraLltFromEvents' => Yii::t('app','Event Llt')

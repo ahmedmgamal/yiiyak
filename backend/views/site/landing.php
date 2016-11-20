@@ -30,7 +30,7 @@ use yii\bootstrap\Nav;
 
                             <!-- Center paragraph -->
                             <p class="ls-l text-standard text-center c-white" style="width: 900px; top: 50%; left: 50%;" data-ls="offsetxin:-250;offsetyin:-;durationin:1000;delayin:1000;offsetxout:0;offsetyout:-8;easingout:easeInOutQuart;scalexout:1.2;scaleyout:1.2;">
-                                <medium ><?= Yii::t('app',' Taking care of your Pharmacovigilence')?></medium>
+                                <medium ><?= Yii::t('app',' Taking care of your Pharmacovigilance')?></medium>
 
                             </p>
 
@@ -55,10 +55,10 @@ use yii\bootstrap\Nav;
                                     </div>
                                     <div class="block-body scroll-on fadeIn" data-wow-duration="1s">
                                          <p class="text-center">
-                                            <?= Yii::t('app','ICSRs E28 reporting support')?>
+                                            <?= Yii::t('app','ICSRs E2B reporting support')?>
                                         </p>
                                         <p class="text-center">
-                                            <?= Yii::t('app','XML validate ICSRs')?>
+                                            <?= Yii::t('app','XML validated ICSRs')?>
                                         </p>
                                         <p class="text-center">
                                             <?= Yii::t('app','Null case ICSR support')?>
@@ -82,7 +82,7 @@ use yii\bootstrap\Nav;
                                     <div class="block-body scroll-on fadeIn" data-wow-duration="1s">
 
                                          <p class="text-center">
-                                           <?= Yii::t('app','Preparation & submission to PSMF')?>
+                                           <?= Yii::t('app','Preparation & submission of PSMF')?>
                                         </p>
 
                                         <p class="text-center">
@@ -179,11 +179,11 @@ use yii\bootstrap\Nav;
                                     </div>
                                     <div class="block-body">
                                         <ul>
-                                            <li><a>< 10 <?= Yii::t('app','products')?></a></li>
-                                            <li><a>1 <?= Yii::t('app','user')?></a></li>
-                                            <li><a><?= Yii::t('app','unlimited ICSR storage')?></a></li>
-                                            <li><a><?=Yii::t('app','E2B complaint')?> </a></li>
-                                            <li><a><?=Yii::t('app','duplication detection')?></a></li>
+                                            <li><a>< 10 <?= Yii::t('app','Products')?></a></li>
+                                            <li><a>1 <?= Yii::t('app','User')?></a></li>
+                                            <li><a><?= Yii::t('app','Unlimited ICSRs Storage')?></a></li>
+                                            <li><a><?=Yii::t('app','E2B Compliant')?> </a></li>
+                                            <li><a><?=Yii::t('app','Duplication Detection')?></a></li>
                                         </ul>
 
                                     </div>
@@ -200,11 +200,11 @@ use yii\bootstrap\Nav;
                                     </div>
                                     <div class="block-body">
                                         <ul>
-                                            <li><a>10-50 <?= Yii::t('app','products')?></a></li>
-                                            <li><a>2 <?= Yii::t('app','users')?></a></li>
-                                            <li><a><?= Yii::t('app','unlimited ICSR storage')?></a></li>
-                                            <li><a><?=Yii::t('app','E2B complaint')?> </a></li>
-                                            <li><a><?=Yii::t('app','duplication detection')?></a></li>
+                                            <li><a>10-50 <?= Yii::t('app','Products')?></a></li>
+                                            <li><a>2 <?= Yii::t('app','Users')?></a></li>
+                                            <li><a><?= Yii::t('app','Unlimited ICSRs Storage')?></a></li>
+                                            <li><a><?=Yii::t('app','E2B Compliant')?> </a></li>
+                                            <li><a><?=Yii::t('app','Duplication Detection')?></a></li>
                                         </ul>
                                     </div>
                                     <div class="block-footer">
@@ -220,11 +220,11 @@ use yii\bootstrap\Nav;
                                     </div>
                                     <div class="block-body">
                                         <ul>
-                                            <li><a>51-150 <?= Yii::t('app','products') ?></a></li>
-                                            <li><a>3 <?= Yii::t('app','users')?></a></li>
-                                            <li><a><?= Yii::t('app','unlimited ICSR storage')?></a></li>
-                                            <li><a><?=Yii::t('app','E2B complaint')?></a></li>
-                                            <li><a><?=Yii::t('app','duplication detection')?></a></li>
+                                            <li><a>51-150 <?= Yii::t('app','Products') ?></a></li>
+                                            <li><a>3 <?= Yii::t('app','Users')?></a></li>
+                                            <li><a><?= Yii::t('app','Unlimited ICSRs Storage')?></a></li>
+                                            <li><a><?=Yii::t('app','E2B Compliant')?> </a></li>
+                                            <li><a><?=Yii::t('app','Duplication Detection')?></a></li>
                                         </ul>
 
                                     </div>
@@ -243,11 +243,11 @@ use yii\bootstrap\Nav;
                                     </div>
                                     <div class="block-body">
                                         <ul>
-                                            <li><a>> 150 <?= Yii::t('app','products') ?></a></li>
-                                            <li><a>5 <?= Yii::t('app','users')?></a></li>
-                                            <li><a><?= Yii::t('app','unlimited ICSR storage')?></a></li>
-                                            <li><a><?=Yii::t('app','E2B complaint')?></a></li>
-                                            <li><a><?=Yii::t('app','duplication detection')?></a></li>
+                                            <li><a>> 150 <?= Yii::t('app','Products') ?></a></li>
+                                            <li><a>5 <?= Yii::t('app','Users')?></a></li>
+                                            <li><a><?= Yii::t('app','Unlimited ICSRs Storage')?></a></li>
+                                            <li><a><?=Yii::t('app','E2B Compliant')?> </a></li>
+                                            <li><a><?=Yii::t('app','Duplication Detection')?></a></li>
                                         </ul>
 
                                     </div>
@@ -321,14 +321,6 @@ use yii\bootstrap\Nav;
                                 <div class="testimonial-fluid">
                                     <p class="testimonial-text">
                                         <?= Yii::t('app','Risk management system(s) and monitoring of the outcome of risk minimisation measures')?>
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="item">
-                                <div class="testimonial-fluid">
-                                    <p class="testimonial-text">
-                                        <?= Yii::t('app','Pharmacovigilance system master file(PSMF)')?>
                                     </p>
                                 </div>
                             </div>
@@ -468,7 +460,7 @@ use yii\bootstrap\Nav;
                     <div class="container">
                         <div class="div-table v-middle">
                             <div class="cell">
-                                All rights reserved. Copyright &copy; <?= date('Y') ?> <span class="company-rights">Pv-Raddar</span>
+                                All rights reserved. Copyright &copy; <?= date('Y') ?> <span class="company-rights"><?= Yii::t('app','PV-Radar')?></span>
 
                                 <?php if (file_exists(Yii::getAlias('@webroot').'/test-check.txt'))
                                 {
