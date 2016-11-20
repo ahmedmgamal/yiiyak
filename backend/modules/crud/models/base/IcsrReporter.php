@@ -14,8 +14,8 @@ use Yii;
  * @property integer $country_lkp_id
  * @property string $first_name
  * @property string $last_name
- * @property string $address_line_1
- * @property string $address_line_2
+ * @property string $reporter_organization
+ * @property string $reporter_department
  * @property string $city
  * @property string $state
  * @property string $zip_code
@@ -72,7 +72,7 @@ abstract class IcsrReporter extends \yii\db\ActiveRecord
             [['id', 'icsr_id', 'country_lkp_id', 'occupation_lkp_id'], 'integer'],
             [['health_professional'], 'string'],
             [['first_name','city'],'string','max' => 35],
-            [['last_name','address_line_1','address_line_2'],'string','max' => 50],
+            [['last_name','reporter_organization','reporter_department'],'string','max' => 50],
             [['zip_code'],'string','max' => 15],
             [['state', 'email'], 'string', 'max' => 40],
             [['phone'], 'string', 'max' => 20],
@@ -98,8 +98,8 @@ abstract class IcsrReporter extends \yii\db\ActiveRecord
             'country_lkp_id' => Yii::t('app', 'Country '),
             'first_name' => Yii::t('app', 'First Name'),
             'last_name' => Yii::t('app', 'Last Name'),
-            'address_line_1' => Yii::t('app', 'Reporter Organization'),
-            'address_line_2' => Yii::t('app', 'Reporter  Department'),
+            'reporter_organization' => Yii::t('app', 'Reporter Organization'),
+            'reporter_department' => Yii::t('app', 'Reporter  Department'),
             'city' => Yii::t('app', 'City'),
             'state' => Yii::t('app', 'State'),
             'zip_code' => Yii::t('app', 'Zip Code'),
@@ -123,8 +123,8 @@ abstract class IcsrReporter extends \yii\db\ActiveRecord
             'country_lkp_id' => Yii::t('app', 'Country Lkp Id'),
             'first_name' => Yii::t('app', 'First Name'),
             'last_name' => Yii::t('app', 'Last Name'),
-            'address_line_1' => Yii::t('app', 'Address Line 1'),
-            'address_line_2' => Yii::t('app', 'Address Line 2'),
+            'reporter_organization' => Yii::t('app', 'Address Line 1'),
+            'reporter_department' => Yii::t('app', 'Address Line 2'),
             'city' => Yii::t('app', 'City'),
             'state' => Yii::t('app', 'State'),
             'zip_code' => Yii::t('app', 'Zip Code'),

@@ -40,8 +40,8 @@ use \dmstr\bootstrap\Tabs;
 
 			<?php echo $form->field($model, 'first_name')->textInput(['maxlength' => true]) ?>
 			<?php echo $form->field($model, 'last_name')->textInput(['maxlength' => true]) ?>
-			<?php echo $form->field($model, 'address_line_1')->textInput(['maxlength' => true]) ?>
-			<?php echo $form->field($model, 'address_line_2')->textInput(['maxlength' => true]) ?>
+			<?php echo $form->field($model, 'reporter_organization')->textInput(['maxlength' => true]) ?>
+			<?php echo $form->field($model, 'reporter_department')->textInput(['maxlength' => true]) ?>
 			<?php echo $form->field($model, 'city')->textInput(['maxlength' => true]) ?>
 			<?php echo $form->field($model, 'state')->textInput(['maxlength' => true]) ?>
 			<?php echo $form->field($model, 'zip_code')->textInput(['maxlength' => true]) ?>
