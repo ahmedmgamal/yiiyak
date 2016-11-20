@@ -33,4 +33,28 @@ class CompanyController extends \backend\modules\crud\controllers\base\CompanyCo
             ]
         ];
     }
+
+    public function actionCompanyStatistics ($companyId)
+    {
+        $model = $this->findModel($companyId);
+
+        $totalUsers = $model->plan->getOneLimitAmount('user');
+        $totalProducts = $model->plan->getOneLimitAmount('drug');
+
+        $usedUsers = count($model->users);
+        $usedProducts = count($model->drugs);
+
+        $remainingUsers = $totalUsers - $usedUsers;
+        $remainingProducts = $totalProducts  - $usedProducts;
+
+        return $this->render('company-statistics',[
+            'model' => $model,
+            'totalUsers' => $totalUsers,
+            'totalProducts' => $totalProducts,
+            'usedUsers' => $usedUsers,
+            'usedProducts' => $usedProducts,
+            'remainingUsers' => $remainingUsers,
+            'remainingProducts' => $remainingProducts
+        ]);
+    }
 }
