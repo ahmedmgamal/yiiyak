@@ -6,6 +6,7 @@
  */
 
 
+use kartik\password\PasswordInput;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
@@ -38,7 +39,12 @@ use \dmstr\bootstrap\Tabs;
 			<?php echo $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
 			<?php
 			if ($this->context->action->id == 'create') {
-				echo $form->field($model, 'password_hash')->textInput(['maxlength' => true]);
+			 echo $form->field($model, 'password_hash')->textInput(['maxlength' => true])->widget(PasswordInput::classname(), [
+				'pluginOptions' => [
+					'showMeter' => true,
+					'toggleMask' => true
+				]
+			]);
 			}
 			?>
 			<?php echo $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
