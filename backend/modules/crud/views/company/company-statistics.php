@@ -33,58 +33,21 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 
     <div class="clearfix crud-navigation">
         </div>
-
-    <?php $this->beginBlock('Users'); ?>
-
+    <br><br>
     <div class="tab-content"><div id="relation-tabs-tab0" class="tab-pane active">
 
             <table id="w0" class="table table-striped table-bordered detail-view">
                 <tbody>
-                <tr><th class="col-md-6"><?= Yii::t('app','Total Users')?></th><td class="col-md-6"><?= $totalUsers ?></td></tr>
-                <tr><th><?= Yii::t('app','Used Users')?></th><td><?= $usedUsers?></td></tr>
-                <tr><th><?= Yii::t('app','Remaining Users ')?></th><td><?= $remainingUsers?></td></tr>
+                <tr><th class="col-md-3"><?= Yii::t('app','Type')?></th> <th class="col-md-3"><?= Yii::t('app','Total')?></th> <th class="col-md-3"><?= Yii::t('app','Used')?></th> <th class="col-md-3"><?= Yii::t('app','Remaining')?></th></tr>
+               <tr><td><?= Yii::t('app','Product') ?></td><td><?= $totalProducts ?></td><td><?= $usedProducts?></td><td><?= $remainingProducts ?></td></tr>
+                <tr><td><?= Yii::t('app','User') ?></td><td><?= $totalUsers ?></td><td><?= $usedUsers?></td><td><?= $remainingUsers ?></td></tr>
+
                 </tbody>
             </table>
         </div></div>
 
-    <?php $this->endBlock(); ?>
 
     <hr/>
-
-    <?php $this->beginBlock('Products'); ?>
-
-    <div class="tab-content"><div id="relation-tabs-tab0" class="tab-pane active">
-
-            <table id="w0" class="table table-striped table-bordered detail-view">
-                <tbody>
-                <tr><th class="col-md-6"><?= Yii::t('app','Total Products')?></th><td class="col-md-6"><?= $totalProducts ?></td></tr>
-                <tr><th><?= Yii::t('app','Used Products')?></th><td><?= $usedProducts?></td></tr>
-                <tr><th><?= Yii::t('app','Remaining Products ')?></th><td><?= $remainingProducts ?></td></tr>
-                </tbody>
-            </table>
-        </div></div>
-
-    <?php $this->endBlock(); ?>
-
-    <?php echo Tabs::widget(
-        [
-            'id' => 'relation-tabs',
-            'encodeLabels' => false,
-            'items' => [ [
-                'label'   => '<b class="">'.Yii::t('app','Users Statistics').' </b>',
-                'content' => $this->blocks['Users'],
-                'active'  => true,
-            ] , [
-                'label'   => '<b class="">'.Yii::t('app','Products Statistics').' </b>',
-                'content' => $this->blocks['Products'],
-                'active'  => false,
-            ] ,  ]
-        ]
-    );
-    ?>
-
-
-
 
 </div>
 <?php $this->registerCssFile('@web/crud/company/css/custom.css',['depends' => [\yii\bootstrap\BootstrapAsset::className()]])?>
