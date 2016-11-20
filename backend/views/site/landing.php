@@ -182,7 +182,7 @@ use yii\bootstrap\Nav;
                                             <li><a>< 10 <?= Yii::t('app','Products')?></a></li>
                                             <li><a>1 <?= Yii::t('app','User')?></a></li>
                                             <li><a><?= Yii::t('app','Unlimited ICSRs Storage')?></a></li>
-                                            <li><a><?=Yii::t('app','E2B Complaint')?> </a></li>
+                                            <li><a><?=Yii::t('app','E2B Compliant')?> </a></li>
                                             <li><a><?=Yii::t('app','Duplication Detection')?></a></li>
                                         </ul>
 
@@ -203,7 +203,7 @@ use yii\bootstrap\Nav;
                                             <li><a>10-50 <?= Yii::t('app','Products')?></a></li>
                                             <li><a>2 <?= Yii::t('app','Users')?></a></li>
                                             <li><a><?= Yii::t('app','Unlimited ICSRs Storage')?></a></li>
-                                            <li><a><?=Yii::t('app','E2B Complaint')?> </a></li>
+                                            <li><a><?=Yii::t('app','E2B Compliant')?> </a></li>
                                             <li><a><?=Yii::t('app','Duplication Detection')?></a></li>
                                         </ul>
                                     </div>
@@ -223,7 +223,7 @@ use yii\bootstrap\Nav;
                                             <li><a>51-150 <?= Yii::t('app','Products') ?></a></li>
                                             <li><a>3 <?= Yii::t('app','Users')?></a></li>
                                             <li><a><?= Yii::t('app','Unlimited ICSRs Storage')?></a></li>
-                                            <li><a><?=Yii::t('app','E2B Complaint')?> </a></li>
+                                            <li><a><?=Yii::t('app','E2B Compliant')?> </a></li>
                                             <li><a><?=Yii::t('app','Duplication Detection')?></a></li>
                                         </ul>
 
@@ -246,7 +246,7 @@ use yii\bootstrap\Nav;
                                             <li><a>> 150 <?= Yii::t('app','Products') ?></a></li>
                                             <li><a>5 <?= Yii::t('app','Users')?></a></li>
                                             <li><a><?= Yii::t('app','Unlimited ICSRs Storage')?></a></li>
-                                            <li><a><?=Yii::t('app','E2B Complaint')?> </a></li>
+                                            <li><a><?=Yii::t('app','E2B Compliant')?> </a></li>
                                             <li><a><?=Yii::t('app','Duplication Detection')?></a></li>
                                         </ul>
 
