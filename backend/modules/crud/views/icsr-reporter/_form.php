@@ -57,9 +57,7 @@ $form->field($model, 'occupation_lkp_id')->dropDownList(
 	\yii\helpers\ArrayHelper::map(backend\modules\crud\models\LkpOccupation::find()->all(), 'id', 'description'),
 	['prompt' => Yii::t('app', 'Select')]
 ); ?>
-			<?php echo                         $form->field($model, 'health_professional')->dropDownList(
-	backend\modules\crud\models\IcsrReporter::optshealthprofessional()
-); ?>
+
         </p>
         <?php $this->endBlock(); ?>
 
