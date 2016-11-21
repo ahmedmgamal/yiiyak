@@ -22,7 +22,7 @@ class Icsr extends IcsrModel
 	public function rules() {
 return [
 [['id', 'drug_id', 'reaction_country_id'], 'integer'],
-            [['meddraLltFromEvents','safetyReportId','created_by','created_at','patient_identifier', 'patient_age_unit', 'patient_birth_date', 'patient_weight_unit', 'extra_history', 'is_serious', 'results_in_death', 'life_threatening', 'requires_hospitalization', 'results_in_disability', 'is_congenital_anomaly', 'others_significant', 'report_type'], 'safe'],
+            [['meddraLltFromEvents','safetyReportId','created_by','patient_identifier', 'patient_age_unit', 'patient_birth_date', 'patient_weight_unit', 'extra_history', 'is_serious', 'results_in_death', 'life_threatening', 'requires_hospitalization', 'results_in_disability', 'is_congenital_anomaly', 'others_significant', 'report_type'], 'safe'],
             [['patient_age', 'patient_weight'], 'number'],
 ];
 }
@@ -83,7 +83,6 @@ return Model::scenarios();
             ->andFilterWhere(['like', 'is_congenital_anomaly', $this->is_congenital_anomaly])
             ->andFilterWhere(['like', 'others_significant', $this->others_significant])
             ->andFilterWhere(['like', 'report_type', $this->report_type])
-            ->andFilterWhere(['like','created_at',$this->created_at])
             ->andFilterWhere(['like', 'user.username', $this->created_by])
             ->andFilterWhere(['like','icsr_event.meddra_llt_text',$this->meddraLltFromEvents]);
 
