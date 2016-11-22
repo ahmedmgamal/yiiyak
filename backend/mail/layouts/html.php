@@ -11,7 +11,7 @@
     <body>
     <?php $this->beginBody() ?>
     <?= $content ?>
-    <div class="footer">With kind regards, Pv-Radar team</div>
+    <div class="footer">with kind regards, Pv-Radar team</div>
     <?php $this->endBody() ?>
     </body>
     </html>
