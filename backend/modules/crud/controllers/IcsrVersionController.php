@@ -20,6 +20,7 @@ class IcsrVersionController extends \backend\modules\crud\controllers\base\IcsrV
     public function actionSendEmail ()
     {
 
+
         $request = Yii::$app->request;
 
         $xmlFilePath = Yii::getAlias('@webroot').substr($request->post('xmlUrl'),strpos($request->post('xmlUrl'),'/files'));
@@ -37,7 +38,7 @@ class IcsrVersionController extends \backend\modules\crud\controllers\base\IcsrV
         if (file_exists($xmlFilePath)) {
             try {
                 Yii::$app->mailer->compose('xmlEmail', ['additionalInfo' => $additionalInfo, 'senderCompanyName' => $senderCompanyName])
-                    ->setFrom($senderEmail)
+                    ->setFrom('yiiyaktest@gmail.com')
                     ->setTo($sendToEmail)
                     ->setSubject('Xml File')
                     ->setReplyTo($senderEmail)
