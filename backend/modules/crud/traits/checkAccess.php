@@ -7,6 +7,12 @@ trait checkAccess {
 
     public static function checkAccess($user_id,$obj_id)
     {
+
+        if (!isset($user_id) || empty($user_id))
+        {
+            return false;
+        }
+
         $userRole = \Yii::$app->authManager->getRolesByUser(\Yii::$app->user->id);
         if (isset($userRole['admin']))
         {
