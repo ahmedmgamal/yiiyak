@@ -34,7 +34,7 @@ use dmstr\bootstrap\Tabs;
 
 
 		<!--A.1.0.1 Sender’s (case) safety report unique identifier-->
-		<safetyreportid> <?php echo $model->getReactionCountry()->one()->code; ?>-<?php echo $model->getDrug()->one()->getCompany()->one()->short_name;  ?>-<?php echo $model->id; ?></safetyreportid>
+		<safetyreportid> EG-<?php echo $model->getDrug()->one()->getCompany()->one()->short_name;  ?>-<?php echo $model->id; ?></safetyreportid>
 
 		<!--     A.1.1 Identification of the country of the primary source -->
 		<primarysourcecountry><?php echo $model->getReactionCountry()->one()->code; ?></primarysourcecountry>
