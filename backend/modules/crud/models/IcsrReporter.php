@@ -46,4 +46,8 @@ class IcsrReporter extends BaseIcsrReporter
             ]
         ];
     }
+
+    public function getEgyptIdFromLkpCountry() {
+        return LkpCountry::findOne(['name' => 'Egypt'])->id;
+    }
 }
