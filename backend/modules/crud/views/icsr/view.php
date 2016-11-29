@@ -458,6 +458,15 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                                                         $url = '<a href='.$model->file_url.'> Icsr Version </a>';
                                                         return   $url;
                                                     }
+                                                ],
+                                                [
+                                                    'label' => Yii::t('app','Open'),
+                                                    'format' => 'raw',
+                                                    'value' => function ($model,$key,$index)
+                                                    {
+                                                        $url = '<a href=open-pdf?path='.substr($model->file_url,strpos($model->file_url,'/files')) .' target=_blank>'.Yii::t('app','Open').'</a>';
+                                                        return $url;
+                                                    }
                                                 ]
                                                 ,
                                                 'version_no',

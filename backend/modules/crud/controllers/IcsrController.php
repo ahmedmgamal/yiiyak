@@ -272,4 +272,28 @@ private function createExportFile ($icsrObj,$content)
         return $this->render('null-case-reason',['model' => $icsr]);
     }
 
+
+    public function actionOpenPdf($path)
+    {
+        $path =  Yii::getAlias('@webroot') . $path;
+
+                  if (file_exists($path))
+                  {
+                      $e2pLkp = Yii::$app->params['e2bLkp'];
+                       Yii::$app->response->format = 'pdf';
+                        $this->layout =false;
+
+                      $xml = simplexml_load_file($path);
+
+                      return $this->render('open-pdf',['xml' => $xml , 'e2pLkp' => $e2pLkp]);
+
+                  }
+            else
+                {
+                        Yii::$app->session->setFlash('error',Yii::t('app','can\'t download file right now try again later'));
+
+                      return $this->redirect(Yii::$app->request->referrer);
+                 }
+    }
+
 }
