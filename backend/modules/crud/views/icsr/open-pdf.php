@@ -15,49 +15,33 @@ function loopRec ($obj,$e2pLkp)
 
     foreach ($obj as $key => $value)
     {
+        if ($value->children()->count() >=1) {
+            $htmlString .= '<tr style="background-color: red;"><td></td><td></td><td></td></tr>';
 
-     $htmlString .= '<tr>';
+        }
+
+     $htmlString.= '<tr>';
      $htmlString .= "<td>{$e2pLkp[$key]['element']} </td>";
      $htmlString .= "<td>{$e2pLkp[$key]['title']} </td>";
 
-        if (is_object($value))
+        if ($value->children()->count() >=1)
         {
             $htmlString .= '<td> </td></tr>';
-            loopRec($value,$e2pLkp);
+
+            loopRec($value->children(),$e2pLkp);
         }
      else
      {
-         $htmlString.= "<td>{$value}</td></tr>";
+         $htmlString.= "<td>".(!empty($value->children()->__toString()) ? $value->children()->__toString() : $value->__toString())."</td></tr>";
 
      }
+
     }
 
     return $htmlString;
 }
-foreach ($xml as $key => $tag)
-{
-?>
-    <tr>
-        <td><?= $e2pLkp[$key]['element']?></td>
-        <td><?= $e2pLkp[$key]['title']?></td>
-        <?php
-        if (is_object($tag))
-        {
-            echo '<td> </td></tr>';
-           echo   loopRec($tag,$e2pLkp);
 
-        }
-        else
-        {
-
-            echo "<td>{$tag}</td></tr>";
-        }
-        ?>
-
-<?php
-
-}
-
+echo loopRec($xml,$e2pLkp);
 ?>
 
 </tr>
