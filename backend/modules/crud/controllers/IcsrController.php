@@ -280,12 +280,14 @@ private function createExportFile ($icsrObj,$content)
                   if (file_exists($path))
                   {
                       $e2pLkp = Yii::$app->params['e2bLkp'];
-                       Yii::$app->response->format = 'pdf';
+                      $elementsLkp = Yii::$app->params['elementsLkp'];
+
+                      Yii::$app->response->format = 'pdf';
                         $this->layout =false;
 
                       $xml = simplexml_load_file($path);
 
-                      return $this->render('open-pdf',['xml' => $xml , 'e2pLkp' => $e2pLkp]);
+                      return $this->render('open-pdf',['xml' => $xml , 'e2pLkp' => $e2pLkp , 'elementsLkp' => $elementsLkp]);
 
                   }
             else
