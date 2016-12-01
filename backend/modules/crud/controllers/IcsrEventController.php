@@ -44,10 +44,14 @@ class IcsrEventController extends \backend\modules\crud\controllers\base\IcsrEve
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
 
+        if (Yii::$app->user->identity->company->enable_meddra_search != 1)
+        {
+            return ['ptTerms' => []];
+        }
+
         if (isset($term) && !empty($term))
         {
 
-        
         $connection = Yii::$app->getDb();
            
         $term = '+' . $term . '*';
@@ -74,8 +78,12 @@ class IcsrEventController extends \backend\modules\crud\controllers\base\IcsrEve
 
     public function actionSearchLlt ($ptTerm,$searchTerm)
     {
-        Yii::$app->response->format = Response::FORMAT_JSON;
 
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        if (Yii::$app->user->identity->company->enable_meddra_search != 1)
+        {
+            return ['lltTerms' => []];
+        }
         $whereCondition = "";
 
         if (isset($ptTerm) && !empty($ptTerm))
@@ -105,7 +113,6 @@ class IcsrEventController extends \backend\modules\crud\controllers\base\IcsrEve
 
             return ['lltTerms' => $response];
         }
-
 
         return ['lltTerms' => []];
     }
@@ -160,8 +167,6 @@ class IcsrEventController extends \backend\modules\crud\controllers\base\IcsrEve
         }
 
         return ['ltTerm' => ''];
-
-
     }
 
 }
