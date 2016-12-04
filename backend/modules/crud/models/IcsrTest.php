@@ -23,6 +23,7 @@ class IcsrTest extends BaseIcsrTest
             'normal_low_range' => Yii::t('app', 'B.3.1.1 Normal low range'),
             'normal_high_range' => Yii::t('app', 'B.3.1.2 Normal high range '),
             'more_info' => Yii::t('app', 'B.3.2 Results of tests and procedures relevant to the investigation'),
+            'image' => Yii::t('app', 'upload image to icsr test'),
         ]);
     }
 

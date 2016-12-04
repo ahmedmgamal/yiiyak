@@ -80,10 +80,15 @@ class IcsrTestController extends Controller
 	 */
 	public function actionCreate() {
 		$model = new IcsrTest;
-
 		try {
-			if ($model->load($_POST) && $model->save()) {
-				return $this->redirect(Url::previous());
+			if (\Yii::$app->request->isPost) {
+			    //Check If user uploaded a file
+			    if(is_uploaded_file($_FILES['IcsrTest']['tmp_name']['image'])){
+                    $_POST["IcsrTest"]["image"] = $this->saveIcsrTestImage();
+                }
+                if($model->load($_POST) && $model->save()){
+                    return $this->redirect(Url::previous());
+                }
 			} elseif (!\Yii::$app->request->isPost) {
 				$model->load($_GET);
 			}
@@ -105,8 +110,13 @@ class IcsrTestController extends Controller
 	public function actionUpdate($id) {
 		$model = $this->findModel($id);
 
-		if ($model->load($_POST) && $model->save()) {
-			return $this->redirect(Url::previous());
+		if (\Yii::$app->request->isPost) {
+            if(is_uploaded_file($_FILES['IcsrTest']['tmp_name']['image'])){
+                $_POST["IcsrTest"]["image"] = $this->saveIcsrTestImage();
+            }
+            if($model->load($_POST) && $model->save()){
+                return $this->redirect(Url::previous());
+            }
 		} else {
 			return $this->render('update', [
 					'model' => $model,
@@ -163,6 +173,16 @@ class IcsrTestController extends Controller
 			throw new HttpException(404, 'The requested page does not exist.');
 		}
 	}
+
+	private function saveIcsrTestImage(){
+        $bucket = \Yii::$app->fileStorage->getBucket("icsrTestImage");
+        $fileExt = end(explode(".",$_FILES['IcsrTest']["name"]["image"]));
+        $filename = "icsrTestImage_".strtotime("now.").$fileExt;
+        $file_content =  file_get_contents($_FILES['IcsrTest']['tmp_name']['image']);
+        $bucket->saveFileContent($filename,$file_content);
+        return $bucket->getFileUrl($filename);
+
+    }
 
 
 }

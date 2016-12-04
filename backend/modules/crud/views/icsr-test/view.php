@@ -58,11 +58,9 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 
     <?php $this->beginBlock('backend\modules\crud\models\IcsrTest'); ?>
 
-
     <?php echo DetailView::widget([
 		'model' => $model,
 		'attributes' => [
-
 			'test_name',
 			'date',
 			'result',
@@ -70,6 +68,11 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 			'normal_low_range',
 			'normal_high_range',
 			'more_info',
+            [
+                'label'=>"Image",
+                'format'=>'raw',
+                'value'=> "<a href='{$model->image}'>" . Html::img($model->image,["width"=>"500px"]) . "</a>"
+            ]
 		],
 	]); ?>
 

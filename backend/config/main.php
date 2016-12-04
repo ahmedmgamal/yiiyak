@@ -121,6 +121,9 @@ if (YII_ENV_DEV)
                 'psmfFile' => [
                     'baseSubPath' => 'psmfFiles'
                 ],
+                "icsrTestImage"=>[
+                    "baseSubPath"=>"icsrTestImages"
+                ]
                 ]
             ];
 
@@ -150,6 +153,9 @@ else{
                 'psmfFile' => [
                     'baseSubPath' => 'psmfFiles'
                 ],
+                "icsrTestImage"=>[
+                    "baseSubPath"=>"icsrTestImages"
+                ]
             ]
         ];
 }
