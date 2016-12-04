@@ -1,3 +1,11 @@
 .alert-signal-color{
     color: #b94a48;
 }
+
+.fromVer{
+    color: #49af49;
+}
+
+.toVer{
+    color: red;
+}
