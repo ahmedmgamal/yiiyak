@@ -21,6 +21,9 @@ use dmstr\bootstrap\Tabs;
 use backend\modules\crud\models\IcsrVersion;
 use backend\modules\crud\models\IcsrNarritive;
 
+use backend\modules\crud\overrides\TrailChild\AuditTrailChild;
+use yii\web\Response;
+
 /**
  * This is the class for controller "IcsrController".
  */
@@ -296,6 +299,34 @@ private function createExportFile ($icsrObj,$content)
 
                       return $this->redirect(Yii::$app->request->referrer);
                  }
+    }
+
+    public function actionGetDiffBeforeDate($icsrId,$date,$versionNo)
+    {
+
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
+        if ($versionNo -1 <= 0 )
+        {
+            return ['diffs' =>  [] ,'fromVer' =>$versionNo, 'toVer' =>   Yii::t('app','First Export Version Have No Difference') ];
+        }
+
+        $dateTimeObj = new \DateTime($date);
+
+        //subtract 2 hours from the current time stamp
+        $dateTimeObj = $dateTimeObj->sub(new \DateInterval('PT2H'));
+
+        $maxDateRange = $dateTimeObj->format('Y-m-d H:i:s');
+
+        $icsrObj = Icsr::findOne($icsrId);
+
+        $minDateRange = AuditTrailChild::find()->where(['model_id' => $icsrObj->id , 'action' => 'EXPORT' ])->andWhere(['<','created',$maxDateRange])->orderBy('created DESC')->one()->created;
+
+        $diffArrOfObjs = $icsrObj->getIcsrTrails()->where(['between', 'created', $minDateRange, $maxDateRange ])->andWhere(['<>','action' ,'EXPORT'])->all();
+
+        return ['diffs' =>  $diffArrOfObjs ,'fromVer' =>$versionNo, 'toVer' =>   $versionNo - 1];
+
+
     }
 
 }

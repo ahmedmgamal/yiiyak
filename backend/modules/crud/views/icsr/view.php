@@ -437,6 +437,43 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 
                                         <div style='position: relative'><div style='position:absolute; right: 0px; top: 0px;'>
 
+                                                 <!-- Diff Modal -->
+                                                <div class="modal fade" id="myModal" role="dialog">
+                                                    <div style="width: auto " class="modal-dialog ">
+
+                                                        <!-- Modal content-->
+                                                        <div class="modal-content  ">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                <h4 class="modal-title"><?= Yii::t('app','Difference From Version')?> <span class="fromVer" id="fromVer"></span> <?= Yii::t('app','To Version')?> <span class="toVer" id="toVer"></span></h4>
+                                                            </div>
+                                                            <div class="modal-body ">
+
+                                                                <table  id ='diffTable' class="table">
+                                                                    <tr>
+                                                                        <th><?= Yii::t('app','User ID');?></th>
+                                                                        <th><?= Yii::t('app','Action');?></th>
+                                                                        <th><?= Yii::t('app','Type');?></th>
+                                                                        <th><?= Yii::t('app','Field');?></th>
+                                                                        <th><?= Yii::t('app','Old Value');?></th>
+                                                                        <th><?= Yii::t('app','New Value');?></th>
+                                                                        <th><?= Yii::t('app','Created');?></th>
+                                                                    </tr>
+
+                                                                </table>
+
+
+
+
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
                                             </div></div><?php Pjax::begin(['id' => 'pjax-IcsrVersions', 'enableReplaceState' => false, 'linkSelector' => '#pjax-IcsrVersions ul.pagination a, th a', 'clientOptions' => ['pjax:success' => 'function(){alert("yo")}']]) ?>
                                         <?=
                                         '<div class="table-responsive">' . \yii\grid\GridView::widget([
@@ -470,6 +507,13 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                                                 ]
                                                 ,
                                                 'version_no',
+                                                [
+                                                    'label' => Yii::t('app','Difference'),
+                                                    'format' => 'raw',
+                                                    'value' => function ($model,$key,$index){
+                                                        return "<a  class='versionDiff btn btn-default' href='get-diff-before-date?icsrId={$model->icsr_id}&date={$model->export_date}&versionNo={$model->version_no}'><span class='glyphicon glyphicon-retweet'></span></a>";
+                                                    }
+                                                ],
                                                 'export_date',
                                                 [
                                                    'attribute' => 'exported_by',

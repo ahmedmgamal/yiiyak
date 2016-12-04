@@ -72,6 +72,46 @@ $('#exportXml').on('click',function (e) {
 });
 
 
+    $('.versionDiff').on('click',function (event){
+        event.preventDefault();
+        ajaxUrl = $(this).attr('href');
+
+        $.ajax({
+            'url' : ajaxUrl,
+            'method' : 'GET',
+            'success' : function (response) {
+
+                $('#fromVer').html(response.fromVer);
+                $('#toVer').html(response.toVer);
+
+                var diffs = response.diffs;
+
+                $('#diffTable').find("tr:gt(0)").remove();
+
+                var htmlRows = '';
+                for (var i=0; i<diffs.length ; i++)
+                {
+                    htmlRows += '<tr>'
+
+                    htmlRows += "<td>" + diffs[i].user_id+ "</td>"
+                    htmlRows += "<td>" +diffs[i].action+ "</td>"
+                    htmlRows += "<td>" +diffs[i].model+ "</td>"
+                    htmlRows += "<td>" +diffs[i].field+ "</td>"
+                    htmlRows += "<td>" +diffs[i].old_value+ "</td>"
+                    htmlRows += "<td>" +diffs[i].new_value+ "</td>"
+                    htmlRows += "<td>" +diffs[i].created+ "</td>"
+
+                    htmlRows += '</tr>'
+                }
+
+
+                $('#diffTable').append(htmlRows);
+
+                $('#myModal').modal('show');
+            }
+        });
+    });
+
 
 });
 
