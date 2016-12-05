@@ -10,6 +10,7 @@ use yii\web\HttpException;
 use yii\helpers\Url;
 use yii\filters\AccessControl;
 use dmstr\bootstrap\Tabs;
+use yii\web\UploadedFile;
 
 /**
 * RmpController implements the CRUD actions for Rmp model.
@@ -70,8 +71,22 @@ public $enableCsrfValidation = false;
         $model = new Rmp;
 
         try {
-            if ($model->load($_POST) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load($_POST) ) {
+                $model->drug_id = $drug_id;
+                $model->rmp_created_by = \Yii::$app->user->identity->id;
+                $model->rmpFile = UploadedFile::getInstance($model, 'rmpFile');
+                $model->rmp_created_at = date('Y-m-d H:i:s',strtotime('+2 hours'));
+
+                if (! $model->uploadRmp())
+                {
+                    \Yii::$app->getSession()->setFlash('error', Yii::t('app','can\'t upload fiel right now try again later'));
+                    return $this->redirect(\Yii::$app->request->referrer);
+                }
+
+                if ($model->save()) {
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
+
             } elseif (!\Yii::$app->request->isPost) {
                 $model->load($_GET);
             }

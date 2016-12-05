@@ -19,7 +19,8 @@ use yii\helpers\StringHelper;
     'id' => 'Rmp',
     'layout' => 'horizontal',
     'enableClientValidation' => true,
-    'errorSummaryCssClass' => 'error-summary alert alert-error'
+    'errorSummaryCssClass' => 'error-summary alert alert-error',
+    'options' => ['enctype' => 'multipart/form-data']
     ]
     );
     ?>
@@ -29,11 +30,20 @@ use yii\helpers\StringHelper;
 
         <p>
             
-
+            <?php if(!isset($model->rmp_file_url) && empty($model->rmp_file_url))
+            {?>
 			<?= $form->field($model, 'version')->textInput(['maxlength' => true]) ?>
 			<?= $form->field($model, 'version_description')->textInput(['maxlength' => true]) ?>
-			<?= $form->field($model, 'rmp_file_url')->textInput(['maxlength' => true]) ?>
-			<?= $form->field($model, 'ack_file_url')->textInput(['maxlength' => true]) ?>
+			<?= $form->field($model, 'rmpFile')->fileInput() ?>
+
+            <?php }?>
+
+            <?php if (isset($model->rmp_file_url) && !empty($model->rmp_file_url))
+            {?>
+
+			<?= $form->field($model, 'ack_file_url')->fileInput() ?>
+
+            <?php } ?>
 
         </p>
         <?php $this->endBlock(); ?>

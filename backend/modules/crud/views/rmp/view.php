@@ -76,8 +76,8 @@ $this->params['breadcrumbs'][] = 'View';
         'version_description',
         'rmp_file_url:url',
         'ack_file_url:url',
-        'prsu_created_by',
-        'prsu_created_at',
+        'rmp_created_by',
+        'rmp_created_at',
         'ack_created_by',
         'ack_created_at',
     ],
@@ -86,12 +86,6 @@ $this->params['breadcrumbs'][] = 'View';
     
     <hr/>
 
-    <?= Html::a('<span class="glyphicon glyphicon-trash"></span> ' . 'Delete', ['delete', 'id' => $model->id],
-    [
-    'class' => 'btn btn-danger',
-    'data-confirm' => '' . 'Are you sure to delete this item?' . '',
-    'data-method' => 'post',
-    ]); ?>
     <?php $this->endBlock(); ?>
 
 

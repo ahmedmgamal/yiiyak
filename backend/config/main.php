@@ -103,6 +103,9 @@ if (YII_ENV_DEV)
             'baseUrl' => '@web/files',
             'filePermission' => 0777,
             'buckets' => [
+                'rmp' => [
+                  'baseSubPath' => 'rmpFiles'
+                ],
                 'meddra-files' => [
                     'baseSubPath' => 'MeddrFiles',
                 ],
@@ -135,6 +138,9 @@ else{
             'baseUrl' => '@web/files',
             'filePermission' => 0777,
             'buckets' => [
+                'rmp' => [
+                  'baseSubPath' => 'rmpFiles'
+                ],
                 'icsrVersions' => [
                     'baseSubPath' => 'icsrsVersions',
                 ],

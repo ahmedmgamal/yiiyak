@@ -85,10 +85,10 @@ Yii::$app->view->params['pageButtons'] = Html::a('<span class="glyphicon glyphic
             'contentOptions' => ['nowrap'=>'nowrap']
         ],
 			'drug_id',
-			'prsu_created_by',
+			'rmp_created_by',
 			'ack_created_by',
 			'version',
-			'prsu_created_at',
+			'rmp_created_at',
 			'ack_created_at',
 			'version_description',
 			/*'rmp_file_url:url',*/

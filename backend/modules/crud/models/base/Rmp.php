@@ -15,8 +15,8 @@ use Yii;
  * @property string $version_description
  * @property string $rmp_file_url
  * @property string $ack_file_url
- * @property integer $prsu_created_by
- * @property string $prsu_created_at
+ * @property integer $rmp_created_by
+ * @property string $rmp_created_at
  * @property integer $ack_created_by
  * @property string $ack_created_at
  * @property string $aliasModel
@@ -41,13 +41,13 @@ abstract class Rmp extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['drug_id', 'prsu_created_by'], 'required'],
-            [['drug_id', 'prsu_created_by', 'ack_created_by'], 'integer'],
+            [['drug_id', 'rmp_created_by','rmp_file_url','version'], 'required'],
+            [['drug_id', 'rmp_created_by', 'ack_created_by'], 'integer'],
             [['version'], 'number'],
-            [['prsu_created_at', 'ack_created_at'], 'safe'],
+            [['rmp_created_at', 'ack_created_at'], 'safe'],
             [['version_description', 'rmp_file_url', 'ack_file_url'], 'string', 'max' => 255],
             [['drug_id'], 'exist', 'skipOnError' => true, 'targetClass' => Drug::className(), 'targetAttribute' => ['drug_id' => 'id']],
-            [['prsu_created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['prsu_created_by' => 'id']]
+            [['rmp_created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['rmp_created_by' => 'id']]
         ];
     }
 
@@ -63,8 +63,8 @@ abstract class Rmp extends \yii\db\ActiveRecord
             'version_description' => 'Version Description',
             'rmp_file_url' => 'Rmp File Url',
             'ack_file_url' => 'Ack File Url',
-            'prsu_created_by' => 'Prsu Created By',
-            'prsu_created_at' => 'Prsu Created At',
+            'rmp_created_by' => 'Rmp Created By',
+            'rmp_created_at' => 'Rmp Created At',
             'ack_created_by' => 'Ack Created By',
             'ack_created_at' => 'Ack Created At',
         ];

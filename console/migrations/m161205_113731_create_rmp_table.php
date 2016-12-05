@@ -9,7 +9,7 @@ use yii\db\Migration;
  * - `drug`
  * - `user`
  */
-class m161205_105253_create_rmp_table extends Migration
+class m161205_113731_create_rmp_table extends Migration
 {
     /**
      * @inheritdoc
@@ -19,12 +19,12 @@ class m161205_105253_create_rmp_table extends Migration
         $this->createTable('rmp', [
             'id' => $this->primaryKey(),
             'drug_id' => $this->integer()->notNull(),
-            'version' => $this->decimal(),
+            'version' => $this->decimal(10,2),
             'version_description' => $this->string(),
             'rmp_file_url' => $this->string(),
             'ack_file_url' => $this->string(),
-            'prsu_created_by' => $this->integer()->notNull(),
-            'prsu_created_at' => $this->dateTime(),
+            'rmp_created_by' => $this->integer()->notNull(),
+            'rmp_created_at' => $this->dateTime(),
             'ack_created_by' => $this->integer(),
             'ack_created_at' => $this->dateTime(),
         ]);
@@ -46,18 +46,18 @@ class m161205_105253_create_rmp_table extends Migration
             'CASCADE'
         );
 
-        // creates index for column `prsu_created_by`
+        // creates index for column `rmp_created_by`
         $this->createIndex(
-            'idx-rmp-prsu_created_by',
+            'idx-rmp-rmp_created_by',
             'rmp',
-            'prsu_created_by'
+            'rmp_created_by'
         );
 
         // add foreign key for table `user`
         $this->addForeignKey(
-            'fk-rmp-prsu_created_by',
+            'fk-rmp-rmp_created_by',
             'rmp',
-            'prsu_created_by',
+            'rmp_created_by',
             'user',
             'id',
             'CASCADE'
@@ -83,13 +83,13 @@ class m161205_105253_create_rmp_table extends Migration
 
         // drops foreign key for table `user`
         $this->dropForeignKey(
-            'fk-rmp-prsu_created_by',
+            'fk-rmp-rmp_created_by',
             'rmp'
         );
 
-        // drops index for column `prsu_created_by`
+        // drops index for column `rmp_created_by`
         $this->dropIndex(
-            'idx-rmp-prsu_created_by',
+            'idx-rmp-rmp_created_by',
             'rmp'
         );
 
