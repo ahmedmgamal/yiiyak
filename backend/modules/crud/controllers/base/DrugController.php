@@ -62,6 +62,10 @@ class DrugController extends Controller
 	 * @return mixed
 	 */
 	public function actionView($id) {
+	    $sql = "select * from V_signal_detection
+                where drug_id = :drugId";
+	    $signalValues = \Yii::$app->db->createCommand($sql,[":drugId"=>$id])->queryAll();
+
 		\Yii::$app->session['__crudReturnUrl'] = Url::previous();
 		Url::remember();
 		Tabs::rememberActiveState();
@@ -77,7 +81,8 @@ class DrugController extends Controller
                 'signaledDrugs' => $signaledDrugs,
                 'signaledIcsrs' => $signaledIcsrs,
                 'icsrSeachModel' => $icsrSeachModel,
-                'icsrDataProvider' => $icsrDataProvider
+                'icsrDataProvider' => $icsrDataProvider,
+                'signal_detection'=>$signalValues
 			]);
 	}
 
