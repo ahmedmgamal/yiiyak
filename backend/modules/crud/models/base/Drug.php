@@ -134,6 +134,9 @@ abstract class Drug extends \yii\db\ActiveRecord
     }
 
 
-
+    public function getRmps()
+    {
+        return $this->hasMany(\backend\modules\crud\models\Rmp::className(),['drug_id' => 'id']);
+    }
 
 }

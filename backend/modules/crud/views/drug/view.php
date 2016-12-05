@@ -163,20 +163,45 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 <?php Pjax::end() ?>
 <?php $this->endBlock() ?>
 
+	<?php $this->beginBlock('Rmp'); ?>
+
+	<div style='position: relative'><div style='position:absolute; right: 0px; top: 0px;'>
+
+			<a class="btn btn-success btn-xs" href="<?= Url::to(['/crud/rmp/create', 'drug_id' => $model->id])?>">
+
+				<span class="glyphicon glyphicon-plus"></span><?= Yii::t('app','New ').'Rmp'?>
+			</a>
+
+		</div></div>
+
+	<?php $this->endBlock() ?>
+
+
+
 
     <?php echo Tabs::widget(
 	[
 		'id' => 'relation-tabs',
 		'encodeLabels' => false,
-		'items' => [ [
+		'items' => [
+			[
 				'label'   => '<b class=""># '.$model->trade_name. '</b>',
 				'content' => $this->blocks['backend\modules\crud\models\Drug'],
 				'active'  => true,
-			],  [
+			],
+			[
 				'content' => $this->blocks['Icsrs'],
 				'label'   => '<small>Icsrs <span class="badge badge-default">'.count($model->getIcsrs()->asArray()->all()).'</span></small>',
 				'active'  => false,
-			], ]
+			],
+
+			[
+				'content' => $this->blocks['Rmp'],
+				'label'   => '<small>RMP <span class="badge badge-default">'.count($model->getRmps()->asArray()->all()).'</span></small>',
+				'active'  => false,
+			],
+
+		]
 	]
 );
 ?>
