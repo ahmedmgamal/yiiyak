@@ -176,7 +176,8 @@ class IcsrTestController extends Controller
 
 	private function saveIcsrTestImage(){
         $bucket = \Yii::$app->fileStorage->getBucket("icsrTestImage");
-        $fileExt = end(explode(".",$_FILES['IcsrTest']["name"]["image"]));
+        $tempName = explode(".",$_FILES['IcsrTest']["name"]["image"]);
+        $fileExt = end($tempName);
         $filename = "icsrTestImage_".strtotime("now.").$fileExt;
         $file_content =  file_get_contents($_FILES['IcsrTest']['tmp_name']['image']);
         $bucket->saveFileContent($filename,$file_content);
