@@ -60,6 +60,75 @@ class Drug extends BaseDrug
         return $result;
     }
 
+    public function get_signalDetectionArray(){
+        $signalValues= [];
+        foreach ($this->getIcsrEvents() as $event){
+            $values = $this->get_ABCD($event['EventName']);
+            $signalValues[] = [
+                "event_description"=>$event['EventName'],
+                "A"=>isset($values['A']) ? $values['A'] : 0 ,
+                "B"=>isset($values['B']) ? $values['B'] : 0,
+                "C"=>isset($values['C']) ? $values['C'] : 0,
+                "D"=>isset($values['D']) ? $values['D'] : 0
+            ];
+        }
+        return $signalValues;
+    }
+    private function get_ABCD($eventName){
+        $sql = "SELECT
+                  MAX(IF(`EventName` = 'A', COUNTS, NULL)) AS A,
+                  MAX(IF(`EventName` = 'B', COUNTS, NULL)) AS B,
+                  MAX(IF(`EventName` = 'C', COUNTS, NULL)) AS C,
+                  MAX(IF(`EventName` = 'D', COUNTS, NULL)) AS D
+                FROM(
+                SELECT EventName,count(EventName) as COUNTS
+                FROM(
+                SELECT
+                      CASE Events.event_description
+                    WHEN :eventName then 'A'
+                      ELSE 'B'
+                        END AS EventName
+                FROM drug
+                  INNER JOIN icsr
+                    ON(icsr.drug_id = drug.id)
+                  INNER JOIN icsr_event as Events
+                    ON(Events.icsr_id = icsr.id)
+                WHERE drug.id = :drugId) AS F
+                GROUP BY EventName
+                UNION
+                SELECT EventName,count(EventName)
+                FROM(
+                      SELECT
+                        CASE Events.event_description
+                        WHEN :eventName then 'C'
+                        ELSE 'D'
+                        END AS EventName
+                      FROM drug
+                        INNER JOIN icsr
+                          ON(icsr.drug_id = drug.id)
+                        INNER JOIN icsr_event as Events
+                          ON(Events.icsr_id = icsr.id)
+                      WHERE drug.id != :drugId) AS F
+                GROUP BY EventName
+                ORDER BY EventName ASC
+                ) AS ABCD;";
+        $A = Yii::$app->db->createCommand($sql,[":eventName"=>$eventName,"drugId"=>$this->id])->queryAll();
+        return reset($A);
+    }
+
+    private function getIcsrEvents(){
+        $sql = "SELECT Events.event_description as EventName
+                FROM drug
+                  INNER JOIN icsr
+                    ON(icsr.drug_id = drug.id)
+                  INNER JOIN icsr_event as Events
+                    ON(Events.icsr_id = icsr.id)
+                WHERE drug.id = :drugId
+                GROUP BY Events.event_description;";
+        $events = Yii::$app->db->createCommand($sql,["drugId"=>$this->id])->queryAll();
+        return $events;
+    }
+
 
 
 }

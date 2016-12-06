@@ -62,9 +62,9 @@ class DrugController extends Controller
 	 * @return mixed
 	 */
 	public function actionView($id) {
-	    $sql = "select * from V_signal_detection
-                where drug_id = :drugId";
-	    $signalValues = \Yii::$app->db->createCommand($sql,[":drugId"=>$id])->queryAll();
+        $model = $this->findModel($id);
+        $signalValues= $model->get_signalDetectionArray();
+
 
 		\Yii::$app->session['__crudReturnUrl'] = Url::previous();
 		Url::remember();

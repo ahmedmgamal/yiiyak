@@ -179,20 +179,8 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                 ]),
                  'columns'=>[
                      'event_description',
-                     'A',
-                     [
-                         'label'=>'A',
-                         'value'=>function($data){
-                                return $data['AB'] - $data['A'];
-                         }
-                     ],
-                     'C',
-                     [
-                         'label'=>'D',
-                         'value'=>function($data){
-                             return $data['CD'] - $data['C'];
-                         }
-                     ],
+                     'A','B','C','D'
+
                  ]
              ]);
     ?>
