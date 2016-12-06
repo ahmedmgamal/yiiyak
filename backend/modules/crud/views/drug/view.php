@@ -208,7 +208,11 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 				'version',
 				'version_description',
 				[
-					'label' => Yii::t('app','Download RMP')
+					'label' => Yii::t('app','Download RMP'),
+					'format' => 'raw',
+					'value' => function ($model){
+						return '<a href=/crud/rmp/download-file?path='.substr($model->rmp_file_url,strpos($model->rmp_file_url,'/files')).'>'.Yii::t('app','Download').'</a>';
+					}
 				],
 				[
 					'label' => Yii::t('app','Letter Header')
