@@ -163,6 +163,8 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 <?php Pjax::end() ?>
 <?php $this->endBlock() ?>
 
+
+
 	<?php $this->beginBlock('Rmp'); ?>
 
 	<div style='position: relative'><div style='position:absolute; right: 0px; top: 0px;'>
@@ -172,9 +174,59 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 				<span class="glyphicon glyphicon-plus"></span><?= Yii::t('app','New ').'Rmp'?>
 			</a>
 
-		</div></div>
+		</div></div><?php Pjax::begin(['id'=>'pjax-Rmps', 'enableReplaceState'=> false, 'linkSelector'=>'#pjax-Rmps ul.pagination a, th a', 'clientOptions' => ['pjax:success'=>'function(){alert("yo")}']]) ?>
+	<?php echo '<div class="table-responsive">' . \yii\grid\GridView::widget([
+			'layout' => '{summary}{pager}<br/>{items}{pager}',
+			'dataProvider' => $rmpDataProvider,
+			'filterModel' => $rmpSearchModel,
+			'pager'        => [
+				'class'          => yii\widgets\LinkPager::className(),
+				'firstPageLabel' => Yii::t('app', 'First'),
+				'lastPageLabel'  => Yii::t('app', 'Last')
+			],
+			'columns' => [[
+				'class'      => 'yii\grid\ActionColumn',
+				'template'   => '{view}',
+				'contentOptions' => ['nowrap'=>'nowrap'],
+
+				/**
+				 *
+				 */
+				'urlCreator' => function ($action, $model, $key, $index) {
+					// using the column name as key, not mapping to 'id' like the standard generator
+					$params = is_array($key) ? $key : [$model->primaryKey()[0] => (string) $key];
+					$params[0] = '/crud/rmp' . '/' . $action;
+					return $params;
+				},
+
+				'controller' => '/crud/rmp'
+			],
+				[
+					'header' => Yii::t('app','ID'),
+					'class' => SerialColumn::className()
+				],
+				'version',
+				'version_description',
+				[
+					'label' => Yii::t('app','Download RMP')
+				],
+				[
+					'label' => Yii::t('app','Letter Header')
+				],
+				[
+					'attribute' => 'rmp_created_by',
+					'value' => function ($model){
+						return $model->getRmpUserName();
+					}
+				],
+				'rmp_created_at'
+			]
+		]) . '</div>' ?>
+	<?php Pjax::end() ?>
 
 	<?php $this->endBlock() ?>
+
+
 
 
 

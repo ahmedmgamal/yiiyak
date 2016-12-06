@@ -71,6 +71,9 @@ abstract class Rmp extends \yii\db\ActiveRecord
     }
 
 
-
+    public function getRmpUser ()
+    {
+        return $this->hasOne(\backend\modules\crud\models\User::className(),['id' => 'rmp_created_by']);
+    }
 
 }

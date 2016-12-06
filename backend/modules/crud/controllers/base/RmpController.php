@@ -84,7 +84,7 @@ public $enableCsrfValidation = false;
                 }
 
                 if ($model->save()) {
-                    return $this->redirect(['view', 'id' => $model->id]);
+                    return $this->redirect(['drug/view', 'id' => $drug_id]);
                 }
 
             } elseif (!\Yii::$app->request->isPost) {

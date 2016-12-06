@@ -55,4 +55,9 @@ class Rmp extends BaseRmp
 
         return 1;
     }
+
+    public function getRmpUserName() {
+
+        return $this->rmpUser->username;
+    }
 }
