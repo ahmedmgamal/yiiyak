@@ -184,7 +184,6 @@ class IcsrTestController extends Controller
         $fileTemp = $_FILES['IcsrTest']['tmp_name']['image'];
         $file_content =  file_get_contents($fileTemp);
         $bucket->saveFileContent($filename,$file_content);
-        die($file_content);
         return $bucket->getFileUrl($filename);
     }
 
