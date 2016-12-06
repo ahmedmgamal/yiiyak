@@ -103,6 +103,9 @@ if (YII_ENV_DEV)
             'baseUrl' => '@web/files',
             'filePermission' => 0777,
             'buckets' => [
+                'rmp-ack' => [
+                    'baseSubPath' => 'rmpAckFiles'
+                ],
                 'rmp' => [
                   'baseSubPath' => 'rmpFiles'
                 ],
@@ -138,6 +141,9 @@ else{
             'baseUrl' => '@web/files',
             'filePermission' => 0777,
             'buckets' => [
+                'rmp-ack' => [
+                    'baseSubPath' => 'rmpAckFiles'
+                ],
                 'rmp' => [
                   'baseSubPath' => 'rmpFiles'
                 ],

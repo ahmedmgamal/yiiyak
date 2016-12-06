@@ -214,16 +214,34 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 						return '<a href=/crud/rmp/download-file?path='.substr($model->rmp_file_url,strpos($model->rmp_file_url,'/files')).'>'.Yii::t('app','Download').'</a>';
 					}
 				],
-				[
-					'label' => Yii::t('app','Letter Header')
-				],
+
 				[
 					'attribute' => 'rmp_created_by',
 					'value' => function ($model){
-						return $model->getRmpUserName();
+						return ($model->getRmpUserName());
 					}
 				],
-				'rmp_created_at'
+				'rmp_created_at',
+				[
+					'label' => Yii::t('app','Letter Header'),
+					'format' => 'raw',
+					'value' => function ($model){
+						if (isset($model->ack_file_url) && !empty($model->ack_file_url))
+						{
+							return '<a href=/crud/rmp/download-file?path='.substr($model->rmp_file_url,strpos($model->rmp_file_url,'/files')).'>'.Yii::t('app','Download Letter').'</a>';
+						}
+
+						return '<a href=/crud/rmp/upload-letter-header?id='.$model->id.' class="btn btn-warning">'.Yii::t('app','Upload Letter Header').'</a>';
+					}
+				],
+				[
+					'attribute' => 'ack_created_by',
+					'value' => function ($model){
+						return isset($model->ack_created_by) ? $model->getAckUserName() : Yii::t('app','Not Set Yet');
+					}
+				],
+
+				'ack_created_at'
 			]
 		]) . '</div>' ?>
 	<?php Pjax::end() ?>
