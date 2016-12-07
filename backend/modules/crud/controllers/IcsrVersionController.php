@@ -37,13 +37,20 @@ class IcsrVersionController extends \backend\modules\crud\controllers\base\IcsrV
 
         if (file_exists($xmlFilePath)) {
             try {
-                Yii::$app->mailer->compose('xmlEmail', ['additionalInfo' => $additionalInfo, 'senderCompanyName' => $senderCompanyName])
-                    ->setFrom('yiiyaktest@gmail.com')
-                    ->setTo($sendToEmail)
-                    ->setSubject('Xml File')
-                    ->setReplyTo($senderEmail)
-                    ->attach($xmlFilePath)
-                    ->send();
+                if (\Swift_Validate::email($sendToEmail) == 1) {
+                    Yii::$app->mailer->compose('xmlEmail', ['additionalInfo' => $additionalInfo, 'senderCompanyName' => $senderCompanyName])
+                        ->setFrom('yiiyaktest@gmail.com')
+                        ->setTo($sendToEmail)
+                        ->setSubject('Xml File')
+                        ->setReplyTo($senderEmail)
+                        ->attach($xmlFilePath)
+                        ->send();
+                }
+                else
+                {
+                    \Yii::$app->getSession()->setFlash('error', \Yii::t('app',"Please Write A Valid Email "));
+                    return $this->redirect(\Yii::$app->request->referrer);
+                }
             }
             catch (Swift_RfcComplianceException $e)
             {
