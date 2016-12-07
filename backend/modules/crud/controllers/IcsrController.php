@@ -272,4 +272,22 @@ private function createExportFile ($icsrObj,$content)
         return $this->render('null-case-reason',['model' => $icsr]);
     }
 
+    public function actionDownloadXmlFile ($path)
+    {
+
+        $path =  Yii::getAlias('@webroot') . $path;
+        if (file_exists($path))
+        {
+            return Yii::$app->response->sendFile($path);
+        }
+
+        else
+        {
+            Yii::$app->session->setFlash('error',Yii::t('app','can\'t download file right now try again later'));
+
+            return $this->redirect(Yii::$app->request->referrer);
+        }
+
+    }
+
 }

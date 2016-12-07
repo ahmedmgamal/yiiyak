@@ -34,10 +34,15 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 
     <h1 id="modelAlias">
         <?= $model->getAliasModel() ?>
-        <small id='validating' style="color: #337ab7; display: none;"> validating xml
-                 </small>
-        <small id="failedValidation" style="color: red; display:none">failed to pass the validation</small>
-    </h1>
+        <small id='validating' class="small-validating"> <?= Yii::t('app','generating according to ICH specification')?> <a class="small-validation-a" href="<?= Yii::$app->params['ich']?>" target="_blank"> <?= Yii::t('app','Click Here');?> </a>
+        </small>
+
+        <small id="downloadFile" class="downloadFile" > <a href="#" id="downloadFileAnchorTag"  target="_blank"><?= Yii::t('app','Download File')?></a></small>
+
+        <small id="failedValidation" class="failedValidation" ></small>
+        <small id="dtdValidating" class="downloadFile" ><?= Yii::t('app','validating according to ICH DTD');?> <a class="dtd"  href="<?= Yii::$app->params['dtd']?>" target="_blank"><?= Yii::t('app','Click Here To Download');?></a>
+
+             </h1>
     <div id="progressbar" style="display: none;"></div>
     <br>
 
@@ -455,7 +460,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                                                     'value' => function ($model,$key,$index)
                                                     {
 
-                                                        $url = '<a href='.$model->file_url.'> Icsr Version </a>';
+                                                        $url = '<a href=download-xml-file?path='.substr($model->file_url,strpos($model->file_url,'/files')) .'>'.Yii::t('app','Download ').'</a>';
                                                         return   $url;
                                                     }
                                                 ]

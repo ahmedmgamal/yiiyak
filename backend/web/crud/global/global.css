@@ -1,3 +1,26 @@
 .alert-signal-color{
     color: #b94a48;
 }
+
+.small-validating{
+    color: #337ab7;
+    display: none;
+}
+
+.small-validation-a{
+    color: #3b9db7;
+}
+
+.downloadFile{
+    color:#10802d;
+    display:none;
+}
+
+.dtd{
+    color:#078072;
+}
+
+.failedValidation {
+    color: red;
+    display: none;
+}
