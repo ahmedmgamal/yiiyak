@@ -506,6 +506,15 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                                                         return Yii::t('app','response not received yet');
                                                     }
 
+                                                ],
+                                                [
+                                                    'label' => Yii::t('app','Send By Email'),
+                                                    'format' => 'raw',
+                                                    'value' => function ($model){
+
+                                                        return '<a class="btn btn-primary" href='. Yii::getAlias('@web').'/crud/icsr-version/create-email?xmlUrl='.$model->file_url.'&icsrId='.$model->icsr_id.'><span class="glyphicon glyphicon-envelope"></span></a>';
+
+                                                    }
                                                 ]
 
 

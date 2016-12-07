@@ -60,6 +60,7 @@ abstract class User extends \yii\db\ActiveRecord
         return [
             [['username', 'password_hash', 'email','company_id'], 'required'],
             [['status','company_id'], 'integer'],
+            [['email'],'email'],
             [['username', 'password_hash', 'password_reset_token', 'email'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
             [['username'], 'unique'],
