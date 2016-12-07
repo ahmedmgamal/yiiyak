@@ -20,7 +20,7 @@ class Rmp extends BaseRmp
     public function rules()
     {
         return array_merge(parent::rules(), [
-            [['rmpFile'], 'file', 'skipOnEmpty' => false,'extensions' => 'doc,docx,pdf'],
+            [['rmpFile'], 'file', 'skipOnEmpty' => false,'extensions' => 'doc,docx,pdf','maxSize' => 1024 * 1024 * 16],
             [['rmpAck'], 'file', 'skipOnEmpty' => true,'extensions' => 'doc,docx,pdf']
         ]);
     }
