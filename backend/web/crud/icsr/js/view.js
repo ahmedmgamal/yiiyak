@@ -63,7 +63,7 @@ $( document ).ready(function() {
                     controllerUrl = targetUrl.substr(0,(targetUrl.lastIndexOf('/')+1));
 
                     //this will get the path from /files to the end
-                    filePathFromSlashFile = redirectUrl.substr(redirectUrl.lastIndexOf('/web')+4);
+                    filePathFromSlashFile = redirectUrl.substr(redirectUrl.lastIndexOf('/web')+1);
 
                     $('#dtdValidating').hide();
                     progressBar.hide();
