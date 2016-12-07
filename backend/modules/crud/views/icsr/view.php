@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
         <small id="downloadFile" class="downloadFile" > <a href="#" id="downloadFileAnchorTag"  target="_blank"><?= Yii::t('app','Download File')?></a></small>
 
         <small id="failedValidation" class="failedValidation" ></small>
-        <small id="dtdValidating" class="downloadFile" ><?= Yii::t('app','validating according to ICH DTD');?> <a class="dtd"  href="<?= Yii::$app->params['dtd']?>" target="_blank"><?= Yii::t('app','Click Here To Download');?></a>
+        <small id="dtdValidating" class="downloadFile" ><?= Yii::t('app','validating according to ICH DTD');?> <a class="dtd"  href="<?= Yii::$app->params['dtd']?>" target="_blank"><?= Yii::t('app','Click Here To Download');?></a></small>
 
              </h1>
     <div id="progressbar" style="display: none;"></div>
