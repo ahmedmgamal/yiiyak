@@ -62,6 +62,7 @@ abstract class IcsrTest extends \yii\db\ActiveRecord
             [['result'], 'string', 'max' => 512],
             [['result_unit', 'normal_low_range', 'normal_high_range', 'more_info','test_name'], 'string', 'max' => 45],
             [['icsr_id'], 'exist', 'skipOnError' => true, 'targetClass' => Icsr::className(), 'targetAttribute' => ['icsr_id' => 'id']],
+            ['image', 'file', 'extensions' => ['png', 'jpg'],'maxSize' => 1024 * 1024 * 2]
         ];
     }
 
@@ -80,6 +81,7 @@ abstract class IcsrTest extends \yii\db\ActiveRecord
             'normal_low_range' => Yii::t('app', 'Normal Low Range'),
             'normal_high_range' => Yii::t('app', 'Normal High Range'),
             'more_info' => Yii::t('app', 'More Info'),
+            'image' => Yii::t('app', 'Image'),
         ];
     }
 
@@ -100,6 +102,7 @@ abstract class IcsrTest extends \yii\db\ActiveRecord
             'normal_low_range' => Yii::t('app', 'Normal Low Range'),
             'normal_high_range' => Yii::t('app', 'Normal High Range'),
             'more_info' => Yii::t('app', 'More Info'),
+            'image' => Yii::t('app', 'Image'),
             ]);
     }
 

@@ -44,6 +44,8 @@ use yii\jui\DatePicker;
 			<?php echo $form->field($model, 'normal_low_range')->textInput(['maxlength' => true]) ?>
 			<?php echo $form->field($model, 'normal_high_range')->textInput(['maxlength' => true]) ?>
 			<?php echo $form->field($model, 'more_info')->textArea(['maxlength' => true]) ?>
+            <?php echo $form->field($model, 'image')->fileInput(['multiple'=>'multiple']); ?>
+
         </p>
         <?php $this->endBlock(); ?>
 
