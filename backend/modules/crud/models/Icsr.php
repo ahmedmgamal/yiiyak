@@ -151,7 +151,11 @@ class Icsr extends BaseIcsr
     }
 
 
+    public function getEgyptIdFromLkpCountry ()
+    {
 
+        return LkpCountry::findOne(['name' => 'Egypt'])->id;
+    }
 
 
 
