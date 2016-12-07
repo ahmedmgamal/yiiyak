@@ -65,8 +65,8 @@ abstract class Rmp extends \yii\db\ActiveRecord
             'ack_file_url' => 'Ack File Url',
             'rmp_created_by' => 'Rmp Created By',
             'rmp_created_at' => 'Rmp Created At',
-            'ack_created_by' => 'Ack Created By',
-            'ack_created_at' => 'Ack Created At',
+            'ack_created_by' => 'Letter Header Created By',
+            'ack_created_at' => 'Letter Header Created At',
         ];
     }
 

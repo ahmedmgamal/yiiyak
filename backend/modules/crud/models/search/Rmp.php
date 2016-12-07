@@ -21,8 +21,8 @@ class Rmp extends RmpModel
     {
         return [
 
-            [['drug_id', 'ack_created_by'], 'integer'],
-            [['version', 'ack_created_at','rmp_created_by'], 'safe'],
+            [['drug_id'], 'integer'],
+            [['version','rmp_created_by','ack_created_by'], 'safe'],
             [['version_description', 'rmp_file_url', 'ack_file_url'], 'string', 'max' => 255],
             [['drug_id'], 'exist', 'skipOnError' => true, 'targetClass' => Drug::className(), 'targetAttribute' => ['drug_id' => 'id']],
          ];
@@ -65,6 +65,7 @@ class Rmp extends RmpModel
             return $dataProvider;
         }
         $query->joinWith('rmpUser');
+        $query->joinWith('rmpAckUser ackUser');
 
         $query->andFilterWhere([
             'id' => $this->id,
@@ -74,7 +75,8 @@ class Rmp extends RmpModel
 
         $query->andFilterWhere(['like', 'version', $this->version])
               ->andFilterWhere(['like', 'version_description', $this->version_description])
-              ->andFilterWhere(['like', 'user.username', $this->rmp_created_by]);
+              ->andFilterWhere(['like', 'user.username', $this->rmp_created_by])
+              ->andFilterWhere(['like','ackUser.username',$this->ack_created_by]);
 
         return $dataProvider;
     }
