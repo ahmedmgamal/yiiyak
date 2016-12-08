@@ -84,7 +84,7 @@ class Drug extends BaseDrug
                 SELECT EventName,count(EventName) as COUNTS
                 FROM(
                 SELECT
-                      CASE Events.event_description
+                      CASE Events.meddra_llt_text
                     WHEN :eventName then 'A'
                       ELSE 'B'
                         END AS EventName
@@ -99,7 +99,7 @@ class Drug extends BaseDrug
                 SELECT EventName,count(EventName)
                 FROM(
                       SELECT
-                        CASE Events.event_description
+                        CASE Events.meddra_llt_text
                         WHEN :eventName then 'C'
                         ELSE 'D'
                         END AS EventName
@@ -117,14 +117,14 @@ class Drug extends BaseDrug
     }
 
     private function getIcsrEvents(){
-        $sql = "SELECT Events.event_description as EventName
+        $sql = "SELECT Events.meddra_llt_text as EventName
                 FROM drug
                   INNER JOIN icsr
                     ON(icsr.drug_id = drug.id)
                   INNER JOIN icsr_event as Events
                     ON(Events.icsr_id = icsr.id)
                 WHERE drug.id = :drugId
-                GROUP BY Events.event_description;";
+                GROUP BY Events.meddra_llt_text;";
         $events = Yii::$app->db->createCommand($sql,["drugId"=>$this->id])->queryAll();
         return $events;
     }
