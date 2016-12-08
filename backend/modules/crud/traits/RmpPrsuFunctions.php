@@ -17,7 +17,7 @@ use yii\helpers\StringHelper;
 
 
 
-trait RmpPsurFunctions {
+trait RmpPrsuFunctions {
 
 
     public function uploadReport()

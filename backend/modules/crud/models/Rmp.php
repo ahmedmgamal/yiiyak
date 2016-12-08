@@ -4,7 +4,7 @@ namespace backend\modules\crud\models;
 
 use Yii;
 use \backend\modules\crud\models\base\Rmp as BaseRmp;
-use \backend\modules\crud\traits\RmpPsurFunctions;
+use \backend\modules\crud\traits\RmpPrsuFunctions;
 
 
 /**
@@ -12,7 +12,7 @@ use \backend\modules\crud\traits\RmpPsurFunctions;
  */
 class Rmp extends BaseRmp
 {
-    use RmpPsurFunctions;
+    use RmpPrsuFunctions;
 
     /**
      * @var UploadedFile
