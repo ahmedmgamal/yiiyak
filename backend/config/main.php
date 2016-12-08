@@ -103,6 +103,12 @@ if (YII_ENV_DEV)
             'baseUrl' => '@web/files',
             'filePermission' => 0777,
             'buckets' => [
+                'prsu-ack' => [
+                    'baseSubPath' => 'prsuAckFiles'
+                ],
+                'prsu' => [
+                    'baseSubPath' => 'prsuFiles'
+                ],
                 'rmp-ack' => [
                     'baseSubPath' => 'rmpAckFiles'
                 ],
@@ -141,6 +147,12 @@ else{
             'baseUrl' => '@web/files',
             'filePermission' => 0777,
             'buckets' => [
+                'prsu-ack' => [
+                    'baseSubPath' => 'prsuAckFiles'
+                ],
+                'prsu' => [
+                    'baseSubPath' => 'prsuFiles'
+                ],
                 'rmp-ack' => [
                     'baseSubPath' => 'rmpAckFiles'
                 ],
