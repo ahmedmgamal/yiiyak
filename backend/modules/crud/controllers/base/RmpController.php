@@ -77,7 +77,7 @@ public $enableCsrfValidation = false;
                 $model->rmpFile = UploadedFile::getInstance($model, 'rmpFile');
                 $model->rmp_created_at = date('Y-m-d H:i:s',strtotime('+2 hours'));
 
-                if (!$model->uploadRmp())
+                if (!$model->uploadReport())
                 {
                     \Yii::$app->getSession()->setFlash('error', Yii::t('app','can\'t upload fiel right now try again later'));
                     return $this->redirect(\Yii::$app->request->referrer);

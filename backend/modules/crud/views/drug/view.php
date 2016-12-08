@@ -218,7 +218,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 				[
 					'attribute' => 'rmp_created_by',
 					'value' => function ($model){
-						return ($model->getRmpUserName());
+						return ($model->getReportUserName());
 					}
 				],
 				'rmp_created_at',
