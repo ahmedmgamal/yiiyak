@@ -42,7 +42,7 @@ abstract class Prsu extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['drug_id', 'prsu_created_by'], 'required'],
+            [['drug_id', 'prsu_created_by','prsu_file_url','version','next_prsu_date'], 'required'],
             [['drug_id', 'prsu_created_by', 'ack_created_by'], 'integer'],
             [['version'], 'number'],
             [['prsu_created_at', 'ack_created_at', 'next_prsu_date'], 'safe'],
@@ -73,6 +73,15 @@ abstract class Prsu extends \yii\db\ActiveRecord
     }
 
 
+    public function getRmpUser ()
+    {
+        return $this->hasOne(\backend\modules\crud\models\User::className(),['id' => 'prsu_created_by']);
+    }
 
+    public function getRmpAckUser()
+    {
+        return $this->hasOne(\backend\modules\crud\models\User::className(),['id' => 'ack_created_by']);
+
+    }
 
 }
