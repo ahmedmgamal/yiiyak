@@ -17,6 +17,7 @@ use Yii;
  * @property string $manufacturer
  * @property string $strength
  * @property integer $route_lkp_id
+ * @property string $next_prsu_date
  *
  * @property \backend\modules\crud\models\Company $company
  * @property \backend\modules\crud\models\LkpRoute $routeLkp
@@ -59,7 +60,7 @@ abstract class Drug extends \yii\db\ActiveRecord
         return [
             [['company_id', 'route_lkp_id'], 'required'],
             [['company_id', 'route_lkp_id'], 'integer'],
-            [['next_prsu_date'],'date'],
+            [['next_prsu_date'],'date','format' => 'php:Y-m-d'],
             [['generic_name', 'trade_name', 'composition', 'manufacturer', 'strength'], 'string', 'max' => 45],
             [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => Company::className(), 'targetAttribute' => ['company_id' => 'id']],
             [['route_lkp_id'], 'exist', 'skipOnError' => true, 'targetClass' => LkpRoute::className(), 'targetAttribute' => ['route_lkp_id' => 'id']]

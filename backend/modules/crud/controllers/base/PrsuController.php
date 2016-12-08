@@ -4,6 +4,7 @@
 
 namespace backend\modules\crud\controllers\base;
 
+use backend\modules\crud\models\Drug;
 use backend\modules\crud\models\Prsu;
 use yii\web\Controller;
 use yii\web\HttpException;
@@ -72,6 +73,9 @@ public $enableCsrfValidation = false;
 
         try {
             if ($model->load($_POST) ) {
+                $connection = \Yii::$app->db;
+                $transaction = $connection->beginTransaction();
+
                 $model->drug_id = $drug_id;
                 $model->prsu_created_by = \Yii::$app->user->identity->id;
                 $model->prsuFile = UploadedFile::getInstance($model, 'prsuFile');
@@ -84,6 +88,13 @@ public $enableCsrfValidation = false;
                 }
 
                 if ($model->save()) {
+                    $drug= Drug::findOne($drug_id);
+
+                    $drug->next_prsu_date = $model->next_prsu_date;
+                    $drug->update();
+
+                    $transaction->commit();
+
                     return $this->redirect(['drug/view', 'id' => $drug_id]);
                 }
 
@@ -91,6 +102,7 @@ public $enableCsrfValidation = false;
                 $model->load($_GET);
             }
         } catch (\Exception $e) {
+            $transaction->rollBack();
             $msg = (isset($e->errorInfo[2]))?$e->errorInfo[2]:$e->getMessage();
             $model->addError('_exception', $msg);
         }

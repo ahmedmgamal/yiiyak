@@ -46,7 +46,7 @@ abstract class Prsu extends \yii\db\ActiveRecord
             [['drug_id', 'prsu_created_by', 'ack_created_by'], 'integer'],
             [['version'], 'number'],
             [['prsu_created_at', 'ack_created_at', 'next_prsu_date'], 'safe'],
-            [['next_prsu_date'],'date'],
+            [['next_prsu_date'],'date','format' => 'php:Y-m-d'],
             [['version_description', 'prsu_file_url', 'ack_file_url'], 'string', 'max' => 255],
             [['drug_id'], 'exist', 'skipOnError' => true, 'targetClass' => Drug::className(), 'targetAttribute' => ['drug_id' => 'id']],
             [['prsu_created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['prsu_created_by' => 'id']]
