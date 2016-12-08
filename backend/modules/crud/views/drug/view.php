@@ -179,7 +179,15 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                 ]),
                  'columns'=>[
                      'event_description',
-                     'A','B','C','D'
+                     'A','B','C','D',
+                     [
+                         'label'=>"95% confidence interval of the PRR : PRR / exp(1.96se)",
+                         "value"=>"confidence_1"
+                     ],
+                     [
+                         'label'=>"95% confidence interval of the PRR : PRR * exp(1.96se)",
+                         "value"=>"confidence_2"
+                     ]
 
                  ]
              ]);

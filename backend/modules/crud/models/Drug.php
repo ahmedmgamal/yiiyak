@@ -64,12 +64,29 @@ class Drug extends BaseDrug
         $signalValues= [];
         foreach ($this->getIcsrEvents() as $event){
             $values = $this->get_ABCD($event['EventName']);
+            $A = isset($values['A']) ? $values['A'] : 0;
+            $B = isset($values['B']) ? $values['B'] : 0;
+            $C = isset($values['C']) ? $values['C'] : 0;
+            $D = isset($values['D']) ? $values['D'] : 0;
+            $AB = $A + $B;
+            $CD = $C+ $D;
+            $PRR = ($A/ ($AB)) / ($C /($CD));
+            $SE = (1/$A + 1/$C - 1/$AB - 1/$CD);
+            $SE = sqrt($SE);
+            //95% confidence interval of the PRR : PRR / exp(1.96se)
+            $confidence_1 = $PRR / (exp(1.96 * $SE));
+            $confidence_1 = round($confidence_1 , 3);
+            //95% confidence interval of the PRR : PRR * exp(1.96se)
+            $confidence_2 = $PRR * (exp(1.96 * $SE));
+            $confidence_2 = round($confidence_2 , 3);
             $signalValues[] = [
                 "event_description"=>$event['EventName'],
-                "A"=>isset($values['A']) ? $values['A'] : 0 ,
-                "B"=>isset($values['B']) ? $values['B'] : 0,
-                "C"=>isset($values['C']) ? $values['C'] : 0,
-                "D"=>isset($values['D']) ? $values['D'] : 0
+                "A"=> $A,
+                "B"=> $B,
+                "C"=> $C,
+                "D"=> $D,
+                "confidence_1"=>$confidence_1,
+                "confidence_2" => $confidence_2
             ];
         }
         return $signalValues;
