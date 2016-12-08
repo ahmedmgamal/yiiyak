@@ -139,4 +139,11 @@ abstract class Drug extends \yii\db\ActiveRecord
         return $this->hasMany(\backend\modules\crud\models\Rmp::className(),['drug_id' => 'id']);
     }
 
+    public function getPrsus()
+    {
+        return $this->hasMany(\backend\modules\crud\models\Prsu::className(),['drug_id' => 'id']);
+
+
+    }
+
 }

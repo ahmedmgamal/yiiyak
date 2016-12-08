@@ -10,6 +10,7 @@ use yii\web\HttpException;
 use yii\helpers\Url;
 use yii\filters\AccessControl;
 use dmstr\bootstrap\Tabs;
+use yii\web\UploadedFile;
 
 /**
 * PrsuController implements the CRUD actions for Prsu model.
