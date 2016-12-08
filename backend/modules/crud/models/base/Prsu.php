@@ -73,12 +73,12 @@ abstract class Prsu extends \yii\db\ActiveRecord
     }
 
 
-    public function getRmpUser ()
+    public function getPrsuUser ()
     {
         return $this->hasOne(\backend\modules\crud\models\User::className(),['id' => 'prsu_created_by']);
     }
 
-    public function getRmpAckUser()
+    public function getPrsuAckUser()
     {
         return $this->hasOne(\backend\modules\crud\models\User::className(),['id' => 'ack_created_by']);
 
