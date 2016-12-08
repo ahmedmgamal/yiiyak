@@ -66,9 +66,9 @@ abstract class Prsu extends \yii\db\ActiveRecord
             'ack_file_url' => 'Ack File Url',
             'prsu_created_by' => 'Prsu Created By',
             'prsu_created_at' => 'Prsu Created At',
-            'ack_created_by' => 'Ack Created By',
-            'ack_created_at' => 'Ack Created At',
-            'next_prsu_date' => 'Next Prsu Date',
+            'ack_created_by' => 'Letter Header Created By',
+            'ack_created_at' => 'Letter Header Created At',
+            'next_prsu_date' => 'Next Submission Date',
         ];
     }
 
