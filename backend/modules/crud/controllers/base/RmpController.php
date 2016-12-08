@@ -79,7 +79,7 @@ public $enableCsrfValidation = false;
 
                 if (!$model->uploadReport())
                 {
-                    \Yii::$app->getSession()->setFlash('error', Yii::t('app','can\'t upload fiel right now try again later'));
+                    \Yii::$app->getSession()->setFlash('error', Yii::t('app','can\'t upload file right now try again later'));
                     return $this->redirect(\Yii::$app->request->referrer);
                 }
 
