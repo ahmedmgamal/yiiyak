@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use \dmstr\bootstrap\Tabs;
 use yii\helpers\StringHelper;
+use yii\jui\DatePicker;
 
 /**
 * @var yii\web\View $this
@@ -28,19 +29,12 @@ use yii\helpers\StringHelper;
         <?php $this->beginBlock('main'); ?>
 
         <p>
-            
-			<?= $form->field($model, 'id')->textInput() ?>
-			<?= $form->field($model, 'drug_id')->textInput() ?>
-			<?= $form->field($model, 'version')->textInput(['maxlength' => true]) ?>
-			<?= $form->field($model, 'version_description')->textInput(['maxlength' => true]) ?>
-			<?= $form->field($model, 'prsu_file_url')->textInput(['maxlength' => true]) ?>
-			<?= $form->field($model, 'ack_file_url')->textInput(['maxlength' => true]) ?>
-			<?= $form->field($model, 'prsu_created_by')->textInput() ?>
-			<?= $form->field($model, 'prsu_created_at')->textInput() ?>
-			<?= $form->field($model, 'ack_created_by')->textInput() ?>
-			<?= $form->field($model, 'ack_created_at')->textInput() ?>
-			<?= $form->field($model, 'next_prsu_date')->textInput() ?>
-        </p>
+
+            <?= $form->field($model, 'version')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'version_description')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'prsuFile')->fileInput() ?>
+            <?= $form->field($model,'next_prsu_date')->widget(DatePicker::className(),['dateFormat' => 'yyyy-MM-dd']);?>
+            </p>
         <?php $this->endBlock(); ?>
         
         <?=
