@@ -33,7 +33,7 @@ use yii\jui\DatePicker;
             <?= $form->field($model, 'version')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'version_description')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'prsuFile')->fileInput() ?>
-            <?= $form->field($model,'next_prsu_date')->widget(DatePicker::className(),['dateFormat' => 'yyyy-MM-dd']);?>
+            <?= $form->field($model,'next_prsu_date')->widget(DatePicker::className(),['dateFormat' => 'yyyy-MM-dd','clientOptions' => ['minDate' => date('Y-m-d')]]);?>
             </p>
         <?php $this->endBlock(); ?>
         
