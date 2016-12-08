@@ -59,6 +59,7 @@ abstract class Drug extends \yii\db\ActiveRecord
         return [
             [['company_id', 'route_lkp_id'], 'required'],
             [['company_id', 'route_lkp_id'], 'integer'],
+            [['next_prsu_date'],'date'],
             [['generic_name', 'trade_name', 'composition', 'manufacturer', 'strength'], 'string', 'max' => 45],
             [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => Company::className(), 'targetAttribute' => ['company_id' => 'id']],
             [['route_lkp_id'], 'exist', 'skipOnError' => true, 'targetClass' => LkpRoute::className(), 'targetAttribute' => ['route_lkp_id' => 'id']]
@@ -79,6 +80,7 @@ abstract class Drug extends \yii\db\ActiveRecord
             'manufacturer' => Yii::t('app', 'Manufacturer'),
             'strength' => Yii::t('app', 'Strength'),
             'route_lkp_id' => Yii::t('app', 'Route Of Administration'),
+            'next_prsu_date	' => Yii::t('app','Next Submission Date'),
         ];
     }
 
