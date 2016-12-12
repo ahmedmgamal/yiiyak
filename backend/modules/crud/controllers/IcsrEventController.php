@@ -27,6 +27,19 @@ class IcsrEventController extends \backend\modules\crud\controllers\base\IcsrEve
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
+                        'allow' => false,
+                        'actions' => ['update','delete','create'],
+                        'matchCallback' => function ($rule,$action){
+                            $icsrEvent_id = \Yii::$app->request->getQueryParam('id');
+                            if (isset($icsrEvent_id) && !empty($icsrEvent_id)) {
+                                return IcsrEvent::checkObjIcsrNullExported($icsrEvent_id);
+                            }
+
+                            return IcsrEvent::checkIcsrNullExported(\Yii::$app->request->getQueryParam('IcsrEvent')['icsr_id']);
+
+                        }
+                    ],
+                    [
                         'allow' => true,
                         'matchCallback' => function ($rule, $action) {
                             $user_id = \Yii::$app->user->id;

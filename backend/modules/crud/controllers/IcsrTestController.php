@@ -27,6 +27,19 @@ class IcsrTestController extends \backend\modules\crud\controllers\base\IcsrTest
             'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
+                    [
+                        'allow' => false,
+                        'actions' => ['update','delete','create'],
+                        'matchCallback' => function ($rule,$action){
+                            $icsrTest_id = \Yii::$app->request->getQueryParam('id');
+                            if (isset($icsrTest_id) && !empty($icsrTest_id)) {
+                                return IcsrTest::checkObjIcsrNullExported($icsrTest_id);
+                            }
+
+                            return IcsrTest::checkIcsrNullExported(\Yii::$app->request->getQueryParam('IcsrTest')['icsr_id']);
+
+                        }
+                    ],
 
                     [
                         'allow' => true,
