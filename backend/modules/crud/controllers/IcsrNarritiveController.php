@@ -19,6 +19,7 @@ class IcsrNarritiveController extends \backend\modules\crud\controllers\base\Ics
                     [
                         'allow' => false,
                         'actions' => ['update','delete'],
+                        'verbs' => ['POST'],
                         'matchCallback' => function ($rule,$action){
                             $icsrNarritive_id = \Yii::$app->request->getQueryParam('id');
                             return IcsrNarritive::checkObjIcsrNullExported($icsrNarritive_id);
