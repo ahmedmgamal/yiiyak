@@ -128,7 +128,7 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
         $request = Yii::$app->request;
         if( $this->validateXML($xml,$dtd ) )
         {
-            $this->createTrailForExport($icsr);
+            $this->createTrailForExport($icsr,$case);
             $fileUrl =  $this->createExportFile($icsr,$xml);
 
             if ($request->isAjax){
@@ -185,11 +185,17 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
     }
 }
 
-private function createTrailForExport ($icsrObj)
+private function createTrailForExport ($icsrObj,$case)
 {
     $audit = new AuditTrail();
     $audit->user_id = \Yii::$app->user->id;
     $audit->action = 'EXPORT';
+
+    if ($case == 'null')
+    {
+        $audit->action ='EXPORT NULL';
+    }
+
     $audit->model = \backend\modules\crud\models\Icsr::className();
     $audit->model_id = $icsrObj->id;
     $audit->save();

@@ -20,6 +20,8 @@ $this->params['breadcrumbs'][] = ['label' => $model->getDrug()->one()->trade_nam
 $this->params['breadcrumbs'][] = ['label' => $model->getAliasModel(true), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => (string) $model->patient_identifier, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'View');
+
+$updateButton = (!$isIcsrNullExported) ? '{update}' : '';
 ?>
 <div id="icsr-view" class="giiant-crud icsr-view">
 
@@ -46,8 +48,10 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
         <!-- menu buttons -->
         <div class='pull-left'>
 
-            <?php echo Html::a('<span class="glyphicon glyphicon-pencil"></span> ' . Yii::t('app', 'Edit'), ['update', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
-            <?php if ($model->canExported()) { ?>
+            <?php  if (!$isIcsrNullExported){
+                echo Html::a('<span class="glyphicon glyphicon-pencil"></span> ' . Yii::t('app', 'Edit'), ['update', 'id' => $model->id], ['class' => 'btn btn-info']);
+            }  ?>
+            <?php if ($model->canExported() && !$isIcsrNullExported) { ?>
                 <?php echo Html::a('<span class="glyphicon glyphicon-copy"></span> ' . Yii::t('app', 'Export  Xml'), ['export', 'id' => $model->id  ,'case' => 'normal'], ['class' => 'btn btn-success'  ,'id' => 'exportXml']) ?>
                 <?php echo Html::a('<span class="glyphicon glyphicon-copy"></span> ' . Yii::t('app', 'Export  Null Case'), ['export-null-case', 'id' => $model->id ], ['class' => 'btn btn-default']) ?>
             <?php }
@@ -127,7 +131,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
     <?php $this->beginBlock('DrugPrescriptions'); ?>
 
     <div style='position: relative'><div style='position:absolute; right: 0px; top: 0px;'>
-
+            <?php if (!$isIcsrNullExported){?>
             <a class="btn btn-success btn-xs" href="<?= Url::to(['/crud/drug-prescription/create',  'DrugPrescription' => ['icsr_id' => $model->id]])?>">
 
                 <span class="glyphicon glyphicon-plus"></span>
@@ -135,6 +139,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
               <?=  Yii::t('app','New ').' Drug Prescription';?>
 
             </a>
+            <?php } ?>
 
 
 
@@ -150,7 +155,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
         ],
         'columns' => [[
         'class' => 'yii\grid\ActionColumn',
-        'template' => '{view}  {update}',
+        'template' => '{view}  '.$updateButton,
         'contentOptions' => ['nowrap' => 'nowrap'],
         /**
          *
@@ -207,12 +212,12 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                     <?php $this->beginBlock('IcsrEvents'); ?>
                     <div style='position: relative'><div style='position:absolute; right: 0px; top: 0px;'>
 
-
+                            <?php if (!$isIcsrNullExported){ ?>
                             <a class="btn btn-success btn-xs" href="<?= Url::to(['/crud/icsr-event/create', 'IcsrEvent' => ['icsr_id' => $model->id]])?>">
 
                                 <span class="glyphicon glyphicon-plus"></span><?= Yii::t('app','New ').' Icsr Event'?>
                             </a>
-
+                            <?php } ?>
 
                         </div></div><?php Pjax::begin(['id' => 'pjax-IcsrEvents', 'enableReplaceState' => false, 'linkSelector' => '#pjax-IcsrEvents ul.pagination a, th a', 'clientOptions' => ['pjax:success' => 'function(){alert("yo")}']]) ?>
                     <?=
@@ -226,7 +231,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                         ],
                         'columns' => [[
                         'class' => 'yii\grid\ActionColumn',
-                        'template' => '{view} {update} {signal}',
+                        'template' => '{view} {signal}'.$updateButton,
                         'contentOptions' => ['nowrap' => 'nowrap'],
                         'urlCreator' => function ($action, $model, $key, $index) {
                     // using the column name as key, not mapping to 'id' like the standard generator
@@ -266,13 +271,13 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                                             <?php $this->beginBlock('IcsrReporters'); ?>
                                     <div style='position: relative'><div style='position:absolute; right: 0px; top: 0px;'>
 
-
+                                            <?php if (!$isIcsrNullExported){ ?>
                                             <a class="btn btn-success btn-xs" href="<?= Url::to(['/crud/icsr-reporter/create', 'IcsrReporter' => ['icsr_id' => $model->id]])?>">
 
                                                 <span class="glyphicon glyphicon-plus"></span><?= Yii::t('app','New ').' Icsr Reporter'?>
                                             </a>
 
-
+                                            <?php } ?>
 
 
                                         </div></div><?php Pjax::begin(['id' => 'pjax-IcsrReporters', 'enableReplaceState' => false, 'linkSelector' => '#pjax-IcsrReporters ul.pagination a, th a', 'clientOptions' => ['pjax:success' => 'function(){alert("yo")}']]) ?>
@@ -287,7 +292,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                                         ],
                                         'columns' => [[
                                         'class' => 'yii\grid\ActionColumn',
-                                        'template' => '{view} {update}',
+                                        'template' => '{view} '.$updateButton,
                                         'contentOptions' => ['nowrap' => 'nowrap'],
                                         'urlCreator' => function ($action, $model, $key, $index) {
                                     // using the column name as key, not mapping to 'id' like the standard generator
@@ -337,12 +342,12 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 
                                             <div style='position: relative'><div style='position:absolute; right: 0px; top: 0px;'>
 
-
+                                                    <?php if (!$isIcsrNullExported){ ?>
                                                     <a class="btn btn-success btn-xs" href="<?= Url::to(['/crud/icsr-test/create', 'IcsrTest' => ['icsr_id' => $model->id]])?>">
 
                                                         <span class="glyphicon glyphicon-plus"></span><?= Yii::t('app','New ').' Icsr Test'?>
                                                     </a>
-
+                                                    <?php } ?>
 
                                                 </div></div><?php Pjax::begin(['id' => 'pjax-IcsrTests', 'enableReplaceState' => false, 'linkSelector' => '#pjax-IcsrTests ul.pagination a, th a', 'clientOptions' => ['pjax:success' => 'function(){alert("yo")}']]) ?>
                                             <?=
@@ -356,7 +361,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                                                 ],
                                                 'columns' => [[
                                                 'class' => 'yii\grid\ActionColumn',
-                                                'template' => '{view} {update}',
+                                                'template' => '{view} '.$updateButton,
                                                 'contentOptions' => ['nowrap' => 'nowrap'],
                                                 'urlCreator' => function ($action, $model, $key, $index) {
                                             // using the column name as key, not mapping to 'id' like the standard generator
