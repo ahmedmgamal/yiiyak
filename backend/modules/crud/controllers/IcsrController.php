@@ -35,6 +35,17 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
             'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
+                    [
+                        'allow' => false,
+                        'actions' => ['update','delete','export','export-null-case'],
+                        'matchCallback' => function ($rule,$action){
+                            $icsr_id = \Yii::$app->request->getQueryParam('id');
+
+
+                            return Icsr::findOne($icsr_id)->isNullExported();
+
+                        }
+                    ],
 
                     [
                         'allow' => true,
