@@ -41,7 +41,6 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
                         'matchCallback' => function ($rule,$action){
                             $icsr_id = \Yii::$app->request->getQueryParam('id');
 
-
                             return Icsr::findOne($icsr_id)->isNullExported();
 
                         }
