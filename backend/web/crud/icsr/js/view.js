@@ -96,9 +96,9 @@ $('#exportXml').on('click',function (e) {
                     htmlRows += "<td>" + diffs[i].user_id+ "</td>"
                     htmlRows += "<td>" +diffs[i].action+ "</td>"
                     htmlRows += "<td>" +diffs[i].model+ "</td>"
-                    htmlRows += "<td>" +diffs[i].field+ "</td>"
-                    htmlRows += "<td>" +diffs[i].old_value+ "</td>"
-                    htmlRows += "<td>" +diffs[i].new_value+ "</td>"
+                    htmlRows += "<td>" +diffs[i].field.replace(/,/g,'<br>')+ "</td>"
+                    htmlRows += "<td>" +diffs[i].old_value.replace(/,/g,'<br>')+ "</td>"
+                    htmlRows += "<td>" +diffs[i].new_value.replace(/,/g,'<br>')+ "</td>"
                     htmlRows += "<td>" +diffs[i].created+ "</td>"
 
                     htmlRows += '</tr>'

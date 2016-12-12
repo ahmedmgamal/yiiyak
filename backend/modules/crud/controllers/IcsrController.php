@@ -295,7 +295,7 @@ private function createExportFile ($icsrObj,$content)
                   }
             else
                 {
-                        Yii::$app->session->setFlash('error',Yii::t('app','can\'t download file right now try again later'));
+                        Yii::$app->session->setFlash('error',Yii::t('app','File Doesn\'t Exist Any More'));
 
                       return $this->redirect(Yii::$app->request->referrer);
                  }
