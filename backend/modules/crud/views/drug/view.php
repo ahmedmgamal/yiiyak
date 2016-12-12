@@ -167,32 +167,77 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
         $this->beginBlock("signal_detection");
     ?>
     <?php
-         echo '<div class="table-responsive">' . \yii\grid\GridView::widget([
-                'dataProvider'=>new \yii\data\ArrayDataProvider([
-                    'allModels' => $signal_detection,
-                    'pagination' => [
-                        'pageSize' => 20,
-                    ],
-                    'sort' => [
-                        'attributes' => ['event_description'],
-                    ],
-                ]),
-                 'columns'=>[
-                     'event_description',
-                     'A','B','C','D',
-                     [
-                         'label'=>"95% confidence interval of the PRR : PRR / exp(1.96se)",
-                         "value"=>"confidence_1"
-                     ],
-                     [
-                         'label'=>"95% confidence interval of the PRR : PRR * exp(1.96se)",
-                         "value"=>"confidence_2"
-                     ]
-
-                 ]
-             ]);
-    ?>
-
+        foreach ($signal_detection as $signal){
+            $signalPanelType = $signal['isSignal'] == true ?  "panel-danger" :"panel-info";
+            ?>
+            <div class="panel <?php echo $signalPanelType;?> ">
+                <div class="panel-heading">
+                    <?php
+                    echo $signal['event_description'];
+                    if($signal['isSignal']){
+                        echo "<small class='alert-signal-color'><span class='glyphicon glyphicon-warning-sign '></span></small>";
+                    }
+                    ?>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>
+                                &nbsp;
+                            </th>
+                            <th>
+                                Event (E)
+                            </th>
+                            <th>
+                                All other events
+                            </th>
+                            <th>
+                                Total
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Medicinal Product (P)</td>
+                            <td><?php echo $signal['A'];?></td>
+                            <td><?php echo $signal['B'];?></td>
+                            <td><?php echo $signal['AB'];?></td>
+                        </tr>
+                        <tr>
+                            <td>All other medicinal products </td>
+                            <td><?php echo $signal['C'];?></td>
+                            <td><?php echo $signal['D'];?></td>
+                            <td><?php echo $signal['CD'];?></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Total
+                            </td>
+                            <td>
+                                <?php echo $signal['AC'];?>
+                            </td>
+                            <td>
+                                <?php echo $signal['BD'];?>
+                            </td>
+                            <td>
+                                <?php echo $signal['ABCD'];?>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="panel-footer">
+                    <dl class="dl-horizontal">
+                        <dt>PRR</dt>
+                        <dd><?php echo $signal['PRR'];?>
+                        </dd><dt>SE</dt>
+                        <dd><?php echo $signal['SE'];?></dd>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        <?php }?>
     <?php
         $this->endBlock();
     ?>

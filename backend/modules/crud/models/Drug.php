@@ -70,21 +70,37 @@ class Drug extends BaseDrug
             $D = isset($values['D']) ? $values['D'] : 0;
             $AB = $A + $B;
             $CD = $C+ $D;
-            $PRR = ($A/ ($AB)) / ($C /($CD));
+            $AC = $A+$C;
+            $BD = $B+$D;
+            $ABCD = $AC+$BD;
+            if($C > 0){
+                $PRR = ($A/ ($AB)) / ($C /($CD));
+            }else{
+                $PRR = 99.9;
+            }
+
             $SE = (1/$A + 1/$C - 1/$AB - 1/$CD);
             $SE = sqrt($SE);
             //95% confidence interval of the PRR : PRR / exp(1.96se)
             $confidence_1 = $PRR / (exp(1.96 * $SE));
-            $confidence_1 = round($confidence_1 , 3);
             //95% confidence interval of the PRR : PRR * exp(1.96se)
             $confidence_2 = $PRR * (exp(1.96 * $SE));
-            $confidence_2 = round($confidence_2 , 3);
+            $lower = min($confidence_1,$confidence_2);
+            $isSignal = $this->isSignal($lower,$A);
             $signalValues[] = [
                 "event_description"=>$event['EventName'],
                 "A"=> $A,
                 "B"=> $B,
+                "AB"=>$AB,
                 "C"=> $C,
                 "D"=> $D,
+                "CD"=>$CD,
+                "AC"=>$AC,
+                "BD"=>$BD,
+                "ABCD"=>$ABCD,
+                "PRR"=>round($PRR , 6),
+                "SE"=>round($SE , 6),
+                'isSignal'=>$isSignal,
                 "confidence_1"=>$confidence_1,
                 "confidence_2" => $confidence_2
             ];
@@ -145,7 +161,12 @@ class Drug extends BaseDrug
         $events = Yii::$app->db->createCommand($sql,["drugId"=>$this->id])->queryAll();
         return $events;
     }
-
+    private function isSignal($lower,$a){
+        if($lower >= 1 && $a >= 3){
+            return true;
+        }
+        return false;
+    }
 
 
 }
