@@ -28,6 +28,20 @@ class IcsrReporterController extends \backend\modules\crud\controllers\base\Icsr
             'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
+
+                    [
+                        'allow' => false,
+                        'actions' => ['update','delete','create'],
+                        'matchCallback' => function ($rule,$action){
+                            $report_id = \Yii::$app->request->getQueryParam('id');
+                            if (isset($report_id) && !empty($report_id)) {
+                                return IcsrReporter::checkObjIcsrNullExported($report_id);
+                            }
+
+                            return IcsrReporter::checkIcsrNullExported(\Yii::$app->request->getQueryParam('IcsrReporter')['icsr_id']);
+
+                        }
+                    ],
                     [
                         'allow' => true,
                         'matchCallback' => function ($rule, $action) {

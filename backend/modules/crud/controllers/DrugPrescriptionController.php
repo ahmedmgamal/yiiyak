@@ -22,6 +22,20 @@ class DrugPrescriptionController extends \backend\modules\crud\controllers\base\
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
+                        'allow' => false,
+                        'actions' => ['update','delete','create'],
+                        'matchCallback' => function ($rule,$action){
+                            $prescription_id = \Yii::$app->request->getQueryParam('id');
+                            if (isset($prescription_id) && !empty($prescription_id)) {
+                                return DrugPrescription::checkObjIcsrNullExported($prescription_id);
+                            }
+
+                            return DrugPrescription::checkIcsrNullExported(\Yii::$app->request->getQueryParam('DrugPrescription')['icsr_id']);
+
+                        }
+                    ],
+
+                    [
                         'allow' => true,
                         'matchCallback' => function ($rule, $action) {
                             $user_id = \Yii::$app->user->id;
