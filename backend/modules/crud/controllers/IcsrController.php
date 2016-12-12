@@ -336,7 +336,9 @@ private function createExportFile ($icsrObj,$content)
 
         $icsrObj = Icsr::findOne($icsrId);
 
-        $minDateRange = AuditTrailChild::find()->where(['model_id' => $icsrObj->id , 'action' => 'EXPORT' ])->andWhere(['<','created',$maxDateRange])->orderBy('created DESC')->one()->created;
+        $auditTrailObj = AuditTrailChild::find()->where(['model_id' => $icsrObj->id , 'action' => 'EXPORT' ])->andWhere(['<','created',$maxDateRange])->orderBy('created DESC')->one();
+
+        $minDateRange = isset($auditTrailObj->created) ? $auditTrailObj->created : '';
 
         $diffArrOfObjs = $icsrObj->getIcsrTrails()->where(['between', 'created', $minDateRange, $maxDateRange ])->andWhere(['<>','action' ,'EXPORT'])->all();
 
