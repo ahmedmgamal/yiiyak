@@ -10,7 +10,7 @@ use \backend\modules\crud\traits;
  */
 class IcsrTest extends BaseIcsrTest
 {
-    use traits\checkAccess;
+    use traits\checkAccess,traits\checkIcsrNullExported;
     public function attributeHints()
     {
                   return array_merge(

@@ -11,6 +11,7 @@ use \backend\modules\crud\traits;
 class DrugPrescription extends BaseDrugPrescription
 {
     use traits\checkAccess;
+    use traits\checkIcsrNullExported;
      public function attributeLabels()
     {
         return array_merge(

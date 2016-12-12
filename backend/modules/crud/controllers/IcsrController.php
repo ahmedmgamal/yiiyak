@@ -21,6 +21,9 @@ use dmstr\bootstrap\Tabs;
 use backend\modules\crud\models\IcsrVersion;
 use backend\modules\crud\models\IcsrNarritive;
 
+use backend\modules\crud\overrides\TrailChild\AuditTrailChild;
+use yii\web\Response;
+
 /**
  * This is the class for controller "IcsrController".
  */
@@ -32,6 +35,16 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
             'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
+                    [
+                        'allow' => false,
+                        'actions' => ['update','delete','export','export-null-case'],
+                        'matchCallback' => function ($rule,$action){
+                            $icsr_id = \Yii::$app->request->getQueryParam('id');
+
+                            return Icsr::findOne($icsr_id)->isNullExported();
+
+                        }
+                    ],
 
                     [
                         'allow' => true,
@@ -125,7 +138,7 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
         $request = Yii::$app->request;
         if( $this->validateXML($xml,$dtd ) )
         {
-            $this->createTrailForExport($icsr);
+            $this->createTrailForExport($icsr,$case);
             $fileUrl =  $this->createExportFile($icsr,$xml);
 
             if ($request->isAjax){
@@ -182,11 +195,17 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
     }
 }
 
-private function createTrailForExport ($icsrObj)
+private function createTrailForExport ($icsrObj,$case)
 {
     $audit = new AuditTrail();
     $audit->user_id = \Yii::$app->user->id;
     $audit->action = 'EXPORT';
+
+    if ($case == 'null')
+    {
+        $audit->action ='EXPORT NULL';
+    }
+
     $audit->model = \backend\modules\crud\models\Icsr::className();
     $audit->model_id = $icsrObj->id;
     $audit->save();
@@ -272,6 +291,7 @@ private function createExportFile ($icsrObj,$content)
         return $this->render('null-case-reason',['model' => $icsr]);
     }
 
+
     public function actionDownloadXmlFile ($path)
     {
 
@@ -287,6 +307,60 @@ private function createExportFile ($icsrObj,$content)
 
             return $this->redirect(Yii::$app->request->referrer);
         }
+     }
+
+
+    public function actionOpenPdf($path)
+    {
+        $path =  Yii::getAlias('@webroot') . $path;
+
+                  if (file_exists($path))
+                  {
+                      $e2pLkp = Yii::$app->params['e2bLkp'];
+                      $elementsLkp = Yii::$app->params['elementsLkp'];
+
+                      Yii::$app->response->format = 'pdf';
+                        $this->layout =false;
+
+                      $xml = simplexml_load_file($path);
+
+                      return $this->render('open-pdf',['xml' => $xml , 'e2pLkp' => $e2pLkp , 'elementsLkp' => $elementsLkp]);
+
+                  }
+            else
+                {
+                        Yii::$app->session->setFlash('error',Yii::t('app','File Doesn\'t Exist Any More'));
+
+                      return $this->redirect(Yii::$app->request->referrer);
+                 }
+    }
+
+    public function actionGetDiffBeforeDate($icsrId,$date,$versionNo)
+    {
+
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
+        if ($versionNo -1 <= 0 )
+        {
+            return ['diffs' =>  [] ,'fromVer' =>$versionNo, 'toVer' =>   Yii::t('app','First Export Version Have No Difference') ];
+        }
+
+        $dateTimeObj = new \DateTime($date);
+
+
+        $maxDateRange = $dateTimeObj->format('Y-m-d H:i:s');
+
+        $icsrObj = Icsr::findOne($icsrId);
+
+        $auditTrailObj = AuditTrailChild::find()->where(['model_id' => $icsrObj->id , 'action' => 'EXPORT' ])->andWhere(['<','created',$maxDateRange])->orderBy('created DESC')->one();
+
+        $minDateRange = isset($auditTrailObj->created) ? $auditTrailObj->created : '';
+
+        $diffArrOfObjs = $icsrObj->getIcsrTrails()->where(['between', 'created', $minDateRange, $maxDateRange ])->andWhere(['<>','action' ,'EXPORT'])->all();
+
+        return ['diffs' =>  $diffArrOfObjs ,'fromVer' =>$versionNo, 'toVer' =>   $versionNo - 1];
+
+
 
     }
 
