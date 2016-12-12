@@ -329,8 +329,6 @@ private function createExportFile ($icsrObj,$content)
 
         $dateTimeObj = new \DateTime($date);
 
-        //subtract 2 hours from the current time stamp
-        $dateTimeObj = $dateTimeObj->sub(new \DateInterval('PT2H'));
 
         $maxDateRange = $dateTimeObj->format('Y-m-d H:i:s');
 
