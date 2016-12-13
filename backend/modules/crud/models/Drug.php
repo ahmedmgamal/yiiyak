@@ -75,12 +75,14 @@ class Drug extends BaseDrug
             $ABCD = $AC+$BD;
             if($C > 0){
                 $PRR = ($A/ ($AB)) / ($C /($CD));
+                $SE = (1/$A + 1/$C - 1/$AB - 1/$CD);
+                $SE = sqrt($SE);
             }else{
                 $PRR = 99.9;
+                $SE = 0;
             }
 
-            $SE = (1/$A + 1/$C - 1/$AB - 1/$CD);
-            $SE = sqrt($SE);
+
             //95% confidence interval of the PRR : PRR / exp(1.96se)
             $confidence_1 = $PRR / (exp(1.96 * $SE));
             //95% confidence interval of the PRR : PRR * exp(1.96se)

@@ -232,7 +232,12 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                         <dt>PRR</dt>
                         <dd><?php echo $signal['PRR'];?>
                         </dd><dt>SE</dt>
-                        <dd><?php echo $signal['SE'];?></dd>
+                        <dd>
+                            <?php if($signal['SE'] <= 0){
+                                echo "No C to Calculate the confidence rate";
+                            }else{
+                                echo $signal['SE'];
+                            }?></dd>
                         </dd>
                     </dl>
                 </div>
