@@ -157,6 +157,17 @@ class DrugController extends Controller
 		}
 	}
 
+    public function actionExcelUpload(){
+
+	    $companyId = \Yii::$app->user->identity->company->id;
+        $model = new Drug;
+        if(\Yii::$app->request->isPost){
+        //Handle Excel Upload
+        }else{
+            return $this->render('upload',["model"=>$model]);
+        }
+
+    }
 
 	/**
 	 * Finds the Drug model based on its primary key value.
