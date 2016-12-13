@@ -37,7 +37,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="clearfix crud-navigation">
         <div class="pull-left">
             <?php echo Html::a('<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('app', 'New'), ['create'], ['class' => 'btn btn-success']) ?>
-            <?php echo Html::a('<span class="glyphicon glyphicon-list"></span> ' . Yii::t('app', 'summary tabulations'), ['summary-tabulation'], ['class' => 'btn btn-default']) ?>
         </div>
 
      </div>
