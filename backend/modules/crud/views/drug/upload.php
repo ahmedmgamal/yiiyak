@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
 echo Html::beginForm([Url::toRoute("drug/excel-upload")], 'post', ['enctype' => 'multipart/form-data']);
 ?>
         <div class="form-group">
-            <?php echo Html::fileInput("excel",null,[]);?>
+            <?php echo Html::fileInput("excel",null,['accept'=>'.xls ,.xlsx']);?>
         </div>
 <?php
 echo Html::submitButton(
