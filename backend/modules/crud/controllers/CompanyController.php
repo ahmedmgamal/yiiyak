@@ -9,6 +9,7 @@
 namespace backend\modules\crud\controllers;
 use Yii;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the class for controller "CompanyController".
@@ -51,67 +52,66 @@ class CompanyController extends \backend\modules\crud\controllers\base\CompanyCo
 
         $currentUserCompany = \Yii::$app->user->identity->company;
 
-       $companyDrugs = $currentUserCompany->getDrugs()->with([
 
-                    'icsrs' => function ($query) {
-                        $query->with(['icsrEvents']);
-                    }])->all();
+       $companyDrugs = $currentUserCompany->getDrugs()->with(['icsrs' ])->all();
 
         $drugsWithIcsrs = [];
+        $icsrsIds = [];
+
+
         foreach ($companyDrugs as $key => $obj)
         {
-            $formattedDrug = $this->formatDrug($obj);
-            $drugsWithIcsrs [] = $formattedDrug['drugsWithIcsrs'];
+
+            ArrayHelper::getColumn($obj->icsrs, function ($element) use (&$icsrsIds){
+                $icsrsIds [] = $element['id'];
+            });
+
+
+            $drugsWithIcsrs [] = ['name' => $obj->trade_name , 'y' => count($obj->icsrs)];
         }
 
+        $formattedMeddra = $this->formatLltAndPt($icsrsIds);
 
-        return $this->render('statistics',['drugsWithIcsrs' => $drugsWithIcsrs]);
+        return $this->render('statistics',
+                            [
+                                'drugsWithIcsrs' => $drugsWithIcsrs,
+                                'meddraLltWithIcsrs' => $formattedMeddra['meddraLltWithIcsrs'],
+                                'meddraPtWithIcsrs' => $formattedMeddra['meddraPtWithIcsrs']
+                            ]);
     }
 
 
-    private function formatDrug ($drugObj)
+
+
+    private function formatLltAndPt ($icsrsIdsArr)
     {
 
-        $drugsWithIcsrs = ['name' => $drugObj->trade_name , 'y' => count($drugObj->icsrs)];
+        return [
+                'meddraLltWithIcsrs' => $this->meddraQueryResult('meddra_llt_text',$icsrsIdsArr),
+                'meddraPtWithIcsrs' => $this->meddraQueryResult('meddra_pt_text',$icsrsIdsArr)
+               ];
 
-        // Ex ['Aglcouma' => ['name' => 'Aglcouma' , 'y' => 50]]
-        $meddraLltWithIcsrs = [];
-        //Ex ['Aglcouma' =>['icsr_id' => 5]]
-        $tempLltArr = [];
-        foreach ($drugObj->icsrs as $key1 => $icsrObj)
-        {
-
-            foreach ($icsrObj->icsrEvents as $key2 => $icsrEventObj)
-            {
-                if(isset($tempLltArr[$icsrEventObj->meddra_llt_text]['icsr_id'][$icsrObj->id]))
-                {
-
-                }
-                else
-                 {
-                     $tempLltArr[] = [$icsrEventObj->meddra_llt_text => ['icsr_id' => $icsrObj->id]];
-                    if (isset($meddraLltWithIcsrs[$icsrEventObj->meddra_llt_text]))
-                    {
-                        $meddraLltWithIcsrs[$icsrEventObj->meddra_llt_text]['y'] += 1;
-                    }
-
-                    else
-                        {
-                            $meddraLltWithIcsrs [$icsrEventObj->meddra_llt_text] = ['name' => $icsrEventObj->meddra_llt_text , 'y' => 1];
-                        }
-                 }
-
-
-            }
-
-
-
-
-        }
-
-//        print_r($meddraLltWithIcsrs);
-//        die();
-        return ['drugsWithIcsrs' => $drugsWithIcsrs];
 
     }
+
+    private function meddraQueryResult ($groupBy,$icsrsIdsArr) {
+
+        $query = new \yii\db\Query();
+
+      $objects =  $query->select(['`icsr_event`.`meddra_llt_text` as name','count(DISTINCT `icsr`.id) as y'])
+            ->from('icsr')
+            ->where(['icsr.id' => $icsrsIdsArr])
+            ->innerJoin('icsr_event','icsr.id = icsr_event.icsr_id')
+            ->groupBy('icsr_event.'.$groupBy)
+            ->all();
+
+       return  array_map(function ($element){
+           $element['y'] = (integer)$element['y'];
+           return $element;
+       } , $objects);
+
+    }
+
+
+
 }
