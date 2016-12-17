@@ -72,11 +72,13 @@ class CompanyController extends \backend\modules\crud\controllers\base\CompanyCo
 
         $formattedMeddra = $this->formatLltAndPt($icsrsIds);
 
+
         return $this->render('statistics',
                             [
                                 'drugsWithIcsrs' => $drugsWithIcsrs,
                                 'meddraLltWithIcsrs' => $formattedMeddra['meddraLltWithIcsrs'],
-                                'meddraPtWithIcsrs' => $formattedMeddra['meddraPtWithIcsrs']
+                                'meddraPtWithIcsrs' => $formattedMeddra['meddraPtWithIcsrs'],
+                                'icsrsPerMonth' => $this->icsrsPerMonthResult($icsrsIds)
                             ]);
     }
 
@@ -109,6 +111,29 @@ class CompanyController extends \backend\modules\crud\controllers\base\CompanyCo
            $element['y'] = (integer)$element['y'];
            return $element;
        } , $objects);
+
+    }
+
+    private function icsrsPerMonthResult ($icsrsIdsArr) {
+        $query = new \yii\db\Query();
+
+        $objects =  $query->select([' MONTHNAME(created_at) as monthName',' count(id) as icsrsNumbers'])
+            ->from('icsr')
+            ->where(['icsr.id' => $icsrsIdsArr])
+            ->groupBy('monthName')
+            ->orderBy('created_at ASC')
+            ->all();
+
+        $monthNames = [];
+        $icsrsNumbers = [];
+
+         array_map(function ($element) use (&$monthNames,&$icsrsNumbers){
+            $monthNames [] = $element['monthName'];
+            $icsrsNumbers [] = (integer)$element['icsrsNumbers'];
+
+        } , $objects);
+
+        return ['monthNames' => $monthNames ,'icsrsNumbers' => $icsrsNumbers] ;
 
     }
 

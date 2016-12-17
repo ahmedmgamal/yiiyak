@@ -42,7 +42,7 @@ echo Highcharts::widget([
         'chart' =>[
             'type' => 'pie'
         ],
-        'title' => ['text' => Yii::t('app','llt (Low Level Term)')],
+        'title' => ['text' => Yii::t('app','llt (Low Level Term) over icsrs')],
 
         'plotOptions' => [
 
@@ -77,7 +77,7 @@ echo Highcharts::widget([
                 'chart' =>[
                     'type' => 'pie'
                 ],
-                'title' => ['text' => Yii::t('app','pt (Prefered Term)')],
+                'title' => ['text' => Yii::t('app','pt (Prefered Term) over Icsrs')],
 
                 'plotOptions' => [
 
@@ -94,6 +94,29 @@ echo Highcharts::widget([
                         'data' => $meddraPtWithIcsrs
 
                     ],
+
+                ]
+            ]
+        ]);
+        ?>
+
+    </div>
+
+
+    <div class="col-md-6">
+        <?php
+
+        echo Highcharts::widget([
+            'options' => [
+                'title' => ['text' => Yii::t('app', 'Icsrs Per Month')],
+                'xAxis' => [
+                    'categories' =>  $icsrsPerMonth['monthNames']
+                ],
+                'yAxis' => [
+                    'title' => ['text' => 'Icsrs Number']
+                ],
+                'series' => [
+                    ['name' => 'Icsrs', 'data' =>$icsrsPerMonth['icsrsNumbers'] ]
 
                 ]
             ]
