@@ -124,4 +124,31 @@ echo Highcharts::widget([
         ?>
 
     </div>
+
+</div>
+<hr>
+
+<div class="row">
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading"><?= Yii::t('app','Company Summary');?></div>
+    <table class="table">
+        <tr>
+            <th>total number of</th>
+            <th><?= Yii::t('app','Users');?></th>
+            <th><?= Yii::t('app','Drugs');?></th>
+            <th><?= Yii::t('app','Icsrs');?></th>
+
+
+
+        </tr>
+        <tr>
+            <td></td>
+            <td><?=$totalUsers;?> <?= Yii::t('app','of') ?> <?= $limitsArr['user']['limit']?></td>
+            <td><?=$totalDrugs;?> <?= Yii::t('app','of') ?> <?= $limitsArr['drug']['limit']?></td>
+            <td><?= $totalIcsrs?></td>
+        </tr>
+
+    </table>
+</div>
 </div>

@@ -50,14 +50,13 @@ class CompanyController extends \backend\modules\crud\controllers\base\CompanyCo
             return $this->redirect(Yii::$app->request->referrer);
         }
 
-        $currentUserCompany = \Yii::$app->user->identity->company;
-
-
-       $companyDrugs = $currentUserCompany->getDrugs()->with(['icsrs' ])->all();
-
         $drugsWithIcsrs = [];
         $icsrsIds = [];
+        $limitsArr = [];
 
+        $currentUserCompany = \Yii::$app->user->identity->company;
+
+        $companyDrugs = $currentUserCompany->getDrugs()->with(['icsrs' ])->all();
 
         foreach ($companyDrugs as $key => $obj)
         {
@@ -66,9 +65,14 @@ class CompanyController extends \backend\modules\crud\controllers\base\CompanyCo
                 $icsrsIds [] = $element['id'];
             });
 
-
             $drugsWithIcsrs [] = ['name' => $obj->trade_name , 'y' => count($obj->icsrs)];
         }
+
+        foreach ($currentUserCompany->plan->getAllLimitsWithAmount() as $key => $value)
+        {
+            $limitsArr [$value['name']] = $value;
+        }
+
 
         $formattedMeddra = $this->formatLltAndPt($icsrsIds);
 
@@ -78,7 +82,12 @@ class CompanyController extends \backend\modules\crud\controllers\base\CompanyCo
                                 'drugsWithIcsrs' => $drugsWithIcsrs,
                                 'meddraLltWithIcsrs' => $formattedMeddra['meddraLltWithIcsrs'],
                                 'meddraPtWithIcsrs' => $formattedMeddra['meddraPtWithIcsrs'],
-                                'icsrsPerMonth' => $this->icsrsPerMonthResult($icsrsIds)
+                                'icsrsPerMonth' => $this->icsrsPerMonthResult($icsrsIds),
+                                'limitsArr' => $limitsArr,
+                                'totalUsers' => count($currentUserCompany->users),
+                                'totalDrugs' => count($companyDrugs),
+                                'totalIcsrs' => count($icsrsIds)
+
                             ]);
     }
 
