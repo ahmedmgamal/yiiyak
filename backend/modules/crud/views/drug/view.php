@@ -258,7 +258,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 
 			<a class="btn btn-success btn-xs" href="<?= Url::to(['/crud/prsu/create', 'drug_id' => $model->id])?>">
 
-				<span class="glyphicon glyphicon-plus"></span><?= Yii::t('app','New ').'Prsu'?>
+				<span class="glyphicon glyphicon-plus"></span><?= Yii::t('app','New ').'PBRER'?>
 			</a>
 
 		</div></div><?php Pjax::begin(['id'=>'pjax-Prsus', 'enableReplaceState'=> false, 'linkSelector'=>'#pjax-Prsus ul.pagination a, th a', 'clientOptions' => ['pjax:success'=>'function(){alert("yo")}']]) ?>
@@ -295,7 +295,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 				'version',
 				'version_description',
 				[
-					'label' => Yii::t('app','Download PRSU'),
+					'label' => Yii::t('app','Download PBRER'),
 					'format' => 'raw',
 					'value' => function ($model){
 						return '<a href=/crud/prsu/download-file?path='.substr($model->prsu_file_url,strpos($model->prsu_file_url,'/files')).'>'.Yii::t('app','Download').'</a>';
@@ -365,7 +365,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 
 			[
 				'content' => $this->blocks['Prsu'],
-				'label'   => '<small>PRSU <span class="badge badge-default">'.count($model->getPrsus()->asArray()->all()).'</span></small>',
+				'label'   => '<small>PBRER <span class="badge badge-default">'.count($model->getPrsus()->asArray()->all()).'</span></small>',
 				'active'  => false,
 			],
 

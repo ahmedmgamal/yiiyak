@@ -33,7 +33,7 @@ class Prsu extends BasePrsu
     public function attributeLabels()
     {
         return array_merge(parent::attributeLabels(),[
-            'prsuFile' => Yii::t('app',' upload PRSU version')
+            'prsuFile' => Yii::t('app',' upload PBRER version')
         ]);
     }
 
