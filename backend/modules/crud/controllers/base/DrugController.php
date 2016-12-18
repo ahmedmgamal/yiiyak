@@ -166,8 +166,14 @@ class DrugController extends Controller
         if(\Yii::$app->request->isPost){
             if($this->validateUploadedExcel()){
                 $excel =$_FILES['excel']['tmp_name'];
-                $data = \moonland\phpexcel\Excel::import($excel);
+                $data = \moonland\phpexcel\Excel::import($excel,[
+                    'setFirstRecordAsKeys' => true,
+                    'setIndexSheetByName' => true
+
+                ]);
+
                 $drugs = $this->createUploadData($data);
+
                 $result =$this->bulkInsert($drugs);
                 \Yii::$app->getSession()->addFlash('success', $result . " Records Uploaded successfully.");
                 return $this->redirect(['index']);
@@ -211,9 +217,21 @@ class DrugController extends Controller
     }
 
     private function createUploadData($data){
+        $drugs = [];
+        $firstKey = key($data);
+        if(gettype($firstKey) == "string"){
+            foreach ($data as $sheet){
+                $tem = $this->loadSheet($sheet);
+                $drugs = array_merge($drugs,$tem);
+            }
+        }else{
+            $drugs = $this->loadSheet($data);
+        }
+        return $drugs;
+    }
+    private function loadSheet($data){
         $companyId = \Yii::$app->user->identity->company->id;
         $LkpRoutes = LkpRoute::find()->all();
-        $drugs = [];
         foreach ($data as $record){
             $drugs[] = [
                 $record['Generic Name'],
@@ -227,7 +245,6 @@ class DrugController extends Controller
         }
         return $drugs;
     }
-
     private function bulkInsert($data){
        $result =  \Yii::$app->db
             ->createCommand()
