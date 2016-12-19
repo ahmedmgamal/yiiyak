@@ -2,6 +2,7 @@
     color: #b94a48;
 }
 
+
 .small-validating{
     color: #337ab7;
     display: none;
@@ -24,3 +25,12 @@
     color: red;
     display: none;
 }
+
+.fromVer{
+    color: #49af49;
+}
+
+.toVer{
+    color: red;
+}
+
