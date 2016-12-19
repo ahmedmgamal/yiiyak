@@ -61,6 +61,14 @@ AppAsset::register($this);
         if (\Yii::$app->user->can('/crud/drug/index') && !isset($userRole['admin'])){
             $menuItems [] =  ['label' => 'Products', 'url' => ['/crud/drug/index']];
         }
+        if (\Yii::$app->user->can('/crud/reports/summary-tabulation') && !isset($userRole['admin'])){
+            $menuItems [] =  [
+                'label' => 'Reports',
+                'items' => [
+                    ['label' => 'Summary Tabulation', 'url' => '/crud/drug/summary-tabulation'],
+                ]
+            ];
+        }
 
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')

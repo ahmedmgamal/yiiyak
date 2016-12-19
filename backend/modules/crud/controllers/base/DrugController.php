@@ -62,6 +62,10 @@ class DrugController extends Controller
 	 * @return mixed
 	 */
 	public function actionView($id) {
+        $model = $this->findModel($id);
+        $signalValues= $model->get_signalDetectionArray();
+
+
 		\Yii::$app->session['__crudReturnUrl'] = Url::previous();
 		Url::remember();
 		Tabs::rememberActiveState();
@@ -77,7 +81,8 @@ class DrugController extends Controller
                 'signaledDrugs' => $signaledDrugs,
                 'signaledIcsrs' => $signaledIcsrs,
                 'icsrSeachModel' => $icsrSeachModel,
-                'icsrDataProvider' => $icsrDataProvider
+                'icsrDataProvider' => $icsrDataProvider,
+                'signal_detection'=>$signalValues
 			]);
 	}
 

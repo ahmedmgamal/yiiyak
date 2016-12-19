@@ -163,7 +163,31 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 <?php Pjax::end() ?>
 <?php $this->endBlock() ?>
 
+    <?php
+        $this->beginBlock("signal_detection");
+    ?>
+    <?php
+         echo '<div class="table-responsive">' . \yii\grid\GridView::widget([
+                'dataProvider'=>new \yii\data\ArrayDataProvider([
+                    'allModels' => $signal_detection,
+                    'pagination' => [
+                        'pageSize' => 20,
+                    ],
+                    'sort' => [
+                        'attributes' => ['event_description'],
+                    ],
+                ]),
+                 'columns'=>[
+                     'event_description',
+                     'A','B','C','D'
 
+                 ]
+             ]);
+    ?>
+
+    <?php
+        $this->endBlock();
+    ?>
     <?php echo Tabs::widget(
 	[
 		'id' => 'relation-tabs',
@@ -172,11 +196,18 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 				'label'   => '<b class=""># '.$model->trade_name. '</b>',
 				'content' => $this->blocks['backend\modules\crud\models\Drug'],
 				'active'  => true,
-			],  [
+			],
+            [
 				'content' => $this->blocks['Icsrs'],
 				'label'   => '<small>Icsrs <span class="badge badge-default">'.count($model->getIcsrs()->asArray()->all()).'</span></small>',
 				'active'  => false,
-			], ]
+			],
+            [
+                'content' => $this->blocks['signal_detection'],
+                'label'   => '<small>Signal Detection </small>',
+                'active'  => false,
+            ],
+        ]
 	]
 );
 ?>
