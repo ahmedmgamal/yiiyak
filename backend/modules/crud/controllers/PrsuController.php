@@ -21,7 +21,7 @@ class PrsuController extends \backend\modules\crud\controllers\base\PrsuControll
         {
             $model->prsuAck =  UploadedFile::getInstance($model, 'prsuAck');
             $model->ack_created_by = \Yii::$app->user->identity->id;
-            $model->ack_created_at = date('Y-m-d H:i:s',strtotime('+2 hours'));
+            $model->ack_created_at = date('Y-m-d H:i:s',strtotime('now'));
             $model->prsuFile = UploadedFile::getInstance($model, 'prsuAck');
 
             $uploadResult = $model->uploadAck();

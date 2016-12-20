@@ -22,7 +22,7 @@ class RmpController extends \backend\modules\crud\controllers\base\RmpController
         {
             $model->rmpAck =  UploadedFile::getInstance($model, 'rmpAck');
             $model->ack_created_by = \Yii::$app->user->identity->id;
-            $model->ack_created_at = date('Y-m-d H:i:s',strtotime('+2 hours'));
+            $model->ack_created_at = date('Y-m-d H:i:s',strtotime('now'));
             $model->rmpFile = UploadedFile::getInstance($model, 'rmpAck');
 
             $uploadResult = $model->uploadAck();
