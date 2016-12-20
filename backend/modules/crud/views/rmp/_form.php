@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use \dmstr\bootstrap\Tabs;
 use yii\helpers\StringHelper;
+use yii\jui\DatePicker;
 
 /**
 * @var yii\web\View $this
@@ -35,6 +36,7 @@ use yii\helpers\StringHelper;
 			<?= $form->field($model, 'version')->textInput(['maxlength' => true]) ?>
 			<?= $form->field($model, 'version_description')->textInput(['maxlength' => true]) ?>
 			<?= $form->field($model, 'rmpFile')->fileInput() ?>
+            <?= $form->field($model,'next_rmp_date')->widget(DatePicker::className(),['dateFormat' => 'yyyy-MM-dd','clientOptions' => ['minDate' => date('Y-m-d') , 'changeYear'=>'true' ,  'changeMonth'=>'true' , 'yearRange' => '+0:+50']]);?>
 
             <?php }?>
 

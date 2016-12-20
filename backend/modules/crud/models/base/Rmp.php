@@ -41,10 +41,11 @@ abstract class Rmp extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['drug_id', 'rmp_created_by','rmp_file_url','version'], 'required'],
+            [['drug_id', 'rmp_created_by','rmp_file_url','version','next_rmp_date'], 'required'],
             [['drug_id', 'rmp_created_by', 'ack_created_by'], 'integer'],
             [['version'], 'number'],
             [['rmp_created_at', 'ack_created_at'], 'safe'],
+            [['next_rmp_date'],'date','format' => 'php:Y-m-d'],
             [['version_description', 'rmp_file_url', 'ack_file_url'], 'string', 'max' => 255],
             [['drug_id'], 'exist', 'skipOnError' => true, 'targetClass' => Drug::className(), 'targetAttribute' => ['drug_id' => 'id']],
             [['rmp_created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['rmp_created_by' => 'id']]
@@ -67,6 +68,8 @@ abstract class Rmp extends \yii\db\ActiveRecord
             'rmp_created_at' => 'Rmp Created At',
             'ack_created_by' => 'Letter Header Created By',
             'ack_created_at' => 'Letter Header Created At',
+            'next_rmp_date' => 'Next Submission Date',
+
         ];
     }
 

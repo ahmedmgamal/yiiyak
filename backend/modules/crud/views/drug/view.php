@@ -241,7 +241,8 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 					}
 				],
 
-				'ack_created_at'
+				'ack_created_at',
+				'next_rmp_date'
 			]
 		]) . '</div>' ?>
 	<?php Pjax::end() ?>
