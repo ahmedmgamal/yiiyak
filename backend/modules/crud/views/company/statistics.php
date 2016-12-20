@@ -1,6 +1,6 @@
 <?php
 use miloschuman\highcharts\Highcharts;
-
+$this->title = Yii::t('app','Statistics');
 ?>
 <div class="row">
 <div class="col-md-6">
@@ -151,4 +151,36 @@ echo Highcharts::widget([
 
     </table>
 </div>
+</div>
+
+<hr>
+
+<div class="row">
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading"><?= Yii::t('app','Products Important Dates');?></div>
+        <table class="table">
+            <tr>
+
+                <th><?= Yii::t('app','Generic Name');?></th>
+                <th><?= Yii::t('app','Trade Name');?></th>
+                <th><?= Yii::t('app','Next PBRER Date');?></th>
+                <th><?= Yii::t('app','Next RMP Date');?></th>
+
+
+
+
+            </tr>
+
+            <?php foreach ($companyDrugs as $key => $obj)
+            {?>
+            <tr>
+                <td><?= $obj->generic_name?></td>
+                <td><?= $obj->trade_name?></td>
+                <td><?= $obj->next_prsu_date?></td>
+            </tr>
+            <?php }?>
+
+        </table>
+    </div>
 </div>

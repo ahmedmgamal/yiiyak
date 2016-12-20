@@ -86,7 +86,8 @@ class CompanyController extends \backend\modules\crud\controllers\base\CompanyCo
                                 'limitsArr' => $limitsArr,
                                 'totalUsers' => count($currentUserCompany->users),
                                 'totalDrugs' => count($companyDrugs),
-                                'totalIcsrs' => count($icsrsIds)
+                                'totalIcsrs' => count($icsrsIds),
+                                'companyDrugs' => $companyDrugs
 
                             ]);
     }
