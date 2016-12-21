@@ -177,8 +177,7 @@ echo Highcharts::widget([
             <tr>
                 <td><?= $obj->generic_name?></td>
                 <td><?= $obj->trade_name?></td>
-                <td><? //$obj->next_prsu_date?></td>
-                <td><?// $obj->rmp_first_deadline?></td>
+
             </tr>
             <?php }?>
 
