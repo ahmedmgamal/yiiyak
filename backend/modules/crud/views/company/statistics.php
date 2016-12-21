@@ -165,7 +165,7 @@ echo Highcharts::widget([
                 <th><?= Yii::t('app','Generic Name');?></th>
                 <th><?= Yii::t('app','Trade Name');?></th>
                 <th><?= Yii::t('app','Next PBRER Date');?></th>
-                <th><?= Yii::t('app','Next RMP Date');?></th>
+                <th><?= Yii::t('app','RMP First Deadline');?></th>
 
 
 
@@ -178,6 +178,7 @@ echo Highcharts::widget([
                 <td><?= $obj->generic_name?></td>
                 <td><?= $obj->trade_name?></td>
                 <td><?= $obj->next_prsu_date?></td>
+                <td><?= $obj->rmp_first_deadline?></td>
             </tr>
             <?php }?>
 
