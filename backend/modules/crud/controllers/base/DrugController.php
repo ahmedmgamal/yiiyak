@@ -178,7 +178,7 @@ class DrugController extends Controller
                 \Yii::$app->getSession()->addFlash('success', $result . " Records Uploaded successfully.");
                 return $this->redirect(['index']);
             }else{
-                \Yii::$app->getSession()->addFlash('error', "Invalid Excel File.");
+                \Yii::$app->getSession()->addFlash('error',\Yii::t("app","Invalid Excel File.") );
                 return $this->render('upload',["model"=>$model]);
             }
         }else{
