@@ -13,6 +13,7 @@ namespace backend\modules\crud\controllers\base;
 
 use backend\modules\crud\models\Company;
 use backend\modules\crud\models\search\Company as CompanySearch;
+use Yii;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\helpers\Url;
@@ -178,6 +179,11 @@ class CompanyController extends Controller
 			throw new HttpException(404, 'The requested page does not exist.');
 		}
 	}
+
+	public function actionFullExport(){
+        $companyId = Yii::$app->user->identity->getCompany()->one()->id;
+
+    }
 
 
 }

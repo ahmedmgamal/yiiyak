@@ -26,6 +26,11 @@ class CompanyController extends \backend\modules\crud\controllers\base\CompanyCo
                 'rules' => [
                     [
                         'allow' => true,
+                        'actions' => ['full-export'],
+                        'roles' => ['normalUser'],
+                    ],
+                    [
+                        'allow' => true,
                         'roles' => ['admin'],
                     ],
 

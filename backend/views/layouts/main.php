@@ -69,6 +69,15 @@ AppAsset::register($this);
                 ]
             ];
         }
+        if (\Yii::$app->user->can('/crud/company/admin') && !isset($userRole['admin'])){
+            $menuItems [] =  [
+                'label' => 'Admin',
+                'items' => [
+                    ['label' => 'Full Export', 'url' => '/crud/company/full-export'],
+                    ['label' => 'Manage users', 'url' => '#'],
+                ]
+            ];
+        }
 
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
