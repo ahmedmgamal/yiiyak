@@ -9,6 +9,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use \dmstr\bootstrap\Tabs;
+use yii\jui\DatePicker;
 
 /**
  *
@@ -46,7 +47,9 @@ $form->field($model, 'route_lkp_id')->dropDownList(
 ); ?>
 
 			<?php echo $form->field($model, 'manufacturer')->textInput(['maxlength' => true]) ?>
-        </p>
+			<?= $form->field($model,'rmp_first_deadline')->widget(DatePicker::className(),['dateFormat' => 'yyyy-MM-dd','clientOptions' => ['minDate' => date('Y-m-d') , 'changeYear'=>'true' ,  'changeMonth'=>'true' , 'yearRange' => '+0:+50']]);?>
+
+		</p>
         <?php $this->endBlock(); ?>
 
         <?php echo

@@ -43,7 +43,7 @@ use yii\jui\DatePicker;
             <?php if (isset($model->rmp_file_url) && !empty($model->rmp_file_url))
             {?>
 
-			<?= $form->field($model, 'ack_file_url')->fileInput() ?>
+                <?= $form->field($model,'next_rmp_date')->widget(DatePicker::className(),['dateFormat' => 'yyyy-MM-dd','clientOptions' => ['minDate' => date('Y-m-d') , 'changeYear'=>'true' ,  'changeMonth'=>'true' , 'yearRange' => '+0:+50']]);?>
 
             <?php } ?>
 

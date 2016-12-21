@@ -5,6 +5,7 @@
 namespace backend\modules\crud\controllers\base;
 
 use backend\modules\crud\models\Rmp;
+use yii\helpers\BaseStringHelper;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\helpers\Url;
@@ -69,13 +70,14 @@ public $enableCsrfValidation = false;
     public function actionCreate($drug_id)
     {
         $model = new Rmp;
-
+        $model->scenario = 'create';
         try {
             if ($model->load($_POST) ) {
+
                 $model->drug_id = $drug_id;
                 $model->rmp_created_by = \Yii::$app->user->identity->id;
                 $model->rmpFile = UploadedFile::getInstance($model, 'rmpFile');
-                $model->rmp_created_at = date('Y-m-d H:i:s',strtotime('+2 hours'));
+                $model->rmp_created_at = date('Y-m-d H:i:s',strtotime('now'));
 
                 if (!$model->uploadReport())
                 {
@@ -107,13 +109,16 @@ public $enableCsrfValidation = false;
     {
         $model = $this->findModel($id);
 
-        if ($model->load($_POST) && $model->save()) {
-            return $this->redirect(Url::previous());
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+        if ($model->load($_POST)  ) {
+
+               if ( $model->save())
+                return $this->redirect(Url::previous());
+
         }
+
+        return $this->render('update', [
+            'model' => $model,
+        ]);
     }
 
     /**

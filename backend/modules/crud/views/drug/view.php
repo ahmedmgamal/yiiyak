@@ -186,7 +186,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 			],
 			'columns' => [[
 				'class'      => 'yii\grid\ActionColumn',
-				'template'   => '{view}',
+				'template'   => '{view} {update}',
 				'contentOptions' => ['nowrap'=>'nowrap'],
 
 				/**

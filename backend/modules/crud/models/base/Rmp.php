@@ -41,7 +41,7 @@ abstract class Rmp extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['drug_id', 'rmp_created_by','rmp_file_url','version','next_rmp_date'], 'required'],
+            [['drug_id', 'rmp_created_by','rmp_file_url','version'], 'required'],
             [['drug_id', 'rmp_created_by', 'ack_created_by'], 'integer'],
             [['version'], 'number'],
             [['rmp_created_at', 'ack_created_at'], 'safe'],
