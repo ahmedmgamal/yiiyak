@@ -42,8 +42,10 @@ use \dmstr\bootstrap\Tabs;
 			}
 			?>
 			<?php echo $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
-            <?php echo $form->field($model,'company_id')->dropDownList(ArrayHelper::map($model->getAllCompanies(),'id','name'),['options'=>[$company_id=>['Selected'=>true]]]); ?>
 
+			<?php if (isset(\Yii::$app->authManager->getRolesByUser(\Yii::$app->user->id)['admin'])) {?>
+			<?php echo $form->field($model,'company_id')->dropDownList(ArrayHelper::map($model->getAllCompanies(),'id','name'),['options'=>[$company_id=>['Selected'=>true]]]); ?>
+			<?php }?>
         </p>
         <?php $this->endBlock(); ?>
 
