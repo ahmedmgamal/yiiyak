@@ -12,7 +12,10 @@
 namespace backend\modules\crud\controllers\base;
 
 use backend\modules\crud\models\Company;
+use backend\modules\crud\models\Drug;
 use backend\modules\crud\models\search\Company as CompanySearch;
+use Faker\Provider\cs_CZ\DateTime;
+use mPDF;
 use Yii;
 use yii\web\Controller;
 use yii\web\HttpException;
@@ -181,8 +184,30 @@ class CompanyController extends Controller
 	}
 
 	public function actionFullExport(){
-        $companyId = Yii::$app->user->identity->getCompany()->one()->id;
+        $company = Yii::$app->user->identity->getCompany()->one();
+        $drugs = $company->drugs;
 
+        $mpdf = new mPDF();
+        $mpdf->Bookmark('Company');
+
+        $companyHtml = $this->generateCompanyHtml($company);
+        $mpdf->WriteHTML($companyHtml);
+        $mpdf->AddPage();
+        $mpdf->Bookmark('Drugs');
+        $mpdf->WriteHTML("drugs");
+        $mpdf->Output();
+
+    }
+    private function generateCompanyHtml($company){
+        $companyDate = date_create($company->end_date);
+	    $html = "<div>";
+        $html .= "<div style='width: 100%;text-align: center;'><img src='{$company->license_image_url}' width='150px' height='150px' /></div>";
+        $html .= "<h2><strong>Company Name:</strong> ".$company->name."</h2>";
+        $html .= "<p><strong>Company Short Name:</strong> ".$company->name."</p>";
+        $html .= "<p><strong>License No#:</strong> ".$company->license_no."</p>";
+        $html .= "<p><strong>End Date:</strong> ".date_format($companyDate,'d-m-Y') ."</p>";
+        $html .="<p><strong>Address:</strong> ".$company->adderess."</p>";
+        return $html;
     }
 
 

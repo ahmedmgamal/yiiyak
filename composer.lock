@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6bfabe00ca839482cc90745417e040a0",
-    "content-hash": "929b04ba8071ce6bebbbeb680c9e5c1f",
+    "hash": "40ea9ec570ae3198dfe5f99c5c1687e7",
+    "content-hash": "278e66e9a4cdb09635b61686f0c1ae75",
     "packages": [
         {
             "name": "2amigos/yii2-chartjs-widget",
@@ -1340,12 +1340,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/mpdf/mpdf.git",
-                "reference": "da078bc2669d3f98553ac41f920ead4c17c951ad"
+                "reference": "7f138bf7508eac895ac2c13d2509b056ac7e7e97"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mpdf/mpdf/zipball/da078bc2669d3f98553ac41f920ead4c17c951ad",
-                "reference": "da078bc2669d3f98553ac41f920ead4c17c951ad",
+                "url": "https://api.github.com/repos/mpdf/mpdf/zipball/7f138bf7508eac895ac2c13d2509b056ac7e7e97",
+                "reference": "7f138bf7508eac895ac2c13d2509b056ac7e7e97",
                 "shasum": ""
             },
             "require": {
@@ -1383,7 +1383,7 @@
                 "php",
                 "utf-8"
             ],
-            "time": "2016-07-20 12:31:58"
+            "time": "2016-12-12 10:42:18"
         },
         {
             "name": "phpspec/php-diff",
@@ -1524,16 +1524,16 @@
         },
         {
             "name": "robregonm/yii2-pdf",
-            "version": "dev-master",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/robregonm/yii2-pdf.git",
-                "reference": "4ef2951e8eab220cfb6500ac630a845adeaa3036"
+                "reference": "0702997518ae58675a918924183585d25a47d604"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/robregonm/yii2-pdf/zipball/4ef2951e8eab220cfb6500ac630a845adeaa3036",
-                "reference": "4ef2951e8eab220cfb6500ac630a845adeaa3036",
+                "url": "https://api.github.com/repos/robregonm/yii2-pdf/zipball/0702997518ae58675a918924183585d25a47d604",
+                "reference": "0702997518ae58675a918924183585d25a47d604",
                 "shasum": ""
             },
             "require": {
@@ -1570,7 +1570,7 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2015-03-04 10:55:42"
+            "time": "2015-01-15 18:10:47"
         },
         {
             "name": "schmunk42/retry",
