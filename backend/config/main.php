@@ -89,7 +89,7 @@ $config = [
         ],
          'authManager' => [
             'class' => 'yii\rbac\DbManager',
-            'defaultRoles' => ['normalUser'],
+            'defaultRoles' => ['Qppv Person'],
         ],
         'urlManager' => [
             'class' => 'yii\web\UrlManager',
