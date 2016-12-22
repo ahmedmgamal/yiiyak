@@ -31,6 +31,7 @@ class m161222_131257_add_qppv_person_role extends Migration
       ('Qppv Person','/site/landing'),
       ('Qppv Person','/site/login'),
       ('Qppv Person','/site/logout'),
+      ('Qppv Person','/site/send-mail'),
       ('Qppv Person','/site/request-password-reset'),
       ('Qppv Person','/site/reset-password');
       ");
