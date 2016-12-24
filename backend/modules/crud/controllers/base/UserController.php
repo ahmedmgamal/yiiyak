@@ -144,6 +144,25 @@ class UserController extends Controller
 		$model = $this->findModel($id);
         $roles = Yii::$app->params['Roles'];
 		if ($model->load($_POST) && $model->save()) {
+
+		    $roleName = \Yii::$app->request->post('role_name');
+            $connection = \Yii::$app->db;
+            $transaction = $connection->beginTransaction();
+
+            if(!in_array($roleName,$roles)) {
+                $roleName = 'Qppv Person';
+            }
+
+            if (!$model->updateRole($model->id,$roleName))
+            {
+                $transaction->rollBack();
+                \Yii::$app->getSession()->setFlash('error', \Yii::t('app',"Can't Update User Role "));
+                return $this->redirect(Url::previous());
+            }
+
+
+            $transaction->commit();
+
 			return $this->redirect(Url::previous());
 		} else {
 			return $this->render('update', [

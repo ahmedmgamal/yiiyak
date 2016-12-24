@@ -18,7 +18,10 @@ use \dmstr\bootstrap\Tabs;
  * @var yii\widgets\ActiveForm $form
  */
 ?>
-<?php $company_id = isset($_GET['Company']['company_id']) ? $_GET['Company']['company_id'] : 0;  ?>
+<?php $company_id = isset($_GET['Company']['company_id']) ? $_GET['Company']['company_id'] : 0;
+	  $createdUserRole = isset($model->id) ? $model->getRole($model->id)['item_name'] : 0;
+
+?>
 <div class="user-form">
 
     <?php $form = ActiveForm::begin([
@@ -48,7 +51,9 @@ use \dmstr\bootstrap\Tabs;
             <div class="col-sm-6">
                 <select id="role_name" class="form-control" name="role_name">
                     <?php foreach ($roles as $key => $value){?>
-                    <option value="<?= $value?>"><?= Yii::t('app',$value)?></option>
+                    <option value="<?= $value?>" <?php if($value == $createdUserRole) echo 'selected';?> >
+						<?= Yii::t('app',$value)?>
+						</option>
                     <?php }?>
                 </select>
             </div>
