@@ -81,6 +81,10 @@ return [
         'reactionoutcome' => [1 => 'recovered/resolved' , 2 => 'recovering/resolving' , 3 => 'not recovered/not resolved' , 4 => 'recovered/resolved with sequelae' , 5 => 'fatal' , 6 => 'unknown'],
         'drugcharacterization' => [1 => 'Suspect' , 2 => 'Concomitant' , 3 => 'Interacting'],
 
+    ],
+
+    'Roles' =>[
+        'Manager' , 'Qppv Deputy','Qppv Person'
     ]
 
 ];

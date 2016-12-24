@@ -6,6 +6,7 @@ namespace backend\modules\crud\models\base;
 
 use kartik\password\StrengthValidator;
 use Yii;
+use yii\db\Query;
 
 /**
  * This is the base-model class for table "user".
@@ -135,6 +136,36 @@ abstract class User extends \yii\db\ActiveRecord
     }
 
 
+    public function getRole ($user_id)
+    {
+
+        $query = new Query;
+
+       return $query->select('item_name')
+              ->from('auth_assignment')
+              ->where(['user_id' => $user_id])
+              ->one();
+
+    }
+
+    public function setRole ($user_id,$roleName)
+    {
+
+        return \Yii::$app->db->createCommand()->insert('auth_assignment',
+                            ['user_id' => $user_id,'item_name' => $roleName]
+                            )->execute();
+    }
+
+    public function updateRole ($user_id,$roleName)
+    {
+        if ($roleName == $this->getRole($user_id)['item_name'])
+            return 1;
+
+        return \Yii::$app->db->createCommand()->update('auth_assignment',
+
+                    ['item_name' => $roleName] , 'user_id = '.$user_id
+            )->execute();
+    }
     
     /**
      * @inheritdoc

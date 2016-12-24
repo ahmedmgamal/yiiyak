@@ -24,8 +24,20 @@ class m161224_161957_add_manager_role extends Migration
       ('Manager','/crud/user/index'),
       ('Manager','/crud/user/view'),
       ('Manager','/crud/user/update'),
-      ('Manager','/crud/user/create');
-      
+      ('Manager','/crud/user/create'),
+      ('Manager','/crud/drug-prescription/create'),
+      ('Manager','/crud/drug-prescription/update'),
+      ('Manager','/crud/drug/create'),
+      ('Manager','/crud/drug/update'),
+      ('Manager','/crud/icsr-event/create'),
+      ('Manager','/crud/icsr-event/update'),
+      ('Manager','/crud/icsr-reporter/create'),
+      ('Manager','/crud/icsr-reporter/update'),
+      ('Manager','/crud/icsr-test/create'),
+      ('Manager','/crud/icsr-test/update'),
+      ('Manager','/crud/icsr/create'),
+      ('Manager','/crud/icsr/update'),
+      ('Manager','/crud/icsr/check-duplicate-icsr');
       ");
 
 

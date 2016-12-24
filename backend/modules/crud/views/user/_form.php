@@ -43,6 +43,18 @@ use \dmstr\bootstrap\Tabs;
 			?>
 			<?php echo $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
+        <div class="form-group field-role_name required">
+            <label class="control-label col-sm-3" for="role_name"><?= Yii::t('app','Role')?></label>
+            <div class="col-sm-6">
+                <select id="role_name" class="form-control" name="role_name">
+                    <?php foreach ($roles as $key => $value){?>
+                    <option value="<?= $value?>"><?= Yii::t('app',$value)?></option>
+                    <?php }?>
+                </select>
+            </div>
+
+        </div>
+
 			<?php if (isset(\Yii::$app->authManager->getRolesByUser(\Yii::$app->user->id)['admin'])) {?>
 			<?php echo $form->field($model,'company_id')->dropDownList(ArrayHelper::map($model->getAllCompanies(),'id','name'),['options'=>[$company_id=>['Selected'=>true]]]); ?>
 			<?php }?>
