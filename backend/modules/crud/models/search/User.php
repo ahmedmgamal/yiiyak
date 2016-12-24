@@ -51,7 +51,15 @@ class User extends UserModel
 	 * @return ActiveDataProvider
 	 */
 	public function search($params) {
+        $userRole = \Yii::$app->authManager->getRolesByUser(\Yii::$app->user->id);
+
 		$query = UserModel::find();
+
+
+        if (isset($userRole['Manager']))
+        {
+            $query = UserModel::find()->where(['company_id' => \Yii::$app->user->identity->company_id]);
+        }
 
 		$dataProvider = new ActiveDataProvider([
 				'query' => $query,
