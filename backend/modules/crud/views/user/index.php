@@ -95,6 +95,13 @@ $this->params['breadcrumbs'][] = $this->title;
 					return $model->company->name;
 				}
 			}
+			],
+			[
+			'label' => Yii::t('app','Role'),
+			'value' => function ($model){
+				$role = $model->getRole($model->id);
+				return isset($role) ? $role : Yii::t('app','Not Set');
+			}
 			]
 
 		],

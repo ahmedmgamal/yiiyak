@@ -144,7 +144,7 @@ abstract class User extends \yii\db\ActiveRecord
        return $query->select('item_name')
               ->from('auth_assignment')
               ->where(['user_id' => $user_id])
-              ->one();
+              ->one()['item_name'];
 
     }
 
@@ -158,7 +158,7 @@ abstract class User extends \yii\db\ActiveRecord
 
     public function updateRole ($user_id,$roleName)
     {
-        if ($roleName == $this->getRole($user_id)['item_name'])
+        if ($roleName == $this->getRole($user_id))
             return 1;
 
         return \Yii::$app->db->createCommand()->update('auth_assignment',

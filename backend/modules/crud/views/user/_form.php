@@ -19,7 +19,7 @@ use \dmstr\bootstrap\Tabs;
  */
 ?>
 <?php $company_id = isset($_GET['Company']['company_id']) ? $_GET['Company']['company_id'] : 0;
-	  $createdUserRole = isset($model->id) ? $model->getRole($model->id)['item_name'] : 0;
+	  $createdUserRole = isset($model->id) ? $model->getRole($model->id): 0;
 
 ?>
 <div class="user-form">
