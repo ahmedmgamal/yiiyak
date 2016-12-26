@@ -39,6 +39,9 @@ $config = [
     ],
 
     'components' => [
+        'helpers' => [
+            'class' => 'backend\components\HelpersComponent',
+        ],
 
         'response' => [
             'formatters' => [
