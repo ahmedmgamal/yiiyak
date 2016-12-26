@@ -19,6 +19,10 @@ use yii\grid\GridView;
  */
 $this->title = $searchModel->getAliasModel(true);
 $this->params['breadcrumbs'][] = $this->title;
+
+$helpers = Yii::$app->helpers;
+$updateButton = ( $helpers->currentUserCan('/crud/icsr/update')) ? '{update}' : '';
+
 ?>
 
 <div class="giiant-crud drug-index">
@@ -34,12 +38,14 @@ $this->params['breadcrumbs'][] = $this->title;
             List
         </small>
     </h1>
+	<?php if ($helpers->currentUserCan('/crud/drug/new')) { ?>
     <div class="clearfix crud-navigation">
         <div class="pull-left">
             <?php echo Html::a('<span class="glyphicon glyphicon-plus"></span>' . Yii::t('app', 'New'), ['create'], ['class' => 'btn btn-success']) ?>
         </div>
 
      </div>
+	<?php } ?>
 
 
     <div class="table-responsive">
@@ -57,7 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 			[
 				'class' => 'yii\grid\ActionColumn',
-				'template' => '{view} {update} {signal}',
+				'template' => '{view}'.$updateButton.' {signal}',
 				'urlCreator' => function($action, $model, $key, $index) {
 					// using the column name as key, not mapping to 'id' like the standard generator
 					$params = is_array($key) ? $key : [$model->primaryKey()[0] => (string) $key];
