@@ -161,6 +161,11 @@ abstract class User extends \yii\db\ActiveRecord
         if ($roleName == $this->getRole($user_id))
             return 1;
 
+        if ($this->getRole($user_id) == null)
+        {
+            return $this->setRole($user_id,$roleName);
+        }
+
         return \Yii::$app->db->createCommand()->update('auth_assignment',
 
                     ['item_name' => $roleName] , 'user_id = '.$user_id
