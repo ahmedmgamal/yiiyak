@@ -33,7 +33,13 @@ class m161222_131257_add_qppv_person_role extends Migration
       ('Qppv Person','/site/logout'),
       ('Qppv Person','/site/send-mail'),
       ('Qppv Person','/site/request-password-reset'),
-      ('Qppv Person','/site/reset-password');
+      ('Qppv Person','/site/reset-password'),
+      ('Qppv Person','/crud/drug/summary-tabulation'),
+      ('Qppv Person','/crud/reports/summary-tabulation'),
+      ('Qppv Person','/crud/icsr/open-pdf'),
+      ('Qppv Person','/crud/icsr/download-xml-file'),
+      ('Qppv Person','/crud/icsr/get-diff-before-date');
+      
       ");
 
 
