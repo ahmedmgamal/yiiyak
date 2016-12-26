@@ -11,7 +11,6 @@ class m161222_131257_add_qppv_person_role extends Migration
 
       ('Qppv Person',1),
       ('/crud/icsr/get-diff-before-date',2),
-      ('/crud/reports/summary-tabulation',2),
       ('/crud/drug/summary-tabulation',2),
       ('/crud/icsr/open-pdf',2),
       ('/crud/icsr/download-xml-file',2),
