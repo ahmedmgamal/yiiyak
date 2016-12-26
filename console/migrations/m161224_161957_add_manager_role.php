@@ -6,7 +6,13 @@ class m161224_161957_add_manager_role extends Migration
 {
     public function up()
     {
-        $this->execute("INSERT INTO auth_item (name,type) VALUES('Manager',1)");
+        $this->execute("INSERT INTO auth_item (name,type) VALUES 
+        ('Manager',1),
+        ('/crud/icsr/download-dtd',2);
+        
+        
+        
+        ");
 
         $this->execute("INSERT INTO auth_item_child(parent,child) VALUES
 
