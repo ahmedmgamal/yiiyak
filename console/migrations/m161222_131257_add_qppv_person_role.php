@@ -7,7 +7,22 @@ class m161222_131257_add_qppv_person_role extends Migration
     public function up()
     {
 
-        $this->execute("INSERT INTO auth_item (name,type) VALUES('Qppv Person',1)");
+        $this->execute("INSERT INTO auth_item (name,type) VALUES 
+
+      ('Qppv Person',1),
+      ('/crud/icsr/get-diff-before-date',2),
+      ('/crud/reports/summary-tabulation',2),
+      ('/crud/reports/summary-tabulation',2),
+      ('/crud/icsr/open-pdf',2),
+      ('/crud/icsr/download-xml-file',2),
+      ('/site/request-password-reset',2),
+      ('/site/reset-password',2),
+      ('/crud/icsr-event/get-first-lt-from-pt',2),
+      ('/crud/icsr-event/get-pt-from-lt',2),
+      ('/crud/icsr-event/search-llt',2),
+      ('/crud/icsr-event/search-pt',2);
+      ");
+
         $this->execute("INSERT INTO auth_item_child(parent,child) VALUES
 
       ('Qppv Person','/crud/drug-prescription/index'),
