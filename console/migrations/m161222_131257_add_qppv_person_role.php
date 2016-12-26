@@ -19,7 +19,8 @@ class m161222_131257_add_qppv_person_role extends Migration
       ('/crud/icsr-event/get-first-lt-from-pt',2),
       ('/crud/icsr-event/get-pt-from-lt',2),
       ('/crud/icsr-event/search-llt',2),
-      ('/crud/icsr-event/search-pt',2);
+      ('/crud/icsr-event/search-pt',2),
+      ('/crud/icsr-event/search',2);
       ");
 
         $this->execute("INSERT INTO auth_item_child(parent,child) VALUES
