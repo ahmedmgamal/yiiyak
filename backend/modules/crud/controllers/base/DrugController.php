@@ -161,29 +161,34 @@ class DrugController extends Controller
 	}
 
     public function actionExcelUpload(){
+        try{
+            $model = new Drug;
+            if(\Yii::$app->request->isPost){
+                if($this->validateUploadedExcel()){
+                    $excel =$_FILES['excel']['tmp_name'];
+                    $data = \moonland\phpexcel\Excel::import($excel,[
+                        'setFirstRecordAsKeys' => true,
+                        'setIndexSheetByName' => true
 
-        $model = new Drug;
-        if(\Yii::$app->request->isPost){
-            if($this->validateUploadedExcel()){
-                $excel =$_FILES['excel']['tmp_name'];
-                $data = \moonland\phpexcel\Excel::import($excel,[
-                    'setFirstRecordAsKeys' => true,
-                    'setIndexSheetByName' => true
+                    ]);
 
-                ]);
+                    $drugs = $this->createUploadData($data);
 
-                $drugs = $this->createUploadData($data);
-
-                $result =$this->bulkInsert($drugs);
-                \Yii::$app->getSession()->addFlash('success', $result . " Records Uploaded successfully.");
-                return $this->redirect(['index']);
+                    $result =$this->bulkInsert($drugs);
+                    \Yii::$app->getSession()->addFlash('success', $result . " Records Uploaded successfully.");
+                    return $this->redirect(['index']);
+                }else{
+                    \Yii::$app->getSession()->addFlash('error',\Yii::t("app","Invalid Excel File.") );
+                    return $this->render('upload',["model"=>$model]);
+                }
             }else{
-                \Yii::$app->getSession()->addFlash('error',\Yii::t("app","Invalid Excel File.") );
                 return $this->render('upload',["model"=>$model]);
             }
-        }else{
+        }catch (\Exception $exception ){
+            \Yii::$app->getSession()->addFlash('error',\Yii::t("app",$exception->getMessage()));
             return $this->render('upload',["model"=>$model]);
         }
+
 
     }
 

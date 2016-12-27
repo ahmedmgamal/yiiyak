@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1e444f380aba8cbfe1263ae7ffc79046",
-    "content-hash": "899d2047f376350344a98516add0807b",
+    "hash": "c625ea81a63cf949a76a68afe44e2075",
+    "content-hash": "d4facc48e791cab04400fa7c28e4d224",
     "packages": [
         {
             "name": "2amigos/yii2-chartjs-widget",
@@ -1336,16 +1336,16 @@
         },
         {
             "name": "moonlandsoft/yii2-phpexcel",
-            "version": "dev-master",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moonlandsoft/yii2-phpexcel.git",
-                "reference": "b79fc4c7996da9ba0ff844d7dd70ab042a9aac7b"
+                "reference": "9408d09abc7ff4828302dafd5ffb709314f14589"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moonlandsoft/yii2-phpexcel/zipball/b79fc4c7996da9ba0ff844d7dd70ab042a9aac7b",
-                "reference": "b79fc4c7996da9ba0ff844d7dd70ab042a9aac7b",
+                "url": "https://api.github.com/repos/moonlandsoft/yii2-phpexcel/zipball/9408d09abc7ff4828302dafd5ffb709314f14589",
+                "reference": "9408d09abc7ff4828302dafd5ffb709314f14589",
                 "shasum": ""
             },
             "require": {
@@ -1377,7 +1377,7 @@
                 "xls",
                 "yii2"
             ],
-            "time": "2016-09-03 12:33:44"
+            "time": "2015-09-06 07:50:33"
         },
         {
             "name": "phpoffice/phpexcel",
