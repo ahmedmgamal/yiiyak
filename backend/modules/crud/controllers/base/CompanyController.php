@@ -15,6 +15,7 @@ use backend\modules\crud\models\Company;
 use backend\modules\crud\models\Drug;
 use backend\modules\crud\models\search\Company as CompanySearch;
 use Faker\Provider\cs_CZ\DateTime;
+use FPDF;
 use mPDF;
 use Yii;
 use yii\web\Controller;
@@ -186,15 +187,19 @@ class CompanyController extends Controller
 	public function actionFullExport(){
         $company = Yii::$app->user->identity->getCompany()->one();
         $drugs = $company->drugs;
-
+//        $pdf = new FPDF();
+////
+//        $pdf->AddPage();
+//        header('Content-type: text/xml');
         $mpdf = new mPDF();
         $mpdf->Bookmark('Company');
-
         $companyHtml = $this->generateCompanyHtml($company);
+        $drugsHtml = $this->generateDrugsHtml($drugs);
         $mpdf->WriteHTML($companyHtml);
         $mpdf->AddPage();
         $mpdf->Bookmark('Drugs');
-        $mpdf->WriteHTML("drugs");
+        $mpdf->WriteHTML("<div><h2 style=\"text-align: center;\">Company Drugs</h2></div>");
+        $mpdf->WriteHTML($drugsHtml);
         $mpdf->Output();
 
     }
@@ -209,6 +214,35 @@ class CompanyController extends Controller
         $html .="<p><strong>Address:</strong> ".$company->adderess."</p>";
         return $html;
     }
+    private function generateDrugsHtml($drugs){
+        $html = "<div>";
+        $html .= "<table style='border: 1px solid black;width:100%;border-collapse: collapse;'>";
+        $html .= "<thead>";
+        $html .= "<tr>";
+        $html .= "<th style='border:1px solid black'>Generic Name</th>";
+        $html .= "<th style='border:1px solid black'>Trade Name</th>";
+        $html .= "<th style='border:1px solid black'>Dosage Form</th>";
+        $html .= "<th style='border:1px solid black'>Strength</th>";
+        $html .= "<th style='border:1px solid black'>Manufacturer</th>";
+        $html .= "<th style='border:1px solid black'>Manufacturer</th>";
+        $html .= "</tr>";
+        $html .= "</thead>";
+        $html .="<tbody>";
+        foreach ($drugs as $drug){
+            $html .= "<tr>";
+            $html .= "<td style='border:1px solid black'>{$drug->generic_name}</td>";
+            $html .= "<td style='border:1px solid black'>{$drug->trade_name}</td>";
+            $html .= "<td style='border:1px solid black'>{$drug->composition}</td>";
+            $html .= "<td style='border:1px solid black'>{$drug->strength}</td>";
+            $html .= "<td style='border:1px solid black'>{$drug->manufacturer}</td>";
+            $html .= "<td style='border:1px solid black'>{$drug->routeLkp->description}</td>";
+            $html .= "</tr>";
 
+        }
+        $html .="</tbody>";
+        $html .= "</table>";
+        $html .= "</div>";
+        return $html;
+    }
 
 }
