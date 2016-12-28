@@ -189,7 +189,7 @@ $updateIcsr = ( $helpers->currentUserCan('/crud/icsr/update')) ? '{update}' : ''
                      'A','B','C','D'
 
                  ]
-             ]);
+             ]). '</div>';
     ?>
 
     <?php
