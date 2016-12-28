@@ -10,7 +10,7 @@ use \backend\modules\crud\traits;
  */
 class IcsrTest extends BaseIcsrTest
 {
-    use traits\checkAccess;
+    use traits\checkAccess,traits\checkIcsrNullExported;
     public function attributeHints()
     {
                   return array_merge(
@@ -23,6 +23,7 @@ class IcsrTest extends BaseIcsrTest
             'normal_low_range' => Yii::t('app', 'B.3.1.1 Normal low range'),
             'normal_high_range' => Yii::t('app', 'B.3.1.2 Normal high range '),
             'more_info' => Yii::t('app', 'B.3.2 Results of tests and procedures relevant to the investigation'),
+            'image' => Yii::t('app', 'upload image to icsr test'),
         ]);
     }
 

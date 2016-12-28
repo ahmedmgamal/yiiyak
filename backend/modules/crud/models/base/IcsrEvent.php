@@ -68,7 +68,7 @@ abstract class IcsrEvent extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['icsr_id'], 'required'],
+            [['icsr_id','event_description','meddra_llt_text'], 'required'],
             [['icsr_id','lkp_icsr_eventoutcome_id'], 'integer'],
             [['event_date', 'event_end_date'], 'safe'],
             [['event_outcome'], 'string'],

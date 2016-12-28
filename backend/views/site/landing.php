@@ -22,19 +22,18 @@ use yii\bootstrap\Nav;
                         <!-- Slide 1 -->
                         <div class="ls-slide" data-ls="transition2d:1;timeshift:-1000;">
                             <!-- Slide background -->
-                            <?= Html::img('@web/images/backgrounds/full-bg-7.jpg',['class' => 'ls-bg' , 'style' => 'width: 100%' , 'alt' => 'Slide background']); ?>
-                            <!-- Center title -->
-                            <h3 class="ls-l title-lg c-white text-center strong-700" style="width:100%; top:35%; left:50%;" data-ls="offsetxin:0;offsetyin:250;durationin:1000;delayin:500;offsetxout:0;offsetyout:-8;easingout:easeInOutQuart;scalexout:1.2;scaleyout:1.2;">
-                              <?= Yii::t('app','PV-Radar'); ?>
-                            </h3>
+                            <?= Html::img('@web/images/backgrounds/bg1.jpg',['class' => 'ls-bg' , 'style' => 'width: 100%' , 'alt' => 'Slide background']); ?>
+
 
                             <!-- Center paragraph -->
                             <p class="ls-l text-standard text-center c-white" style="width: 900px; top: 50%; left: 50%;" data-ls="offsetxin:-250;offsetyin:-;durationin:1000;delayin:1000;offsetxout:0;offsetyout:-8;easingout:easeInOutQuart;scalexout:1.2;scaleyout:1.2;">
-                                <medium ><?= Yii::t('app',' Taking care of your Pharmacovigilance')?></medium>
+
+                                <?= Html::img('@web/images/logos/pvRadarLogo.png',['class' => 'img-responsive','alt' => 'PV-Radar artimis logo']) ?>
+
 
                             </p>
 
-                            <?= Html::a('Login',Url::toRoute(['site/login']),['class' => 'btn btn-lg btn-b-white ls-l' ,  'style' => "top: 70%; left: 40%;" ,'data-ls' =>"offsetxin: 0; offsetyin: 250; durationin: 1000; delayin: 1000; offsetxout: 0; offsetyout:-8;easingout:easeInOutQuart;scalexout:1.2;scaleyout:1.2;"]); ?>
+                            <?= Html::a('Login',Url::toRoute(['site/login']),['class' => 'btn btn-lg btn-b-red ls-l' ,  'style' => "top: 70%; left: 40%;" ,'data-ls' =>"offsetxin: 0; offsetyin: 250; durationin: 1000; delayin: 1000; offsetxout: 0; offsetyout:-8;easingout:easeInOutQuart;scalexout:1.2;scaleyout:1.2;"]); ?>
 
                             <a href="#section-7" class="btn btn-lg btn-base-1  ls-l scroll-me" style="top: 70%; left: 55%;" data-ls="offsetxin: 0; offsetyin: 250; durationin: 1000; delayin: 1000; offsetxout: 0; offsetyout:-8;easingout:easeInOutQuart;scalexout:1.2;scaleyout:1.2;" onclick="setTimeout(function() {$('#email').focus()},100);">
                               <?= Yii::t('app','Request Quotation') ?>
@@ -55,10 +54,10 @@ use yii\bootstrap\Nav;
                                     </div>
                                     <div class="block-body scroll-on fadeIn" data-wow-duration="1s">
                                          <p class="text-center">
-                                            <?= Yii::t('app','ICSR E28 reporting support')?>
+                                            <?= Yii::t('app','ICSRs E2B reporting support')?>
                                         </p>
                                         <p class="text-center">
-                                            <?= Yii::t('app','XML validate ICSR')?>
+                                            <?= Yii::t('app','XML validated ICSRs')?>
                                         </p>
                                         <p class="text-center">
                                             <?= Yii::t('app','Null case ICSR support')?>
@@ -82,16 +81,14 @@ use yii\bootstrap\Nav;
                                     <div class="block-body scroll-on fadeIn" data-wow-duration="1s">
 
                                          <p class="text-center">
-                                           <?= Yii::t('app','Preparation and submission to PSMF')?>
+                                           <?= Yii::t('app','Preparation & submission of PSMF')?>
                                         </p>
-                                        <p class="text-center">
-                                            <?= Yii::t('app','Pharmacovigilance system master file (PSMF)')?>
-                                        </p>
+
                                         <p class="text-center">
                                             <?= Yii::t('app','Risk Management Plan (RMP) production,review and harmonization')?>
                                         </p>
                                         <p class="text-center">
-                                            <?= Yii::t('app','Periodic safety update report (PSUR) preparation and submission')?>
+                                            <?= Yii::t('app','Periodic Benefit Risk Evaluation Reports (PBRERs)')?>
                                         </p>
                                         <p class="text-center">
                                             <?= Yii::t('app','Individual case safety report (ICSR) full processing')?>
@@ -168,74 +165,98 @@ use yii\bootstrap\Nav;
                     <div class="container">
                         <div class="section-title-wrapper style-1 v1 scroll-on bounceInDown" data-wow-duration="1s" data-wow-offset="100">
                             <h3 class="section-title center">
-                                <span><?= Yii::t('app','3 packages are available (Contracts for 2 years only)')?></span>
-                                <span class="section-subtitle"><?= Yii::t('app','To be the best means to make each customer your friend and give him what he needs')?></span>
+                                <span><?= Yii::t('app','4 plans are available (Contracts for minimum 2 years)')?></span>
                             </h3>
                         </div>
 
                         <div class="row">
-                            <div class="col-md-4 scroll-on slideInLeft" data-wow-duration=".5s" data-wow-offset="200">
+                            <div class="col-md-3 scroll-on slideInLeft" data-wow-duration=".5s" data-wow-offset="200">
                                 <div class="block block-pricing style-1 bg-base-1 mt-20">
                                     <div class="block-header">
-                                        <h3 class="pricing-title">Silver</h3>
+                                        <h3 class="pricing-title"><?= Yii::t('app' ,'Plan I')?></h3>
                                         <span class="pricing-subtitle"></span>
                                     </div>
                                     <div class="block-body">
                                         <ul>
-                                            <li><a>< 10 products</a></li>
-                                            <li><a>2 Users</a></li>
-                                            <li><a >unlimited ICSR storgae</a></li>
-                                            <li><a >E2B complinet </a></li>
-                                            <li><a >duplication detetciton</a></li>
+                                            <li><a>< 10 <?= Yii::t('app','Products')?></a></li>
+                                            <li><a>1 <?= Yii::t('app','User')?></a></li>
+                                            <li><a><?= Yii::t('app','Unlimited ICSRs Storage')?></a></li>
+                                            <li><a><?=Yii::t('app','E2B Compliant')?> </a></li>
+                                            <li><a><?=Yii::t('app','Duplication Detection')?></a></li>
                                         </ul>
 
                                     </div>
                                     <div class="block-footer">
-                                        <a href="#request-form" class="btn btn-lg btn-base-1 scroll-me" onclick="$('#request-message').val('i would like to request Silver package'); setTimeout(function() {$('#email').focus()},100);">Request</a>
+                                        <a href="#request-form" class="btn btn-lg btn-base-1 scroll-me" onclick="$('#request-message').val('i would like to request Plan I'); setTimeout(function() {$('#email').focus()},100);">Request</a>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 scroll-on zoomIn" data-wow-duration=".5s" data-wow-delay=".5s" data-wow-offset="100">
+                            <div class="col-md-3 scroll-on zoomIn" data-wow-duration=".5s" data-wow-delay=".5s" data-wow-offset="100">
                                 <div class="block block-pricing style-1 bg-base-2">
                                     <div class="block-header">
-                                        <h3 class="pricing-title">Gold</h3>
+                                        <h3 class="pricing-title"><?= Yii::t('app','Plan II')?></h3>
                                         <span class="pricing-subtitle"></span>
                                     </div>
                                     <div class="block-body">
                                         <ul>
-                                            <li><a >11-50 products</a></li>
-                                            <li><a>5 Users</a></li>
-                                            <li><a >unlimited ICSR storgae</a></li>
-                                            <li><a >E2B complinet </a></li>
-                                            <li><a >duplication detetciton</a></li>
+                                            <li><a>10-50 <?= Yii::t('app','Products')?></a></li>
+                                            <li><a>2 <?= Yii::t('app','Users')?></a></li>
+                                            <li><a><?= Yii::t('app','Unlimited ICSRs Storage')?></a></li>
+                                            <li><a><?=Yii::t('app','E2B Compliant')?> </a></li>
+                                            <li><a><?=Yii::t('app','Duplication Detection')?></a></li>
                                         </ul>
                                     </div>
                                     <div class="block-footer">
-                                        <a href="#request-form" class="btn btn-lg btn-base-2 scroll-me" onclick="$('#request-message').val('i would like to request Gold package'); setTimeout(function() {$('#email').focus()},100);">Request</a>
+                                        <a href="#request-form" class="btn btn-lg btn-base-2 scroll-me" onclick="$('#request-message').val('i would like to request Plan II'); setTimeout(function() {$('#email').focus()},100);">Request</a>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 scroll-on slideInRight" data-wow-duration=".5s" data-wow-offset="200">
+                            <div class="col-md-3 scroll-on slideInRight" data-wow-duration=".5s" data-wow-offset="200">
                                 <div class="block block-pricing style-1 bg-base-1 mt-20">
                                     <div class="block-header">
-                                        <h3 class="pricing-title">Platinum</h3>
+                                        <h3 class="pricing-title"><?= Yii::t('app','Plan III')?></h3>
 
                                     </div>
                                     <div class="block-body">
                                         <ul>
-                                            <li><a >51-100 products</a></li>
-                                            <li><a>10 Users</a></li>
-                                            <li><a >unlimited ICSR storgae</a></li>
-                                            <li><a >E2B complinet </a></li>
-                                            <li><a >duplication detetciton</a></li>
+                                            <li><a>51-150 <?= Yii::t('app','Products') ?></a></li>
+                                            <li><a>3 <?= Yii::t('app','Users')?></a></li>
+                                            <li><a><?= Yii::t('app','Unlimited ICSRs Storage')?></a></li>
+                                            <li><a><?=Yii::t('app','E2B Compliant')?> </a></li>
+                                            <li><a><?=Yii::t('app','Duplication Detection')?></a></li>
                                         </ul>
 
                                     </div>
                                     <div class="block-footer">
-                                        <a href="#request-form" class="btn btn-lg btn-base-1 scroll-me" onclick="$('#request-message').val('i would like to request Platinum package'); setTimeout(function() {$('#email').focus()},100);">Request</a>
+                                        <a href="#request-form" class="btn btn-lg btn-base-1 scroll-me" onclick="$('#request-message').val('i would like to request Plan III'); setTimeout(function() {$('#email').focus()},100);">Request</a>
                                     </div>
                                 </div>
                             </div>
+
+
+                            <div class="col-md-3 scroll-on slideInRight" data-wow-duration=".5s" data-wow-offset="200">
+                                <div class="block block-pricing style-1 bg-base-1 mt-20">
+                                    <div class="block-header">
+                                        <h3 class="pricing-title"><?= Yii::t('app','Plan IV')?></h3>
+
+                                    </div>
+                                    <div class="block-body">
+                                        <ul>
+                                            <li><a>> 150 <?= Yii::t('app','Products') ?></a></li>
+                                            <li><a>5 <?= Yii::t('app','Users')?></a></li>
+                                            <li><a><?= Yii::t('app','Unlimited ICSRs Storage')?></a></li>
+                                            <li><a><?=Yii::t('app','E2B Compliant')?> </a></li>
+                                            <li><a><?=Yii::t('app','Duplication Detection')?></a></li>
+                                        </ul>
+
+                                    </div>
+                                    <div class="block-footer">
+                                        <a href="#request-form" class="btn btn-lg btn-base-1 scroll-me" onclick="$('#request-message').val('i would like to request Plan IV'); setTimeout(function() {$('#email').focus()},100);">Request</a>
+                                    </div>
+                                </div>
+                            </div>
+
+
                         </div>
                     </div>
                 </section>
@@ -251,12 +272,12 @@ use yii\bootstrap\Nav;
                         </div>
 
                         <div class="row">
-                            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 scroll-on rotateInDownLeft" data-wow-duration=".15s" data-wow-offset="250">
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 scroll-on rotateInDownLeft" data-wow-duration=".15s" data-wow-offset="250">
                                 <div class="client-logo style-1 block-shadow">
                                     <?= Html::img('@web/images/logos/hygint.jpg',['class' => 'img-responsive','alt' => 'PV-Radar hygint logo']) ?>
                                 </div>
                             </div>
-                            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 scroll-on rotateInDownLeft" data-wow-duration=".15s" data-wow-delay=".15s" data-wow-offset="250">
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 scroll-on rotateInDownLeft" data-wow-duration=".15s" data-wow-delay=".15s" data-wow-offset="250">
                                 <div class="client-logo style-1 block-shadow">
                                     <?= Html::img('@web/images/logos/pharma.jpg',['class' => 'img-responsive','alt' => 'PV-Radar pharma logo']) ?>
 
@@ -268,12 +289,7 @@ use yii\bootstrap\Nav;
 
                                 </div>
                             </div>
-                            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 scroll-on rotateInDownLeft" data-wow-duration=".15s" data-wow-delay=".45s" data-wow-offset="250">
-                                <div class="client-logo style-1 block-shadow">
-                                    <?= Html::img('@web/images/logos/Alhuda.jpg',['class' => 'img-responsive','alt' => 'PV-Radar Alhuda logo']) ?>
 
-                                </div>
-                            </div>
                             <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 scroll-on rotateInDownLeft" data-wow-duration=".15s" data-wow-delay=".60s" data-wow-offset="250">
                                 <div class="client-logo style-1 block-shadow">
                                     <?= Html::img('@web/images/logos/haier.png',['class' => 'img-responsive','alt' => 'PV-Radar haier logo']) ?>
@@ -311,14 +327,6 @@ use yii\bootstrap\Nav;
                             <div class="item">
                                 <div class="testimonial-fluid">
                                     <p class="testimonial-text">
-                                        <?= Yii::t('app','Pharmacovigilance system master file(PSMF)')?>
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="item">
-                                <div class="testimonial-fluid">
-                                    <p class="testimonial-text">
                                         <?= Yii::t('app','Outsourcing of QPPV')?>
                                     </p>
                                 </div>
@@ -338,7 +346,7 @@ use yii\bootstrap\Nav;
                                 <div class="section-title-wrapper style-1 v1 v2 mb-40">
                                     <h3 class="section-title section-title-sm left">
                                         <span><?= Yii::t('app','Our office')?></span>
-                                        <small class="section-subtitle">زهراء مدينة نصر  </small>
+                                        <small class="section-subtitle"><?= Yii::t('app','Building 5A, block 4, Manteqat El-Cinema, Nasr city, Cairo, Egypt')?></small>
                                     </h3>
 
                                 </div>
@@ -398,7 +406,7 @@ use yii\bootstrap\Nav;
                                     </div>
                                     <div class="block-content">
                                         <h3 class="block-title-2">Our Office</h3>
-                                        <p> زهراء مدينة نصر </p>
+                                        <p> <?= Yii::t('app','Building 5A, block 4, Manteqat El-Cinema, Nasr city, Cairo, Egypt')?> </p>
                                     </div>
                                 </div>
 
@@ -410,7 +418,7 @@ use yii\bootstrap\Nav;
                                     </div>
                                     <div class="block-content">
                                         <h3 class="block-title-2">Email</h3>
-                                        <p>pv@emcoegypt.com </p>
+                                        <p>pv@emcoegypt.org </p>
                                     </div>
                                 </div>
 
@@ -451,7 +459,7 @@ use yii\bootstrap\Nav;
                     <div class="container">
                         <div class="div-table v-middle">
                             <div class="cell">
-                                All rights reserved. Copyright &copy; <?= date('Y') ?> <span class="company-rights">Pv-Raddar</span>
+                                All rights reserved. Copyright &copy; <?= date('Y') ?> <span class="company-rights"><?= Yii::t('app','PV-Radar')?></span>
 
                                 <?php if (file_exists(Yii::getAlias('@webroot').'/test-check.txt'))
                                 {

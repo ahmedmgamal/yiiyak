@@ -9,6 +9,8 @@
 
 namespace backend\modules\crud\controllers;
 use backend\modules\crud\models\Drug;
+use backend\modules\crud\models\IcsrEvent;
+use backend\modules\crud\models\IcsrTest;
 use backend\modules\crud\models\search\Drug as DrugSearch;
 use yii\web\Controller;
 use yii\web\HttpException;
@@ -76,7 +78,7 @@ class DrugController extends \backend\modules\crud\controllers\base\DrugControll
 
         public function actionCreate() {
 		$model = new Drug;
-                $_POST['Drug']['company_id'] = Yii::$app->user->identity->getCompany()->one()->id;
+        $_POST['Drug']['company_id'] = Yii::$app->user->identity->getCompany()->one()->id;
 
 		try {
 			if (Yii::$app->request->isPost && $model->load($_POST) ) {
@@ -102,7 +104,41 @@ class DrugController extends \backend\modules\crud\controllers\base\DrugControll
 		return $this->render('create', ['model' => $model]);
         }
 
+        public function actionSummaryTabulation(){
+            $summary = [];
+            $summaryResult = $this->get_summary_result();
+            foreach ($summaryResult as $item){
+                if(!isset($summary[$item['meddra_pt_text']])){
+                    $summary[$item['meddra_pt_text']] = [
+                        "Serious" => 0,
+                        "notSerious" => 0
+                    ];
+                }
+                if($item['is_serious'] == 1){
+                    $summary[$item['meddra_pt_text']]['Serious'] = $item['interval'];
+                }
+                if($item['is_serious'] == 0){
+                    $summary[$item['meddra_pt_text']]['notSerious'] = $item['interval'];
+                }
+            }
+            return $this->render('summaryTabulation',[
+                'summary' => $summary
+            ]);
+        }
 
+        private function get_summary_result(){
+            $companyId = Yii::$app->user->identity->getCompany()->one()->id;
+            $sql = "SELECT icsr_event.meddra_pt_text ,IF(icsr.is_serious = 0, 0, 1) AS 'is_serious' , count(icsr.is_serious) AS 'interval'
+                      FROM icsr
+                      INNER JOIN icsr_event
+                    ON(icsr_event.icsr_id = icsr.id)
+                        INNER JOIN drug
+                          ON(icsr.drug_id = drug.id)
+                        WHERE drug.company_id = :companyId
+                    GROUP BY icsr_event.meddra_pt_text , icsr.is_serious";
+            $summary = Yii::$app->db->createCommand($sql,[":companyId"=>$companyId])->queryAll();
+            return $summary;
+        }
 
 
 }

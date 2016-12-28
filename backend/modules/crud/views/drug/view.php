@@ -7,6 +7,7 @@
 
 
 use dmstr\helpers\Html;
+use yii\grid\SerialColumn;
 use yii\helpers\Url;
 use yii\grid\GridView;
 use yii\widgets\DetailView;
@@ -24,6 +25,10 @@ $this->title = $model->getAliasModel() . $model->trade_name;
 $this->params['breadcrumbs'][] = ['label' => $model->getAliasModel(true), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => (string)$model->trade_name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'View');
+
+$helpers = Yii::$app->helpers;
+$updateIcsr = ( $helpers->currentUserCan('/crud/icsr/update')) ? '{update}' : '';
+
 ?>
 <div class="giiant-crud drug-view">
 
@@ -46,9 +51,11 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
     <div class="clearfix crud-navigation">
         <!-- menu buttons -->
         <div class='pull-left'>
-            <?php echo Html::a('<span class="glyphicon glyphicon-pencil"></span> ' . Yii::t('app', 'Edit'), ['update', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
+            <?php if ($helpers->currentUserCan('/crud/drug/update')) {?>
+			<?php echo Html::a('<span class="glyphicon glyphicon-pencil"></span> ' . Yii::t('app', 'Edit'), ['update', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
             <?php echo Html::a('<span class="glyphicon glyphicon-copy"></span> ' . Yii::t('app', 'Copy'), ['create', 'id' => $model->id, 'Drug            '=>$copyParams], ['class' => 'btn btn-success']) ?>
             <?php echo Html::a('<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('app', 'New'), ['create'], ['class' => 'btn btn-success']) ?>
+			<?php }?>
 			<?php
 			if ($model->isSignaled($signaledDrugs,'drug_id')) {
 				 echo '<span class="alert-signal-color"> <span class="glyphicon glyphicon-warning-sign "></span> '.Yii::t('app','Signal Detected Check Icsrs Below').'</span>';
@@ -95,16 +102,18 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 
 <?php $this->beginBlock('Icsrs'); ?>
 <div style='position: relative'><div style='position:absolute; right: 0px; top: 0px;'>
-
+<?php if ($helpers->currentUserCan('/crud/icsr/create')){?>
 <a class="btn btn-success btn-xs" href="<?= Url::to(['/crud/icsr/create', 'Icsr' => ['drug_id' => $model->id]])?>">
 
 	<span class="glyphicon glyphicon-plus"></span><?= Yii::t('app','New ').'Icsr'?>
 </a>
+	<?php } ?>
 
 </div></div><?php Pjax::begin(['id'=>'pjax-Icsrs', 'enableReplaceState'=> false, 'linkSelector'=>'#pjax-Icsrs ul.pagination a, th a', 'clientOptions' => ['pjax:success'=>'function(){alert("yo")}']]) ?>
 <?php echo '<div class="table-responsive">' . \yii\grid\GridView::widget([
 		'layout' => '{summary}{pager}<br/>{items}{pager}',
-		'dataProvider' => new \yii\data\ActiveDataProvider(['query' => $model->getIcsrs(), 'pagination' => ['pageSize' => 20, 'pageParam'=>'page-icsrs']]),
+		'dataProvider' => $icsrDataProvider,
+		'filterModel' => $icsrSeachModel,
 		'pager'        => [
 			'class'          => yii\widgets\LinkPager::className(),
 			'firstPageLabel' => Yii::t('app', 'First'),
@@ -112,7 +121,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 		],
 		'columns' => [[
 				'class'      => 'yii\grid\ActionColumn',
-				'template'   => '{view} {update} {signal}',
+				'template'   => '{view} '.$updateIcsr.' {signal}',
 				'contentOptions' => ['nowrap'=>'nowrap'],
 
 				/**
@@ -140,33 +149,225 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 				'controller' => '/crud/icsr'
 			],
 			[
-				'attribute' => 'id',
-				'value' => function ($model,$key,$index){
-					return ++$index;
-				}
+				'header' => Yii::t('app','ID'),
+				'class' => SerialColumn::className()
 			],
 			'patient_identifier',
-			'patient_age',
+			'safetyReportId',
 			[
-				'attribute' => 'patient_age_unit',
+			 'attribute' =>'meddraLltFromEvents',
+				'format' => 'raw',
+			],
+			[
+				'attribute' => 'created_by',
 				'value' => function ($model,$key,$index){
-						return $model-> ageUnit->name;
+				return $model->createdBy->username;
 				}
 			],
-			'patient_birth_date',
-			'patient_weight',
-			[
-				'attribute' =>'patient_weight_unit',
-				'value' => function ($model,$key,$index){
-				return $model->patientWeightUnit->name;
-				}
-			],
-			'extra_history',
+			'created_at'
 		]
 	]) . '</div>' ?>
 <?php Pjax::end() ?>
 <?php $this->endBlock() ?>
 
+    <?php
+        $this->beginBlock("signal_detection");
+    ?>
+    <?php
+         echo '<div class="table-responsive">' . \yii\grid\GridView::widget([
+                'dataProvider'=>new \yii\data\ArrayDataProvider([
+                    'allModels' => $signal_detection,
+                    'pagination' => [
+                        'pageSize' => 20,
+                    ],
+                    'sort' => [
+                        'attributes' => ['event_description'],
+                    ],
+                ]),
+                 'columns'=>[
+                     'event_description',
+                     'A','B','C','D'
+
+                 ]
+             ]);
+    ?>
+
+    <?php
+        $this->endBlock();
+    ?>
+
+
+	<?php $this->beginBlock('Rmp'); ?>
+
+	<div style='position: relative'><div style='position:absolute; right: 0px; top: 0px;'>
+
+			<a class="btn btn-success btn-xs" href="<?= Url::to(['/crud/rmp/create', 'drug_id' => $model->id])?>">
+
+				<span class="glyphicon glyphicon-plus"></span><?= Yii::t('app','New ').'Rmp'?>
+			</a>
+
+		</div></div><?php Pjax::begin(['id'=>'pjax-Rmps', 'enableReplaceState'=> false, 'linkSelector'=>'#pjax-Rmps ul.pagination a, th a', 'clientOptions' => ['pjax:success'=>'function(){alert("yo")}']]) ?>
+	<?php echo '<div class="table-responsive">' . \yii\grid\GridView::widget([
+			'layout' => '{summary}{pager}<br/>{items}{pager}',
+			'dataProvider' => $rmpDataProvider,
+			'filterModel' => $rmpSearchModel,
+			'pager'        => [
+				'class'          => yii\widgets\LinkPager::className(),
+				'firstPageLabel' => Yii::t('app', 'First'),
+				'lastPageLabel'  => Yii::t('app', 'Last')
+			],
+			'columns' => [[
+				'class'      => 'yii\grid\ActionColumn',
+				'template'   => '{view} {update}',
+				'contentOptions' => ['nowrap'=>'nowrap'],
+
+				/**
+				 *
+				 */
+				'urlCreator' => function ($action, $model, $key, $index) {
+					// using the column name as key, not mapping to 'id' like the standard generator
+					$params = is_array($key) ? $key : [$model->primaryKey()[0] => (string) $key];
+					$params[0] = '/crud/rmp' . '/' . $action;
+					return $params;
+				},
+
+				'controller' => '/crud/rmp'
+			],
+				[
+					'header' => Yii::t('app','ID'),
+					'class' => SerialColumn::className()
+				],
+				'version',
+				'version_description',
+				[
+					'label' => Yii::t('app','Download RMP'),
+					'format' => 'raw',
+					'value' => function ($model){
+						return '<a href=/crud/rmp/download-file?path='.substr($model->rmp_file_url,strpos($model->rmp_file_url,'/files')).'>'.Yii::t('app','Download').'</a>';
+					}
+				],
+
+				[
+					'attribute' => 'rmp_created_by',
+					'value' => function ($model){
+						return ($model->getReportUserName());
+					}
+				],
+				'rmp_created_at',
+				[
+					'label' => Yii::t('app','Letter Header'),
+					'format' => 'raw',
+					'value' => function ($model){
+						if (isset($model->ack_file_url) && !empty($model->ack_file_url))
+						{
+							return '<a href=/crud/rmp/download-file?path='.substr($model->ack_file_url,strpos($model->ack_file_url,'/files')).'>'.Yii::t('app','Download Letter').'</a>';
+						}
+
+						return '<a href=/crud/rmp/upload-letter-header?id='.$model->id.' class="btn btn-warning btn-sm">'.Yii::t('app','Upload').'</a>';
+					}
+				],
+				[
+					'attribute' => 'ack_created_by',
+					'value' => function ($model){
+						return isset($model->ack_created_by) ? $model->getAckUserName() : Yii::t('app','not set');
+					}
+				],
+
+				'ack_created_at',
+				'next_rmp_date'
+			]
+		]) . '</div>' ?>
+	<?php Pjax::end() ?>
+
+	<?php $this->endBlock() ?>
+
+
+
+
+
+	<?php $this->beginBlock('Prsu'); ?>
+
+	<div style='position: relative'><div style='position:absolute; right: 0px; top: 0px;'>
+
+			<a class="btn btn-success btn-xs" href="<?= Url::to(['/crud/prsu/create', 'drug_id' => $model->id])?>">
+
+				<span class="glyphicon glyphicon-plus"></span><?= Yii::t('app','New ').'PBRER'?>
+			</a>
+
+		</div></div><?php Pjax::begin(['id'=>'pjax-Prsus', 'enableReplaceState'=> false, 'linkSelector'=>'#pjax-Prsus ul.pagination a, th a', 'clientOptions' => ['pjax:success'=>'function(){alert("yo")}']]) ?>
+	<?php echo '<div class="table-responsive">' . \yii\grid\GridView::widget([
+			'layout' => '{summary}{pager}<br/>{items}{pager}',
+			'dataProvider' => $prsuDataProvider,
+			'filterModel' => $prsuSearchModel,
+			'pager'        => [
+				'class'          => yii\widgets\LinkPager::className(),
+				'firstPageLabel' => Yii::t('app', 'First'),
+				'lastPageLabel'  => Yii::t('app', 'Last')
+			],
+			'columns' => [[
+				'class'      => 'yii\grid\ActionColumn',
+				'template'   => '{view}',
+				'contentOptions' => ['nowrap'=>'nowrap'],
+
+				/**
+				 *
+				 */
+				'urlCreator' => function ($action, $model, $key, $index) {
+					// using the column name as key, not mapping to 'id' like the standard generator
+					$params = is_array($key) ? $key : [$model->primaryKey()[0] => (string) $key];
+					$params[0] = '/crud/prsu' . '/' . $action;
+					return $params;
+				},
+
+				'controller' => '/crud/prsu'
+			],
+				[
+					'header' => Yii::t('app','ID'),
+					'class' => SerialColumn::className()
+				],
+				'version',
+				'version_description',
+				[
+					'label' => Yii::t('app','Download PBRER'),
+					'format' => 'raw',
+					'value' => function ($model){
+						return '<a href=/crud/prsu/download-file?path='.substr($model->prsu_file_url,strpos($model->prsu_file_url,'/files')).'>'.Yii::t('app','Download').'</a>';
+					}
+				],
+
+				[
+					'attribute' => 'prsu_created_by',
+					'value' => function ($model){
+						return ($model->getReportUserName());
+					}
+				],
+				'prsu_created_at',
+				[
+					'label' => Yii::t('app','Letter Header'),
+					'format' => 'raw',
+					'value' => function ($model){
+						if (isset($model->ack_file_url) && !empty($model->ack_file_url))
+						{
+							return '<a href=/crud/prsu/download-file?path='.substr($model->ack_file_url,strpos($model->ack_file_url,'/files')).'>'.Yii::t('app','Download Letter').'</a>';
+						}
+
+						return '<a href=/crud/prsu/upload-letter-header?id='.$model->id.' class="btn btn-warning btn-sm">'.Yii::t('app','Upload').'</a>';
+					}
+				],
+				[
+					'attribute' => 'ack_created_by',
+					'value' => function ($model){
+						return isset($model->ack_created_by) ? $model->getAckUserName() : Yii::t('app','not set');
+					}
+				],
+
+				'ack_created_at',
+				'next_prsu_date'
+			]
+		]) . '</div>' ?>
+	<?php Pjax::end() ?>
+
+	<?php $this->endBlock() ?>
 
     <?php echo Tabs::widget(
 	[
@@ -176,11 +377,30 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 				'label'   => '<b class=""># '.$model->trade_name. '</b>',
 				'content' => $this->blocks['backend\modules\crud\models\Drug'],
 				'active'  => true,
-			],  [
+			],
+            [
 				'content' => $this->blocks['Icsrs'],
 				'label'   => '<small>Icsrs <span class="badge badge-default">'.count($model->getIcsrs()->asArray()->all()).'</span></small>',
 				'active'  => false,
-			], ]
+			],
+            [
+                'content' => $this->blocks['signal_detection'],
+                'label'   => '<small>Signal Detection </small>',
+                'active'  => false,
+            ],
+			[
+				'content' => $this->blocks['Rmp'],
+				'label'   => '<small>RMP <span class="badge badge-default">'.count($model->getRmps()->asArray()->all()).'</span></small>',
+				'active'  => false,
+			],
+
+			[
+				'content' => $this->blocks['Prsu'],
+				'label'   => '<small>PBRER <span class="badge badge-default">'.count($model->getPrsus()->asArray()->all()).'</span></small>',
+				'active'  => false,
+			],
+
+		]
 	]
 );
 ?>

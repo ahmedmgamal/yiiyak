@@ -52,7 +52,6 @@ use yii\helpers\ArrayHelper;
                             \yii\helpers\ArrayHelper::map(backend\modules\crud\models\LkpTimeUnit::find()->all(), 'id', 'name'),
                             ['onchange'=>'changeDates()']); ?>
 			<?php echo $form->field($model, 'reason_of_use')->textInput(['maxlength' => true]) ?>
-			<?php echo $form->field($model, 'problem_went_after_stop')->checkbox(); ?>
 			<?php echo $form->field($model, 'problem_returned_after_reuse')->checkbox(); ?>
 			<?= $form->field($model, 'drug_addtional_info')->textInput(['maxlength' => true]) ?>
 

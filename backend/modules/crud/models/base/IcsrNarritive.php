@@ -70,6 +70,10 @@ abstract class IcsrNarritive extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getIcsr()
+    {
+        return $this->hasOne(\backend\modules\crud\models\Icsr::className(), ['id' => 'icsr_id']);
 
+    }
 
 }

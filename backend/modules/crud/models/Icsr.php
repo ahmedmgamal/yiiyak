@@ -7,8 +7,9 @@ use bedezign\yii2\audit\models\AuditTrail;
 use Yii;
 use \backend\modules\crud\models\base\Icsr as BaseIcsr;
 use \backend\modules\crud\traits;
+use yii\behaviors\TimestampBehavior;
 
-
+use yii\db\Expression;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -18,6 +19,16 @@ class Icsr extends BaseIcsr
 {
     use traits\checkAccess,traits\checkSignal;
 
+
+    public function attributeLabels()
+    {
+        return array_merge(
+            parent::attributeLabels(),
+        [
+            'safetyReportId' => Yii::t('app', 'Safety Report ID'),
+            'meddraLltFromEvents' => Yii::t('app','Event Llt')
+        ]);
+    }
 
     /**
      * @inheritdoc
@@ -29,8 +40,6 @@ class Icsr extends BaseIcsr
             [
             'id' => Yii::t('app', 'A.1.0.1 Sender’s (case) safety report unique identifier safetyreport>   safetyreportid'),
             'drug_id' => Yii::t('app', 'Drug Id'),
-                
-    
             'patient_identifier' => Yii::t('app', 'B.1.1 Patient (name or initials)'),
             'patient_age' => Yii::t('app', 'B.1.2.2a Age at time of onset of reaction or event'),
             'patient_age_unit' => Yii::t('app', 'B.1.2.2b Age at time of onset of reaction / event unit'),
@@ -52,8 +61,17 @@ class Icsr extends BaseIcsr
                     'patient_weight_unit'=> ['table_name' => 'lkp_weight_unit','search_field' => 'id', 'return_field' => 'name'],
                     'reaction_country_id'=> ['table_name' => 'lkp_icsr_eventoutcome' , 'search_field' => 'id', 'return_field' => 'name'],
                     'report_type' => ['table_name' => 'lkp_icsr_type','search_field' => 'id' , 'return_field' => 'description']
-                ]
-                ]
+                ],
+
+            ],
+
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => new Expression('NOW()'),
+            ],
+
         ];
     }
     public function getIcsrTrails()
@@ -93,14 +111,12 @@ class Icsr extends BaseIcsr
         foreach ($this->getIcsrEvents()->all() as $key => $value)
         {
             $temp_arr[] = "{\"id\":$value->id,\"icsr_id\":\"$this->id\"}";
-
-
         }
         return $temp_arr;
     }
 
 
-public function  isIcsrExported($icsr_id)
+    public function  isIcsrExported($icsr_id)
     {
         return  AuditTrail::findOne(['model_id' => $icsr_id , 'action' => 'EXPORT' ]);
     }
@@ -124,8 +140,27 @@ public function  isIcsrExported($icsr_id)
     }
 
 
+    public function getMeddraLltFromEvents ()
+    {
+        $connection = Yii::$app->getDb();
+        $command = $connection->createCommand("select group_concat(meddra_llt_text SEPARATOR '|') as llt from icsr_event where icsr_id={$this->id};");
+        $result = $command->queryAll();
+
+       return  isset($result[0]['llt']) ? str_replace("|",'<br>',$result[0]['llt']) : '';
+
+    }
 
 
+    public function getEgyptIdFromLkpCountry ()
+    {
 
+        return LkpCountry::findOne(['name' => 'Egypt'])->id;
+    }
+
+    public function isNullExported ()
+    {
+
+        return AuditTrailChild::findOne(['model_id' => $this->id , 'action' => 'EXPORT NULL' , 'model' =>get_class($this) ]);
+    }
 
 }

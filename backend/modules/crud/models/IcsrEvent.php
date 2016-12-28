@@ -10,7 +10,7 @@ use \backend\modules\crud\traits;
  */
 class IcsrEvent extends BaseIcsrEvent
 {
-    use traits\checkAccess,traits\checkSignal;
+    use traits\checkAccess,traits\checkSignal,traits\checkIcsrNullExported;
     public function attributeLabels()
     {
         return array_merge(parent::attributeLabels(), [

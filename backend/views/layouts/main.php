@@ -35,6 +35,7 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = array();
+    $adminSubMenus = [];
 
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
@@ -45,7 +46,7 @@ AppAsset::register($this);
         }
 
         if (\Yii::$app->user->can('/crud/user/index')) {
-            $menuItems [] =  ['label' => 'Users', 'url' => ['/crud/user/index']];
+            $adminSubMenus [] =  ['label' => Yii::t('app', 'Users'), 'url' => ['/crud/user/index']];
         }
 
         if (\Yii::$app->user->can('/crud/lkp-plan/index')){
@@ -53,6 +54,9 @@ AppAsset::register($this);
         }
 
         $userRole = \Yii::$app->authManager->getRolesByUser(\Yii::$app->user->id);
+        if (\Yii::$app->user->can('/crud/company/statistics') && !isset($userRole['admin'])){
+            $menuItems [] = ['label' => Yii::t('app','Statistics') , 'url' => ['/crud/company/statistics']];
+        }
 
         if (\Yii::$app->user->can('/crud/psmf/index') && !isset($userRole['admin'])){
             $menuItems [] =  ['label' => 'PSMF', 'url' => ['/crud/psmf/index']];
@@ -61,6 +65,24 @@ AppAsset::register($this);
         if (\Yii::$app->user->can('/crud/drug/index') && !isset($userRole['admin'])){
             $menuItems [] =  ['label' => 'Products', 'url' => ['/crud/drug/index']];
         }
+        if (\Yii::$app->user->can('/crud/reports/summary-tabulation') && !isset($userRole['admin'])){
+            $menuItems [] =  [
+                'label' => 'Reports',
+                'items' => [
+                    ['label' => 'Summary Tabulation', 'url' => '/crud/drug/summary-tabulation'],
+                ]
+            ];
+        }
+
+        if(!empty($adminSubMenus))
+        {
+            $menuItems [] = [
+                'label' => Yii::t('app','admin'),
+                'items' => $adminSubMenus
+
+            ];
+        }
+
 
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')

@@ -43,7 +43,7 @@ use kartik\password\PasswordInput;
 			<?php echo $form->field($model, 'license_image_url')->textInput(['maxlength' => true]) ?>
 			<?php echo $form->field($model,'end_date')->widget(DatePicker::className(),['dateFormat' => 'yyyy-MM-dd']);?>
 			<?php echo $form->field($model,'plan_id')->dropDownList( ArrayHelper::map($model->getPlans(),'id','name'));?>
-
+			<?php echo $form->field($model,'enable_meddra_search')->checkbox();?>
 
 			<?php if ($this->context->action->id == 'create') { ?>
 			<?php echo $form->field($userModel, 'username')->textInput(['maxlength' => true]) ?>

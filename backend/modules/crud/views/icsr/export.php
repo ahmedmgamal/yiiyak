@@ -34,7 +34,7 @@ use dmstr\bootstrap\Tabs;
 
 
 		<!--A.1.0.1 Sender’s (case) safety report unique identifier-->
-		<safetyreportid> <?php echo $model->getReactionCountry()->one()->code; ?>-<?php echo $model->getDrug()->one()->getCompany()->one()->short_name;  ?>-<?php echo $model->id; ?></safetyreportid>
+		<safetyreportid> EG-<?php echo $model->getDrug()->one()->getCompany()->one()->short_name;  ?>-<?php echo $model->id; ?></safetyreportid>
 
 		<!--     A.1.1 Identification of the country of the primary source -->
 		<primarysourcecountry><?php echo $model->getReactionCountry()->one()->code; ?></primarysourcecountry>
@@ -61,7 +61,7 @@ use dmstr\bootstrap\Tabs;
         <!--*** A.1.7	Date of receipt of the most recent information for this report --> 
         <receiptdateformat>102</receiptdateformat>
 		<receiptdate><?php echo date("Ymd"); ?> </receiptdate>
-		<authoritynumb><?php echo $model->getReactionCountry()->one()->code.'-'.$model->getDrug()->one()->getCompany()->one()->short_name.'-'.$model->id; ?></authoritynumb>
+		<authoritynumb> 'EG'<?php echo'-'.$model->getDrug()->one()->getCompany()->one()->short_name.'-'.$model->id; ?></authoritynumb>
 
 		<?php if (isset($nullReason)){?>
 		<!--A.1.13	 -->

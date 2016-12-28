@@ -1,5 +1,6 @@
 # yii console command
 /yii
+/backend/web/files
 
 # phpstorm project files
 .idea
@@ -17,7 +18,7 @@ Thumbs.db
 
 # composer vendor dir
 /vendor
-
+/backend/web/files/*
 # composer itself is not needed
 composer.phar
 

@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Edit');
     </div>
 
     <?php echo $this->render('_form', [
-		'model' => $model,
+		'model' => $model,'roles'=>$roles
 	]); ?>
 
 </div>

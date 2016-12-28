@@ -39,10 +39,31 @@ $config = [
     ],
 
     'components' => [
+        'helpers' => [
+            'class' => 'backend\components\HelpersComponent',
+        ],
 
+        'response' => [
+            'formatters' => [
+                'pdf' => [
+                    'class' => 'robregonm\pdf\PdfResponseFormatter',
+                    'format' => 'A4',  // Optional but recommended. http://mpdf1.com/manual/index.php?tid=184
+                    'defaultFontSize' => 0, // Optional
+                    'defaultFont' => '', // Optional
+                    'marginLeft' => 15, // Optional
+                    'marginRight' => 15, // Optional
+                    'marginTop' => 16, // Optional
+                    'marginBottom' => 16, // Optional
+                    'marginHeader' => 9, // Optional
+                    'marginFooter' => 9, // Optional
+                    'orientation' => 'Landscape',
+                ],
+            ]
+        ],
 
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
+            'viewPath' => '@app/mail',
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
                 'host' => 'smtp.gmail.com',
@@ -71,7 +92,7 @@ $config = [
         ],
          'authManager' => [
             'class' => 'yii\rbac\DbManager',
-            'defaultRoles' => ['normalUser'],
+            'defaultRoles' => ['Qppv Deputy'],
         ],
         'urlManager' => [
             'class' => 'yii\web\UrlManager',
@@ -88,6 +109,8 @@ $config = [
             ],
         ],
 
+
+
     ],
     'params' => $params,
     'defaultRoute' => 'site/landing'
@@ -103,6 +126,18 @@ if (YII_ENV_DEV)
             'baseUrl' => '@web/files',
             'filePermission' => 0777,
             'buckets' => [
+                'prsu-ack' => [
+                    'baseSubPath' => 'prsuAckFiles'
+                ],
+                'prsu' => [
+                    'baseSubPath' => 'prsuFiles'
+                ],
+                'rmp-ack' => [
+                    'baseSubPath' => 'rmpAckFiles'
+                ],
+                'rmp' => [
+                  'baseSubPath' => 'rmpFiles'
+                ],
                 'meddra-files' => [
                     'baseSubPath' => 'MeddrFiles',
                 ],
@@ -121,6 +156,9 @@ if (YII_ENV_DEV)
                 'psmfFile' => [
                     'baseSubPath' => 'psmfFiles'
                 ],
+                "icsrTestImage"=>[
+                    "baseSubPath"=>"icsrTestImages"
+                ]
                 ]
             ];
 
@@ -135,6 +173,18 @@ else{
             'baseUrl' => '@web/files',
             'filePermission' => 0777,
             'buckets' => [
+                'prsu-ack' => [
+                    'baseSubPath' => 'prsuAckFiles'
+                ],
+                'prsu' => [
+                    'baseSubPath' => 'prsuFiles'
+                ],
+                'rmp-ack' => [
+                    'baseSubPath' => 'rmpAckFiles'
+                ],
+                'rmp' => [
+                  'baseSubPath' => 'rmpFiles'
+                ],
                 'icsrVersions' => [
                     'baseSubPath' => 'icsrsVersions',
                 ],
@@ -150,6 +200,9 @@ else{
                 'psmfFile' => [
                     'baseSubPath' => 'psmfFiles'
                 ],
+                "icsrTestImage"=>[
+                    "baseSubPath"=>"icsrTestImages"
+                ]
             ]
         ];
 }
