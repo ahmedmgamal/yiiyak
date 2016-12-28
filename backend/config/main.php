@@ -67,8 +67,8 @@ $config = [
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
                 'host' => 'smtp.gmail.com',
-                'username' => 'yiiyaktest@gmail.com',
-                'password' => 'opensource',
+                'username' => 'info@pv-radar.com',
+                'password' => '?3vxs\gI@3<',
                 'port' => '587',
                 'encryption' => 'tls',
             ],
