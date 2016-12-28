@@ -100,7 +100,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			'label' => Yii::t('app','Role'),
 			'value' => function ($model){
 				$role = $model->getRole($model->id);
-				return isset($role) ? $role : Yii::t('app','Not Set');
+				return isset($role) ? $role : Yii::t('app','Qppv Deputy');
 			}
 			]
 

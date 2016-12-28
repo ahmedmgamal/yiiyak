@@ -101,7 +101,7 @@ class UserController extends Controller
                 if (!($model->isBeyondLimit()) && $model->save()) {
 
                     if(!in_array($roleName,$roles)) {
-                        $roleName = 'Qppv Person';
+                        $roleName = 'Manager';
                     }
 
                     if (!$model->setRole($model->id,$roleName))
@@ -150,7 +150,7 @@ class UserController extends Controller
             $transaction = $connection->beginTransaction();
 
             if(!in_array($roleName,$roles)) {
-                $roleName = 'Qppv Person';
+                $roleName = 'Manager';
             }
 
             if (!$model->updateRole($model->id,$roleName))

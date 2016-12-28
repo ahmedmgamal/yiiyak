@@ -25,35 +25,20 @@ class m161222_131257_add_qppv_person_role extends Migration
 
         $this->execute("INSERT INTO auth_item_child(parent,child) VALUES
 
-      ('Qppv Person','/crud/drug-prescription/index'),
-      ('Qppv Person','/crud/drug-prescription/view'),
-      ('Qppv Person','/crud/drug/index'),
-      ('Qppv Person','/crud/drug/view'),
-      ('Qppv Person','/crud/icsr-event/get-first-lt-from-pt'),
-      ('Qppv Person','/crud/icsr-event/get-pt-from-lt'),
-      ('Qppv Person','/crud/icsr-event/index'),
-      ('Qppv Person','/crud/icsr-event/view'),
-      ('Qppv Person','/crud/icsr-event/search'),
-      ('Qppv Person','/crud/icsr-event/search-llt'),
-      ('Qppv Person','/crud/icsr-event/search-pt'),
-      ('Qppv Person','/crud/icsr-reporter/index'),
-      ('Qppv Person','/crud/icsr-reporter/view'),
-      ('Qppv Person','/crud/icsr-test/index'),
-      ('Qppv Person','/crud/icsr-test/view'),
-      ('Qppv Person','/crud/icsr/index'),
-      ('Qppv Person','/crud/icsr/view'),
-      ('Qppv Person','/site/index'),
-      ('Qppv Person','/site/landing'),
-      ('Qppv Person','/site/login'),
-      ('Qppv Person','/site/logout'),
-      ('Qppv Person','/site/send-mail'),
-      ('Qppv Person','/site/request-password-reset'),
-      ('Qppv Person','/site/reset-password'),
-      ('Qppv Person','/crud/drug/summary-tabulation'),
-      ('Qppv Person','/crud/reports/summary-tabulation'),
-      ('Qppv Person','/crud/icsr/open-pdf'),
-      ('Qppv Person','/crud/icsr/download-xml-file'),
-      ('Qppv Person','/crud/icsr/get-diff-before-date');
+      ('Qppv Person','/crud/drug-prescription/create'),
+      ('Qppv Person','/crud/drug-prescription/update'),
+      ('Qppv Person','/crud/drug/create'),
+      ('Qppv Person','/crud/drug/update'),
+      ('Qppv Person','/crud/icsr-event/create'),
+      ('Qppv Person','/crud/icsr-event/update'),
+      ('Qppv Person','/crud/icsr-reporter/create'),
+      ('Qppv Person','/crud/icsr-reporter/update'),
+      ('Qppv Person','/crud/icsr-test/create'),
+      ('Qppv Person','/crud/icsr-test/update'),
+      ('Qppv Person','/crud/icsr/create'),
+      ('Qppv Person','/crud/icsr/update'),
+      ('Qppv Person','/crud/icsr/check-duplicate-icsr');
+
       
       ");
 

@@ -19,7 +19,8 @@ use \dmstr\bootstrap\Tabs;
  */
 ?>
 <?php $company_id = isset($_GET['Company']['company_id']) ? $_GET['Company']['company_id'] : 0;
-	  $createdUserRole = isset($model->id) ? $model->getRole($model->id): 0;
+
+	  $createdUserRole = isset($model->id)  ? ($model->getRole($model->id)) ?  : Yii::t('app','Qppv Deputy') : Yii::t('app','Qppv Deputy');
 
 ?>
 <div class="user-form">
