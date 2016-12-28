@@ -18,6 +18,8 @@ use yii\web\HttpException;
 use yii\helpers\Url;
 use dmstr\bootstrap\Tabs;
 use backend\modules\crud\models\search\Icsr as IcsrSearch;
+use backend\modules\crud\models\search\Rmp as RmpSearch;
+use backend\modules\crud\models\search\Prsu as PrsuSearch;
 /**
  * DrugController implements the CRUD actions for Drug model.
  */
@@ -76,13 +78,24 @@ class DrugController extends Controller
         $signaledIcsrs  = $model->getSignaledIcsrsAndIcsrEvenets($signaledDrugs);
         $icsrSeachModel = new IcsrSearch();
         $icsrDataProvider = $icsrSeachModel->search($_GET);
+
+        $rmpSearchModel = new RmpSearch();
+        $rmpDataProvider = $rmpSearchModel->search($_GET);
+
+        $prsuSearchModel = new PrsuSearch();
+        $prsuDataProvider = $prsuSearchModel->search($_GET);
+
 		return $this->render('view', [
 				'model' => $model,
                 'signaledDrugs' => $signaledDrugs,
                 'signaledIcsrs' => $signaledIcsrs,
                 'icsrSeachModel' => $icsrSeachModel,
                 'icsrDataProvider' => $icsrDataProvider,
-                'signal_detection'=>$signalValues
+                'signal_detection'=>$signalValues,
+                'rmpSearchModel' => $rmpSearchModel,
+                'rmpDataProvider' => $rmpDataProvider,
+                'prsuSearchModel' => $prsuSearchModel,
+                'prsuDataProvider' => $prsuDataProvider
 			]);
 	}
 

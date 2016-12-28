@@ -188,6 +188,180 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
     <?php
         $this->endBlock();
     ?>
+
+
+	<?php $this->beginBlock('Rmp'); ?>
+
+	<div style='position: relative'><div style='position:absolute; right: 0px; top: 0px;'>
+
+			<a class="btn btn-success btn-xs" href="<?= Url::to(['/crud/rmp/create', 'drug_id' => $model->id])?>">
+
+				<span class="glyphicon glyphicon-plus"></span><?= Yii::t('app','New ').'Rmp'?>
+			</a>
+
+		</div></div><?php Pjax::begin(['id'=>'pjax-Rmps', 'enableReplaceState'=> false, 'linkSelector'=>'#pjax-Rmps ul.pagination a, th a', 'clientOptions' => ['pjax:success'=>'function(){alert("yo")}']]) ?>
+	<?php echo '<div class="table-responsive">' . \yii\grid\GridView::widget([
+			'layout' => '{summary}{pager}<br/>{items}{pager}',
+			'dataProvider' => $rmpDataProvider,
+			'filterModel' => $rmpSearchModel,
+			'pager'        => [
+				'class'          => yii\widgets\LinkPager::className(),
+				'firstPageLabel' => Yii::t('app', 'First'),
+				'lastPageLabel'  => Yii::t('app', 'Last')
+			],
+			'columns' => [[
+				'class'      => 'yii\grid\ActionColumn',
+				'template'   => '{view} {update}',
+				'contentOptions' => ['nowrap'=>'nowrap'],
+
+				/**
+				 *
+				 */
+				'urlCreator' => function ($action, $model, $key, $index) {
+					// using the column name as key, not mapping to 'id' like the standard generator
+					$params = is_array($key) ? $key : [$model->primaryKey()[0] => (string) $key];
+					$params[0] = '/crud/rmp' . '/' . $action;
+					return $params;
+				},
+
+				'controller' => '/crud/rmp'
+			],
+				[
+					'header' => Yii::t('app','ID'),
+					'class' => SerialColumn::className()
+				],
+				'version',
+				'version_description',
+				[
+					'label' => Yii::t('app','Download RMP'),
+					'format' => 'raw',
+					'value' => function ($model){
+						return '<a href=/crud/rmp/download-file?path='.substr($model->rmp_file_url,strpos($model->rmp_file_url,'/files')).'>'.Yii::t('app','Download').'</a>';
+					}
+				],
+
+				[
+					'attribute' => 'rmp_created_by',
+					'value' => function ($model){
+						return ($model->getReportUserName());
+					}
+				],
+				'rmp_created_at',
+				[
+					'label' => Yii::t('app','Letter Header'),
+					'format' => 'raw',
+					'value' => function ($model){
+						if (isset($model->ack_file_url) && !empty($model->ack_file_url))
+						{
+							return '<a href=/crud/rmp/download-file?path='.substr($model->ack_file_url,strpos($model->ack_file_url,'/files')).'>'.Yii::t('app','Download Letter').'</a>';
+						}
+
+						return '<a href=/crud/rmp/upload-letter-header?id='.$model->id.' class="btn btn-warning btn-sm">'.Yii::t('app','Upload').'</a>';
+					}
+				],
+				[
+					'attribute' => 'ack_created_by',
+					'value' => function ($model){
+						return isset($model->ack_created_by) ? $model->getAckUserName() : Yii::t('app','not set');
+					}
+				],
+
+				'ack_created_at',
+				'next_rmp_date'
+			]
+		]) . '</div>' ?>
+	<?php Pjax::end() ?>
+
+	<?php $this->endBlock() ?>
+
+
+
+
+
+	<?php $this->beginBlock('Prsu'); ?>
+
+	<div style='position: relative'><div style='position:absolute; right: 0px; top: 0px;'>
+
+			<a class="btn btn-success btn-xs" href="<?= Url::to(['/crud/prsu/create', 'drug_id' => $model->id])?>">
+
+				<span class="glyphicon glyphicon-plus"></span><?= Yii::t('app','New ').'PBRER'?>
+			</a>
+
+		</div></div><?php Pjax::begin(['id'=>'pjax-Prsus', 'enableReplaceState'=> false, 'linkSelector'=>'#pjax-Prsus ul.pagination a, th a', 'clientOptions' => ['pjax:success'=>'function(){alert("yo")}']]) ?>
+	<?php echo '<div class="table-responsive">' . \yii\grid\GridView::widget([
+			'layout' => '{summary}{pager}<br/>{items}{pager}',
+			'dataProvider' => $prsuDataProvider,
+			'filterModel' => $prsuSearchModel,
+			'pager'        => [
+				'class'          => yii\widgets\LinkPager::className(),
+				'firstPageLabel' => Yii::t('app', 'First'),
+				'lastPageLabel'  => Yii::t('app', 'Last')
+			],
+			'columns' => [[
+				'class'      => 'yii\grid\ActionColumn',
+				'template'   => '{view}',
+				'contentOptions' => ['nowrap'=>'nowrap'],
+
+				/**
+				 *
+				 */
+				'urlCreator' => function ($action, $model, $key, $index) {
+					// using the column name as key, not mapping to 'id' like the standard generator
+					$params = is_array($key) ? $key : [$model->primaryKey()[0] => (string) $key];
+					$params[0] = '/crud/prsu' . '/' . $action;
+					return $params;
+				},
+
+				'controller' => '/crud/prsu'
+			],
+				[
+					'header' => Yii::t('app','ID'),
+					'class' => SerialColumn::className()
+				],
+				'version',
+				'version_description',
+				[
+					'label' => Yii::t('app','Download PBRER'),
+					'format' => 'raw',
+					'value' => function ($model){
+						return '<a href=/crud/prsu/download-file?path='.substr($model->prsu_file_url,strpos($model->prsu_file_url,'/files')).'>'.Yii::t('app','Download').'</a>';
+					}
+				],
+
+				[
+					'attribute' => 'prsu_created_by',
+					'value' => function ($model){
+						return ($model->getReportUserName());
+					}
+				],
+				'prsu_created_at',
+				[
+					'label' => Yii::t('app','Letter Header'),
+					'format' => 'raw',
+					'value' => function ($model){
+						if (isset($model->ack_file_url) && !empty($model->ack_file_url))
+						{
+							return '<a href=/crud/prsu/download-file?path='.substr($model->ack_file_url,strpos($model->ack_file_url,'/files')).'>'.Yii::t('app','Download Letter').'</a>';
+						}
+
+						return '<a href=/crud/prsu/upload-letter-header?id='.$model->id.' class="btn btn-warning btn-sm">'.Yii::t('app','Upload').'</a>';
+					}
+				],
+				[
+					'attribute' => 'ack_created_by',
+					'value' => function ($model){
+						return isset($model->ack_created_by) ? $model->getAckUserName() : Yii::t('app','not set');
+					}
+				],
+
+				'ack_created_at',
+				'next_prsu_date'
+			]
+		]) . '</div>' ?>
+	<?php Pjax::end() ?>
+
+	<?php $this->endBlock() ?>
+
     <?php echo Tabs::widget(
 	[
 		'id' => 'relation-tabs',
@@ -207,7 +381,19 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
                 'label'   => '<small>Signal Detection </small>',
                 'active'  => false,
             ],
-        ]
+			[
+				'content' => $this->blocks['Rmp'],
+				'label'   => '<small>RMP <span class="badge badge-default">'.count($model->getRmps()->asArray()->all()).'</span></small>',
+				'active'  => false,
+			],
+
+			[
+				'content' => $this->blocks['Prsu'],
+				'label'   => '<small>PBRER <span class="badge badge-default">'.count($model->getPrsus()->asArray()->all()).'</span></small>',
+				'active'  => false,
+			],
+
+		]
 	]
 );
 ?>
