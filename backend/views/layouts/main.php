@@ -54,6 +54,9 @@ AppAsset::register($this);
         }
 
         $userRole = \Yii::$app->authManager->getRolesByUser(\Yii::$app->user->id);
+        if (\Yii::$app->user->can('/crud/company/statistics') && !isset($userRole['admin'])){
+            $menuItems [] = ['label' => Yii::t('app','Statistics') , 'url' => ['/crud/company/statistics']];
+        }
 
         if (\Yii::$app->user->can('/crud/psmf/index') && !isset($userRole['admin'])){
             $menuItems [] =  ['label' => 'PSMF', 'url' => ['/crud/psmf/index']];
@@ -79,6 +82,7 @@ AppAsset::register($this);
 
             ];
         }
+
 
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
