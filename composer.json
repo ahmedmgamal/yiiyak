@@ -30,7 +30,8 @@
       "bedezign/yii2-audit": "^1.0",
       "aws/aws-sdk-php": "~2.0",
       "yii2tech/file-storage": "*",
-        "robregonm/yii2-pdf": "*"
+        "robregonm/yii2-pdf": "*",
+      "miloschuman/yii2-highcharts-widget": "*"
 
     },
     "require-dev": {
