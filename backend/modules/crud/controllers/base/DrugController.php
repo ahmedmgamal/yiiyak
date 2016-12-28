@@ -11,9 +11,11 @@
 
 namespace backend\modules\crud\controllers\base;
 
+use backend\modules\crud\models\base\LkpLimits;
 use backend\modules\crud\models\Drug;
 use backend\modules\crud\models\LkpRoute;
 use backend\modules\crud\models\search\Drug as DrugSearch;
+use yii\helpers\StringHelper;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\helpers\Url;
@@ -161,19 +163,27 @@ class DrugController extends Controller
 	}
 
     public function actionExcelUpload(){
-        try{
             $model = new Drug;
             if(\Yii::$app->request->isPost){
+                $company = \Yii::$app->user->identity->company;
+                $planLimit = $company->getDrugsLimit();
+                $companyDrugs = $company->getDrugsCount();
+                $maxDrugsUpload = $planLimit - $companyDrugs;
+                if($maxDrugsUpload <= 0){
+                    \Yii::$app->getSession()->addFlash('error', \Yii::t("app","Max Plan Drugs Limit."));
+                    return $this->redirect(['index']);
+                }
                 if($this->validateUploadedExcel()){
                     $excel =$_FILES['excel']['tmp_name'];
                     $data = \moonland\phpexcel\Excel::import($excel,[
                         'setFirstRecordAsKeys' => true,
                         'setIndexSheetByName' => true
-
                     ]);
-
                     $drugs = $this->createUploadData($data);
-
+                    if(count($drugs) > $maxDrugsUpload){
+                        \Yii::$app->getSession()->addFlash('error', \Yii::t("app","Max Plan Drugs Limit."));
+                        return $this->render('upload',["model"=>$model]);
+                    }
                     $result =$this->bulkInsert($drugs);
                     \Yii::$app->getSession()->addFlash('success', $result . " Records Uploaded successfully.");
                     return $this->redirect(['index']);
@@ -184,12 +194,14 @@ class DrugController extends Controller
             }else{
                 return $this->render('upload',["model"=>$model]);
             }
-        }catch (\Exception $exception ){
-            \Yii::$app->getSession()->addFlash('error',\Yii::t("app",$exception->getMessage()));
-            return $this->render('upload',["model"=>$model]);
-        }
 
 
+    }
+    public function actionExcelDownload(){
+        $path = \Yii::getAlias('@webroot').'/sample_files/';
+        $fileName = StringHelper::basename("upload.xlsx");
+        $path .= $fileName;
+        \Yii::$app->response->sendFile($path);
     }
 
 	/**
@@ -235,14 +247,14 @@ class DrugController extends Controller
         return $drugs;
     }
     private function loadSheet($data){
-        $companyId = \Yii::$app->user->identity->company->id;
+        $company = \Yii::$app->user->identity->company;
         $LkpRoutes = LkpRoute::find()->all();
         foreach ($data as $record){
             $drugs[] = [
                 $record['Generic Name'],
                 $record['Trade Name'],
                 $record['Dosage Form'],//composition
-                $companyId,
+                $company->id,
                 $record['Manufacturer'],
                 $record['Strength'],
                 $this->getRouteLkpId($record['Route Of Administration'],$LkpRoutes)

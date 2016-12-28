@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1>
         <?php echo $model->getAliasModel() ?>        <small>
-                        <?php echo $model->id ?>        </small>
+                    <?php echo $model->id ?>        </small>
     </h1>
 
     <div class="clearfix crud-navigation">
@@ -37,6 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="drug-form">
 
+        <p>Please Download this sample Excel <a href="<?php echo Url::toRoute("drug/excel-download") ?>" class="btn btn-warning glyphicon glyphicon-save"></a> file , Fill it with drugs date and upload it.</p>
 <?php
 echo Html::beginForm([Url::toRoute("drug/excel-upload")], 'post', ['enctype' => 'multipart/form-data']);
 ?>
