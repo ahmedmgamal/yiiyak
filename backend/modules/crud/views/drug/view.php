@@ -25,6 +25,10 @@ $this->title = $model->getAliasModel() . $model->trade_name;
 $this->params['breadcrumbs'][] = ['label' => $model->getAliasModel(true), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => (string)$model->trade_name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'View');
+
+$helpers = Yii::$app->helpers;
+$updateIcsr = ( $helpers->currentUserCan('/crud/icsr/update')) ? '{update}' : '';
+
 ?>
 <div class="giiant-crud drug-view">
 
@@ -47,9 +51,11 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
     <div class="clearfix crud-navigation">
         <!-- menu buttons -->
         <div class='pull-left'>
-            <?php echo Html::a('<span class="glyphicon glyphicon-pencil"></span> ' . Yii::t('app', 'Edit'), ['update', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
+            <?php if ($helpers->currentUserCan('/crud/drug/update')) {?>
+			<?php echo Html::a('<span class="glyphicon glyphicon-pencil"></span> ' . Yii::t('app', 'Edit'), ['update', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
             <?php echo Html::a('<span class="glyphicon glyphicon-copy"></span> ' . Yii::t('app', 'Copy'), ['create', 'id' => $model->id, 'Drug            '=>$copyParams], ['class' => 'btn btn-success']) ?>
             <?php echo Html::a('<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('app', 'New'), ['create'], ['class' => 'btn btn-success']) ?>
+			<?php }?>
 			<?php
 			if ($model->isSignaled($signaledDrugs,'drug_id')) {
 				 echo '<span class="alert-signal-color"> <span class="glyphicon glyphicon-warning-sign "></span> '.Yii::t('app','Signal Detected Check Icsrs Below').'</span>';
@@ -96,11 +102,12 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 
 <?php $this->beginBlock('Icsrs'); ?>
 <div style='position: relative'><div style='position:absolute; right: 0px; top: 0px;'>
-
+<?php if ($helpers->currentUserCan('/crud/icsr/create')){?>
 <a class="btn btn-success btn-xs" href="<?= Url::to(['/crud/icsr/create', 'Icsr' => ['drug_id' => $model->id]])?>">
 
 	<span class="glyphicon glyphicon-plus"></span><?= Yii::t('app','New ').'Icsr'?>
 </a>
+	<?php } ?>
 
 </div></div><?php Pjax::begin(['id'=>'pjax-Icsrs', 'enableReplaceState'=> false, 'linkSelector'=>'#pjax-Icsrs ul.pagination a, th a', 'clientOptions' => ['pjax:success'=>'function(){alert("yo")}']]) ?>
 <?php echo '<div class="table-responsive">' . \yii\grid\GridView::widget([
@@ -114,7 +121,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 		],
 		'columns' => [[
 				'class'      => 'yii\grid\ActionColumn',
-				'template'   => '{view} {update} {signal}',
+				'template'   => '{view} '.$updateIcsr.' {signal}',
 				'contentOptions' => ['nowrap'=>'nowrap'],
 
 				/**

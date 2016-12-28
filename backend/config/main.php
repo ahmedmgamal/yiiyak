@@ -39,6 +39,9 @@ $config = [
     ],
 
     'components' => [
+        'helpers' => [
+            'class' => 'backend\components\HelpersComponent',
+        ],
 
         'response' => [
             'formatters' => [
@@ -89,7 +92,7 @@ $config = [
         ],
          'authManager' => [
             'class' => 'yii\rbac\DbManager',
-            'defaultRoles' => ['normalUser'],
+            'defaultRoles' => ['Qppv Deputy'],
         ],
         'urlManager' => [
             'class' => 'yii\web\UrlManager',

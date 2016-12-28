@@ -35,6 +35,7 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = array();
+    $adminSubMenus = [];
 
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
@@ -45,7 +46,7 @@ AppAsset::register($this);
         }
 
         if (\Yii::$app->user->can('/crud/user/index')) {
-            $menuItems [] =  ['label' => 'Users', 'url' => ['/crud/user/index']];
+            $adminSubMenus [] =  ['label' => Yii::t('app', 'Users'), 'url' => ['/crud/user/index']];
         }
 
         if (\Yii::$app->user->can('/crud/lkp-plan/index')){
@@ -67,6 +68,15 @@ AppAsset::register($this);
                 'items' => [
                     ['label' => 'Summary Tabulation', 'url' => '/crud/drug/summary-tabulation'],
                 ]
+            ];
+        }
+
+        if(!empty($adminSubMenus))
+        {
+            $menuItems [] = [
+                'label' => Yii::t('app','admin'),
+                'items' => $adminSubMenus
+
             ];
         }
 

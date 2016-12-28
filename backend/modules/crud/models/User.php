@@ -12,7 +12,7 @@ use backend\modules\crud\traits;
 class User extends BaseUser implements IdentityInterface
 {
 
-    use traits\checkLimit;
+    use traits\checkLimit,traits\checkUserCan;
     /**
      * @inheritdoc
      */
