@@ -7,6 +7,7 @@
 
 
 namespace backend\modules\crud\controllers;
+use backend\modules\crud\models\Company;
 use Yii;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
@@ -29,7 +30,11 @@ class CompanyController extends \backend\modules\crud\controllers\base\CompanyCo
                     [
                         'allow' => true,
                         'actions' => ['statistics'],
-                        'roles' => ['normalUser'],
+                        'matchCallback' => function ($rule,$action){
+                            $user_id = \Yii::$app->user->id;
+                            return Company::checkUserCan($user_id);
+
+                        }
                     ],
                     [
                         'allow' => true,
