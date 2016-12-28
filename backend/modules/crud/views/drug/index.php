@@ -89,6 +89,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			'trade_name',
 			'composition',
 			'manufacturer',
+			'next_prsu_date'
 			/*'strength'*/
 		],
 	]); ?>
