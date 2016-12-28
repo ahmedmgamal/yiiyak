@@ -66,11 +66,18 @@ $config = [
             'viewPath' => '@app/mail',
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
-                'host' => 'smtp.gmail.com',
+                'host' => 'host146.hostmonster.com',
                 'username' => 'info@pv-radar.com',
                 'password' => '?3vxs\gI@3<',
-                'port' => '587',
-                'encryption' => 'tls',
+                'port' => '465',
+                'encryption' => 'ssl',
+//                'streamOptions' => [
+//                    'ssl' => [
+//                        'verify_peer' => false,
+//                        'verify_peer_name' => false,
+//                        'allow_self_signed' => true
+//                    ],
+//                ]
             ],
         ],
         'user' => [

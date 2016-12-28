@@ -39,7 +39,7 @@ class IcsrVersionController extends \backend\modules\crud\controllers\base\IcsrV
             try {
                 if (\Swift_Validate::email($sendToEmail) == 1) {
                     Yii::$app->mailer->compose('xmlEmail', ['additionalInfo' => $additionalInfo, 'senderCompanyName' => $senderCompanyName])
-                        ->setFrom('yiiyaktest@gmail.com')
+                        ->setFrom('info@pv-radar.com')
                         ->setTo($sendToEmail)
                         ->setSubject('Xml File')
                         ->setReplyTo($senderEmail)
