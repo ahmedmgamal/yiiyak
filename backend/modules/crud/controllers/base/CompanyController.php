@@ -191,7 +191,6 @@ class CompanyController extends Controller
         $mpdf = new mPDF();
         $mpdf->simpleTables = true;
         $mpdf->Bookmark('Company');
-
         $companyHtml = $this->generateCompanyHtml($company);
         $drugsHtml = $this->generateDrugsHtml($drugs);
         $mpdf->WriteHTML($companyHtml);
@@ -202,7 +201,6 @@ class CompanyController extends Controller
         $mpdf->AddPage();
         $this->generateDrugIcsrPdf($mpdf,$drugs);
         $mpdf->Output();
-
     }
     private function generateIcsrPdf($mpdf,$drug){
 	    if(count($drug->icsrs) > 0){
