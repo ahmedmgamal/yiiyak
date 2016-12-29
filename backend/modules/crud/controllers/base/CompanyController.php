@@ -11,6 +11,7 @@
 
 namespace backend\modules\crud\controllers\base;
 
+use backend\modules\crud\controllers\IcsrController;
 use backend\modules\crud\models\Company;
 use backend\modules\crud\models\Drug;
 use backend\modules\crud\models\search\Company as CompanySearch;
@@ -187,21 +188,36 @@ class CompanyController extends Controller
 	public function actionFullExport(){
         $company = Yii::$app->user->identity->getCompany()->one();
         $drugs = $company->drugs;
-//        $pdf = new FPDF();
-////
-//        $pdf->AddPage();
-//        header('Content-type: text/xml');
         $mpdf = new mPDF();
+        $mpdf->simpleTables = true;
         $mpdf->Bookmark('Company');
+
         $companyHtml = $this->generateCompanyHtml($company);
         $drugsHtml = $this->generateDrugsHtml($drugs);
         $mpdf->WriteHTML($companyHtml);
         $mpdf->AddPage();
         $mpdf->Bookmark('Drugs');
-        $mpdf->WriteHTML("<div><h2 style=\"text-align: center;\">Company Drugs</h2></div>");
+        $mpdf->WriteHTML("<div><h2 style='text-align: center;'>Company Drugs</h2></div>");
         $mpdf->WriteHTML($drugsHtml);
+        $mpdf->AddPage();
+        $this->generateDrugIcsrPdf($mpdf,$drugs);
         $mpdf->Output();
 
+    }
+    private function generateIcsrPdf($mpdf,$drug){
+	    if(count($drug->icsrs) > 0){
+            $mpdf->Bookmark($drug->generic_name);
+        }
+
+        foreach ($drug->icsrs as $icsr){
+            $hasIcsrs = true;
+            $mpdf->WriteHTML($this->getIcsrHtml($icsr));
+        }
+    }
+    private function generateDrugIcsrPdf($mpdf,$drugs){
+        foreach ($drugs as $drug){
+            $this->generateIcsrPdf($mpdf,$drug);
+        }
     }
     private function generateCompanyHtml($company){
         $companyDate = date_create($company->end_date);
@@ -243,6 +259,16 @@ class CompanyController extends Controller
         $html .= "</table>";
         $html .= "</div>";
         return $html;
+    }
+    private function getIcsrHtml($icsr){
+
+        $xml =  $this->renderPartial('/icsr/export', [
+            "model"=>$icsr
+        ]);
+        $xml = simplexml_load_string($xml);
+        $e2pLkp = Yii::$app->params['e2bLkp'];
+        $elementsLkp = Yii::$app->params['elementsLkp'];
+        return $this->renderPartial('/icsr/open-pdf',['xml' => $xml , 'e2pLkp' => $e2pLkp , 'elementsLkp' => $elementsLkp]);
     }
 
 }
