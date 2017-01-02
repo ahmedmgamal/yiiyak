@@ -106,19 +106,26 @@ $( document ).ready(function() {
 
                 var diffs = response.diffs;
 
+
+
                 $('#diffTable').find("tr:gt(0)").remove();
 
                 var htmlRows = '';
                 for (var i=0; i<diffs.length ; i++)
                 {
+                    var field = (diffs[i].field || false) ? diffs[i].field.replace(/,/g,'<br>') : '';
+                    var old_value = (diffs[i].old_value || false) ? diffs[i].old_value.replace(/,/g,'<br>') : '';
+                    var new_value = (diffs[i].new_value || false) ? diffs[i].new_value.replace(/,/g,'<br>') : '';
+
+
                     htmlRows += '<tr>'
 
                     htmlRows += "<td>" + diffs[i].user_id+ "</td>"
                     htmlRows += "<td>" +diffs[i].action+ "</td>"
                     htmlRows += "<td>" +diffs[i].model+ "</td>"
-                    htmlRows += "<td>" +diffs[i].field.replace(/,/g,'<br>')+ "</td>"
-                    htmlRows += "<td>" +diffs[i].old_value.replace(/,/g,'<br>')+ "</td>"
-                    htmlRows += "<td>" +diffs[i].new_value.replace(/,/g,'<br>')+ "</td>"
+                    htmlRows += "<td>" + field + "</td>"
+                    htmlRows += "<td>" +old_value+ "</td>"
+                    htmlRows += "<td>" +new_value+ "</td>"
                     htmlRows += "<td>" +diffs[i].created+ "</td>"
 
                     htmlRows += '</tr>'

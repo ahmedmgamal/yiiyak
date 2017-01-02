@@ -7,6 +7,7 @@
 
 
 namespace backend\modules\crud\controllers;
+use backend\modules\crud\models\Company;
 use Yii;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
@@ -29,7 +30,11 @@ class CompanyController extends \backend\modules\crud\controllers\base\CompanyCo
                     [
                         'allow' => true,
                         'actions' => ['statistics'],
-                        'roles' => ['normalUser'],
+                        'matchCallback' => function ($rule,$action){
+                            $user_id = \Yii::$app->user->id;
+                            return Company::checkUserCan($user_id);
+
+                        }
                     ],
                     [
                         'allow' => true,
@@ -39,6 +44,31 @@ class CompanyController extends \backend\modules\crud\controllers\base\CompanyCo
                 ]
             ]
         ];
+    }
+
+
+    public function actionCompanyStatistics ($companyId)
+    {
+        $model = $this->findModel($companyId);
+
+        $totalUsers = $model->plan->getOneLimitAmount('user');
+        $totalProducts = $model->plan->getOneLimitAmount('drug');
+
+        $usedUsers = count($model->users);
+        $usedProducts = count($model->drugs);
+
+        $remainingUsers = $totalUsers - $usedUsers;
+        $remainingProducts = $totalProducts  - $usedProducts;
+
+        return $this->render('company-statistics',[
+            'model' => $model,
+            'totalUsers' => $totalUsers,
+            'totalProducts' => $totalProducts,
+            'usedUsers' => $usedUsers,
+            'usedProducts' => $usedProducts,
+            'remainingUsers' => $remainingUsers,
+            'remainingProducts' => $remainingProducts
+        ]);
     }
 
     public function actionStatistics ()
@@ -146,6 +176,7 @@ class CompanyController extends \backend\modules\crud\controllers\base\CompanyCo
         return ['monthNames' => $monthNames ,'icsrsNumbers' => $icsrsNumbers] ;
 
     }
+
 
 
 

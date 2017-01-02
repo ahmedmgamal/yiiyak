@@ -87,6 +87,14 @@ class UserController extends Controller
         try {
 			if ($model->load($_POST)) {
 
+
+			    if ($model->isBeyondLimit())
+                {
+                    \Yii::$app->getSession()->setFlash('error', \Yii::t('app',"you have exceeded your users limit upgrade {$model->company->name} plan to add more users "));
+
+                }
+			    elseif ( $model->save()) {
+
                 $roleName = \Yii::$app->request->post('role_name');
                 $connection = \Yii::$app->db;
                 $transaction = $connection->beginTransaction();
@@ -114,18 +122,15 @@ class UserController extends Controller
 
                     $transaction->commit();
 
+
                     return $this->redirect(Url::previous());
                 }
-                else
-                    {
-                        \Yii::$app->getSession()->setFlash('error', \Yii::t('app',"you have exceeded your users limit upgrade {$model->company->name} plan to add more users "));
 
-                    }
 
 			} elseif (!\Yii::$app->request->isPost) {
 				$model->load($_GET);
 			}
-		} catch (\Exception $e) {
+		} }catch (\Exception $e) {
 			$msg = (isset($e->errorInfo[2]))?$e->errorInfo[2]:$e->getMessage();
 			$model->addError('_exception', $msg);
 		}

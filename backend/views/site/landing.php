@@ -27,7 +27,9 @@ use yii\bootstrap\Nav;
 
                             <!-- Center paragraph -->
                             <p class="ls-l text-standard text-center c-white" style="width: 900px; top: 50%; left: 50%;" data-ls="offsetxin:-250;offsetyin:-;durationin:1000;delayin:1000;offsetxout:0;offsetyout:-8;easingout:easeInOutQuart;scalexout:1.2;scaleyout:1.2;">
+
                                 <?= Html::img('@web/images/logos/pvRadarLogo.png',['class' => 'img-responsive','alt' => 'PV-Radar artimis logo']) ?>
+
 
                             </p>
 

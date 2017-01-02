@@ -41,7 +41,8 @@ class m161222_135928_add_qppv_debuty_role extends Migration
       ('Qppv Deputy','/crud/reports/summary-tabulation'),
       ('Qppv Deputy','/crud/icsr/open-pdf'),
       ('Qppv Deputy','/crud/icsr/download-xml-file'),
-      ('Qppv Deputy','/crud/icsr/get-diff-before-date');
+      ('Qppv Deputy','/crud/icsr/get-diff-before-date'),
+      ('Qppv Deputy','/crud/company/statistics');
       ");
 
 

@@ -45,8 +45,12 @@ use yii\helpers\ArrayHelper;
 
 
 
-        <?php echo $form->field($model, 'event_date')->widget(DatePicker::className(),['dateFormat' => 'yyyy-MM-dd']); ?>
-        <?php echo $form->field($model, 'event_end_date')->widget(DatePicker::className(),['dateFormat' => 'yyyy-MM-dd']); ?>
+        <?php echo $form->field($model, 'event_date')->widget(DatePicker::className(),['dateFormat' => 'yyyy-MM-dd',  'clientOptions' => [
+                'maxDate' => 0
+            ]]); ?>
+        <?php echo $form->field($model, 'event_end_date')->widget(DatePicker::className(),['dateFormat' => 'yyyy-MM-dd', 'clientOptions' => [
+                'maxDate' => 0
+            ]]); ?>
 
             <?php
             $events_outcome = backend\modules\crud\models\LkpIcsrEventoutcome::find()->all();

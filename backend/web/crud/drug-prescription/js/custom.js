@@ -1,9 +1,9 @@
-$('#drugprescription-use_date_start').datepicker({ dateFormat: 'yy-mm-dd',onSelect: function (dateText,inst){
+$('#drugprescription-use_date_start').datepicker({ dateFormat: 'yy-mm-dd',maxDate: 0,onSelect: function (dateText,inst){
     changeDurationUseAndUnit($(this).datepicker( 'getDate' ),$('#drugprescription-use_date_end').datepicker('getDate'));
 }});
 
 
-$('#drugprescription-use_date_end').datepicker({dateFormat: 'yy-mm-dd',onSelect: function (dateText,inst){
+$('#drugprescription-use_date_end').datepicker({dateFormat: 'yy-mm-dd',maxDate: 0,onSelect: function (dateText,inst){
     changeDurationUseAndUnit($('#drugprescription-use_date_start').datepicker('getDate'),$(this).datepicker( 'getDate' ));
 }});
 

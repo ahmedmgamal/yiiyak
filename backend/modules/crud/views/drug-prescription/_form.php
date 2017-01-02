@@ -45,8 +45,8 @@ use yii\helpers\ArrayHelper;
 			<?php echo $form->field($model, 'expiration_date')->widget(DatePicker::className(),['dateFormat' => 'yyyy-MM-dd']); ?>
 			<?php echo $form->field($model, 'lot_no')->textInput(['maxlength' => true]) ?>
 
-			<?php echo $form->field($model, 'use_date_start')->widget(DatePicker::className(),['dateFormat' => 'yyyy-MM-dd']); ?>
-			<?php echo $form->field($model, 'use_date_end')->widget(DatePicker::className(),['dateFormat' => 'yyyy-MM-dd']); ?>
+			<?php echo $form->field($model, 'use_date_start')->widget(DatePicker::className(),['dateFormat' => 'yyyy-MM-dd','clientOptions' => ['maxDate' => 0]]); ?>
+			<?php echo $form->field($model, 'use_date_end')->widget(DatePicker::className(),['dateFormat' => 'yyyy-MM-dd','clientOptions' => ['maxDate' => 0]]); ?>
 			<?php echo $form->field($model, 'duration_of_use')->textInput(['type' => 'number', 'maxlength' => true, 'onchange'=>'changeDates()']) ?>
 			<?php echo $form->field($model, 'duration_of_use_unit')->dropDownList(                          
                             \yii\helpers\ArrayHelper::map(backend\modules\crud\models\LkpTimeUnit::find()->all(), 'id', 'name'),
