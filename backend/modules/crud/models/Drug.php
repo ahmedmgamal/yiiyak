@@ -63,7 +63,6 @@ class Drug extends BaseDrug
     public function get_signalDetectionArray(){
         $signalValues= [];
         foreach ($this->getIcsrEvents() as $event){
-            $values = $this->get_ABCD($event['EventName']);
             $A = isset($values['A']) ? $values['A'] : 0;
             $B = isset($values['B']) ? $values['B'] : 0;
             $C = isset($values['C']) ? $values['C'] : 0;
@@ -89,6 +88,8 @@ class Drug extends BaseDrug
             $confidence_2 = $PRR * (exp(1.96 * $SE));
             $lower = min($confidence_1,$confidence_2);
             $isSignal = $this->isSignal($lower,$A);
+
+            $values = $this->getAbcd($event['EventName']);
             $signalValues[] = [
                 "event_description"=>$event['EventName'],
                 "A"=> $A,
@@ -109,7 +110,7 @@ class Drug extends BaseDrug
         }
         return $signalValues;
     }
-    private function get_ABCD($eventName){
+    private function getAbcd($eventName){
         $sql = "SELECT
                   MAX(IF(`EventName` = 'A', COUNTS, NULL)) AS A,
                   MAX(IF(`EventName` = 'B', COUNTS, NULL)) AS B,

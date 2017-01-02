@@ -27,6 +27,19 @@ class IcsrEventController extends \backend\modules\crud\controllers\base\IcsrEve
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
+                        'allow' => false,
+                        'actions' => ['update','delete','create'],
+                        'matchCallback' => function ($rule,$action){
+                            $icsrEvent_id = \Yii::$app->request->getQueryParam('id');
+                            if (isset($icsrEvent_id) && !empty($icsrEvent_id)) {
+                                return IcsrEvent::checkObjIcsrNullExported($icsrEvent_id);
+                            }
+
+                            return IcsrEvent::checkIcsrNullExported(\Yii::$app->request->getQueryParam('IcsrEvent')['icsr_id']);
+
+                        }
+                    ],
+                    [
                         'allow' => true,
                         'matchCallback' => function ($rule, $action) {
                             $user_id = \Yii::$app->user->id;
@@ -44,10 +57,14 @@ class IcsrEventController extends \backend\modules\crud\controllers\base\IcsrEve
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
 
+        if (Yii::$app->user->identity->company->enable_meddra_search != 1)
+        {
+            return ['ptTerms' => []];
+        }
+
         if (isset($term) && !empty($term))
         {
 
-        
         $connection = Yii::$app->getDb();
            
         $term = '+' . $term . '*';
@@ -74,8 +91,12 @@ class IcsrEventController extends \backend\modules\crud\controllers\base\IcsrEve
 
     public function actionSearchLlt ($ptTerm,$searchTerm)
     {
-        Yii::$app->response->format = Response::FORMAT_JSON;
 
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        if (Yii::$app->user->identity->company->enable_meddra_search != 1)
+        {
+            return ['lltTerms' => []];
+        }
         $whereCondition = "";
 
         if (isset($ptTerm) && !empty($ptTerm))
@@ -105,7 +126,6 @@ class IcsrEventController extends \backend\modules\crud\controllers\base\IcsrEve
 
             return ['lltTerms' => $response];
         }
-
 
         return ['lltTerms' => []];
     }
@@ -160,8 +180,6 @@ class IcsrEventController extends \backend\modules\crud\controllers\base\IcsrEve
         }
 
         return ['ltTerm' => ''];
-
-
     }
 
 }

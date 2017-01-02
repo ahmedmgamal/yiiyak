@@ -55,7 +55,7 @@ abstract class Company extends \yii\db\ActiveRecord
     {
         return [
             [['name','end_date','plan_id','short_name'],'required'],
-            [['id','plan_id'], 'integer'],
+            [['id','plan_id','enable_meddra_search'], 'integer'],
             [['short_name'],'string','max' => 4],
             [['short_name'],'unique'],
             [['name', 'adderess', 'license_no', 'license_image_url'], 'string', 'max' => 45]
@@ -74,7 +74,8 @@ abstract class Company extends \yii\db\ActiveRecord
             'license_no' => Yii::t('app', 'License No'),
             'license_image_url' => Yii::t('app', 'License Image Url'),
             'plan_id' => Yii::t('app','Plan'),
-            'short_name' => Yii::t('app','Short Name')
+            'short_name' => Yii::t('app','Short Name'),
+            'enable_meddra_search' => Yii::t('app','Enable Meddra Search')
         ];
     }
 

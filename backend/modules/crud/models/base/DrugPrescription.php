@@ -21,7 +21,6 @@ use Yii;
  * @property string $duration_of_use
  * @property string $duration_of_use_unit
  * @property string $reason_of_use
- * @property string $problem_went_after_stop
  * @property string $problem_returned_after_reuse
  * @property string $active_substance_names
  * @property string $drug_role
@@ -77,7 +76,7 @@ abstract class DrugPrescription extends \yii\db\ActiveRecord
             [['icsr_id'], 'required'],
             [['expiration_date', 'use_date_start', 'use_date_end'], 'safe'],
             [['duration_of_use'], 'number','max' => 99999],
-            [['duration_of_use_unit', 'problem_went_after_stop', 'problem_returned_after_reuse', 'drug_role'], 'string'],
+            [['duration_of_use_unit', 'problem_returned_after_reuse', 'drug_role'], 'string'],
             [['drug_action_drug_withdrawn', 'drug_action_dose_reduced', 'drug_action_dose_increased', 'drug_action_dose_not_changed', 'drug_action_unknown'], 'boolean'],
             [[ 'lot_no'], 'string', 'max' => 35],
             [['reason_of_use'], 'string', 'max' => 250],
@@ -109,7 +108,6 @@ abstract class DrugPrescription extends \yii\db\ActiveRecord
             'duration_of_use' => Yii::t('app', 'Duration Of Use'),
             'duration_of_use_unit' => Yii::t('app', 'Duration Of Use Unit'),
             'reason_of_use' => Yii::t('app', 'Reason Of Use'),
-            'problem_went_after_stop' => Yii::t('app', 'Problem Went After Stop'),
             'problem_returned_after_reuse' => Yii::t('app', 'Problem Returned After Reuse'),
             'active_substance_names' => Yii::t('app', 'Active Substance Names'),
             'drug_role' => Yii::t('app', 'Drug Role'),
@@ -143,7 +141,6 @@ abstract class DrugPrescription extends \yii\db\ActiveRecord
             'duration_of_use' => Yii::t('app', '	B.4.k.15 Duration of drug administration'),
             'duration_of_use_unit' => Yii::t('app', '	B.4.k.15 Duration of drug administration'),
             'reason_of_use' => Yii::t('app', '	B.4.k.11 Indication for use in the case'),
-            'problem_went_after_stop' => Yii::t('app', 'Problem Went After Stop'),
             'problem_returned_after_reuse' => Yii::t('app', '	B.4.k.17 Effect of rechallenge'),
             'active_substance_names' => Yii::t('app', 'B.4.k.2.2 Active substance name(s)'),
             'drug_role' => Yii::t('app', 'B.4.k.1 Characterization of drug role (Suspect/Concomitant/Interacting)'),

@@ -83,6 +83,7 @@ class IcsrTestController extends Controller
 		try {
 			if (\Yii::$app->request->isPost) {
 			    //Check If user uploaded a file
+
 			    if(is_uploaded_file($_FILES['IcsrTest']['tmp_name']['image'])){
                     $_POST["IcsrTest"]["image"] = $this->saveIcsrTestImage();
                 }
@@ -109,8 +110,8 @@ class IcsrTestController extends Controller
 	 */
 	public function actionUpdate($id) {
 		$model = $this->findModel($id);
-
 		if (\Yii::$app->request->isPost) {
+
             if(is_uploaded_file($_FILES['IcsrTest']['tmp_name']['image'])){
                 $_POST["IcsrTest"]["image"] = $this->saveIcsrTestImage();
             }
@@ -175,13 +176,15 @@ class IcsrTestController extends Controller
 	}
 
 	private function saveIcsrTestImage(){
-        $bucket = \Yii::$app->fileStorage->getBucket("icsrTestImage");
-        $fileExt = end(explode(".",$_FILES['IcsrTest']["name"]["image"]));
+        $bucket = \Yii::$app->fileStorage->getBucket("psmfImages");
+        $imageFile = $_FILES['IcsrTest']["name"]["image"];
+        $tempNames = explode(".",$imageFile);
+        $fileExt = end($tempNames);
         $filename = "icsrTestImage_".strtotime("now.").$fileExt;
-        $file_content =  file_get_contents($_FILES['IcsrTest']['tmp_name']['image']);
+        $fileTemp = $_FILES['IcsrTest']['tmp_name']['image'];
+        $file_content =  file_get_contents($fileTemp);
         $bucket->saveFileContent($filename,$file_content);
         return $bucket->getFileUrl($filename);
-
     }
 
 

@@ -12,6 +12,7 @@ use \backend\modules\crud\traits;
 class IcsrReporter extends BaseIcsrReporter
 {
     use traits\checkAccess;
+    use traits\checkIcsrNullExported;
     public function attributeHints()
     {
         return array_merge(
@@ -45,5 +46,9 @@ class IcsrReporter extends BaseIcsrReporter
 
             ]
         ];
+    }
+
+    public function getEgyptIdFromLkpCountry() {
+        return LkpCountry::findOne(['name' => 'Egypt'])->id;
     }
 }

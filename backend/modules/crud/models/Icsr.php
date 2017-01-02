@@ -151,8 +151,16 @@ class Icsr extends BaseIcsr
     }
 
 
+    public function getEgyptIdFromLkpCountry ()
+    {
 
+        return LkpCountry::findOne(['name' => 'Egypt'])->id;
+    }
 
+    public function isNullExported ()
+    {
 
+        return AuditTrailChild::findOne(['model_id' => $this->id , 'action' => 'EXPORT NULL' , 'model' =>get_class($this) ]);
+    }
 
 }

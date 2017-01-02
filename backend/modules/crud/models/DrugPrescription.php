@@ -11,6 +11,7 @@ use \backend\modules\crud\traits;
 class DrugPrescription extends BaseDrugPrescription
 {
     use traits\checkAccess;
+    use traits\checkIcsrNullExported;
      public function attributeLabels()
     {
         return array_merge(
@@ -39,7 +40,6 @@ class DrugPrescription extends BaseDrugPrescription
             'duration_of_use' => Yii::t('app', 'B.4.k.15a Duration of drug administration'),
             'duration_of_use_unit' => Yii::t('app', 'B.4.k.15b Duration of drug administration (unit)'),
             'reason_of_use' => Yii::t('app', 'B.4.k.11 Indication for use in the case'),
-            'problem_went_after_stop' => Yii::t('app', 'Problem Went After Stop'),
             'problem_returned_after_reuse' => Yii::t('app', 'B.4.k.17 Effect of rechallenge (or re-exposure), for suspect drug(s) only'),
             'lkp_drug_action_id' =>   Yii::t('app', 'B.4.k.16 Action(s) taken with drug')
             ]);

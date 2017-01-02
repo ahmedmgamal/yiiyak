@@ -40,7 +40,6 @@ use yii\widgets\ActiveForm;
 
 		<?php // echo $form->field($model, 'reason_of_use') ?>
 
-		<?php // echo $form->field($model, 'problem_went_after_stop') ?>
 
 		<?php // echo $form->field($model, 'problem_returned_after_reuse') ?>
 
