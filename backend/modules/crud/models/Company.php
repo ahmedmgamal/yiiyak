@@ -56,4 +56,28 @@ class Company extends BaseCompany
         return $result;
     }
 
+    public function getDrugsLimit(){
+        $planId = $this->getPlan()->one();
+        $connection = Yii::$app->getDb();
+        $command = $connection
+            ->createCommand("SELECT MAX(plan_limits.`limit`) AS 'limit'
+              FROM plan_limits
+            INNER JOIN lkp_limits
+            ON(lkp_limits.id = plan_limits.limit_id)
+            WHERE lkp_limits.name = 'drug'
+            AND plan_limits.plan_id = :planId",[":planId"=>$planId->id]);
+        return $command->queryScalar();
+    }
+
+    public function getDrugsCount()
+    {
+        $connection = Yii::$app->getDb();
+        $command = $connection
+            ->createCommand("SELECT COUNT(*)
+                            FROM drug
+                            WHERE drug.company_id = :companyId",[":companyId"=>$this->id]);
+        return $command->queryScalar();
+    }
+
+
 }
