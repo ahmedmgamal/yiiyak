@@ -121,7 +121,7 @@ use \dmstr\bootstrap\Tabs;
         <hr>
 
         <div class="form-group">
-            <label class="control-label col-sm-3" for="meddra-SMQ_Content">SMQ_Content.asc</label>
+            <label class="control-label col-sm-3" for="meddra-SMQ_Content">smq_content.asc</label>
             <div class="col-sm-6">
                 <input type="file" id="meddra-SMQ_Content" name="Meddra[SMQ_Content]" >
             </div>
@@ -132,7 +132,7 @@ use \dmstr\bootstrap\Tabs;
         <hr>
 
         <div class="form-group">
-            <label class="control-label col-sm-3" for="meddra-SMQ_List">SMQ_List.asc</label>
+            <label class="control-label col-sm-3" for="meddra-SMQ_List">smq_list.asc</label>
             <div class="col-sm-6">
                 <input type="file" id="meddra-SMQ_List" name="Meddra[SMQ_List]" >
             </div>

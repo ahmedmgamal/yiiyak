@@ -15,10 +15,11 @@ class MeddraController extends \yii\web\Controller
                                  'llt' => 'llt.asc',
                                  'mdhier' => 'mdhier.asc',
                                  'pt' => 'pt.asc',
-                                 'SMQ_Content' => 'SMQ_Content.asc',
-                                 'SMQ_List' => 'SMQ_List.asc',
+                                 'SMQ_Content' => 'smq_content.asc',
+                                 'SMQ_List' => 'smq_list.asc',
                                  'soc' => 'soc.asc',
-                                 'soc_hlgt' =>'soc_hlgt.asc'];
+                                 'soc_hlgt' =>'soc_hlgt.asc'
+                                ];
 
     private  $MEDDRA_MODELS = [   'hlgt' => 'MeddraHlgt',
                                  'hlgt_hlt' =>  'MeddraHlgtHlt',
@@ -31,7 +32,8 @@ class MeddraController extends \yii\web\Controller
                                  'SMQ_Content' => 'MeddraSmqContent',
                                  'SMQ_List' => 'MeddraSmqList',
                                  'soc' => 'MeddraSoc',
-                                 'soc_hlgt' =>'MeddraSocHlgt'];
+                                 'soc_hlgt' =>'MeddraSocHlgt'
+                            ];
 
 
 
@@ -58,16 +60,15 @@ class MeddraController extends \yii\web\Controller
                 {
                     $transaction->rollBack();
                     \Yii::$app->getSession()->setFlash('error', \Yii::t('app',$saveUploadedFiles['message']));
-                    return $this->redirect(['create']);
                 }
 
                 if ($saveUploadedFiles['status'] == 'success')
                 {
                     $transaction->commit();
                     \Yii::$app->getSession()->setFlash('success', \Yii::t('app',$saveUploadedFiles['message']));
-                    return $this->redirect(['create']);
-
                 }
+
+                return $this->redirect(['create']);
             }
 
 
@@ -76,7 +77,6 @@ class MeddraController extends \yii\web\Controller
 
     private function checkFiles ($meddraFiles)
     {
-
         $message = [];
         foreach ($meddraFiles['name'] as $key => $value )
         {
@@ -132,13 +132,15 @@ class MeddraController extends \yii\web\Controller
                             $rowCount = 0;
                             $rows = [];
                         }
-                        $buffer = fgets($handle, 4096);
+                        $buffer = fgets($handle);
                         $row = str_getcsv($buffer, '$');
+                       //last key in the array is always empty so need to get poped out
                         array_pop($row);
                         $rows []= $row;
-                    }
+                     }
                     fclose($handle);
                 }
+                //last line in meddra files always empty so it needs to get poped
                 array_pop($rows);
 
                 $model = new $modelClassName;
