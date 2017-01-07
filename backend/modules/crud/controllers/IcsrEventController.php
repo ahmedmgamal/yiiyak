@@ -67,10 +67,10 @@ class IcsrEventController extends \backend\modules\crud\controllers\base\IcsrEve
 
         $connection = Yii::$app->getDb();
            
-        $term = '%' . $term . '%';
+        $term = '+' . $term . '*';
         
             $command = $connection->createCommand('
-             SELECT term FROM meddra_pt WHERE (term) LIKE :term LIMIT 10 ')
+             SELECT term FROM meddra_pt WHERE MATCH(term) AGAINST (:term IN BOOLEAN MODE )  LIMIT 10 ')
              ->bindValue(':term',$term);
             
               
@@ -107,11 +107,11 @@ class IcsrEventController extends \backend\modules\crud\controllers\base\IcsrEve
         {
             $connection = Yii::$app->getDb();
             
-            $searchTerm = "%" . $searchTerm . "%";
+            $searchTerm = "+" . $searchTerm . "*";
             $sql = "
              SELECT `meddra_llt`.term FROM meddra_llt 
              join meddra_pt on `meddra_llt`.pt_id = `meddra_pt`.id
-             WHERE  `meddra_llt`.term LIKE :searchTerm ".$whereCondition."  LIMIT 10 ";
+             WHERE   MATCH (`meddra_llt`.term) AGAINST (:searchTerm IN BOOLEAN MODE )  ".$whereCondition."  LIMIT 10 ";
 
             $command = $connection->createCommand($sql)
              ->bindValue(':searchTerm',$searchTerm);
