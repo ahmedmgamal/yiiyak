@@ -185,6 +185,9 @@ else{
                 'rmp' => [
                   'baseSubPath' => 'rmpFiles'
                 ],
+                'meddra-files' => [
+                    'baseSubPath' => 'MeddrFiles',
+                ],
                 'icsrVersions' => [
                     'baseSubPath' => 'icsrsVersions',
                 ],
