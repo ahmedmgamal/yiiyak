@@ -11,8 +11,11 @@
 
 namespace backend\modules\crud\controllers\base;
 
+use backend\modules\crud\models\base\LkpLimits;
 use backend\modules\crud\models\Drug;
+use backend\modules\crud\models\LkpRoute;
 use backend\modules\crud\models\search\Drug as DrugSearch;
+use yii\helpers\StringHelper;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\helpers\Url;
@@ -20,6 +23,7 @@ use dmstr\bootstrap\Tabs;
 use backend\modules\crud\models\search\Icsr as IcsrSearch;
 use backend\modules\crud\models\search\Rmp as RmpSearch;
 use backend\modules\crud\models\search\Prsu as PrsuSearch;
+use yii\web\UploadedFile;
 /**
  * DrugController implements the CRUD actions for Drug model.
  */
@@ -175,6 +179,47 @@ class DrugController extends Controller
 		}
 	}
 
+    public function actionExcelUpload(){
+            $model = new Drug;
+            if(\Yii::$app->request->isPost){
+                $company = \Yii::$app->user->identity->company;
+                $planLimit = $company->getDrugsLimit();
+                $companyDrugs = $company->getDrugsCount();
+                $maxDrugsUpload = $planLimit - $companyDrugs;
+                if($maxDrugsUpload <= 0){
+                    \Yii::$app->getSession()->addFlash('error', \Yii::t("app","Max Plan Drugs Limit."));
+                    return $this->redirect(['index']);
+                }
+                if($this->validateUploadedExcel()){
+                    $excel =$_FILES['excel']['tmp_name'];
+                    $data = \moonland\phpexcel\Excel::import($excel,[
+                        'setFirstRecordAsKeys' => true,
+                        'setIndexSheetByName' => true
+                    ]);
+                    $drugs = $this->createUploadData($data);
+                    if(count($drugs) > $maxDrugsUpload){
+                        \Yii::$app->getSession()->addFlash('error', \Yii::t("app","Max Plan Drugs Limit."));
+                        return $this->render('upload',["model"=>$model]);
+                    }
+                    $result =$this->bulkInsert($drugs);
+                    \Yii::$app->getSession()->addFlash('success', $result . " Records Uploaded successfully.");
+                    return $this->redirect(['index']);
+                }else{
+                    \Yii::$app->getSession()->addFlash('error',\Yii::t("app","Invalid Excel File.") );
+                    return $this->render('upload',["model"=>$model]);
+                }
+            }else{
+                return $this->render('upload',["model"=>$model]);
+            }
+
+
+    }
+    public function actionExcelDownload(){
+        $path = \Yii::getAlias('@webroot').'/sample_files/';
+        $fileName = StringHelper::basename("upload.xlsx");
+        $path .= $fileName;
+        \Yii::$app->response->sendFile($path);
+    }
 
 	/**
 	 * Finds the Drug model based on its primary key value.
@@ -191,6 +236,68 @@ class DrugController extends Controller
 			throw new HttpException(404, 'The requested page does not exist.');
 		}
 	}
+
+	private function getRouteLkpId($name,$LkpRoutes){
+	    $otherId = null;
+	    foreach ($LkpRoutes as $lkpRoute){
+	        if(strtolower(trim($name)) == strtolower(trim($lkpRoute->description))){
+	            if($name == 'Other'){
+                    $otherId = $lkpRoute->id;
+                }
+	            return $lkpRoute->id;
+            }
+        }
+        return $otherId;
+    }
+
+    private function createUploadData($data){
+        $drugs = [];
+        $firstKey = key($data);
+        if(gettype($firstKey) == "string"){
+            foreach ($data as $sheet){
+                $tem = $this->loadSheet($sheet);
+                $drugs = array_merge($drugs,$tem);
+            }
+        }else{
+            $drugs = $this->loadSheet($data);
+        }
+        return $drugs;
+    }
+    private function loadSheet($data){
+        $company = \Yii::$app->user->identity->company;
+        $LkpRoutes = LkpRoute::find()->all();
+        foreach ($data as $record){
+            $drugs[] = [
+                $record['Generic Name'],
+                $record['Trade Name'],
+                $record['Dosage Form'],//composition
+                $company->id,
+                $record['Manufacturer'],
+                $record['Strength'],
+                $this->getRouteLkpId($record['Route Of Administration'],$LkpRoutes)
+            ];
+        }
+        return $drugs;
+    }
+    private function bulkInsert($data){
+       $result =  \Yii::$app->db
+            ->createCommand()
+            ->batchInsert('drug',
+                ['generic_name','trade_name','composition','company_id','manufacturer','strength','route_lkp_id'],
+                $data)->execute();
+       return $result;
+    }
+
+    private function validateUploadedExcel(){
+        $exts = ['xlsx','xls'];
+        if(is_uploaded_file($_FILES['excel']['tmp_name'])) {
+            $extension = pathinfo($_FILES['excel']['name'], PATHINFO_EXTENSION);
+            if(in_array($extension,$exts)){
+                return true;
+            }
+        }
+        return false;
+    }
 
 
 }

@@ -41,7 +41,8 @@ $updateButton = ( $helpers->currentUserCan('/crud/icsr/update')) ? '{update}' : 
 	<?php  if ($helpers->currentUserCan('/crud/drug/create')) { ?>
     <div class="clearfix crud-navigation">
         <div class="pull-left">
-            <?php echo Html::a('<span class="glyphicon glyphicon-plus"></span>' . Yii::t('app', 'New'), ['create'], ['class' => 'btn btn-success']) ?>
+            <?php echo Html::a('<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('app', 'New'), ['create'], ['class' => 'btn btn-success']) ?>
+            <?php echo Html::a('<span class="glyphicon glyphicon-open"></span> ' . Yii::t('app', 'Excel Upload'), ['excel-upload'], ['class' => 'btn btn-primary']) ?>
         </div>
 
      </div>
