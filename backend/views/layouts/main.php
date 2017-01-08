@@ -65,12 +65,16 @@ AppAsset::register($this);
         if (\Yii::$app->user->can('/crud/drug/index') && !isset($userRole['admin'])){
             $menuItems [] =  ['label' => 'Products', 'url' => ['/crud/drug/index']];
         }
-        if (\Yii::$app->user->can('/crud/reports/summary-tabulation') && !isset($userRole['admin'])){
+        if (!isset($userRole['admin'])){
+            $items = [];
+            if(\Yii::$app->user->can('/crud/reports/summary-tabulation')){
+                $items[] =  ['label' => 'Summary Tabulation', 'url' => '/crud/drug/summary-tabulation'];
+            }
+            $items[] = ['label'=>'RMP Template','url'=>'/crud/template/rmp'];
+            $items[] = ['label'=>'PSUR Template','url'=>'/crud/template/psur'];
             $menuItems [] =  [
                 'label' => 'Reports',
-                'items' => [
-                    ['label' => 'Summary Tabulation', 'url' => '/crud/drug/summary-tabulation'],
-                ]
+                'items' => $items
             ];
         }
 
