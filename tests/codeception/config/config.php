@@ -14,7 +14,7 @@ return [
     ],
     'components' => [
         'db' => [
-            'dsn' => 'mysql:host=localhost;dbname=yiiyak',
+            'dsn' => 'mysql:host=localhost;dbname=yiiyak_test',
             'username' => 'root',
             'password' => 'hosny',
             'charset' => 'utf8',
