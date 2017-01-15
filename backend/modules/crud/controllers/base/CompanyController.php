@@ -14,6 +14,7 @@ namespace backend\modules\crud\controllers\base;
 use backend\modules\crud\controllers\IcsrController;
 use backend\modules\crud\models\Company;
 use backend\modules\crud\models\Drug;
+use backend\modules\crud\models\Icsr;
 use backend\modules\crud\models\search\Company as CompanySearch;
 use Faker\Provider\cs_CZ\DateTime;
 use FPDF;
@@ -37,7 +38,7 @@ class CompanyController extends Controller
 	 * CSRF validation is enabled only when both this property and [[Request::enableCsrfValidation]] are true.
 	 */
 	public $enableCsrfValidation = false;
-
+    private $zipper = null;
 
 
 
@@ -187,6 +188,25 @@ class CompanyController extends Controller
 
 	public function actionFullExport(){
         $company = Yii::$app->user->identity->getCompany()->one();
+        $archiveFileName = "files/".$company->name."_".strtotime("now").".zip";
+        $this->zipper = new \ZipArchive();
+        $pdf =$this->generateCompanyPdf($company);
+        $this->zipper->open($archiveFileName,\ZipArchive::OVERWRITE);
+        $this->zipper->addFromString("company.pdf",$pdf);
+        $this->generateDrugIcsrXml($company->drugs);
+        $this->zipper->close();
+        header("Content-type: application/zip");
+        header("Content-Disposition: attachment; filename=".$archiveFileName);
+        header("Content-length: " . filesize($archiveFileName));
+        header("Pragma: no-cache");
+        header("Expires: 0");
+        readfile($archiveFileName);
+        unlink($archiveFileName);
+
+
+    }
+    private function generateCompanyPdf($company){
+
         $drugs = $company->drugs;
         $mpdf = new mPDF();
         $mpdf->simpleTables = true;
@@ -199,9 +219,29 @@ class CompanyController extends Controller
         $mpdf->WriteHTML("<div><h2 style='text-align: center;'>Company Drugs</h2></div>");
         $mpdf->WriteHTML($drugsHtml);
         $mpdf->AddPage();
-        $this->generateDrugIcsrPdf($mpdf,$drugs);
-        $mpdf->Output();
+        return $mpdf->Output("company.pdf","S");
     }
+
+    private function generateDrugIcsrXml($drugs){
+        foreach ($drugs as $drug){
+            $this->generateIcsrXml($drug);
+        }
+    }
+    private function generateIcsrXml($drug){
+        foreach ($drug->icsrs as $icsr){
+            $fileName = 'IcsrVersion_IcsrId'.$icsr->id.'_DrugId'.$drug->id.'_'.strtotime("now").'.xml';
+            $this->zipper->addFromString($fileName,$this->getIcsrXml($icsr))  ;
+        }
+    }
+    private function getIcsrXml($icsr){
+        $this->layout = false;
+
+        $xml = $this->renderPartial('export', [
+            'model' => $icsr,
+        ]);
+        return $xml;
+    }
+
     private function generateIcsrPdf($mpdf,$drug){
 	    if(count($drug->icsrs) > 0){
             $mpdf->Bookmark($drug->generic_name);

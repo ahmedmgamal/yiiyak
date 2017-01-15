@@ -69,7 +69,7 @@ AppAsset::register($this);
                 ]
             ];
         }
-        if (\Yii::$app->user->can('/crud/company/admin') && !isset($userRole['admin'])){
+        if (\Yii::$app->user->can('/crud/drug/index') && !isset($userRole['admin'])){
             $menuItems [] =  [
                 'label' => 'Admin',
                 'items' => [
