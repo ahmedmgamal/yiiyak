@@ -7,7 +7,10 @@
 
 
 namespace backend\modules\crud\controllers;
+use backend\modules\crud\models\Company;
+use Yii;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the class for controller "CompanyController".
@@ -28,6 +31,11 @@ class CompanyController extends \backend\modules\crud\controllers\base\CompanyCo
                         'allow' => true,
                         'actions' => ['full-export'],
                         'roles' => ['normalUser'],
+                        'actions' => ['statistics'],
+                        'matchCallback' => function ($rule,$action){
+                            $user_id = \Yii::$app->user->id;
+                            return Company::checkUserCan($user_id);
+                        }
                     ],
                     [
                         'allow' => true,
@@ -38,4 +46,139 @@ class CompanyController extends \backend\modules\crud\controllers\base\CompanyCo
             ]
         ];
     }
+
+
+    public function actionCompanyStatistics ($companyId)
+    {
+        $model = $this->findModel($companyId);
+
+        $totalUsers = $model->plan->getOneLimitAmount('user');
+        $totalProducts = $model->plan->getOneLimitAmount('drug');
+
+        $usedUsers = count($model->users);
+        $usedProducts = count($model->drugs);
+
+        $remainingUsers = $totalUsers - $usedUsers;
+        $remainingProducts = $totalProducts  - $usedProducts;
+
+        return $this->render('company-statistics',[
+            'model' => $model,
+            'totalUsers' => $totalUsers,
+            'totalProducts' => $totalProducts,
+            'usedUsers' => $usedUsers,
+            'usedProducts' => $usedProducts,
+            'remainingUsers' => $remainingUsers,
+            'remainingProducts' => $remainingProducts
+        ]);
+    }
+
+    public function actionStatistics ()
+    {
+        if (!isset(\Yii::$app->user->identity->id))
+        {
+            Yii::$app->session->setFlash('error',Yii::t('app','Login First To See Your Company Statistics'));
+
+            return $this->redirect(Yii::$app->request->referrer);
+        }
+
+        $drugsWithIcsrs = [];
+        $icsrsIds = [];
+        $limitsArr = [];
+
+        $currentUserCompany = \Yii::$app->user->identity->company;
+
+        $companyDrugs = $currentUserCompany->getDrugs()->with(['icsrs' ])->all();
+
+        foreach ($companyDrugs as $key => $obj)
+        {
+
+            ArrayHelper::getColumn($obj->icsrs, function ($element) use (&$icsrsIds){
+                $icsrsIds [] = $element['id'];
+            });
+
+            $drugsWithIcsrs [] = ['name' => $obj->trade_name , 'y' => count($obj->icsrs)];
+        }
+
+        foreach ($currentUserCompany->plan->getAllLimitsWithAmount() as $key => $value)
+        {
+            $limitsArr [$value['name']] = $value;
+        }
+
+
+        $formattedMeddra = $this->formatLltAndPt($icsrsIds);
+
+
+        return $this->render('statistics',
+                            [
+                                'drugsWithIcsrs' => $drugsWithIcsrs,
+                                'meddraLltWithIcsrs' => $formattedMeddra['meddraLltWithIcsrs'],
+                                'meddraPtWithIcsrs' => $formattedMeddra['meddraPtWithIcsrs'],
+                                'icsrsPerMonth' => $this->icsrsPerMonthResult($icsrsIds),
+                                'limitsArr' => $limitsArr,
+                                'totalUsers' => count($currentUserCompany->users),
+                                'totalDrugs' => count($companyDrugs),
+                                'totalIcsrs' => count($icsrsIds),
+                                'companyDrugs' => $companyDrugs
+
+                            ]);
+    }
+
+
+
+
+    private function formatLltAndPt ($icsrsIdsArr)
+    {
+
+        return [
+                'meddraLltWithIcsrs' => $this->meddraQueryResult('meddra_llt_text',$icsrsIdsArr),
+                'meddraPtWithIcsrs' => $this->meddraQueryResult('meddra_pt_text',$icsrsIdsArr)
+               ];
+
+
+    }
+
+    private function meddraQueryResult ($groupBy,$icsrsIdsArr) {
+
+        $query = new \yii\db\Query();
+
+      $objects =  $query->select(['`icsr_event`.`meddra_llt_text` as name','count(DISTINCT `icsr`.id) as y'])
+            ->from('icsr')
+            ->where(['icsr.id' => $icsrsIdsArr])
+            ->innerJoin('icsr_event','icsr.id = icsr_event.icsr_id')
+            ->groupBy('icsr_event.'.$groupBy)
+            ->all();
+
+       return  array_map(function ($element){
+           $element['y'] = (integer)$element['y'];
+           return $element;
+       } , $objects);
+
+    }
+
+    private function icsrsPerMonthResult ($icsrsIdsArr) {
+        $query = new \yii\db\Query();
+
+        $objects =  $query->select([' MONTHNAME(created_at) as monthName',' count(id) as icsrsNumbers'])
+            ->from('icsr')
+            ->where(['icsr.id' => $icsrsIdsArr])
+            ->groupBy('monthName')
+            ->orderBy('created_at ASC')
+            ->all();
+
+        $monthNames = [];
+        $icsrsNumbers = [];
+
+         array_map(function ($element) use (&$monthNames,&$icsrsNumbers){
+            $monthNames [] = $element['monthName'];
+            $icsrsNumbers [] = (integer)$element['icsrsNumbers'];
+
+        } , $objects);
+
+        return ['monthNames' => $monthNames ,'icsrsNumbers' => $icsrsNumbers] ;
+
+    }
+
+
+
+
 }

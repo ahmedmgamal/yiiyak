@@ -1,0 +1,184 @@
+<ichicsr lang="en">
+    <ichicsrmessageheader>
+        <messagetype>ICSR</messagetype>
+        <messageformatversion>2.1</messageformatversion>
+        <messageformatrelease>1.0</messageformatrelease>
+        <messagenumb>31</messagenumb>
+        <messagesenderidentifier>EMEO5</messagesenderidentifier>
+        <messagereceiveridentifier>EPVC</messagereceiveridentifier>
+        <messagedateformat>102</messagedateformat>
+        <messagedate>20161020</messagedate>
+  </ichicsrmessageheader>
+  
+    <safetyreport>
+        <safetyreportversion>1.0</safetyreportversion>
+
+        <!--A.1.0.1 Sender‚ (case) safety report unique identifier-->
+        <safetyreportid> EG-EMEO5-918</safetyreportid>
+
+        <!--     A.1.1 Identification of the country of the primary source -->
+        <primarysourcecountry>EG</primarysourcecountry>
+
+        <!--      A.1.3 Date of this transmission -->
+        <transmissiondateformat>102</transmissiondateformat>
+        <transmissiondate>20161020</transmissiondate>
+        <!--     A.1.4 Type of report -->
+        <reporttype>1</reporttype>
+
+        <!--A.1.5 Seriousness -->
+        <serious>2</serious>
+
+        <!--A.1.5.2. Seriousness criteria-->
+        <seriousnessdeath>2</seriousnessdeath>
+        <seriousnesslifethreatening>2</seriousnesslifethreatening>
+        <seriousnesshospitalization>2</seriousnesshospitalization>
+        <seriousnessdisabling>2</seriousnessdisabling>
+        <seriousnesscongenitalanomali>2</seriousnesscongenitalanomali>
+        <seriousnessother>2</seriousnessother>
+
+        <!--*** A.1.6 Date report was first received from source-->
+        <receivedateformat>102</receivedateformat>
+        <receivedate>19970102</receivedate>
+
+        <!--*** A.1.7	Date of receipt of the most recent information for this report -->
+        <receiptdateformat>102</receiptdateformat>
+        <receiptdate>20161017</receiptdate>
+
+        <!--A.1.10	Worldwide unique case identification number.      -->
+        <companynumb> EG-EMEO5-31</companynumb>
+
+        <primarysource>
+            <!--A.2.1.1	Reporter identifier (name or initials)       -->
+            <reportergivename>hend mahmoud</reportergivename>
+            <reporterfamilyname>rizk</reporterfamilyname>
+
+
+            <!-- A.2.1.2	Reporter‚ address          -->
+            <reporterstreet> </reporterstreet>
+            <reportercity>cairo</reportercity>
+            <reporterstate/>
+            <reporterpostcode/>
+
+            <!--  A.2.1.3	Country           -->
+            <reportercountry>EG</reportercountry>
+
+            <!-- A.2.1.4	Qualification           -->
+            <qualification> 5</qualification>
+
+       </primarysource>
+
+
+
+        <!-- A.3	Sender	and reviver          -->
+        <sender>
+
+            <!-- A.3.1.1	Sender Type          -->
+            <sendertype>1</sendertype>
+
+            <!--	A.3.1.2	Sender identifier          -->
+            <senderorganization>EMEO5</senderorganization>
+
+            <!--***	A.3.1.3	Person responsible for sending the report      -->
+            <sendergivename>regular</sendergivename>
+
+            <!-- A.3.1.4l E-mail address -->
+            <senderemailaddress>khgghfgf@yahoo.com</senderemailaddress>
+
+       </sender>
+
+
+        <receiver>
+            <!--	A.3.2.1	Receiver Type          -->
+            <receivertype>6</receivertype>
+       </receiver>
+
+        <patient>
+            <!--  B.1.1	Patient (name or initials)        -->
+            <patientinitial>A M</patientinitial>
+
+            <!--  B.1.2.1	Date of birth         -->
+            <patientbirthdateformat>102</patientbirthdateformat>
+            <patientbirthdate>19891106</patientbirthdate>
+            <!--  B.1.2.2	Age at time of onset of reaction / event   -->
+            <patientonsetage>28.00</patientonsetage>
+            <patientonsetageunit>801</patientonsetageunit>
+            <!--  B.1.3	Weight (kg)          -->
+            <patientweight/>
+
+            <!--  B.1.7.2	Text for relevant medical history and concurrent conditions (not including reaction/event) -->
+            <patientmedicalhistorytext/>
+
+            <reaction>
+                <!--  B.2.i.0	Reaction or event as reported by the primary source   -->
+                <primarysourcereaction>headache</primarysourcereaction>
+
+                <!--  B.2.i.1	Reaction or event in MedDRA terminology (Lowest Level Term)   -->
+                <reactionmeddraversionllt> v. 2.3</reactionmeddraversionllt>
+                <reactionmeddrallt/>
+                <!--  B.2.i.2	Reaction or event in MedDRA terminology (Preferred Term)    -->
+                <reactionmeddraversionpt>  v. 2.3</reactionmeddraversionpt>
+                <reactionmeddrapt/>
+                <!--  B.2.i.4	Date of start of reaction or event     -->
+                <reactionstartdateformat>102</reactionstartdateformat>
+                <reactionstartdate>20161003</reactionstartdate>
+                <!--  B.2.i.5	Date of end of reaction or event     -->
+                <reactionenddateformat>102</reactionenddateformat>
+                <reactionenddate>20161017</reactionenddate>
+
+                <!--  B.2.i.8	Outcome of reaction or event at the time of last observation (Recovered/resolved,Recovering/resolving,Not-->
+                <reactionoutcome>3</reactionoutcome>
+
+
+           </reaction>
+
+
+            <drug>
+                <!--  B.4.k.1	Characterization of drug role (Suspect/Concomitant/Interacting)    -->
+                <drugcharacterization>1</drugcharacterization>
+
+                <!--  B.4.k.2	Drug identification           -->
+
+                <medicinalproduct>pregabalin</medicinalproduct>
+
+                <!--  B.4.k.3	Batch/lot number           -->
+                <drugbatchnumb/>
+
+                <!--  B.4.k.6	Dosage text           -->
+                <drugdosagetext>75mg</drugdosagetext>
+
+                <!--  B.4.k.8	Route of administration   -->
+                <drugadministrationroute/>
+
+                <!--  B.4.k.11	Indication for use in the case       -->
+                <drugindication>Generalized anexity disorder</drugindication>
+                <!--  B.4.k.12	Date of start of drug        -->
+                <drugstartdateformat>102</drugstartdateformat>
+                <drugstartdate>20161001</drugstartdate>
+                <!--  B.4.k.14	Date of last administration      -->
+                <drugenddateformat>102</drugenddateformat>
+                <drugenddate>20161001</drugenddate>
+                <!--  B.4.k.15	Duration of drug administration      -->
+                <drugtreatmentduration>16</drugtreatmentduration>
+                <drugtreatmentdurationunit>803</drugtreatmentdurationunit>
+                <!--  B.4.k.16	Action(s) taken with drug (‚àí Drug withdrawn,‚àí Dose reduced,‚àí Dose increased,‚àí Dose -->
+
+                <actiondrug>1</actiondrug>
+
+                <!--  B.4.k.17	Effect of rechallenge          -->
+                <drugrecurreadministration/>
+
+                <!--  B.4.k.19	Additional information on drug     -->
+                <drugadditional/>
+           </drug>
+			<summary>
+				<narrativeincludeclinical>physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures.  the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures. the outcome is currently being determined.  additional relevant information will soon follow. the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures. the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures. the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures. the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures. the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures. the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures. the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures. the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures. the outcome is currently being determined.  additional relevant information will soon follow.  physician should be consulted to properly determine clinical course and therapeutic measures. the outcome is currently being determined.</narrativeincludeclinical>
+				<reportercomment>more information is necessary to accurately assess this lethal drug combination (654321a).  i recommend an in-depth investigation be conducted by the proper authorities (123).  no further comments at this time.</reportercomment>
+				<sendercomment>this will be the agency's last transmission for some time.  ICSRs will be submitted again next month.  this will be the agency's last transmission for some time.  ICSRs will be submitted again next month.  this will be the agency's last transmission for some time.  ICSRs will be submitted again next month. this will be the agency's last transmission for some time.  ICSRs will be submitted again next month.  this will be the agency's last transmission for some time.  ICSRs will be submitted again next month.  this will be the agency's last transmission for some time.  ICSRs will be submitted again next month.  this will be the agency's last transmission for some time.  ICSRs will be submitted again next month.  this will be the agency's last transmission for some time.  ICSRs will be submitted again next month.  this will be the agency's last transmission for some time.  ICSRs will be submitted again next month.  more comments are necessary. questions, please feel free to contact.</sendercomment>
+			</summary>
+       </patient>
+   </safetyreport>
+
+
+
+
+</ichicsr>

@@ -67,7 +67,7 @@ $('#icsrevent-meddra_pt_text').on('focusout',function () {
         'url' : url + '/get-first-lt-from-pt?ptTerm='+ $(this).val(),
         'method' : 'GET',
         'success' : function (response){
-            console.log(response.ltTerm);
+
             if (response.ltTerm )
             {
                 $('#icsrevent-meddra_llt_text').val(response.ltTerm);

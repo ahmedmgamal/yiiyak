@@ -101,9 +101,10 @@ class CompanyController extends Controller
 		try {
 			if ($model->load($_POST) && $model->save() && $userModel->load($_POST) ) {
 			   $userModel->company_id = $model->id;
-                $userModel->save();
-                $transaction->commit();
-                return $this->redirect(Url::previous());
+                if ($userModel->save()) {
+                    $transaction->commit();
+                    return $this->redirect(Url::previous());
+                }
 			} elseif (!\Yii::$app->request->isPost) {
 				$model->load($_GET);
 			}

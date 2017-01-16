@@ -13,6 +13,7 @@ namespace backend\modules\crud\controllers\base;
 
 use backend\modules\crud\models\User;
 use backend\modules\crud\models\search\User as UserSearch;
+use Yii;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\helpers\Url;
@@ -32,28 +33,6 @@ class UserController extends Controller
 	 */
 	public $enableCsrfValidation = false;
 
-	/**
-	 *
-	 * @inheritdoc
-	 * @return unknown
-	 */
-	public function behaviors() {
-		return [
-			'access' => [
-				'class' => AccessControl::className(),
-				'rules' => [
-					[
-						'allow' => true,
-
-						/**
-						 *
-						 */
-					//	'matchCallback' => function ($rule, $action) {return \Yii::$app->user->can($this->module->id . '_' . $this->id . '_' . $action->id, ['route' => true]);},
-					]
-				]
-			]
-		];
-	}
 
 
 	/**
@@ -64,6 +43,7 @@ class UserController extends Controller
 	public function actionIndex() {
 		$searchModel  = new UserSearch;
 		$dataProvider = $searchModel->search($_GET);
+
 
 		Tabs::clearLocalStorage();
 
@@ -102,27 +82,59 @@ class UserController extends Controller
 	 */
 	public function actionCreate() {
 		$model = new User;
+        $roles = Yii::$app->params['Roles'];
 
-		try {
+        try {
 			if ($model->load($_POST)) {
 
-			    if (!($model->isBeyondLimit()) && $model->save()) {
+
+			    if ($model->isBeyondLimit())
+                {
+                    \Yii::$app->getSession()->setFlash('error', \Yii::t('app',"you have exceeded your users limit upgrade {$model->company->name} plan to add more users "));
+
+                }
+			    elseif ( $model->save()) {
+
+                $roleName = \Yii::$app->request->post('role_name');
+                $connection = \Yii::$app->db;
+                $transaction = $connection->beginTransaction();
+                $currentUserRole = \Yii::$app->authManager->getRolesByUser(\Yii::$app->user->id);
+
+                if (!isset($currentUserRole['admin']))
+                {
+                    $model->company_id = \Yii::$app->user->identity->company_id;
+                }
+
+
+                if (!($model->isBeyondLimit()) && $model->save()) {
+
+                    if(!in_array($roleName,$roles)) {
+                        $roleName = 'Manager';
+                    }
+
+                    if (!$model->setRole($model->id,$roleName))
+                    {
+                        $transaction->rollBack();
+                        \Yii::$app->getSession()->setFlash('error', \Yii::t('app',"Can't Set User Role "));
+                        return $this->redirect(Url::previous());
+                    }
+
+
+                    $transaction->commit();
+
+
                     return $this->redirect(Url::previous());
                 }
-                else
-                    {
-                        \Yii::$app->getSession()->setFlash('error', \Yii::t('app',"you have exceeded your users limit upgrade {$model->company->name} plan to add more users "));
 
-                    }
 
 			} elseif (!\Yii::$app->request->isPost) {
 				$model->load($_GET);
 			}
-		} catch (\Exception $e) {
+		} }catch (\Exception $e) {
 			$msg = (isset($e->errorInfo[2]))?$e->errorInfo[2]:$e->getMessage();
 			$model->addError('_exception', $msg);
 		}
-		return $this->render('create', ['model' => $model]);
+		return $this->render('create', ['model' => $model , 'roles' => $roles]);
 	}
 
 
@@ -135,12 +147,32 @@ class UserController extends Controller
 	 */
 	public function actionUpdate($id) {
 		$model = $this->findModel($id);
-
+        $roles = Yii::$app->params['Roles'];
 		if ($model->load($_POST) && $model->save()) {
+
+		    $roleName = \Yii::$app->request->post('role_name');
+            $connection = \Yii::$app->db;
+            $transaction = $connection->beginTransaction();
+
+            if(!in_array($roleName,$roles)) {
+                $roleName = 'Manager';
+            }
+
+            if (!$model->updateRole($model->id,$roleName))
+            {
+                $transaction->rollBack();
+                \Yii::$app->getSession()->setFlash('error', \Yii::t('app',"Can't Update User Role "));
+                return $this->redirect(Url::previous());
+            }
+
+
+            $transaction->commit();
+
 			return $this->redirect(Url::previous());
 		} else {
 			return $this->render('update', [
 					'model' => $model,
+                    'roles' => $roles
 				]);
 		}
 	}

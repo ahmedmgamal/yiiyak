@@ -35,6 +35,7 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = array();
+    $adminSubMenus = [];
 
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
@@ -45,7 +46,7 @@ AppAsset::register($this);
         }
 
         if (\Yii::$app->user->can('/crud/user/index')) {
-            $menuItems [] =  ['label' => 'Users', 'url' => ['/crud/user/index']];
+            $adminSubMenus [] =  ['label' => Yii::t('app', 'Users'), 'url' => ['/crud/user/index']];
         }
 
         if (\Yii::$app->user->can('/crud/lkp-plan/index')){
@@ -53,6 +54,9 @@ AppAsset::register($this);
         }
 
         $userRole = \Yii::$app->authManager->getRolesByUser(\Yii::$app->user->id);
+        if (\Yii::$app->user->can('/crud/company/statistics') && !isset($userRole['admin'])){
+            $menuItems [] = ['label' => Yii::t('app','Statistics') , 'url' => ['/crud/company/statistics']];
+        }
 
         if (\Yii::$app->user->can('/crud/psmf/index') && !isset($userRole['admin'])){
             $menuItems [] =  ['label' => 'PSMF', 'url' => ['/crud/psmf/index']];
@@ -78,6 +82,16 @@ AppAsset::register($this);
                 ]
             ];
         }
+
+        if(!empty($adminSubMenus))
+        {
+            $menuItems [] = [
+                'label' => Yii::t('app','admin'),
+                'items' => $adminSubMenus
+
+            ];
+        }
+
 
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
@@ -111,7 +125,7 @@ AppAsset::register($this);
         <p class="pull-left">&copy; PV-RADAR <?= date('Y') ?></p>
         <?php if (file_exists(Yii::getAlias('@webroot').'/test-check.txt'))
         {
-            echo "<p>".file_get_contents(Yii::getAlias('@webroot').'/test-check.txt')."</p>";
+            echo "<br><p>".file_get_contents(Yii::getAlias('@webroot').'/test-check.txt')."</p>";
         }
         ?>
     </div>

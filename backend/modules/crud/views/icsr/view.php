@@ -21,7 +21,10 @@ $this->params['breadcrumbs'][] = ['label' => $model->getAliasModel(true), 'url' 
 $this->params['breadcrumbs'][] = ['label' => (string) $model->patient_identifier, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 
-$updateButton = (!$isIcsrNullExported) ? '{update}' : '';
+$helpers = Yii::$app->helpers;
+
+$updateButton = (!$isIcsrNullExported && $helpers->currentUserCan('/crud/icsr/update')) ? '{update}' : '';
+
 ?>
 <div id="icsr-view" class="giiant-crud icsr-view">
 
@@ -53,10 +56,10 @@ $updateButton = (!$isIcsrNullExported) ? '{update}' : '';
         <!-- menu buttons -->
         <div class='pull-left'>
 
-            <?php  if (!$isIcsrNullExported){
+            <?php  if (!$isIcsrNullExported && $helpers->currentUserCan('/crud/icsr/update')){
                 echo Html::a('<span class="glyphicon glyphicon-pencil"></span> ' . Yii::t('app', 'Edit'), ['update', 'id' => $model->id], ['class' => 'btn btn-info']);
             }  ?>
-            <?php if ($model->canExported() && !$isIcsrNullExported) { ?>
+            <?php if ($model->canExported() && !$isIcsrNullExported && $helpers->currentUserCan('/crud/icsr/export')) { ?>
                 <?php echo Html::a('<span class="glyphicon glyphicon-copy"></span> ' . Yii::t('app', 'Export  Xml'), ['export', 'id' => $model->id  ,'case' => 'normal'], ['class' => 'btn btn-success'  ,'id' => 'exportXml']) ?>
                 <?php echo Html::a('<span class="glyphicon glyphicon-copy"></span> ' . Yii::t('app', 'Export  Null Case'), ['export-null-case', 'id' => $model->id ], ['class' => 'btn btn-default']) ?>
             <?php }
@@ -136,7 +139,7 @@ $updateButton = (!$isIcsrNullExported) ? '{update}' : '';
     <?php $this->beginBlock('DrugPrescriptions'); ?>
 
     <div style='position: relative'><div style='position:absolute; right: 0px; top: 0px;'>
-            <?php if (!$isIcsrNullExported){?>
+            <?php if (!$isIcsrNullExported && $helpers->currentUserCan('/crud/drug-prescription/create')){?>
             <a class="btn btn-success btn-xs" href="<?= Url::to(['/crud/drug-prescription/create',  'DrugPrescription' => ['icsr_id' => $model->id]])?>">
 
                 <span class="glyphicon glyphicon-plus"></span>
@@ -217,7 +220,7 @@ $updateButton = (!$isIcsrNullExported) ? '{update}' : '';
                     <?php $this->beginBlock('IcsrEvents'); ?>
                     <div style='position: relative'><div style='position:absolute; right: 0px; top: 0px;'>
 
-                            <?php if (!$isIcsrNullExported){ ?>
+                            <?php if (!$isIcsrNullExported && $helpers->currentUserCan('/crud/icsr-event/create')){ ?>
                             <a class="btn btn-success btn-xs" href="<?= Url::to(['/crud/icsr-event/create', 'IcsrEvent' => ['icsr_id' => $model->id]])?>">
 
                                 <span class="glyphicon glyphicon-plus"></span><?= Yii::t('app','New ').' Icsr Event'?>
@@ -276,7 +279,7 @@ $updateButton = (!$isIcsrNullExported) ? '{update}' : '';
                                             <?php $this->beginBlock('IcsrReporters'); ?>
                                     <div style='position: relative'><div style='position:absolute; right: 0px; top: 0px;'>
 
-                                            <?php if (!$isIcsrNullExported){ ?>
+                                            <?php if (!$isIcsrNullExported && $helpers->currentUserCan('/crud/icsr-reporter/create')){ ?>
                                             <a class="btn btn-success btn-xs" href="<?= Url::to(['/crud/icsr-reporter/create', 'IcsrReporter' => ['icsr_id' => $model->id]])?>">
 
                                                 <span class="glyphicon glyphicon-plus"></span><?= Yii::t('app','New ').' Icsr Reporter'?>
@@ -347,7 +350,7 @@ $updateButton = (!$isIcsrNullExported) ? '{update}' : '';
 
                                             <div style='position: relative'><div style='position:absolute; right: 0px; top: 0px;'>
 
-                                                    <?php if (!$isIcsrNullExported){ ?>
+                                                    <?php if (!$isIcsrNullExported && $helpers->currentUserCan('/crud/icsr-test/create')){ ?>
                                                     <a class="btn btn-success btn-xs" href="<?= Url::to(['/crud/icsr-test/create', 'IcsrTest' => ['icsr_id' => $model->id]])?>">
 
                                                         <span class="glyphicon glyphicon-plus"></span><?= Yii::t('app','New ').' Icsr Test'?>
@@ -664,7 +667,7 @@ $updateButton = (!$isIcsrNullExported) ? '{update}' : '';
                                                                     [
                                                                         'content' => $this->blocks['IcsrEvents'],
                                                                         'label' => count($model->getIcsrEvents()->asArray()->all()) <1 ?
-                                                                            '<small>Icsr Events <span class="badge badge-default">'.count($model->getIcsrEvents()->asArray()->all()).'  </span> <span class="glyphicon glyphicon-warning-sign alert-signal-color" ></span></small>'
+                                                                            '<small data-toggle="tooltip" title="'.Yii::t('app',' there is no events for this icsr . you need to add at least one event to be able to export e2b icsr').'">Icsr Events <span class="badge badge-default">'.count($model->getIcsrEvents()->asArray()->all()).'  </span> <span class="glyphicon glyphicon-warning-sign alert-signal-color" ></span></small>'
                                                                             :
                                                                             '<small>Icsr Events <span class="badge badge-default">'.count($model->getIcsrEvents()->asArray()->all()) . '</span></small>'
                                                                         ,
@@ -676,7 +679,7 @@ $updateButton = (!$isIcsrNullExported) ? '{update}' : '';
                                                                     ], [
                                                                         'content' => $this->blocks['IcsrReporters'],
                                                                         'label' => count($model->getIcsrReporters()->asArray()->all()) <1 ?
-                                                                            '<small>Icsr Reporters <span class="badge badge-default">' . count($model->getIcsrReporters()->asArray()->all()) . '</span> <span class="glyphicon glyphicon-warning-sign alert-signal-color" ></span></small>'
+                                                                            '<small data-toggle="tooltip" title="'.Yii::t('app',' there is no reports for this icsr . you need to add at least one report to be able to export e2b icsr').'">Icsr Reporters <span class="badge badge-default">' . count($model->getIcsrReporters()->asArray()->all()) . '</span> <span class="glyphicon glyphicon-warning-sign alert-signal-color" ></span></small>'
                                                                             :
                                                                             '<small>Icsr Reporters <span class="badge badge-default">' . count($model->getIcsrReporters()->asArray()->all()) . '</span></small>'
                                                                         ,

@@ -1,0 +1,208 @@
+<ichicsr lang="en">
+	<ichicsrmessageheader>
+		<messagetype>ICSR</messagetype>
+		<messageformatversion>2.1</messageformatversion>
+		<messageformatrelease>1.0</messageformatrelease>
+		<messagenumb>EG-NMGS-145</messagenumb>
+		<messagesenderidentifier>NMGS</messagesenderidentifier>
+		<messagereceiveridentifier>EPVC</messagereceiveridentifier>
+		<messagedateformat>102</messagedateformat>
+		<messagedate>20161224 </messagedate>
+	</ichicsrmessageheader>
+	<safetyreport>
+
+
+		<!--A.1.0.1 Sender’s (case) safety report unique identifier-->
+		<safetyreportid> EG-NMGS-145</safetyreportid>
+
+		<!--     A.1.1 Identification of the country of the primary source -->
+		<primarysourcecountry>EG</primarysourcecountry>
+		
+
+		<!--     A.1.4 Type of report --> 
+		<reporttype>2</reporttype>
+ 		
+ 		<!--A.1.5 Seriousness -->
+ 		<serious>1</serious>
+
+		<!--A.1.5.2. Seriousness criteria-->
+		<seriousnessdeath>2</seriousnessdeath>
+		<seriousnesslifethreatening>1</seriousnesslifethreatening>
+		<seriousnesshospitalization>1</seriousnesshospitalization>
+		<seriousnessdisabling>2</seriousnessdisabling>
+		<seriousnesscongenitalanomali>2</seriousnesscongenitalanomali>
+		<seriousnessother>2</seriousnessother>
+		
+		<!--*** A.1.6 Date report was first received from source-->
+		<receivedateformat>102</receivedateformat>
+		<receivedate>19970102</receivedate>
+
+        <!--*** A.1.7	Date of receipt of the most recent information for this report --> 
+        <receiptdateformat>102</receiptdateformat>
+		<receiptdate>20161224 </receiptdate>
+		<authoritynumb> 'EG'-NMGS-145</authoritynumb>
+
+		
+					<primarysource>
+				<!-- A.2.1.4	Qualification           -->
+				<qualification> 4 </qualification>
+
+			</primarysource>  
+	 
+					<primarysource>
+				<!-- A.2.1.4	Qualification           -->
+				<qualification> 1 </qualification>
+
+			</primarysource>  
+	 
+					<primarysource>
+				<!-- A.2.1.4	Qualification           -->
+				<qualification> 1 </qualification>
+
+			</primarysource>  
+	 
+		 
+	
+	<!-- A.3	Sender	and reviver          -->
+		<sender>
+ 			
+<!-- A.3.1.1	Sender Type          -->
+			<sendertype>1</sendertype>
+					
+<!--	A.3.1.2	Sender identifier          -->
+			<senderorganization>NMGS</senderorganization>
+
+<!-- A.3.1.4l E-mail address -->
+ 			<senderemailaddress>normal3@yahoo.com</senderemailaddress>
+
+ 		</sender>
+
+
+		<receiver/>
+
+		<patient>
+
+<!--  B.1.2.1	Date of birth         -->
+			<patientbirthdateformat>102</patientbirthdateformat>
+            <patientbirthdate>20160907</patientbirthdate>
+<!--  B.1.2.2	Age at time of onset of reaction / event   -->
+			<patientonsetage>23.00</patientonsetage>
+			<patientonsetageunit>803</patientonsetageunit>
+<!--  B.1.3	Weight (kg)          -->
+			<patientweight>25.00</patientweight>
+
+<!--  B.1.7.2	Text for relevant medical history and concurrent conditions (not including reaction/event) -->
+			<patientmedicalhistorytext>This is a test hitsory</patientmedicalhistorytext>
+
+				<reaction>
+<!--  B.2.i.0	Reaction or event as reported by the primary source   -->
+				<primarysourcereaction>FFFFF</primarysourcereaction>
+
+<!--  B.2.i.1	Reaction or event in MedDRA terminology (Lowest Level Term)   -->
+				<reactionmeddraversionllt> v. 2.3 </reactionmeddraversionllt>
+				<reactionmeddrallt>medra test</reactionmeddrallt>
+
+<!--  B.2.i.4	Date of start of reaction or event     -->
+				<reactionstartdateformat>102</reactionstartdateformat>
+				<reactionstartdate>20160924</reactionstartdate>
+<!--  B.2.i.5	Date of end of reaction or event     -->
+				<reactionenddateformat>102</reactionenddateformat>
+				<reactionenddate>20160930</reactionenddate>
+
+<!--  B.2.i.8	Outcome of reaction or event at the time of last observation (Recovered/resolved,Recovering/resolving,Not-->
+				<reactionoutcome>5</reactionoutcome>
+
+
+			</reaction>
+				<reaction>
+<!--  B.2.i.0	Reaction or event as reported by the primary source   -->
+				<primarysourcereaction>11111</primarysourcereaction>
+
+<!--  B.2.i.1	Reaction or event in MedDRA terminology (Lowest Level Term)   -->
+				<reactionmeddraversionllt> v. 2.3 </reactionmeddraversionllt>
+				<reactionmeddrallt>Abnormal heart sounds, other</reactionmeddrallt>
+
+<!--  B.2.i.4	Date of start of reaction or event     -->
+				<reactionstartdateformat>102</reactionstartdateformat>
+				<reactionstartdate>19700101</reactionstartdate>
+<!--  B.2.i.5	Date of end of reaction or event     -->
+				<reactionenddateformat>102</reactionenddateformat>
+				<reactionenddate>19700101</reactionenddate>
+
+<!--  B.2.i.8	Outcome of reaction or event at the time of last observation (Recovered/resolved,Recovering/resolving,Not-->
+				<reactionoutcome>3</reactionoutcome>
+
+
+			</reaction>
+				<reaction>
+<!--  B.2.i.0	Reaction or event as reported by the primary source   -->
+				<primarysourcereaction>fasdfasdf</primarysourcereaction>
+
+<!--  B.2.i.1	Reaction or event in MedDRA terminology (Lowest Level Term)   -->
+				<reactionmeddraversionllt> v. 2.3 </reactionmeddraversionllt>
+				<reactionmeddrallt>medra test</reactionmeddrallt>
+
+<!--  B.2.i.4	Date of start of reaction or event     -->
+				<reactionstartdateformat>102</reactionstartdateformat>
+				<reactionstartdate>19700101</reactionstartdate>
+<!--  B.2.i.5	Date of end of reaction or event     -->
+				<reactionenddateformat>102</reactionenddateformat>
+				<reactionenddate>19700101</reactionenddate>
+
+<!--  B.2.i.8	Outcome of reaction or event at the time of last observation (Recovered/resolved,Recovering/resolving,Not-->
+				<reactionoutcome>1</reactionoutcome>
+
+
+			</reaction>
+				<reaction>
+<!--  B.2.i.0	Reaction or event as reported by the primary source   -->
+				<primarysourcereaction>ffff</primarysourcereaction>
+
+<!--  B.2.i.1	Reaction or event in MedDRA terminology (Lowest Level Term)   -->
+				<reactionmeddraversionllt> v. 2.3 </reactionmeddraversionllt>
+				<reactionmeddrallt>medra test</reactionmeddrallt>
+
+<!--  B.2.i.4	Date of start of reaction or event     -->
+				<reactionstartdateformat>102</reactionstartdateformat>
+				<reactionstartdate>19700101</reactionstartdate>
+<!--  B.2.i.5	Date of end of reaction or event     -->
+				<reactionenddateformat>102</reactionenddateformat>
+				<reactionenddate>19700101</reactionenddate>
+
+<!--  B.2.i.8	Outcome of reaction or event at the time of last observation (Recovered/resolved,Recovering/resolving,Not-->
+				<reactionoutcome>1</reactionoutcome>
+
+
+			</reaction>
+	
+
+
+				<drug>
+<!--  B.4.k.1	Characterization of drug role (Suspect/Concomitant/Interacting)    -->   
+				<drugcharacterization>1</drugcharacterization>
+
+<!--  B.4.k.2	Drug identification           -->
+
+ 
+				<medicinalproduct>Change Drug Name</medicinalproduct>
+
+				
+		</drug>
+			<drug>
+<!--  B.4.k.1	Characterization of drug role (Suspect/Concomitant/Interacting)    -->   
+				<drugcharacterization>3</drugcharacterization>
+
+<!--  B.4.k.2	Drug identification           -->
+
+ 				<medicinalproduct>This is a drug prescription</medicinalproduct>
+
+		
+		</drug>
+						<!-- B.5 Narrative case summary and further information-->
+			<summary>
+				<!-- B.5.1 Case narrative including clinical course, therapeutic measures, outcome and additional relevant information -->
+				<narrativeincludeclinical>Helpppp</narrativeincludeclinical>
+			</summary>
+			 		</patient>
+	</safetyreport>
+</ichicsr>

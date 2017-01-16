@@ -6,6 +6,7 @@
  */
 
 
+use kartik\password\PasswordInput;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
@@ -18,7 +19,11 @@ use \dmstr\bootstrap\Tabs;
  * @var yii\widgets\ActiveForm $form
  */
 ?>
-<?php $company_id = isset($_GET['Company']['company_id']) ? $_GET['Company']['company_id'] : 0;  ?>
+<?php $company_id = isset($_GET['Company']['company_id']) ? $_GET['Company']['company_id'] : 0;
+
+	  $createdUserRole = isset($model->id)  ? ($model->getRole($model->id)) ?  : Yii::t('app','Qppv Deputy') : Yii::t('app','Qppv Deputy');
+
+?>
 <div class="user-form">
 
     <?php $form = ActiveForm::begin([
@@ -38,12 +43,33 @@ use \dmstr\bootstrap\Tabs;
 			<?php echo $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
 			<?php
 			if ($this->context->action->id == 'create') {
-				echo $form->field($model, 'password_hash')->textInput(['maxlength' => true]);
+			 echo $form->field($model, 'password_hash')->textInput(['maxlength' => true])->widget(PasswordInput::classname(), [
+				'pluginOptions' => [
+					'showMeter' => true,
+					'toggleMask' => true
+				]
+			]);
 			}
 			?>
 			<?php echo $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
-            <?php echo $form->field($model,'company_id')->dropDownList(ArrayHelper::map($model->getAllCompanies(),'id','name'),['options'=>[$company_id=>['Selected'=>true]]]); ?>
 
+        <div class="form-group field-role_name required">
+            <label class="control-label col-sm-3" for="role_name"><?= Yii::t('app','Role')?></label>
+            <div class="col-sm-6">
+                <select id="role_name" class="form-control" name="role_name">
+                    <?php foreach ($roles as $key => $value){?>
+                    <option value="<?= $value?>" <?php if($value == $createdUserRole) echo 'selected';?> >
+						<?= Yii::t('app',$value)?>
+						</option>
+                    <?php }?>
+                </select>
+            </div>
+
+        </div>
+
+			<?php if (isset(\Yii::$app->authManager->getRolesByUser(\Yii::$app->user->id)['admin'])) {?>
+			<?php echo $form->field($model,'company_id')->dropDownList(ArrayHelper::map($model->getAllCompanies(),'id','name'),['options'=>[$company_id=>['Selected'=>true]]]); ?>
+			<?php }?>
         </p>
         <?php $this->endBlock(); ?>
 

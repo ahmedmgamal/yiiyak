@@ -89,6 +89,14 @@ $this->params['breadcrumbs'][] = $this->title;
 				'value' => function ($model,$index,$dataColumn){
 					return $model->plan->name;
 				}
+			],
+			[
+				'label' => Yii::t('app','Statistics'),
+				'format' => 'raw',
+				'value' => function ($model,$index,$datColumn)
+				{
+					return  '<a href="'.Url::to(['company/company-statistics','companyId' => $model->id]).'" title="Statistics" aria-label="Statistics" data-pjax="0" class="btn btn-default statisticsColor"><span class="glyphicon glyphicon-stats"></span></a>';
+				}
 			]
 		],
 	]); ?>
@@ -98,3 +106,4 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 <?php \yii\widgets\Pjax::end() ?>
+<?php $this->registerCssFile('@web/crud/company/css/custom.css',['depends' => [\yii\bootstrap\BootstrapAsset::className()]])?>

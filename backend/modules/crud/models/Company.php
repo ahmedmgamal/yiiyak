@@ -4,12 +4,14 @@ namespace backend\modules\crud\models;
 
 use Yii;
 use \backend\modules\crud\models\base\Company as BaseCompany;
-
+use backend\modules\crud\traits;
 /**
  * This is the model class for table "company".
  */
 class Company extends BaseCompany
 {
+
+    use traits\checkUserCan;
         /**
      * @inheritdoc
      */
@@ -53,5 +55,29 @@ class Company extends BaseCompany
         //  [[icsr_id] => 155 [drug_id] => 41 [id] => 93 [meddra_pt_text] => medra pt test ]
         return $result;
     }
+
+    public function getDrugsLimit(){
+        $planId = $this->getPlan()->one();
+        $connection = Yii::$app->getDb();
+        $command = $connection
+            ->createCommand("SELECT MAX(plan_limits.`limit`) AS 'limit'
+              FROM plan_limits
+            INNER JOIN lkp_limits
+            ON(lkp_limits.id = plan_limits.limit_id)
+            WHERE lkp_limits.name = 'drug'
+            AND plan_limits.plan_id = :planId",[":planId"=>$planId->id]);
+        return $command->queryScalar();
+    }
+
+    public function getDrugsCount()
+    {
+        $connection = Yii::$app->getDb();
+        $command = $connection
+            ->createCommand("SELECT COUNT(*)
+                            FROM drug
+                            WHERE drug.company_id = :companyId",[":companyId"=>$this->id]);
+        return $command->queryScalar();
+    }
+
 
 }

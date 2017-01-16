@@ -70,7 +70,7 @@ class IcsrEventController extends \backend\modules\crud\controllers\base\IcsrEve
         $term = '+' . $term . '*';
         
             $command = $connection->createCommand('
-             SELECT term FROM meddra_pt WHERE MATCH (term) AGAINST (:term IN BOOLEAN MODE ) LIMIT 10 ')
+             SELECT term FROM meddra_pt WHERE MATCH(term) AGAINST (:term IN BOOLEAN MODE )  LIMIT 10 ')
              ->bindValue(':term',$term);
             
               
@@ -98,7 +98,6 @@ class IcsrEventController extends \backend\modules\crud\controllers\base\IcsrEve
             return ['lltTerms' => []];
         }
         $whereCondition = "";
-
         if (isset($ptTerm) && !empty($ptTerm))
         {
             $whereCondition = "AND `meddra_pt`.term='{$ptTerm}'";
@@ -108,16 +107,16 @@ class IcsrEventController extends \backend\modules\crud\controllers\base\IcsrEve
         {
             $connection = Yii::$app->getDb();
             
-            $searchTerm = '+' . $searchTerm . '*';
-
-            $command = $connection->createCommand("
+            $searchTerm = "+" . $searchTerm . "*";
+            $sql = "
              SELECT `meddra_llt`.term FROM meddra_llt 
              join meddra_pt on `meddra_llt`.pt_id = `meddra_pt`.id
-             WHERE MATCH (`meddra_llt`.term) AGAINST (:searchTerm IN BOOLEAN MODE ) ".$whereCondition."  LIMIT 10 ")
+             WHERE   MATCH (`meddra_llt`.term) AGAINST (:searchTerm IN BOOLEAN MODE )  ".$whereCondition."  LIMIT 10 ";
+
+            $command = $connection->createCommand($sql)
              ->bindValue(':searchTerm',$searchTerm);
 
             $result = $command->queryAll();
-
             $response = [];
             foreach ($result as $key => $value)
             {

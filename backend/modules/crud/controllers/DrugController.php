@@ -81,7 +81,7 @@ class DrugController extends \backend\modules\crud\controllers\base\DrugControll
         $_POST['Drug']['company_id'] = Yii::$app->user->identity->getCompany()->one()->id;
 
 		try {
-			if ($model->load($_POST) ) {
+			if (Yii::$app->request->isPost && $model->load($_POST) ) {
 
                 if (!($model->isBeyondLimit()) && $model->save()) {
                         return $this->redirect(Url::previous());
