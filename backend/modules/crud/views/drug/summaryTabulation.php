@@ -25,8 +25,16 @@ use yii\grid\GridView;
         ?>
         <div>
             <h2 class="text-center">
-                Numbers of adverse drug reactions by term from post-marketing sources including counts in bracket
+                <?php echo Yii::t('app','Numbers of adverse drug reactions by term from post-marketing sources including counts in bracket') ?>
             </h2>
+            <h3 >
+                <?php
+                if($drug != null){
+                    echo Yii::t('app','Drug') . ' ' . $drug->generic_name;
+                }
+                ?>
+            </h3>
+
         </div>
         <table class="table table-bordered">
             <thead>

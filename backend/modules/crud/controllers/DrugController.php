@@ -104,9 +104,16 @@ class DrugController extends \backend\modules\crud\controllers\base\DrugControll
 		return $this->render('create', ['model' => $model]);
         }
 
-        public function actionSummaryTabulation(){
+        public function actionSummaryTabulation($id = null){
             $summary = [];
-            $summaryResult = $this->get_summary_result();
+            $drug = null;
+            if($id == null){
+                $summaryResult = $this->getSummaryResult();
+
+            }else{
+                $drug = $this->findModel($id);
+                $summaryResult = $this->getSummaryResultForDrug($id);
+            }
             foreach ($summaryResult as $item){
                 if(!isset($summary[$item['meddra_pt_text']])){
                     $summary[$item['meddra_pt_text']] = [
@@ -122,11 +129,12 @@ class DrugController extends \backend\modules\crud\controllers\base\DrugControll
                 }
             }
             return $this->render('summaryTabulation',[
-                'summary' => $summary
+                'summary' => $summary,
+                'drug'=>$drug
             ]);
         }
 
-        private function get_summary_result(){
+        private function getSummaryResult(){
             $companyId = Yii::$app->user->identity->getCompany()->one()->id;
             $sql = "SELECT icsr_event.meddra_pt_text ,IF(icsr.is_serious = 0, 0, 1) AS 'is_serious' , count(icsr.is_serious) AS 'interval'
                       FROM icsr
@@ -139,6 +147,18 @@ class DrugController extends \backend\modules\crud\controllers\base\DrugControll
             $summary = Yii::$app->db->createCommand($sql,[":companyId"=>$companyId])->queryAll();
             return $summary;
         }
+    private function getSummaryResultForDrug($id){
+        $sql = "SELECT icsr_event.meddra_pt_text ,IF(icsr.is_serious = 0, 0, 1) AS 'is_serious' , count(icsr.is_serious) AS 'interval'
+                      FROM icsr
+                      INNER JOIN icsr_event
+                    ON(icsr_event.icsr_id = icsr.id)
+                        INNER JOIN drug
+                          ON(icsr.drug_id = drug.id)
+                        WHERE drug.id = :id
+                    GROUP BY icsr_event.meddra_pt_text , icsr.is_serious";
+        $summary = Yii::$app->db->createCommand($sql,[":id"=>$id])->queryAll();
+        return $summary;
+    }
 
 
 }
