@@ -20,6 +20,7 @@ use Faker\Provider\cs_CZ\DateTime;
 use FPDF;
 use mPDF;
 use Yii;
+use yii\data\SqlDataProvider;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\helpers\Url;
@@ -39,6 +40,7 @@ class CompanyController extends Controller
 	 */
 	public $enableCsrfValidation = false;
     private $zipper = null;
+    private $icsrsCount = 0;
 
 
 
@@ -186,25 +188,30 @@ class CompanyController extends Controller
 			throw new HttpException(404, 'The requested page does not exist.');
 		}
 	}
-
-	public function actionFullExport(){
+	public function actionExportHistory(){
         $company = Yii::$app->user->identity->getCompany()->one();
-        $archiveFileName = "files/".$company->name."_".strtotime("now").".zip";
+        $tempDir = "files/";
+        $archiveFileName = $company->name."_".strtotime("now").".zip";
+        $path = $tempDir . $archiveFileName;
         $this->zipper = new \ZipArchive();
         $pdf =$this->generateCompanyPdf($company);
-        $this->zipper->open($archiveFileName,\ZipArchive::OVERWRITE);
+        $this->zipper->open($path,\ZipArchive::OVERWRITE);
         $this->zipper->addFromString("company.pdf",$pdf);
         $this->generateDrugIcsrXml($company->drugs);
         $this->zipper->close();
-        header("Content-type: application/zip");
-        header("Content-Disposition: attachment; filename=".$archiveFileName);
-        header("Content-length: " . filesize($archiveFileName));
-        header("Pragma: no-cache");
-        header("Expires: 0");
-        readfile($archiveFileName);
-        unlink($archiveFileName);
+        $fileize = filesize($path);
+        $fileUrl = $this->saveFullExportFile($archiveFileName,$path);
+        $drugsCount = count($company->drugs);
+        $this->saveExportHistory($fileUrl,$fileize,$drugsCount,$this->icsrsCount);
+        unlink($path);
+        return $this->redirect(['full-export']);
+    }
 
-
+	public function actionFullExport(){
+        $company = Yii::$app->user->identity->getCompany()->one();
+        return $this->render('fullexport',[
+            'provider'=>$this->getExportHistoryProvider($company)
+        ]);
     }
     private function generateCompanyPdf($company){
 
@@ -230,6 +237,7 @@ class CompanyController extends Controller
     }
     private function generateIcsrXml($drug){
         foreach ($drug->icsrs as $icsr){
+            $this->icsrsCount += 1;
             $fileName = 'IcsrVersion_IcsrId'.$icsr->id.'_DrugId'.$drug->id.'_'.strtotime("now").'.xml';
             $this->zipper->addFromString($fileName,$this->getIcsrXml($icsr))  ;
         }
@@ -243,21 +251,7 @@ class CompanyController extends Controller
         return $xml;
     }
 
-    private function generateIcsrPdf($mpdf,$drug){
-	    if(count($drug->icsrs) > 0){
-            $mpdf->Bookmark($drug->generic_name);
-        }
 
-        foreach ($drug->icsrs as $icsr){
-            $hasIcsrs = true;
-            $mpdf->WriteHTML($this->getIcsrHtml($icsr));
-        }
-    }
-    private function generateDrugIcsrPdf($mpdf,$drugs){
-        foreach ($drugs as $drug){
-            $this->generateIcsrPdf($mpdf,$drug);
-        }
-    }
     private function generateCompanyHtml($company){
         $companyDate = date_create($company->end_date);
 	    $html = "<div>";
@@ -299,15 +293,60 @@ class CompanyController extends Controller
         $html .= "</div>";
         return $html;
     }
-    private function getIcsrHtml($icsr){
 
-        $xml =  $this->renderPartial('/icsr/export', [
-            "model"=>$icsr
-        ]);
-        $xml = simplexml_load_string($xml);
-        $e2pLkp = Yii::$app->params['e2bLkp'];
-        $elementsLkp = Yii::$app->params['elementsLkp'];
-        return $this->renderPartial('/icsr/open-pdf',['xml' => $xml , 'e2pLkp' => $e2pLkp , 'elementsLkp' => $elementsLkp]);
+    private function saveFullExportFile($filename,$path){
+        $bucket = \Yii::$app->fileStorage->getBucket("icsrVersions");
+        $file_content =  file_get_contents($path);
+        $bucket->saveFileContent($filename,$file_content);
+        return $bucket->getFileUrl($filename);
     }
+
+    private function saveExportHistory($path,$filesize,$drugs,$icsrs){
+        $userId = Yii::$app->user->identity->getId();
+            $sql = "INSERT INTO exports_history(created_by,creation_date,file_size,drugs_number,icsrs_number,file_path)
+                    VALUES (:createdBy,DATE(NOW()),:filesize,:drugCount,:icsrCount,:path)";
+            Yii::$app->db->createCommand($sql,
+                [
+                    ":createdBy"=>$userId,
+                    ":filesize"=>$filesize,
+                    ":drugCount"=>$drugs,
+                    "icsrCount"=>$icsrs,
+                    "path"=>$path
+                ]
+            )->execute();
+    }
+    private function getExportHistoryProvider($company){
+
+        $sql = "SELECT `user`.username AS 'username',creation_date,ROUND((file_size/1024),0) AS 'file_size',drugs_number,icsrs_number,file_path
+                FROM exports_history
+                 INNER JOIN `user`
+                 ON(`user`.id = exports_history.created_by)
+                 WHERE `user`.company_id = :company_id
+                 ORDER BY creation_date ASC";
+        $CountSql = "SELECT COUNT(*)
+                FROM exports_history
+                 INNER JOIN `user`
+                 ON(`user`.id = exports_history.created_by)
+                 WHERE `user`.company_id = :company_id";
+        $count = Yii::$app->db->createCommand($CountSql,  [":company_id"=> $company->id])->queryScalar();
+        $provider = new SqlDataProvider([
+            'sql' => $sql,
+            'params' => [':company_id' => $company->id],
+            'totalCount' => $count,
+            'pagination' => [
+                'pageSize' => 10,
+            ],
+            'sort' => [
+                'attributes' => [
+                    'username',
+                    'icsrs_number',
+                    'drugs_number',
+                    'creation_date'
+                ],
+            ],
+        ]);
+        return $provider;
+    }
+
 
 }

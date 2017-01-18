@@ -29,18 +29,14 @@ class CompanyController extends \backend\modules\crud\controllers\base\CompanyCo
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['full-export'],
-                        'roles' => ['normalUser'],
-                        'actions' => ['statistics'],
-                        'matchCallback' => function ($rule,$action){
-                            $user_id = \Yii::$app->user->id;
-                            return Company::checkUserCan($user_id);
-                        }
-                    ],
-                    [
-                        'allow' => true,
-                        'roles' => ['admin'],
-                    ],
+////                        'roles' => ['normalUser','Manager','companyAdmin'],
+//                        'actions' => ['statistics',"fullExport"],
+//                        'matchCallback' => function ($rule,$action){
+//                            $user_id = \Yii::$app->user->id;
+//                            return Company::checkUserCan($user_id);
+//
+//                        }
+                    ]
 
                 ]
             ]
