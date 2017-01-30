@@ -11,15 +11,15 @@ class m170130_181541_addExcelUploadRole extends Migration
 
         $this->execute("INSERT INTO auth_item_child(parent,child) VALUES
 
-      ('Qppv Deputy','/crud/drug/excel-upload'),
-      ('Qppv Deputy','/crud/drug/excel-download')
+      ('Qppv Person','/crud/drug/excel-upload'),
+      ('Qppv Person','/crud/drug/excel-download')
       ");
     }
 
     public function down()
     {
-        $this->execute('DELETE FROM auth_item_child where parent = "Qppv Deputy" AND child = "/crud/drug/excel-upload" ');
-        $this->execute('DELETE FROM auth_item_child where parent = "Qppv Deputy" AND child = "/crud/drug/excel-download" ');
+        $this->execute('DELETE FROM auth_item_child where parent = "Qppv Person" AND child = "/crud/drug/excel-upload" ');
+        $this->execute('DELETE FROM auth_item_child where parent = "Qppv Person" AND child = "/crud/drug/excel-download" ');
         $this->execute('DELETE FROM auth_item where name = "/crud/drug/excel-download" AND type = 2 ');
         $this->execute('DELETE FROM auth_item where name = "/crud/drug/excel-upload" AND type = 2 ');
 
