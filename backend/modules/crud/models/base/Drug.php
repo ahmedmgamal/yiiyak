@@ -81,7 +81,7 @@ abstract class Drug extends \yii\db\ActiveRecord
             'manufacturer' => Yii::t('app', 'Manufacturer'),
             'strength' => Yii::t('app', 'Strength'),
             'route_lkp_id' => Yii::t('app', 'Route Of Administration'),
-            'next_prsu_date	' => Yii::t('app','Next Submission Date'),
+            'next_prsu_date' => Yii::t('app','Next Submission Date'),
             'rmp_first_deadline' => Yii::t('app','RMP First Deadline')
         ];
     }
