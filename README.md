@@ -34,7 +34,7 @@ A.1 Case
      A.1.5.2. Seriousness criteria
      A.1.6 Date report was first received from source
      A.1.10 Worldwide unique case identification number.
-
+     A.1
 A.2 Reporter
     A.2.1.1 Reporter identifier (name or initials)
     A.2.1.2 Reporter’s address
