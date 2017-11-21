@@ -65,8 +65,10 @@ class SiteController extends Controller
 
     public function actionLogin()
     {
-
+        
         $userRole = \Yii::$app->authManager->getRolesByUser(\Yii::$app->user->id);
+      //  return $this->redirect('@web/crud/company/index');
+
 
         if (isset($userRole['admin']))
         {
