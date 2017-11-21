@@ -16,11 +16,17 @@ use yii\bootstrap\Nav;
     .landingBG{
         background: url('<?php echo Yii::getAlias('@web');?>/images/patterns/subway-lines.png') repeat;
     }
-    .fullWidth{
+    .fullWidth {
         width:100%;
     }
     .centerParagraph{
-        width: 900px; top: 50%; left: 50%;" data-ls="offsetxin:-250;offsetyin:-;durationin:1000;delayin:1000;offsetxout:0;offsetyout:-8;easingout:easeInOutQuart;scalexout:1.2;scaleyout:1.2;
+        width: 900px; top: 50%; left: 50%;
+    }
+    .top70left55{
+        top: 70%; left: 55%;
+    }
+    .height368{
+        height: 368px;
     }
 
 </style>
@@ -32,7 +38,7 @@ use yii\bootstrap\Nav;
 
                 <!-- FULL SCREEN SLIDER -->
                 <section id="slider-wrapper" class="layer-slider-wrapper layer-slider-fullsize">
-                    <div id="layerslider fullWidth">
+                    <div id="layerslider" class="fullWidth">
                         <!-- Slide 1 -->
                         <div class="ls-slide" data-ls="transition2d:1;timeshift:-1000;">
                             <!-- Slide background -->
@@ -40,7 +46,7 @@ use yii\bootstrap\Nav;
 
 
                             <!-- Center paragraph -->
-                            <p class="ls-l text-standard text-center c-white centerParagraph" >
+                            <p class="ls-l text-standard text-center c-white centerParagraph" data-ls="offsetxin:-250;offsetyin:-;durationin:1000;delayin:1000;offsetxout:0;offsetyout:-8;easingout:easeInOutQuart;scalexout:1.2;scaleyout:1.2; >
 
                                 <?= Html::img('@web/images/logos/pvRadarLogo.png',['class' => 'img-responsive','alt' => 'PV-Radar artimis logo']) ?>
 
@@ -49,7 +55,7 @@ use yii\bootstrap\Nav;
 
                             <?= Html::a('Login',Url::toRoute(['site/login']),['class' => 'btn btn-lg btn-b-red ls-l' ,  'style' => "top: 70%; left: 40%;" ,'data-ls' =>"offsetxin: 0; offsetyin: 250; durationin: 1000; delayin: 1000; offsetxout: 0; offsetyout:-8;easingout:easeInOutQuart;scalexout:1.2;scaleyout:1.2;"]); ?>
 
-                            <a href="#section-7" class="btn btn-lg btn-base-1  ls-l scroll-me" style="top: 70%; left: 55%;" data-ls="offsetxin: 0; offsetyin: 250; durationin: 1000; delayin: 1000; offsetxout: 0; offsetyout:-8;easingout:easeInOutQuart;scalexout:1.2;scaleyout:1.2;" onclick="setTimeout(function() {$('#email').focus()},100);">
+                            <a href="#section-7" class="btn btn-lg btn-base-1  ls-l scroll-me top70left55"  data-ls="offsetxin: 0; offsetyin: 250; durationin: 1000; delayin: 1000; offsetxout: 0; offsetyout:-8;easingout:easeInOutQuart;scalexout:1.2;scaleyout:1.2;" onclick="setTimeout(function() {$('#email').focus()},100);">
                               <?= Yii::t('app','Request Quotation') ?>
                             </a>
                         </div>
@@ -371,7 +377,7 @@ use yii\bootstrap\Nav;
 
                                 <section id="google-map">
                                     <!-- #google-container will contain the map  -->
-                                    <div id="mapCanvas" class="map-canvas mt-20" style="height: 368px;"></div>
+                                    <div id="mapCanvas" class="map-canvas mt-20 height368"></div>
                                     <!-- #cd-zoom-in and #zoom-out will be used to create our custom buttons for zooming-in/out -->
                                     <div id="map-zoom-in"></div>
                                     <div id="map-zoom-out"></div>
