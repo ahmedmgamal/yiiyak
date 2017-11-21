@@ -53,8 +53,12 @@ class SiteController extends Controller
     {
         return [
             'error' => [
-                'class' => 'yii\web\ErrorAction',
+                'class' => 'yii2mod\cms\actions\PageAction',
+              //  'class' => 'yii\web\ErrorAction',
             ],
+//            'error' => [
+//                'class' => 'yii\web\ErrorAction',
+//            ],
         ];
     }
 
@@ -65,10 +69,8 @@ class SiteController extends Controller
 
     public function actionLogin()
     {
-        
-        $userRole = \Yii::$app->authManager->getRolesByUser(\Yii::$app->user->id);
-      //  return $this->redirect('@web/crud/company/index');
 
+        $userRole = \Yii::$app->authManager->getRolesByUser(\Yii::$app->user->id);
 
         if (isset($userRole['admin']))
         {

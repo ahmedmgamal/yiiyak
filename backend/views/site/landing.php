@@ -9,7 +9,21 @@ use yii\bootstrap\Nav;
 
 
 ?>
+<style>
+    .displayNone{
+        display: none;
+    }
+    .landingBG{
+        background: url('<?php echo Yii::getAlias('@web');?>/images/patterns/subway-lines.png') repeat;
+    }
+    .fullWidth{
+        width:100%;
+    }
+    .centerParagraph{
+        width: 900px; top: 50%; left: 50%;" data-ls="offsetxin:-250;offsetyin:-;durationin:1000;delayin:1000;offsetxout:0;offsetyout:-8;easingout:easeInOutQuart;scalexout:1.2;scaleyout:1.2;
+    }
 
+</style>
 <!-- MAIN WRAPPER -->
 <div class="body-wrap">
     <div class="st-pusher">
@@ -18,7 +32,7 @@ use yii\bootstrap\Nav;
 
                 <!-- FULL SCREEN SLIDER -->
                 <section id="slider-wrapper" class="layer-slider-wrapper layer-slider-fullsize">
-                    <div id="layerslider" style="width:100%; ">
+                    <div id="layerslider fullWidth">
                         <!-- Slide 1 -->
                         <div class="ls-slide" data-ls="transition2d:1;timeshift:-1000;">
                             <!-- Slide background -->
@@ -26,7 +40,7 @@ use yii\bootstrap\Nav;
 
 
                             <!-- Center paragraph -->
-                            <p class="ls-l text-standard text-center c-white" style="width: 900px; top: 50%; left: 50%;" data-ls="offsetxin:-250;offsetyin:-;durationin:1000;delayin:1000;offsetxout:0;offsetyout:-8;easingout:easeInOutQuart;scalexout:1.2;scaleyout:1.2;">
+                            <p class="ls-l text-standard text-center c-white centerParagraph" >
 
                                 <?= Html::img('@web/images/logos/pvRadarLogo.png',['class' => 'img-responsive','alt' => 'PV-Radar artimis logo']) ?>
 
@@ -128,7 +142,7 @@ use yii\bootstrap\Nav;
                     </div>
                 </section>
                 <!-- SECTION 3 -->
-                <section class="slice sct-color-2 bb" style="display: none;">
+                <section class="slice sct-color-2 bb displayNone">
                     <div class="container">
                         <!-- MILESTONE COUNTER -->
                         <div class="row">
@@ -337,7 +351,7 @@ use yii\bootstrap\Nav;
                 </section>
 
                 <!-- SECTION 7 -->
-                <section id="section-7" class="slice relative" style="background: url('<?php echo Yii::getAlias('@web');?>/images/patterns/subway-lines.png') repeat;">
+                <section id="section-7" class="slice relative landingBG" >
                     <div class="mask mask-3 v1"></div>
                     <div class="container">
                         <div class="row">

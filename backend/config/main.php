@@ -12,6 +12,11 @@ $config = [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [
+
+        'cms' => [
+            'class' => 'yii2mod\cms\Module',
+        ],
+
         'audit' => [
             'class' => 'bedezign\yii2\audit\Audit',
             'ignoreActions' => ['debug/*']
@@ -102,9 +107,12 @@ $config = [
             'enablePrettyUrl' => true,
             'rules' => [
                 [
+                    
+                    'class' => 'yii2mod\cms\components\PageUrlRule',
                     'pattern' => 'crud/icsr/export',
-                    'route' => 'crud/icsr/export',
-                    'suffix' => '.xml',
+                   // 'route' => 'crud/icsr/export',
+                   'suffix' => '.xml',
+
                 ],
             ],
         ],
