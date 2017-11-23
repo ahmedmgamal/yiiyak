@@ -1,6 +1,6 @@
 <?php
 namespace backend\controllers;
-
+use Da\TwoFA\Manager;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use Yii;
@@ -12,6 +12,10 @@ use common\models\LoginForm;
 use yii\filters\VerbFilter;
 use yii\helpers\Url;
 use backend\modules\crud\models\User;
+use Da\TwoFA\Service\TOTPSecretKeyUriGeneratorService;
+use Da\TwoFA\Service\QrCodeDataUriGeneratorService;
+use Da\TwoFA\Service\GoogleQrCodeUrlGeneratorService;
+
 /**
  * Site controller
  */
@@ -66,14 +70,35 @@ class SiteController extends Controller
     {
         return $this->render('index');
     }
+    public function googleAuth(){
+        $manager = new Manager();
+        $secret = $manager->generateSecretKey();
+        $user = \Yii::$app->user;
+        $currentUser=User::findIdentity($user->id);
+        $currentUser->twofa_secret = $secret;
+        $currentUser->save();
+        $currentUser->twofa_secret = $secret;
+        $currentUser->save();
+
+        $totpUri = (new TOTPSecretKeyUriGeneratorService('PVRADAR', 'ddd', $secret))->run();
+        $googleUri = (new GoogleQrCodeUrlGeneratorService($totpUri))->run();
+
+        return $this->render('qrcode', [
+            'googleUri' => $googleUri,
+            'secret' => $secret
+        ]);
+    }
 
     public function actionLogin()
     {
+
 
         $userRole = \Yii::$app->authManager->getRolesByUser(\Yii::$app->user->id);
 
         if (isset($userRole['admin']))
         {
+
+
             return $this->redirect('@web/crud/company/index');
         }
         if (!\Yii::$app->user->isGuest) {
@@ -95,6 +120,7 @@ class SiteController extends Controller
                     return $this->redirect('@web/crud/company/index');
                 }
                 return $this->redirect('@web/crud/drug/index');
+
             }
             Yii::$app->user->logout();
 
