@@ -18,12 +18,16 @@ use yii\web\HttpException;
 use yii\helpers\Url;
 use dmstr\bootstrap\Tabs;
 use backend\modules\crud\models\User;
+use Da\TwoFA\Service\TOTPSecretKeyUriGeneratorService;
+use Da\TwoFA\Service\GoogleQrCodeUrlGeneratorService;
+use Da\TwoFA\Manager;
 
 /**
  * CompanyController implements the CRUD actions for Company model.
  */
 class CompanyController extends Controller
 {
+	
 
 	/**
 	 *
@@ -31,6 +35,47 @@ class CompanyController extends Controller
 	 * CSRF validation is enabled only when both this property and [[Request::enableCsrfValidation]] are true.
 	 */
 	public $enableCsrfValidation = false;
+	
+
+	public function qrcodeGooleAuth($alert=0){
+		$user = \Yii::$app->user;
+		$user = User::findIdentity($user->id);
+		if($user->auth == 1)
+			return '';
+
+		if(isset($_POST['qrcode']))
+		{
+			$manager = new Manager();
+			$valid = $manager->verify($_POST['qrcode'], $user->twofa_secret);
+
+
+			if($valid == false){
+				//if entered invalid qrcode
+				return $this->qrcodeGooleAuth('Your Verification Code is Wrong Please try again');
+			}
+			else{
+				//if entered valid qrcode
+				$user->auth = 1;
+				$user->save();
+				return '';
+
+			}
+		}
+
+		$user = \Yii::$app->user;
+		$user = User::findIdentity($user->id);
+		$secret = $user->twofa_secret;
+
+
+		$totpUri = (new TOTPSecretKeyUriGeneratorService('PVRADAR', $user->username, $secret))->run();
+		$googleUri = (new GoogleQrCodeUrlGeneratorService($totpUri))->run();
+
+		return $this->render('/qrcode', [
+			'googleUri' => $googleUri,
+			'secret' => $secret,
+			'alert'=>$alert,
+		]);
+	}
 
 
 
@@ -41,6 +86,11 @@ class CompanyController extends Controller
 	 * @return mixed
 	 */
 	public function actionIndex() {
+
+
+
+		if($this->qrcodeGooleAuth() != '' )
+			return $this->qrcodeGooleAuth();
 
         $searchModel  = new CompanySearch;
 		$dataProvider = $searchModel->search($_GET);
@@ -64,6 +114,10 @@ class CompanyController extends Controller
 	 * @return mixed
 	 */
 	public function actionView($id) {
+
+		if($this->qrcodeGooleAuth() != '' )
+			return $this->qrcodeGooleAuth();
+
 		\Yii::$app->session['__crudReturnUrl'] = Url::previous();
 		Url::remember();
 		Tabs::rememberActiveState();
@@ -81,6 +135,10 @@ class CompanyController extends Controller
 	 * @return mixed
 	 */
 	public function actionCreate() {
+
+		if($this->qrcodeGooleAuth() != '' )
+			return $this->qrcodeGooleAuth();
+
 		$model = new Company;
         $userModel = new User;
 

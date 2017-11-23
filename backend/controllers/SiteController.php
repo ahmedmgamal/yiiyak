@@ -1,6 +1,6 @@
 <?php
 namespace backend\controllers;
-use Da\TwoFA\Manager;
+
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use Yii;
@@ -13,8 +13,8 @@ use yii\filters\VerbFilter;
 use yii\helpers\Url;
 use backend\modules\crud\models\User;
 use Da\TwoFA\Service\TOTPSecretKeyUriGeneratorService;
-use Da\TwoFA\Service\QrCodeDataUriGeneratorService;
 use Da\TwoFA\Service\GoogleQrCodeUrlGeneratorService;
+use Da\TwoFA\Manager;
 
 /**
  * Site controller
@@ -57,8 +57,8 @@ class SiteController extends Controller
     {
         return [
             'error' => [
-                'class' => 'yii2mod\cms\actions\PageAction',
-              //  'class' => 'yii\web\ErrorAction',
+              //  'class' => 'yii2mod\cms\actions\PageAction',
+                'class' => 'yii\web\ErrorAction',
             ],
 //            'error' => [
 //                'class' => 'yii\web\ErrorAction',
@@ -70,36 +70,71 @@ class SiteController extends Controller
     {
         return $this->render('index');
     }
-    public function googleAuth(){
+    public function genearteGoogleAuthToken()
+    {
         $manager = new Manager();
         $secret = $manager->generateSecretKey();
         $user = \Yii::$app->user;
         $currentUser=User::findIdentity($user->id);
-        $currentUser->twofa_secret = $secret;
-        $currentUser->save();
-        $currentUser->twofa_secret = $secret;
-        $currentUser->save();
+        if(empty($currentUser->twofa_secret)) {
+            $currentUser->twofa_secret = $secret;
+            $currentUser->save();
+        }
 
-        $totpUri = (new TOTPSecretKeyUriGeneratorService('PVRADAR', 'ddd', $secret))->run();
+
+
+    }
+    public function qrcodeGooleAuth($alert=0){
+
+        $user = \Yii::$app->user;
+        $user = User::findIdentity($user->id);
+        $secret = $user->twofa_secret;
+
+
+        $totpUri = (new TOTPSecretKeyUriGeneratorService('PVRADAR', $user->username, $secret))->run();
         $googleUri = (new GoogleQrCodeUrlGeneratorService($totpUri))->run();
 
         return $this->render('qrcode', [
             'googleUri' => $googleUri,
-            'secret' => $secret
+            'secret' => $secret,
+            'alert'=>$alert,
         ]);
     }
 
     public function actionLogin()
     {
 
+        $user = \Yii::$app->user;
+        $user = User::findIdentity($user->id);
+
+        if(isset($_POST['qrcode']))
+        {
+            $manager = new Manager();
+            $valid = $manager->verify($_POST['qrcode'], $user->twofa_secret);
+
+
+            if($valid == false){
+                //if entered invalid qrcode
+                return $this->qrcodeGooleAuth('Your Verification Code is Wrong Please try again');
+            }
+            else{
+                //if entered valid qrcode
+                $user->auth = 1;
+                $user->save();
+                return $this->redirect('@web/crud/company/index');
+            }
+        }
+
 
         $userRole = \Yii::$app->authManager->getRolesByUser(\Yii::$app->user->id);
 
         if (isset($userRole['admin']))
         {
+            if($user->auth == 1)
+                return $this->redirect('@web/crud/company/index');
+            else
+                return $this->qrcodeGooleAuth();
 
-
-            return $this->redirect('@web/crud/company/index');
         }
         if (!\Yii::$app->user->isGuest) {
             return $this->redirect('@web/crud/drug/index');
@@ -117,6 +152,8 @@ class SiteController extends Controller
 
                 if (isset($userRole['admin']))
                 {
+                    // for first time login must generate token
+                    $this->genearteGoogleAuthToken();
                     return $this->redirect('@web/crud/company/index');
                 }
                 return $this->redirect('@web/crud/drug/index');
@@ -136,6 +173,10 @@ class SiteController extends Controller
 
     public function actionLogout()
     {
+        $user = \Yii::$app->user;
+        $user = User::findIdentity($user->id);
+        $user->auth = 0;
+        $user->save();
         Yii::$app->user->logout();
 
         return $this->goHome();
