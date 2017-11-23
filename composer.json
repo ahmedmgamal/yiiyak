@@ -34,7 +34,8 @@
       "miloschuman/yii2-highcharts-widget": "*",
       "yiisoft/yii2-jui": "~2.0.0",
         "moonlandsoft/yii2-phpexcel": "^1.1",
-      "yii2mod/yii2-cms": "*"
+      "yii2mod/yii2-cms": "*",
+        "2amigos/2fa-library": "~1.0"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
