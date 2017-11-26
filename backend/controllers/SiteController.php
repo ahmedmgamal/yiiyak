@@ -31,7 +31,7 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'error','landing','send-mail','request-password-reset','reset-password'],
+                        'actions' => ['login', 'error','landing','send-mail','request-password-reset','reset-password','testing'],
                         'allow' => true,
                     ],
                     [
@@ -56,9 +56,9 @@ class SiteController extends Controller
     public function actions()
     {
         return [
-//            'page' => [
-//                'class' => 'yii2mod\cms\actions\PageAction',
-//            ],
+            'page' => [
+                'class' => 'yii2mod\cms\actions\PageAction',
+            ],
             'error' => [
                 // 'class' => 'yii2mod\cms\actions\PageAction',
                 'class' => 'yii\web\ErrorAction',
@@ -213,6 +213,9 @@ class SiteController extends Controller
     public function actionLanding () {
         $this->layout = 'landing';
         return $this->render('landing');
+    }
+    public function actionCreate() {
+       var_dump('dd'); die;
     }
 
     public function actionSendMail(){

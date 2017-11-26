@@ -47,7 +47,7 @@ return [
             'rules' => [
                 [
                     'class' => 'yii2mod\cms\components\PageUrlRule',
-                  //  'route' => 'site',
+                    'route' => 'site',
                 ],
             ],
         ],
