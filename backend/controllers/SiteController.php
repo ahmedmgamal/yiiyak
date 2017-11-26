@@ -56,8 +56,11 @@ class SiteController extends Controller
     public function actions()
     {
         return [
+//            'page' => [
+//                'class' => 'yii2mod\cms\actions\PageAction',
+//            ],
             'error' => [
-              //  'class' => 'yii2mod\cms\actions\PageAction',
+                // 'class' => 'yii2mod\cms\actions\PageAction',
                 'class' => 'yii\web\ErrorAction',
             ],
 //            'error' => [
@@ -84,7 +87,7 @@ class SiteController extends Controller
 
 
     }
-    public function qrcodeGooleAuth($alert=0){
+    public function qrcodeGooleAuth(){
 
         $user = \Yii::$app->user;
         $user = User::findIdentity($user->id);
@@ -97,45 +100,48 @@ class SiteController extends Controller
         return $this->render('qrcode', [
             'googleUri' => $googleUri,
             'secret' => $secret,
-            'alert'=>$alert,
         ]);
     }
 
     public function actionLogin()
     {
+        $request = Yii::$app->request;
+        $params = $request->bodyParams;
+        $param = $request->getBodyParam('LoginForm');
+
 
         $user = \Yii::$app->user;
         $user = User::findIdentity($user->id);
 
-        if(isset($_POST['qrcode']))
-        {
-            $manager = new Manager();
-            $valid = $manager->verify($_POST['qrcode'], $user->twofa_secret);
-
-
-            if($valid == false){
-                //if entered invalid qrcode
-                return $this->qrcodeGooleAuth('Your Verification Code is Wrong Please try again');
-            }
-            else{
-                //if entered valid qrcode
-                $user->auth = 1;
-                $user->save();
-                return $this->redirect('@web/crud/company/index');
-            }
-        }
+//        if(isset($_POST['qrcode']))
+//        {
+//            $manager = new Manager();
+//            $valid = $manager->verify($_POST['qrcode'], $user->twofa_secret);
+//
+//
+//            if($valid == false){
+//                //if entered invalid qrcode
+//                return $this->qrcodeGooleAuth('Your Verification Code is Wrong Please try again');
+//            }
+//            else{
+//                //if entered valid qrcode
+//                $user->auth = 1;
+//                $user->save();
+//                return $this->redirect('@web/crud/company/index');
+//            }
+//        }
 
 
         $userRole = \Yii::$app->authManager->getRolesByUser(\Yii::$app->user->id);
 
-        if (isset($userRole['admin']))
-        {
-            if($user->auth == 1)
-                return $this->redirect('@web/crud/company/index');
-            else
-                return $this->qrcodeGooleAuth();
-
-        }
+//        if (isset($userRole['admin']))
+//        {
+//            if($user->auth == 1)
+//                return $this->redirect('@web/crud/company/index');
+//            else
+//                return $this->qrcodeGooleAuth();
+//
+//        }
         if (!\Yii::$app->user->isGuest) {
             return $this->redirect('@web/crud/drug/index');
         }
@@ -152,8 +158,30 @@ class SiteController extends Controller
 
                 if (isset($userRole['admin']))
                 {
-                    // for first time login must generate token
-                    $this->genearteGoogleAuthToken();
+                    $user = \Yii::$app->user;
+                    $user = User::findIdentity($user->id);
+
+                    if($user->twofa_secret != null){
+                        $manager = new Manager();
+                        $valid = $manager->verify($param['AuthCode'], $user->twofa_secret);
+                        // var_dump($valid); die;
+
+                        if($valid){
+                            $user->auth = 1;
+                            $user->save();
+                        }
+                        else{
+                            Yii::$app->user->logout();
+                            return $this->render('login', [
+                                'model' => $model,
+                                'AuthCodeAlret' => "<b style='color:darkred;'>your Auth Code is wrong</b>"
+                            ]);
+                        }
+                    }else{
+                        // for first time login must generate token
+                        $this->genearteGoogleAuthToken();
+                         return $this->redirect('@web/crud/company/index');
+                    }
                     return $this->redirect('@web/crud/company/index');
                 }
                 return $this->redirect('@web/crud/drug/index');
@@ -190,8 +218,8 @@ class SiteController extends Controller
     public function actionSendMail(){
         $request = Yii::$app->request;
         $emailBody = 'email is:- ' . $request->post('email').
-                     ' and his number is:- ' .$request->post('number').
-                     ' the requested package is:- '.$request->post('message');
+            ' and his number is:- ' .$request->post('number').
+            ' the requested package is:- '.$request->post('message');
 
         Yii::$app->mailer->compose()
             ->setFrom($request->post('email'))

@@ -10,6 +10,12 @@ return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'modules' => [
+
+        'cms' => [
+            'class' => 'yii2mod\cms\Module',
+        ],
+    ],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
         'user' => [
@@ -33,14 +39,20 @@ return [
             'defaultRoles' => ['admin', 'company'],
 
         ],
-        /*
+
         'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
+
+          //  'enablePrettyUrl' => true,
+           // 'showScriptName' => false,
             'rules' => [
+                [
+                    'class' => 'yii2mod\cms\components\PageUrlRule',
+                  //  'route' => 'site',
+                ],
             ],
         ],
-        */
+
     ],
     'params' => $params,
+    'defaultRoute' => '/'
 ];

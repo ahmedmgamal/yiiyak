@@ -13,9 +13,9 @@ $config = [
     'bootstrap' => ['log'],
     'modules' => [
 
-        'cms' => [
-            'class' => 'yii2mod\cms\Module',
-        ],
+//        'cms' => [
+//            'class' => 'yii2mod\cms\Module',
+//        ],
 
         'audit' => [
             'class' => 'bedezign\yii2\audit\Audit',
@@ -108,9 +108,9 @@ $config = [
             'rules' => [
                 [
                     
-                    'class' => 'yii2mod\cms\components\PageUrlRule',
+                  //  'class' => 'yii2mod\cms\components\PageUrlRule',
                     'pattern' => 'crud/icsr/export',
-                   // 'route' => 'crud/icsr/export',
+                    'route' => 'crud/icsr/export',
                    'suffix' => '.xml',
 
                 ],

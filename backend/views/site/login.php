@@ -23,6 +23,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?= $form->field($model, 'password')->passwordInput() ?>
 
+                 <?= $form->field($model, 'AuthCode')->textInput() ?>
+<?php  if(isset($AuthCodeAlret)){ echo  $AuthCodeAlret;  }  ?>
                 <?= $form->field($model, 'rememberMe')->checkbox() ?>
 
                 <div class="form-group">

@@ -37,11 +37,19 @@ class CompanyController extends Controller
 	public $enableCsrfValidation = false;
 	
 
-	public function qrcodeGooleAuth($alert=0){
+	public function qrcodeGooleAuth(){
 		$user = \Yii::$app->user;
 		$user = User::findIdentity($user->id);
 		if($user->auth == 1)
 			return '';
+
+		$user = \Yii::$app->user;
+		$user = User::findIdentity($user->id);
+		$secret = $user->twofa_secret;
+
+
+		$totpUri = (new TOTPSecretKeyUriGeneratorService('PVRADAR', $user->username, $secret))->run();
+		$googleUri = (new GoogleQrCodeUrlGeneratorService($totpUri))->run();
 
 		if(isset($_POST['qrcode']))
 		{
@@ -49,9 +57,15 @@ class CompanyController extends Controller
 			$valid = $manager->verify($_POST['qrcode'], $user->twofa_secret);
 
 
+
 			if($valid == false){
 				//if entered invalid qrcode
-				return $this->qrcodeGooleAuth('Your Verification Code is Wrong Please try again');
+				return $this->render('/qrcode', [
+					'googleUri' => $googleUri,
+					'secret' => $secret,
+					'alert'=>'Your Verification Code is Wrong Please try again'
+				]);
+
 			}
 			else{
 				//if entered valid qrcode
@@ -62,18 +76,11 @@ class CompanyController extends Controller
 			}
 		}
 
-		$user = \Yii::$app->user;
-		$user = User::findIdentity($user->id);
-		$secret = $user->twofa_secret;
 
-
-		$totpUri = (new TOTPSecretKeyUriGeneratorService('PVRADAR', $user->username, $secret))->run();
-		$googleUri = (new GoogleQrCodeUrlGeneratorService($totpUri))->run();
 
 		return $this->render('/qrcode', [
 			'googleUri' => $googleUri,
 			'secret' => $secret,
-			'alert'=>$alert,
 		]);
 	}
 

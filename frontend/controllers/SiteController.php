@@ -54,7 +54,11 @@ class SiteController extends Controller
      */
     public function actions()
     {
+
         return [
+            'page' => [
+                'class' => 'yii2mod\cms\actions\PageAction',
+            ],
             'error' => [
                 'class' => 'yii\web\ErrorAction',
             ],
@@ -202,6 +206,10 @@ class SiteController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
             Yii::$app->session->setFlash('success', 'New password was saved.');
+            $user = \Yii::$app->user;
+            $user = User::findIdentity($user->id);
+            $user->twofa_secret = null;
+            $user->save();
 
             return $this->goHome();
         }
