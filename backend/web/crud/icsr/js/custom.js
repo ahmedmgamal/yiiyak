@@ -3,20 +3,24 @@
  */
 $( document ).ready(function() {
     if($('#icsr-report_type').val() != 3) {
-        var label = $("label[for='" + $('#icsr-description').attr('id') + "']");
+        var label = $("label[for='" + $('#othertypes-description').attr('id') + "']");
         label.hide();
-        $('#icsr-description').hide();
+        $('#othertypes-description').hide();
     }
 });
+
 $('#icsr-report_type').change(function(){
-    var label = $("label[for='"+$('#icsr-description').attr('id')+"']");
+
+    var label = $("label[for='"+$('#othertypes-description').attr('id')+"']");
     if($(this).val() == 3){
         label.show();
-        $('#icsr-description').show();
+        $('#othertypes-description').show();
 
     }else{
+
+       console.log(label);
         label.hide();
-        $('#icsr-description').hide();
+        $('#othertypes-description').hide();
     }
 });
 

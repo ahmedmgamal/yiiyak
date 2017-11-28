@@ -70,8 +70,8 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
 
         $model = new Icsr;
         $request = Yii::$app->request;
-        $params = $request->bodyParams;
-        $other_report_type = $request->getBodyParam('Icsr')['description'];
+       // $params = $request->bodyParams;
+        $other_report_type = $request->getBodyParam('Othertypes')['description'];
       //var_dump($other_report_type); die;
 
 
@@ -270,11 +270,12 @@ private function createExportFile ($icsrObj,$content)
     {
         $request = Yii::$app->request;
        // $params = $request->bodyParams;
-        if(! empty($request->getBodyParam('Othertypes'))){
-            $other_report_type = $request->getBodyParam('Othertypes')['description'];
-        }else{
-            $other_report_type = $request->getBodyParam('Icsr')['description'];
-        }
+        $other_report_type = $request->getBodyParam('Othertypes')['description'];
+//        if(! empty($request->getBodyParam('Othertypes'))){
+//
+//        }else{
+//            $other_report_type = $request->getBodyParam('Icsr')['description'];
+//        }
      //  $other_report_type = $request->getBodyParam('Icsr')? $request->getBodyParam('Icsr')['description'] :   $request->getBodyParam('Othertypes')['description'] ;
 //        if(! isset($other_report_type)) {
 //            $other_report_type = $request->getBodyParam('Othertypes')['description'];
