@@ -1,7 +1,24 @@
 /**
  * Created by te7a on 16/08/16.
  */
+$( document ).ready(function() {
+    if($('#icsr-report_type').val() != 3) {
+        var label = $("label[for='" + $('#icsr-description').attr('id') + "']");
+        label.hide();
+        $('#icsr-description').hide();
+    }
+});
+$('#icsr-report_type').change(function(){
+    var label = $("label[for='"+$('#icsr-description').attr('id')+"']");
+    if($(this).val() == 3){
+        label.show();
+        $('#icsr-description').show();
 
+    }else{
+        label.hide();
+        $('#icsr-description').hide();
+    }
+});
 
    if ($('#icsr-is_serious').checked)
        $( "#showSeriousBoxes" ).show( "drop", { direction: "up" }, "slow" );

@@ -11,6 +11,7 @@ use yii\helpers\ArrayHelper;
  */
 class Othertypes extends BaseOthertypes
 {
+ //   public $type_description;
 
 public function behaviors()
     {

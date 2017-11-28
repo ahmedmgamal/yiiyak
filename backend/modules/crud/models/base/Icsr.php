@@ -71,7 +71,7 @@ abstract class Icsr extends \yii\db\ActiveRecord
     const OTHERS_SIGNIFICANT_NO = 'no';
 
     var $enum_labels = false;
-    public $other_report_type;
+    public $description ;
     /**
      * @inheritdoc
      */
