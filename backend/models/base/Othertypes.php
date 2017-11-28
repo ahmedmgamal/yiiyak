@@ -34,7 +34,7 @@ abstract class Othertypes extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [[ 'icsr_id', 'description'], 'required'],
+            [[ 'icsr_id'], 'required'],
             [['id', 'icsr_id'], 'integer'],
             [['description'], 'string']
         ];

@@ -83,6 +83,17 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
 
                 if ( $model->save()) {
 
+                    if(!empty($model->is_serious)){
+                        Yii::$app->mailer->compose()
+                            ->setFrom('yiiyaktest@gmail.com')
+                            ->setTo('abdelrahmanbadr.it@gmail.com')
+                            ->setSubject('Message subject')
+                            ->setTextBody('Plain text content')
+                            ->setHtmlBody('<b>HTML content</b>')
+                            ->send();
+
+                    }
+
                     //saving other report type
                     if(!empty($other_report_type)){
                         $other = new \app\models\Othertypes();
