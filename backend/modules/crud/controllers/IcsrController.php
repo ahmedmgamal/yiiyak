@@ -7,6 +7,7 @@
 
 
 namespace backend\modules\crud\controllers;
+use app\models\base\Othertypes;
 use Aws\CloudFront\Exception\Exception;
 use backend\modules\crud\models\Icsr;
 use backend\modules\crud\models\search\Icsr as IcsrSearch;
@@ -68,6 +69,10 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
 	public function actionCreate() {
 
         $model = new Icsr;
+        $request = Yii::$app->request;
+        $params = $request->bodyParams;
+        $other_report_type = $request->getBodyParam('Icsr')['other_report_type'];
+
 
 		try {
 			if ($model->load($_POST) ) {
@@ -76,6 +81,16 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
                 $transaction = $connection->beginTransaction();
 
                 if ( $model->save()) {
+
+                    //saving other report type
+                    if(!empty($other_report_type)){
+                        $other = new \app\models\Othertypes();
+                        $other->icsr_id = $model->id;
+                        $other->description = $other_report_type;
+                        $other->save();
+                       // var_dump($other->save()); die;
+                    }
+
 
                     $narritive = new IcsrNarritive();
                     $narritive->icsr_id = $model->id;
@@ -86,8 +101,11 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
                     $pres->drug_role = '1';//value of suspect
                     $pres->icsr_id = $model->id;
 
+
                     if ($narritive->save() && $pres->save()) {
+
                         $transaction->commit();
+
                         return $this->redirect(Url::previous());
                     }
 
@@ -249,7 +267,23 @@ private function createExportFile ($icsrObj,$content)
      */
     public function actionUpdate($id)
     {
+        $request = Yii::$app->request;
+        $params = $request->bodyParams;
+        $other_report_type = $request->getBodyParam('Icsr')['other_report_type'];
+
+
         $model = $this->findModel($id);
+
+        if(!empty($other_report_type)){
+            $other = $model->otherType()->one();
+            
+            if(empty($other)){
+                $other =  new \app\models\Othertypes();
+            }
+            $other->description = $other_report_type;
+            $other->save();
+
+        }
         if ($model->load($_POST) && $model->save()) {
             return $this->redirect(Url::previous());
         } elseif (!\Yii::$app->request->isPost) {

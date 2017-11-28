@@ -71,6 +71,7 @@ abstract class Icsr extends \yii\db\ActiveRecord
     const OTHERS_SIGNIFICANT_NO = 'no';
 
     var $enum_labels = false;
+    public $other_report_type;
     /**
      * @inheritdoc
      */
@@ -207,7 +208,7 @@ abstract class Icsr extends \yii\db\ActiveRecord
         $icsrType = $this->hasOne(\backend\modules\crud\models\LkpIcsrType::className(), ['id' => 'report_type']);
         $other = $this->otherType();
         if (!empty($icsrType->one()) && $icsrType->one()->description == 'Other' && !empty($other->one())) {
-          
+
             return $other;
         }
 
@@ -216,7 +217,8 @@ abstract class Icsr extends \yii\db\ActiveRecord
     }
     public function otherType()
     {
-        return $otherType = $this->hasOne(Othertypes::className(), ['icsr_id' => 'id']) ;
+
+        return $otherType = $this->hasOne(\app\models\Othertypes::className(), ['icsr_id' => 'id']) ;
     }
 
         /**

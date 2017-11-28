@@ -39,6 +39,7 @@ $form->field($model, 'report_type')->dropDownList(
     \yii\helpers\ArrayHelper::map(backend\modules\crud\models\LkpIcsrType::find()->all(), 'id', 'description')
        ,['prompt' => Yii::t('app', 'Select')]
 ); ?>
+            <?= $form->field($model, 'other_report_type')->textInput() ?>
             
 			<?php echo $form->field($model, 'patient_identifier')->textInput(['maxlength' => true]) ?>
 

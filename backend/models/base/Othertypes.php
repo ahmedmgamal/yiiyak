@@ -14,7 +14,7 @@ use Yii;
  * @property string $description
  * @property string $aliasModel
  */
- class Othertypes extends \yii\db\ActiveRecord
+abstract class Othertypes extends \yii\db\ActiveRecord
 {
 
 
@@ -34,7 +34,7 @@ use Yii;
     public function rules()
     {
         return [
-            [['id', 'icsr_id', 'description'], 'required'],
+            [[ 'icsr_id', 'description'], 'required'],
             [['id', 'icsr_id'], 'integer'],
             [['description'], 'string']
         ];
