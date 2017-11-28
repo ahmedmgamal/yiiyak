@@ -4,6 +4,7 @@
 
 namespace backend\modules\crud\models\base;
 
+use app\models\base\Othertypes;
 use Yii;
 
 /**
@@ -203,8 +204,21 @@ abstract class Icsr extends \yii\db\ActiveRecord
      */
     public function getIcsrType()
     {
-        return $this->hasOne(\backend\modules\crud\models\LkpIcsrType::className(), ['id' => 'report_type']);
+        $icsrType = $this->hasOne(\backend\modules\crud\models\LkpIcsrType::className(), ['id' => 'report_type']);
+        $other = $this->otherType();
+        if (!empty($icsrType->one()) && $icsrType->one()->description == 'Other' && !empty($other->one())) {
+          
+            return $other;
+        }
+
+        return $icsrType;
+
     }
+    public function otherType()
+    {
+        return $otherType = $this->hasOne(Othertypes::className(), ['icsr_id' => 'id']) ;
+    }
+
         /**
      * column patient_weight_unit ENUM value labels
      * @return array

@@ -12,6 +12,9 @@ $config = [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [
+//        'gii' => [
+//            'class' => 'yii\gii\Module',
+//        ],
 
         'cms' => [
             'class' => 'yii2mod\cms\Module',
@@ -110,7 +113,7 @@ $config = [
                     
                     'class' => 'yii2mod\cms\components\PageUrlRule',
                     'pattern' => 'crud/icsr/export',
-                  //  'route' => 'crud/icsr/export',
+                    'route' => 'crud/icsr/export',
                    'suffix' => '.xml',
 
                 ],

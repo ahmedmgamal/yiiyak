@@ -51,6 +51,7 @@ public $enableCsrfValidation = true;
 */
     public function actionView($id)
     {
+
         \Yii::$app->session['__crudReturnUrl'] = Url::previous();
         Url::remember();
         Tabs::rememberActiveState();

@@ -97,7 +97,8 @@ class Icsr extends BaseIcsr
             ])->orOnCondition([
                 'audit_trail.model_id' => ArrayHelper::map($this->getNarrative()->all(),'id','id'),
                 'audit_trail.model' => \backend\modules\crud\models\IcsrNarritive::className(),
-            ])->groupBy('model , action , created')
+            ])
+            ->groupBy('model , action , created')
             ->orderBy(['created' =>  SORT_DESC]);
 
     }
