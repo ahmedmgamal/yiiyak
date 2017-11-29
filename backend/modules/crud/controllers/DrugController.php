@@ -77,8 +77,10 @@ class DrugController extends \backend\modules\crud\controllers\base\DrugControll
 	}
 
         public function actionCreate() {
+
 		$model = new Drug;
         $_POST['Drug']['company_id'] = Yii::$app->user->identity->getCompany()->one()->id;
+          //  var_dump($_POST['Drug']); die;
 
 		try {
 			if (Yii::$app->request->isPost && $model->load($_POST) ) {

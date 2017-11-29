@@ -13,7 +13,7 @@ class Drug extends BaseDrug
 {
     use traits\checkAccess;
     use traits\checkLimit,traits\checkSignal;
-
+  
     public function attributeHints()
     {
         return array_merge(
@@ -21,6 +21,7 @@ class Drug extends BaseDrug
             [
             'id' => Yii::t('app', 'ID'),
             'generic_name' => Yii::t('app', 'Active substance'),
+            'country_id' => Yii::t('app', 'Country'),
             'trade_name' => Yii::t('app', '	B.4.k.2 Drug identification'),
             'composition' => Yii::t('app', 'B.4.k.2.2 Dosage Form'),
             'company_id' => Yii::t('app', 'Company Id'),
@@ -127,6 +128,11 @@ class Drug extends BaseDrug
                 GROUP BY Events.event_description;";
         $events = Yii::$app->db->createCommand($sql,["drugId"=>$this->id])->queryAll();
         return $events;
+    }
+    public function getEgyptIdFromLkpCountry ()
+    {
+
+        return LkpCountry::findOne(['name' => 'Egypt'])->id;
     }
 
 
