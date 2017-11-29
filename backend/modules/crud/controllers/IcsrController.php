@@ -84,14 +84,14 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
                 if ( $model->save()) {
 
                     if(!empty($model->is_serious)){
+                      $firstUser = $model->getCompanyAdminUser();
                         Yii::$app->mailer->compose()
                             ->setFrom('yiiyaktest@gmail.com')
-                            ->setTo('abdelrahmanbadr.it@gmail.com')
-                            ->setSubject('Message subject')
+                            ->setTo($firstUser->email)
+                            ->setSubject('Serious ICSR created')
                             ->setTextBody('Plain text content')
-                            ->setHtmlBody('<b>HTML content</b>')
+                            ->setHtmlBody($model->drug->trade_name . ' has new Serious ICSR')
                             ->send();
-
                     }
 
                     //saving other report type
@@ -280,7 +280,7 @@ private function createExportFile ($icsrObj,$content)
     public function actionUpdate($id)
     {
         $request = Yii::$app->request;
-       // $params = $request->bodyParams;
+        $params = $request->bodyParams;
         $other_report_type = $request->getBodyParam('Othertypes')['description'];
 //        if(! empty($request->getBodyParam('Othertypes'))){
 //
@@ -297,6 +297,27 @@ private function createExportFile ($icsrObj,$content)
 
 
         $model = $this->findModel($id);
+        if(!empty($request->getBodyParam('Icsr'))){
+            $new_is_serious = $request->getBodyParam('Icsr')['is_serious'];
+            $old = $model->is_serious;
+
+            if($old != $new_is_serious){
+
+                if(!empty($new_is_serious)){
+                    $firstUser = $model->getCompanyAdminUser();
+                    Yii::$app->mailer->compose()
+                        ->setFrom('yiiyaktest@gmail.com')
+                        ->setTo($firstUser->email)
+                        ->setSubject('Serious ICSR created')
+                        ->setTextBody('Plain text content')
+                        ->setHtmlBody($model->drug->trade_name . ' has ICSR updated to Serious')
+                        ->send();
+                }
+
+            }
+           // var_dump($old,$new_is_serious);die;
+        }
+
 
         if(!empty($other_report_type)){
             $other = $model->otherType()->one();

@@ -293,6 +293,10 @@ abstract class Icsr extends \yii\db\ActiveRecord
     public function getCompany() {
         return $this->drug->company;
     }
+    public function getCompanyAdminUser() {
+        //first user of the company is the admin as we assume
+        return $this->drug->company->users[0];
+    }
 
     public function getNarrative()
     {
