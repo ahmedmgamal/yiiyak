@@ -36,6 +36,8 @@ use yii\helpers\ArrayHelper;
             <?= $form->field($model, 'meddra_llt_text')->widget(\yii\jui\AutoComplete::classname(), [
                 'options' => ['class' => 'form-control' , 'maxlength' => true]
             ])?>
+            <?php echo Html::activeHiddenInput($model, 'meddra_llt_id', ['id'=>'meddra_llt_id']) ;?>
+
 
              <?= $form->field($model, 'meddra_pt_text')->widget(\yii\jui\AutoComplete::classname(), [
                 'options' => ['class' => 'form-control' , 'maxlength' => true]

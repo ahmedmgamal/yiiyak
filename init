@@ -18,7 +18,8 @@ if (!extension_loaded('openssl')) {
     die('The OpenSSL PHP extension is required by Yii2.');
 }
 
-$params = getParams();
+/*$params = getParams();*/
+array("env" => "Production");
 $root = str_replace('\\', '/', __DIR__);
 $envs = require("$root/environments/index.php");
 $envNames = array_keys($envs);

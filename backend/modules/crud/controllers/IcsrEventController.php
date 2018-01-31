@@ -12,6 +12,7 @@ use Yii;
 use yii\filters\AccessControl;
 use backend\modules\crud\models\IcsrEvent;
 use backend\modules\crud\traits;
+use yii\helpers\VarDumper;
 use yii\web\Response;
 
 /**
@@ -93,6 +94,7 @@ class IcsrEventController extends \backend\modules\crud\controllers\base\IcsrEve
     {
 
         Yii::$app->response->format = Response::FORMAT_JSON;
+
         if (Yii::$app->user->identity->company->enable_meddra_search != 1)
         {
             return ['lltTerms' => []];
@@ -109,21 +111,22 @@ class IcsrEventController extends \backend\modules\crud\controllers\base\IcsrEve
             
             $searchTerm = "+" . $searchTerm . "*";
             $sql = "
-             SELECT `meddra_llt`.term FROM meddra_llt 
+             SELECT `meddra_llt`.term , `meddra_llt`.id FROM meddra_llt 
              join meddra_pt on `meddra_llt`.pt_id = `meddra_pt`.id
              WHERE   MATCH (`meddra_llt`.term) AGAINST (:searchTerm IN BOOLEAN MODE )  ".$whereCondition."  LIMIT 10 ";
-
             $command = $connection->createCommand($sql)
              ->bindValue(':searchTerm',$searchTerm);
 
             $result = $command->queryAll();
+
             $response = [];
             foreach ($result as $key => $value)
             {
-                $response [] = $value['term'];
+//                $response [] = '{"id":"'.$value['id'].'","term":"'.$value['term'].'"}';
+//                $response [] = ['id'=>$value['id'], 'term'=>$value['term']];
+                $response [$value['id']] = $value['term'];
             }
-
-            return ['lltTerms' => $response];
+            return $response;
         }
 
         return ['lltTerms' => []];

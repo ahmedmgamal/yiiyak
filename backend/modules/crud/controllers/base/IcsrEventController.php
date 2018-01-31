@@ -6,6 +6,7 @@ namespace backend\modules\crud\controllers\base;
 
 use backend\modules\crud\models\IcsrEvent;
  use backend\modules\crud\models\search\IcsrEvent as IcsrEventSearch;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\helpers\Url;
@@ -71,9 +72,12 @@ return $this->render('view', [
 public function actionCreate()
 {
 $model = new IcsrEvent;
-
+if($model->load($_POST)){
+    VarDumper::dump($_POST);die;
+}
 try {
 if ($model->load($_POST) && $model->save()) {
+
 return $this->redirect(Url::previous());
 } elseif (!\Yii::$app->request->isPost) {
 $model->load($_GET);
