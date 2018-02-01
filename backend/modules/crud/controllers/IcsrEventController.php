@@ -71,7 +71,7 @@ class IcsrEventController extends \backend\modules\crud\controllers\base\IcsrEve
         $term = '+' . $term . '*';
         
             $command = $connection->createCommand('
-             SELECT term FROM meddra_pt WHERE MATCH(term) AGAINST (:term IN BOOLEAN MODE )  LIMIT 10 ')
+             SELECT id, term FROM meddra_pt WHERE MATCH(term) AGAINST (:term IN BOOLEAN MODE )  LIMIT 10 ')
              ->bindValue(':term',$term);
             
               
@@ -79,7 +79,7 @@ class IcsrEventController extends \backend\modules\crud\controllers\base\IcsrEve
         $response = [];
         foreach ($result as $key => $value)
         {
-         $response [] = $value['term'];
+         $response [] = ['value'=>$value['id'], 'label'=>$value['term']];;
         }
         return ['ptTerms' => $response];
 
@@ -122,9 +122,7 @@ class IcsrEventController extends \backend\modules\crud\controllers\base\IcsrEve
             $response = [];
             foreach ($result as $key => $value)
             {
-//                $response [] = '{"id":"'.$value['id'].'","term":"'.$value['term'].'"}';
-//                $response [] = ['id'=>$value['id'], 'term'=>$value['term']];
-                $response [$value['id']] = $value['term'];
+                $response [] = ['value'=>$value['id'], 'label'=>$value['term']];
             }
             return $response;
         }
@@ -142,7 +140,7 @@ class IcsrEventController extends \backend\modules\crud\controllers\base\IcsrEve
             $connection = Yii::$app->getDb();
 
             $command = $connection->createCommand("
-            SELECT term FROM meddra_pt where id = (
+            SELECT id, term FROM meddra_pt where id = (
             SELECT pt_id FROM meddra_llt WHERE term = :lltTerm
             )
             ")
@@ -150,7 +148,7 @@ class IcsrEventController extends \backend\modules\crud\controllers\base\IcsrEve
 
             $result = $command->queryAll();
 
-            $ptTerm = isset($result[0]['term']) ? $result[0]['term'] : '';
+            $ptTerm = isset($result[0]['term']) ? ['term'=>$result[0]['term'], 'id'=>$result[0]['id']] : '';
 
             return ['ptTerm' => $ptTerm];
         }
