@@ -29,7 +29,7 @@ AppAsset::register($this);
     <?php
     NavBar::begin([
         'brandLabel' => 'PV-RADAR',
-        'brandUrl' => Yii::$app->homeUrl,
+        'brandUrl' => ['/site/login'],
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
