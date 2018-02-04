@@ -90,23 +90,3 @@ $.ajax({
     }
 });
 });
-//
-// $('#icsrevent-meddra_pt_text').on('focusout',function () {
-//     var url = window.location.href;
-//     url = url.substring(0,url.lastIndexOf("/"));
-//
-//
-//     $.ajax({
-//         'url' : url + '/get-first-lt-from-pt?ptTerm='+ $(this).val(),
-//         'method' : 'GET',
-//         'success' : function (response){
-//
-//             if (response.ltTerm )
-//             {
-//                 $('#icsrevent-meddra_llt_text').val(response.ltTerm);
-//             }
-//         }
-//     });
-//
-//
-// });

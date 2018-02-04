@@ -10,20 +10,7 @@ class m180204_171604_alter_meddra_pt_text_column_in_icsr_event_table extends Mig
     /**
      * @inheritdoc
      */
-//    public function safeUp()
-//    {
-//
-//    }
-//
-//    /**
-//     * @inheritdoc
-//     */
-//    public function safeDown()
-//    {
-//        echo "m180204_171604_alter_meddra_pt_text_column_in_icsr_event_table cannot be reverted.\n";
-//
-//        return false;
-//    }
+
 
 
     // Use up()/down() to run migration code without a transaction.
