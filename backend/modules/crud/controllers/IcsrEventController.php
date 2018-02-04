@@ -12,7 +12,6 @@ use Yii;
 use yii\filters\AccessControl;
 use backend\modules\crud\models\IcsrEvent;
 use backend\modules\crud\traits;
-use yii\helpers\VarDumper;
 use yii\web\Response;
 
 /**

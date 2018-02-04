@@ -10,7 +10,6 @@ $('#icsrevent-meddra_pt_text').on('input',function ()
             'method' : 'GET',
             'success' : function (response)
             {
-                console.log(response);
                 if(response.ptTerms.length > 0){
                     $('#icsrevent-meddra_pt_text').autocomplete(
                         {
