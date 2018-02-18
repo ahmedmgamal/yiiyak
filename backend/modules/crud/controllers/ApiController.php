@@ -57,6 +57,7 @@ class ApiController extends Controller
                 $user = User::findIdentity($logged_in_user_id);
                 return Json::encode([
                     'status'=>'success',
+                    'id'=> $user->id,
                     'token'=> $user->auth_key,
                     'companyId'=> $user->company->id,
                     'companyName'=> $user->company->name,
