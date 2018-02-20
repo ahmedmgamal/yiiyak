@@ -70,7 +70,7 @@ class IcsrEventController extends \backend\modules\crud\controllers\base\IcsrEve
         $term = '+' . $term . '*';
         
             $command = $connection->createCommand('
-             SELECT id, term FROM meddra_pt WHERE MATCH(term) AGAINST (:term IN BOOLEAN MODE )  LIMIT 10 ')
+             SELECT id, term FROM meddra_pt WHERE MATCH(term) AGAINST (:term IN BOOLEAN MODE ) ')
              ->bindValue(':term',$term);
             
               
@@ -112,7 +112,7 @@ class IcsrEventController extends \backend\modules\crud\controllers\base\IcsrEve
             $sql = "
              SELECT `meddra_llt`.term , `meddra_llt`.id FROM meddra_llt 
              join meddra_pt on `meddra_llt`.pt_id = `meddra_pt`.id
-             WHERE   MATCH (`meddra_llt`.term) AGAINST (:searchTerm IN BOOLEAN MODE )  ".$whereCondition."  LIMIT 10 ";
+             WHERE   MATCH (`meddra_llt`.term) AGAINST (:searchTerm IN BOOLEAN MODE )  ".$whereCondition;
             $command = $connection->createCommand($sql)
              ->bindValue(':searchTerm',$searchTerm);
 

@@ -13,7 +13,7 @@ $('#icsrevent-meddra_pt_text').on('input',function ()
                 if(response.ptTerms.length > 0){
                     $('#icsrevent-meddra_pt_text').autocomplete(
                         {
-                            minLength: 0,
+                            minLength: 5,
                             source: response.ptTerms,
                             select : function (event, ui) {
                                 $(this).val(ui.item.label);
@@ -51,7 +51,7 @@ $('#icsrevent-meddra_llt_text').on('input',function () {
                 if(response.length > 0){
                     $('#icsrevent-meddra_llt_text').autocomplete(
                         {
-                            minLength: 0,
+                            minLength: 5,
                             source: response,
                             select : function (event, ui) {
                                 $(this).val(ui.item.label);
