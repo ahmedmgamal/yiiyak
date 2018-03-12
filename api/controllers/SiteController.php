@@ -1,6 +1,7 @@
 <?php
 namespace api\controllers;
 
+use backend\modules\crud\models\User;
 use Yii;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
@@ -118,27 +119,31 @@ class SiteController extends RestController
         Yii::$app->api->sendSuccessResponse($data);
     }
 
-    public function actionAccesstoken()
+    public function actionAccesstoken($authorization_code)
     {
 
-        if (!isset($this->request["authorization_code"])) {
-            Yii::$app->api->sendFailedResponse("Authorization code missing");
-        }
-
-        $authorization_code = $this->request["authorization_code"];
+        $authorization_code = $authorization_code;
 
         $auth_code = AuthorizationCodes::isValid($authorization_code);
         if (!$auth_code) {
             Yii::$app->api->sendFailedResponse("Invalid Authorization Code");
         }
-
         $accesstoken = Yii::$app->api->createAccesstoken($authorization_code);
+        $logged_in_user_id = Yii::$app->user->identity->id;
+        if (User::checkSubscription($logged_in_user_id)) {
+            //complete login code here
+            $user = User::findIdentity($logged_in_user_id);
+             return $data = [
+                'status' => 'success',
+                'token' => $accesstoken->token,
+                'companyId' => $user->company->id,
+                'companyName' => $user->company->name,
+                'userRole' => $user->getRole($logged_in_user_id),
+            ];
 
-        $data = [];
-        $data['access_token'] = $accesstoken->token;
-        $data['expires_at'] = $accesstoken->expires_at;
-        Yii::$app->api->sendSuccessResponse($data);
-
+        }else{
+            return Json::encode(['status'=>'your subscription has been ended']);
+        }
     }
 
     public function actionAuthorize()
@@ -156,7 +161,7 @@ class SiteController extends RestController
             $data['authorization_code'] = $auth_code->code;
             $data['expires_at'] = $auth_code->expires_at;
 
-            Yii::$app->api->sendSuccessResponse($data);
+            return $this->actionAccesstoken($data['authorization_code']);
         } else {
             Yii::$app->api->sendFailedResponse($model->errors);
         }
