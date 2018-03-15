@@ -63,6 +63,6 @@ class CountryController extends RestController
     public function actionIndex()
     {
         $response = LkpCountry::find()->all();
-        Yii::$app->api->sendSuccessResponse($response);
+        return ['status'=>'success', 'data'=>$response];
     }
 }

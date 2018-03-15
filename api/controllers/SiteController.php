@@ -137,6 +137,7 @@ class SiteController extends RestController
                 'status' => 'success',
                 'token' => $accesstoken->token,
                 'companyId' => $user->company->id,
+                 'username'=> $user->username,
                 'companyName' => $user->company->name,
                 'userRole' => $user->getRole($logged_in_user_id),
             ];

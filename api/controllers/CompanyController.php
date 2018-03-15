@@ -9,7 +9,8 @@ use api\behaviours\Verbcheck;
 use api\behaviours\Apiauth;
 
 use Yii;
-
+use yii\helpers\Json;
+use yii\helpers\VarDumper;
 
 
 class CompanyController extends RestController
@@ -63,7 +64,8 @@ class CompanyController extends RestController
     public function actionView($id)
     {
         $model = $this->findModel($id)->drugs;
-        Yii::$app->api->sendSuccessResponse($model);
+
+        return ['status'=>'success', 'drugs'=>$model];
     }
 
     protected function findModel($id)

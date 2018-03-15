@@ -4,7 +4,7 @@ namespace api\controllers;
 
 
 use yii\filters\AccessControl;
-use backend\modules\crud\models\LkpIcsrEventoutcome;
+use backend\modules\crud\models\LkpMeddraPt;
 use api\behaviours\Verbcheck;
 use api\behaviours\Apiauth;
 
@@ -12,7 +12,7 @@ use Yii;
 
 
 
-class IcsrEventOutcomeController extends RestController
+class LkpMeddraPtController extends RestController
 {
 
     public function behaviors()
@@ -53,28 +53,17 @@ class IcsrEventOutcomeController extends RestController
             'verbs' => [
                 'class' => Verbcheck::className(),
                 'actions' => [
-                    'view' => ['GET'],
+                    'index' => ['GET']
                 ],
             ],
 
         ];
     }
 
-
-    public function actionView($id)
+    public function actionIndex()
     {
-
-        $model = LkpIcsrEventoutcome::find()->where(['icsr_id'=> $id])->all();
-        Yii::$app->api->sendSuccessResponse($model);
+        $model = LkpMeddraPt::find()->all();
+        return ['status'=>'success', 'data'=>$model];
     }
 
-
-    protected function findModel($id)
-    {
-        if (($model = LkpIcsrEventoutcome::findOne($id)) !== null) {
-            return $model;
-        } else {
-            Yii::$app->api->sendFailedResponse("Invalid Record requested");
-        }
-    }
 }

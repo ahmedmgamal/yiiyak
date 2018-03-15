@@ -63,7 +63,7 @@ class LkpIcsrTypeController extends RestController
     public function actionIndex()
     {
         $model = LkpIcsrType::find()->all();
-        Yii::$app->api->sendSuccessResponse($model);
+        return ['status'=>'success', 'data'=>$model];
     }
 
 
