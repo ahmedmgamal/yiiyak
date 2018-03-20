@@ -13,7 +13,9 @@ return [
             'enableAutoLogin' => true,
 
         ],
-
+        'api' => [
+            'class' => 'common\components\Api',
+        ],
     ],
 
     ];
