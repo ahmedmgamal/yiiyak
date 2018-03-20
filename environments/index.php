@@ -31,6 +31,16 @@
 return [
     'Development' => [
         'path' => 'dev',
+	'skipFiles' => [
+	    'backend/runtime',
+	    'backend/web/assets',
+	    'frontend/runtime',
+	    'frontend/web/assets',
+	    'yii',
+	    'tests/codeception/bin/yii',
+	    'backend/config/main-local.php',
+	    'frontend/config/main-local.php',
+	],
         'setWritable' => [
             'backend/runtime',
             'backend/web/assets',
