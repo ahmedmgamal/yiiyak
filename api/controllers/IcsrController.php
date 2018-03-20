@@ -10,6 +10,7 @@ use api\behaviours\Verbcheck;
 use api\behaviours\Apiauth;
 
 use Yii;
+use yii\helpers\VarDumper;
 
 
 class IcsrController extends RestController
@@ -65,7 +66,10 @@ class IcsrController extends RestController
 
     public function actionCreate($attributes = [])
     {
+        $json =json_decode(Yii::$app->request->rawBody, true);
+        VarDumper::dump(Yii::$app->request->rawBody);die;
         $model = new Icsr;
+
         if(count($attributes) > 0){
             $model->attributes = $attributes;
         }else{
@@ -75,15 +79,7 @@ class IcsrController extends RestController
         $model->created_by = Yii::$app->user->identity->id;
 
         if ($model->save()) {
-            $pres = new DrugPrescription;
-            $pres->drug_id =($model->getDrug()->one()->id);
-            $pres->drug_role = '1';//value of suspect
-            $pres->icsr_id = $model->id;
-            if($pres->save()){
                 Yii::$app->api->sendSuccessResponse(['status'=> 'ok','icsr_id'=>$model->id]);
-            }else{
-                Yii::$app->api->sendFailedResponse($pres->errors);
-            }
 
         } else {
             Yii::$app->api->sendFailedResponse($model->errors);
@@ -118,6 +114,12 @@ class IcsrController extends RestController
                 foreach ($this->request['reporter'] as $icsr_reporter){
                     $reporter =  new IcsrReporterController();
                     $reporter->actionCreate($saveIcsr['icsr_id'], $icsr_reporter);
+                }
+            }
+            if (!empty($this->request['prescription'])){
+                foreach ($this->request['prescription'] as $icsr_prescription){
+                    $prescription =  new DrugPrescriptionController();
+                    $prescription->actionCreate($saveIcsr['icsr_id'],$this->request['icsr']['drug_id'], $icsr_prescription);
                 }
             }
 

@@ -61,12 +61,13 @@ class DrugPrescriptionController extends RestController
     }
 
 
-    public function actionCreate($icsr_id = null, $attributes = [])
+    public function actionCreate($icsr_id = null,$drug_id, $attributes = [])
     {
 
         $model = new DrugPrescription;
         if($icsr_id){
             $model->icsr_id = $icsr_id;
+            $model->drug_id = $drug_id;
             $model->attributes = $attributes;
         }else{
             $model->attributes = $this->request;
