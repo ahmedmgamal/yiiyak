@@ -69,7 +69,7 @@ abstract class IcsrEvent extends \yii\db\ActiveRecord
     {
         return [
             [['icsr_id','event_description','meddra_llt_text'], 'required'],
-            [['icsr_id','lkp_icsr_eventoutcome_id'], 'integer'],
+            [['icsr_id','lkp_icsr_eventoutcome_id', 'meddra_llt_id', 'meddra_pt_id'], 'integer'],
             [['event_date', 'event_end_date'], 'safe'],
             [['event_outcome'], 'string'],
             [['event_description'], 'string', 'max' => 512],
