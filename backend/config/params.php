@@ -84,7 +84,7 @@ return [
     ],
 
     'Roles' =>[
-        'Manager' ,'Qppv Person', 'Qppv Deputy'
+        'Manager' ,'Qppv Person', 'Qppv Deputy', 'Guest'
     ]
 
 ];
