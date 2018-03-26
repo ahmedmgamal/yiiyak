@@ -7,11 +7,16 @@ $params = array_merge(
 );
 
 return [
-    'id' => 'app-backend',
+    'id' => 'app-api',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'api\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => [
+        'audit' => [
+            'class' => 'bedezign\yii2\audit\Audit',
+            'ignoreActions' => ['debug/*']
+        ]
+    ],
     'components' => [
         /* 'request' => [
              'csrfParam' => '_csrf-backend',

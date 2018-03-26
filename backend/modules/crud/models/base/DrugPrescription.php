@@ -72,12 +72,12 @@ abstract class DrugPrescription extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['drug_id', 'icsr_id', 'frequency_lkp_id','lkp_drug_action_id'], 'integer'],
+            [['drug_id', 'icsr_id', 'frequency_lkp_id','lkp_drug_action_id', 'drug_role'], 'integer'],
             [['icsr_id'], 'required'],
             [['expiration_date', 'use_date_start', 'use_date_end'], 'safe'],
             [['duration_of_use'], 'number','max' => 99999],
-            [['duration_of_use_unit', 'problem_returned_after_reuse', 'drug_role'], 'string'],
-            [['drug_action_drug_withdrawn', 'drug_action_dose_reduced', 'drug_action_dose_increased', 'drug_action_dose_not_changed', 'drug_action_unknown'], 'boolean'],
+            [['duration_of_use_unit'], 'string'],
+            [['problem_returned_after_reuse', 'drug_action_drug_withdrawn', 'drug_action_dose_reduced', 'drug_action_dose_increased', 'drug_action_dose_not_changed', 'drug_action_unknown'], 'boolean'],
             [[ 'lot_no'], 'string', 'max' => 35],
             [['reason_of_use'], 'string', 'max' => 250],
             [['active_substance_names', 'drug_addtional_info','dose'], 'string', 'max' => 100],
