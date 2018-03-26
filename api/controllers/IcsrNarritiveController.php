@@ -32,23 +32,19 @@ class IcsrNarritiveController extends RestController
                 'only' => ['index'],
                 'rules' => [
                     [
-                        'actions' => [],
-                        'allow' => true,
-                        'roles' => ['?'],
+                        'allow' => false,
+                        'actions' => ['update','delete'],
+                        'verbs' => ['POST'],
+                        'matchCallback' => function ($rule,$action){
+                            $icsrNarritive_id = \Yii::$app->request->getQueryParam('id');
+                            return IcsrNarritive::checkObjIcsrNullExported($icsrNarritive_id);
+
+                        }
                     ],
                     [
-                        'actions' => [
-                            'index'
-                        ],
                         'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                    [
-                        'actions' => [],
-                        'allow' => true,
-                        'roles' => ['*'],
-                    ],
-                ],
+                    ]
+                ]
             ],
             'verbs' => [
                 'class' => Verbcheck::className(),
@@ -61,19 +57,19 @@ class IcsrNarritiveController extends RestController
     }
 
 
-    public function actionCreate($icsr_id = null, $attributes = [])
+    public  function actionCreate($icsr_id = null, $narritive = '')
     {
-
         $model = new IcsrNarritive;
         if($icsr_id){
             $model->icsr_id = $icsr_id;
-            $model->attributes = $attributes;
+            $model->narritive = $narritive;
         }else{
             $model->attributes = $this->request;
         }
 
         if ($model->save()) {
-            Yii::$app->api->sendSuccessResponse(['status'=> 'ok']);
+
+            return ['status'=> 'ok'];
         } else {
             Yii::$app->api->sendFailedResponse(['status'=> 'failed']);
         }
