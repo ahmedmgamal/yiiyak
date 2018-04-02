@@ -15,9 +15,15 @@ return [
         'audit' => [
             'class' => 'bedezign\yii2\audit\Audit',
             'ignoreActions' => ['debug/*']
-        ]
+        ],
+        'crud' => [
+            'class' => 'backend\modules\crud\Module',
+        ],
     ],
     'components' => [
+        'export' => [
+            'class' => 'backend\components\ExportComponent',
+        ],
         /* 'request' => [
              'csrfParam' => '_csrf-backend',
          ], */
@@ -66,6 +72,7 @@ return [
                 /*end points */
                 'companydrugs/<id>'=>'company/view',
                 'icsrs/<id>'=>'drug/view',
+                'export/<id>'=>'icsr/export',
                 'editicsr/<id>'=>'icsr/update',
                 'countries'=>'country/index',
                 'EventOutcomeList'=>'lkp-icsr-eventoutcome/index',

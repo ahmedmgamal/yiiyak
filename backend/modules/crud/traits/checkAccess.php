@@ -16,6 +16,8 @@ trait checkAccess {
 
         $userRole = \Yii::$app->authManager->getRolesByUser(\Yii::$app->user->id);
 
+
+
         if (isset($userRole['admin']))
         {
             return false;
