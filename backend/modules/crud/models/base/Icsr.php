@@ -68,6 +68,8 @@ abstract class Icsr extends \yii\db\ActiveRecord
     const IS_CONGENITAL_ANOMALY_NO = 'no';
     const OTHERS_SIGNIFICANT_YES = 'yes';
     const OTHERS_SIGNIFICANT_NO = 'no';
+    const DRAFT = 'draft';
+    const REAL = 'real';
 
     var $enum_labels = false;
     /**
@@ -100,11 +102,15 @@ abstract class Icsr extends \yii\db\ActiveRecord
         return [
             [['drug_id','reaction_country_id','report_type'], 'required'],
             [['drug_id', 'reaction_country_id'], 'integer'],
-            [[ 'patient_weight_unit'], 'string'],
+            [[ 'patient_weight_unit'],'integer','min' => 1 , 'max' => 2],
             [['is_serious', 'results_in_death', 'life_threatening', 'requires_hospitalization', 'results_in_disability', 'is_congenital_anomaly', 'others_significant'],'boolean'],
             [['patient_birth_date'], 'safe'],
+            [['status'], 'in', 'range' => [
+                self::DRAFT,
+                self::REAL
+            ]],
             [['patient_identifier'], 'string', 'max' => 10],
-            [['report_type'],'string','max' => 1],
+            [['report_type'],'integer','min' => 1 , 'max' => 4],
             [['extra_history'],'string','max' => 10000],
             [['patient_age'],'number','max' => 99999],
             [['patient_age_unit'],'number','min' => 800 , 'max' => 805],
@@ -123,6 +129,7 @@ abstract class Icsr extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'drug_id' => Yii::t('app', 'Drug '),
+            'status' => Yii::t('app', 'Status '),
             'patient_identifier' => Yii::t('app', 'Patient Identifier'),
             'patient_age' => Yii::t('app', 'Patient Age'),
             'patient_age_unit' => Yii::t('app', 'Patient Age Unit'),

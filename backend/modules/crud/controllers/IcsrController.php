@@ -13,6 +13,7 @@ use backend\modules\crud\models\search\Icsr as IcsrSearch;
 use backend\modules\crud\models\DrugPrescription as DrugPrescription;
 use bedezign\yii2\audit\models\AuditTrail;
 use Yii;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\helpers\Url;
@@ -74,7 +75,6 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
 			    $model->created_by = Yii::$app->user->identity->id;
                 $connection = \Yii::$app->db;
                 $transaction = $connection->beginTransaction();
-
                 if ( $model->save()) {
 
                     $narritive = new IcsrNarritive();
@@ -256,6 +256,20 @@ private function createExportFile ($icsrObj,$content)
             return $this->render('update', [
                 'model' => $model,
             ]);
+        }
+        else {
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    public function actionApprove($id)
+    {
+        $model = $this->findModel($id);
+        $model->status = 'real';
+        if ($model->save()) {
+            return $this->redirect(Url::previous());
         }
         else {
             return $this->render('update', [

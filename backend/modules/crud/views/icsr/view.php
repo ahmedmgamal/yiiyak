@@ -27,7 +27,6 @@ $updateButton = (!$isIcsrNullExported && $helpers->currentUserCan('/crud/icsr/up
 
 ?>
 <div id="icsr-view" class="giiant-crud icsr-view">
-
     <!-- flash message -->
     <?php if (\Yii::$app->session->getFlash('deleteError') !== null) : ?>
         <span class="alert alert-info alert-dismissible" role="alert">
@@ -55,18 +54,25 @@ $updateButton = (!$isIcsrNullExported && $helpers->currentUserCan('/crud/icsr/up
     <div class="clearfix crud-navigation">
         <!-- menu buttons -->
         <div class='pull-left'>
-
-            <?php  if (!$isIcsrNullExported && $helpers->currentUserCan('/crud/icsr/update')){
-                echo Html::a('<span class="glyphicon glyphicon-pencil"></span> ' . Yii::t('app', 'Edit'), ['update', 'id' => $model->id], ['class' => 'btn btn-info']);
-            }  ?>
-            <?php if ($model->canExported() && !$isIcsrNullExported && $helpers->currentUserCan('/crud/icsr/export')) { ?>
-                <?php echo Html::a('<span class="glyphicon glyphicon-copy"></span> ' . Yii::t('app', 'Export  Xml'), ['export', 'id' => $model->id  ,'case' => 'normal'], ['class' => 'btn btn-success'  ,'id' => 'exportXml']) ?>
-                <?php echo Html::a('<span class="glyphicon glyphicon-copy"></span> ' . Yii::t('app', 'Export  Null Case'), ['export-null-case', 'id' => $model->id ], ['class' => 'btn btn-default']) ?>
-            <?php }
-            else{
+            <?php
+                if($model->status == 'draft'){
+                    if(\backend\modules\crud\models\User::getRole(\Yii::$app->user->id) != "Guest"){
+                        echo Html::a('<span class="glyphicon glyphicon-ok"></span> ' . Yii::t('app', 'Aprrove'), ['approve', 'id' => $model->id], ['class' => 'btn btn-success']);
+                        echo Html::a('<span class="glyphicon glyphicon-remove"></span> ' . Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], ['class' => 'btn btn-danger']);
+                    }
+                }else{
+                    if (!$isIcsrNullExported && $helpers->currentUserCan('/crud/icsr/update')){
+                        echo Html::a('<span class="glyphicon glyphicon-pencil"></span> ' . Yii::t('app', 'Edit'), ['update', 'id' => $model->id], ['class' => 'btn btn-info']);
+                    }
+                    if ($model->canExported() && !$isIcsrNullExported && $helpers->currentUserCan('/crud/icsr/export')) {
+                        echo Html::a('<span class="glyphicon glyphicon-copy"></span> ' . Yii::t('app', 'Export  Xml'), ['export', 'id' => $model->id  ,'case' => 'normal'], ['class' => 'btn btn-success'  ,'id' => 'exportXml']);
+                        echo Html::a('<span class="glyphicon glyphicon-copy"></span> ' . Yii::t('app', 'Export  Null Case'), ['export-null-case', 'id' => $model->id ], ['class' => 'btn btn-default']);
+                    }else{
                 echo "<button type='button' class='btn btn-success' disabled><span class='glyphicon glyphicon-copy'></span> ". Yii::t('app','Export  Xml')." </button> ";
                 echo "<button type='button' class='btn btn-default' disabled><span class='glyphicon glyphicon-copy'></span> ". Yii::t('app','Export  Null Case')." </button>";
-            }
+                    }
+                    }
+
             ?>
 
         </div>
