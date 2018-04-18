@@ -63,7 +63,7 @@ class LkpMeddraLltController extends RestController
     public function actionIndex()
     {
         $model = LkpMeddraLlt::find()->all();
-        Yii::$app->api->sendSuccessResponse($model);
+        return ['status'=>'success', 'data'=>$model];
     }
 
 }

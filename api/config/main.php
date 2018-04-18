@@ -7,11 +7,16 @@ $params = array_merge(
 );
 
 return [
-    'id' => 'app-backend',
+    'id' => 'app-api',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'api\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => [
+        'audit' => [
+            'class' => 'bedezign\yii2\audit\Audit',
+            'ignoreActions' => ['debug/*']
+        ]
+    ],
     'components' => [
         /* 'request' => [
              'csrfParam' => '_csrf-backend',
@@ -63,9 +68,10 @@ return [
                 'icsrs/<id>'=>'drug/view',
                 'editicsr/<id>'=>'icsr/update',
                 'countries'=>'country/index',
-                'IcsrEventList'=>'lkp-icsr-eventoutcome/index',
+                'EventOutcomeList'=>'lkp-icsr-eventoutcome/index',
                 'drugactionList'=>'lkp-drug-action/index',
                 'MeddreaLLtList'=>'lkp-meddra-llt/index',
+                'MeddreaPtList'=>'lkp-meddra-pt/index',
                 'drugRoleList'=>'lkp-drug-role/index',
                 'EventList/<id>'=>'icsr-event-outcome/view',
                 'occupationList'=>'lkp-occupation/index',

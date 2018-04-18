@@ -5,7 +5,7 @@ namespace api\controllers;
 use Yii;
 use yii\web\Controller;
 use app\models\LoginForm;
-
+use yii\web\Response;
 
 
 class RestController extends Controller
@@ -31,7 +31,8 @@ class RestController extends Controller
                 'Access-Control-Request-Headers' => ['*'],
                 'Access-Control-Allow-Credentials' => null,
                 'Access-Control-Max-Age' => 86400,
-                'Access-Control-Expose-Headers' => []
+                'Access-Control-Expose-Headers' => [],
+
             ]
 
         ];

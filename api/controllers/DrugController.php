@@ -69,7 +69,7 @@ class DrugController extends RestController
     {
 
         $icsr = $this->findModel($id)->icsrs;
-        Yii::$app->api->sendSuccessResponse($icsr);
+        return ['status'=>'success', 'icsrs'=>$icsr];
     }
 
 

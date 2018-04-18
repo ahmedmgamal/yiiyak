@@ -32,23 +32,28 @@ class DrugPrescriptionController extends RestController
                 'only' => ['index'],
                 'rules' => [
                     [
-                        'actions' => [],
-                        'allow' => true,
-                        'roles' => ['?'],
+                        'allow' => false,
+                        'actions' => ['update','delete','create'],
+                        'matchCallback' => function ($rule,$action){
+                            $prescription_id = \Yii::$app->request->getQueryParam('id');
+                            if (isset($prescription_id) && !empty($prescription_id)) {
+                                return DrugPrescription::checkObjIcsrNullExported($prescription_id);
+                            }
+
+                            return DrugPrescription::checkIcsrNullExported(\Yii::$app->request->getQueryParam('DrugPrescription')['icsr_id']);
+
+                        }
                     ],
+
                     [
-                        'actions' => [
-                            'index'
-                        ],
                         'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                    [
-                        'actions' => [],
-                        'allow' => true,
-                        'roles' => ['*'],
-                    ],
-                ],
+                        'matchCallback' => function ($rule, $action) {
+                            $user_id = \Yii::$app->user->id;
+                            $prescription_id = \Yii::$app->request->getQueryParam('id');
+                            return DrugPrescription::checkAccess($user_id,$prescription_id);
+                        },
+                    ]
+                ]
             ],
             'verbs' => [
                 'class' => Verbcheck::className(),
@@ -61,22 +66,22 @@ class DrugPrescriptionController extends RestController
     }
 
 
-    public function actionCreate($icsr_id = null, $attributes = [])
+    public function actionCreate($icsr_id = null,$drug_id = null, $attributes = null)
     {
-
         $model = new DrugPrescription;
         if($icsr_id){
+            $attributes = json_decode($attributes);
             $model->icsr_id = $icsr_id;
-            $model->attributes = $attributes;
+            $model->drug_id = $drug_id;
+            $model->attributes = (array)$attributes;
         }else{
             $model->attributes = $this->request;
         }
 
-
         if ($model->save()) {
-            Yii::$app->api->sendSuccessResponse(['status'=> 'ok']);
+            return ['status'=> 'ok'];
         } else {
-            Yii::$app->api->sendFailedResponse(['status'=> 'failed']);
+            Yii::$app->api->sendFailedResponse(['status'=> 'failed', 'error'=>$model->getErrors()]);
         }
 
     }

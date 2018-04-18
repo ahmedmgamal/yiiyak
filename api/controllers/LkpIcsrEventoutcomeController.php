@@ -63,7 +63,7 @@ class LkpIcsrEventoutcomeController extends RestController
     public function actionIndex()
     {
         $model = LkpIcsrEventoutcome::find()->all();
-        Yii::$app->api->sendSuccessResponse($model);
+        return ['status'=>'success', 'data'=>$model];
     }
 
 

@@ -66,6 +66,6 @@ class LkpDrugRoleController extends RestController
     public function actionIndex()
     {
         $model = LkpDrugRole::find()->all();
-        Yii::$app->api->sendSuccessResponse($model);
+        return ['status'=>'success', 'data'=>$model];
     }
 }

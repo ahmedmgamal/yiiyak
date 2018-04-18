@@ -32,23 +32,27 @@ class IcsrEventController extends RestController
                 'only' => ['index'],
                 'rules' => [
                     [
-                        'actions' => [],
-                        'allow' => true,
-                        'roles' => ['?'],
+                        'allow' => false,
+                        'actions' => ['update','delete','create'],
+                        'matchCallback' => function ($rule,$action){
+                            $icsrEvent_id = \Yii::$app->request->getQueryParam('id');
+                            if (isset($icsrEvent_id) && !empty($icsrEvent_id)) {
+                                return IcsrEvent::checkObjIcsrNullExported($icsrEvent_id);
+                            }
+
+                            return IcsrEvent::checkIcsrNullExported(\Yii::$app->request->getQueryParam('IcsrEvent')['icsr_id']);
+
+                        }
                     ],
                     [
-                        'actions' => [
-                            'index'
-                        ],
                         'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                    [
-                        'actions' => [],
-                        'allow' => true,
-                        'roles' => ['*'],
-                    ],
-                ],
+                        'matchCallback' => function ($rule, $action) {
+                            $user_id = \Yii::$app->user->id;
+                            $event_id = \Yii::$app->request->getQueryParam('id');
+                            return IcsrEvent::checkAccess($user_id,$event_id);
+                        },
+                    ]
+                ]
             ],
             'verbs' => [
                 'class' => Verbcheck::className(),
@@ -61,21 +65,24 @@ class IcsrEventController extends RestController
     }
 
 
-    public function actionCreate($icsr_id = null, $attributes = [])
+    public function actionCreate($icsr_id = null, $attributes = null)
     {
 
         $model = new IcsrEvent;
         if($icsr_id){
+            $attributes = json_decode($attributes);
+
             $model->icsr_id = $icsr_id;
-            $model->attributes = $attributes;
+            $model->attributes = (array)$attributes;
+
         }else{
             $model->attributes = $this->request;
         }
-
         if ($model->save()) {
-            Yii::$app->api->sendSuccessResponse(['status'=> 'ok']);
+
+            return ['status'=> 'ok'];
         } else {
-            Yii::$app->api->sendFailedResponse(['status'=> 'failed']);
+            Yii::$app->api->sendFailedResponse(['status'=> 'failed', 'error'=>$model->getErrors()]);
         }
 
     }
