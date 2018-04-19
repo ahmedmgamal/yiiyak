@@ -4,7 +4,7 @@ namespace api\controllers;
 
 
 use yii\filters\AccessControl;
-use backend\modules\crud\models\LkpMeddraPt;
+use backend\modules\crud\models\MeddraLlt;
 use api\behaviours\Verbcheck;
 use api\behaviours\Apiauth;
 
@@ -12,7 +12,7 @@ use Yii;
 
 
 
-class LkpMeddraPtController extends RestController
+class MeddraLltController extends RestController
 {
 
     public function behaviors()
@@ -60,10 +60,23 @@ class LkpMeddraPtController extends RestController
         ];
     }
 
-    public function actionIndex()
+    public function actionIndex($term)
     {
-        $model = LkpMeddraPt::find()->all();
-        return ['status'=>'success', 'data'=>$model];
+
+        $result = (new yii\db\query())
+            ->select(['id', 'term'])
+            ->from('meddra_llt')
+            ->where(['like', 'term', $term])
+            ->all();
+        return ['status'=>'success', 'data'=>$result];
+    }
+    public function actionPtId($id){
+        $result = (new yii\db\query())
+            ->select(['id', 'term'])
+            ->from('meddra_llt')
+            ->Where(['pt_id'=>$id])
+            ->all();
+        return ['status'=>'success', 'data'=>$result];
     }
 
 }
