@@ -3,6 +3,7 @@
 namespace api\controllers;
 
 
+use backend\components\ExportComponent;
 use backend\modules\crud\models\DrugPrescription;
 use backend\modules\crud\models\Icsr;
 use yii\filters\AccessControl;
@@ -46,6 +47,7 @@ class IcsrController extends RestController
             'verbs' => [
                 'class' => Verbcheck::className(),
                 'actions' => [
+                    'export' => ['GET'],
                     'create' => ['POST'],
                     'save-storage-data' => ['POST'],
                     'update' => ['POST']
@@ -132,6 +134,15 @@ class IcsrController extends RestController
         } else {
             Yii::$app->api->sendFailedResponse($model->errors);
         }
+
+    }
+
+    public function actionExport($id){
+        $ex = new ExportComponent;
+        $ex->export($id);
+//        $module = Yii::$app->getModule('crud');
+//        VarDumper::dump($module->id);
+//        Yii::$app->runAction('crud/icsr/export', ['id'=>$id, 'case'=>'normal', 'api'=>1]);
 
     }
 

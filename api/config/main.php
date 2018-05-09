@@ -15,9 +15,15 @@ return [
         'audit' => [
             'class' => 'bedezign\yii2\audit\Audit',
             'ignoreActions' => ['debug/*']
-        ]
+        ],
+        'crud' => [
+            'class' => 'backend\modules\crud\Module',
+        ],
     ],
     'components' => [
+        'export' => [
+            'class' => 'backend\components\ExportComponent',
+        ],
         /* 'request' => [
              'csrfParam' => '_csrf-backend',
          ], */
@@ -66,12 +72,14 @@ return [
                 /*end points */
                 'companydrugs/<id>'=>'company/view',
                 'icsrs/<id>'=>'drug/view',
+                'export/<id>'=>'icsr/export',
                 'editicsr/<id>'=>'icsr/update',
                 'countries'=>'country/index',
                 'EventOutcomeList'=>'lkp-icsr-eventoutcome/index',
                 'drugactionList'=>'lkp-drug-action/index',
-                'MeddreaLLtList'=>'lkp-meddra-llt/index',
-                'MeddreaPtList'=>'lkp-meddra-pt/index',
+                'MeddreaLLtList/<term>'=>'meddra-llt/index',
+                'MeddreaLLtbyPT/<id>'=>'meddra-llt/pt-id',
+                'MeddreaPtList/<term>'=>'meddra-pt/index',
                 'drugRoleList'=>'lkp-drug-role/index',
                 'EventList/<id>'=>'icsr-event-outcome/view',
                 'occupationList'=>'lkp-occupation/index',

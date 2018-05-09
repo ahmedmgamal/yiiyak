@@ -76,7 +76,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View');
 
             ],
         'reason_of_use',
-        'problem_went_after_stop:boolean',
+//        'problem_went_after_stop:boolean',
         'problem_returned_after_reuse:boolean',
 
         'active_substance_names',

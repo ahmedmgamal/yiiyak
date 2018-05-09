@@ -33,12 +33,12 @@ abstract class IcsrEvent extends \yii\db\ActiveRecord
     /**
     * ENUM field values
     */
-    const EVENT_OUTCOME_RECOVEREDRESOLVED = 'Recovered/resolved';
-    const EVENT_OUTCOME_RECOVERINGRESOLVING = 'Recovering/resolving';
-    const EVENT_OUTCOME_NOT_RECOVEREDNOT_RESOLVED = 'Not recovered/not resolved';
-    const EVENT_OUTCOME_RECOVEREDRESOLVED_WITH_SEQUELAE = 'Recovered/resolved with sequelae';
-    const EVENT_OUTCOME_FATAL = 'Fatal';
-    const EVENT_OUTCOME_UNKNOWN = 'Unknown';
+    const EVENT_OUTCOME_RECOVEREDRESOLVED = 'recovered/resolved';
+    const EVENT_OUTCOME_RECOVERINGRESOLVING = 'recovering/resolving';
+    const EVENT_OUTCOME_NOT_RECOVEREDNOT_RESOLVED = 'not recovered/not resolved';
+    const EVENT_OUTCOME_RECOVEREDRESOLVED_WITH_SEQUELAE = 'recovered/resolved with sequelae';
+    const EVENT_OUTCOME_FATAL = 'fatal';
+    const EVENT_OUTCOME_UNKNOWN = 'unknown';
     var $enum_labels = false;
     /**
      * @inheritdoc
