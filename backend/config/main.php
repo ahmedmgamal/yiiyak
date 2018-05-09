@@ -42,6 +42,9 @@ $config = [
         'helpers' => [
             'class' => 'backend\components\HelpersComponent',
         ],
+        'export' => [
+            'class' => 'backend\components\ExportComponent',
+        ],
 
         'response' => [
             'formatters' => [

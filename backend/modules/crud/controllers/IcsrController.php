@@ -42,6 +42,7 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
                         'matchCallback' => function ($rule,$action){
                             $icsr_id = \Yii::$app->request->getQueryParam('id');
 
+
                             return Icsr::findOne($icsr_id)->isNullExported();
 
                         }
@@ -109,8 +110,7 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
 		return $this->render('create', ['model' => $model]);
 	}
 
-    public function actionExport($id,$case) {
-
+    public function actionExport($id,$case, $api=0) {
         $icsr = $this->findModel($id);
         $this->layout = false;
 
@@ -145,6 +145,10 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
                 \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
                 return ['fileUrl' =>$fileUrl];
             }
+            elseif ($api == 1){
+                \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+                return ['fileUrl' =>$fileUrl];
+            }
             return $this->redirect($fileUrl);
         }
         if ($request->isAjax){
@@ -165,7 +169,7 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
         $dtd_lines = file($dtd_realpath);
         $new_lines = array();
         foreach ($xml_lines as $x) {
-    
+
             // Assume DOCTYPE SYSTEM "blah blah" format:
             if (preg_match('/DOCTYPE/', $x)) {
                 $y = preg_replace('/SYSTEM "(.*)"/', " [\n" . implode("\n", $dtd_lines) . "\n]", $x);
@@ -175,7 +179,7 @@ class IcsrController extends \backend\modules\crud\controllers\base\IcsrControll
             }
         }
 
-        
+
         $doc->loadXML(implode("\n", $new_lines));
     } else {
         $doc->loadXML(implode("\n", $xml_lines));
@@ -232,11 +236,11 @@ private function createExportFile ($icsrObj,$content)
     $icsrVersion->file_url  = $fileUrl;
     $icsrVersion->exported_by = \Yii::$app->user->id;
     $icsrVersion->version_no = $icsrObj->getVersion();
- 
+
 
         $icsrVersion->save();
     return $fileUrl;
- 
+
 
 }
 

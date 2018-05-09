@@ -598,7 +598,7 @@ $updateButton = (!$isIcsrNullExported && $helpers->currentUserCan('/crud/icsr/up
 
                                         <?php $this->beginBlock('Narrative'); ?>
                                          <div style='position: relative'><div style='position:absolute; right: 0px; top: 0px;'>
-                                                 <?php if (count($model->narrative) < 1 ){?>
+                                                 <?php if (count((array)$model->narrative) < 1 ){?>
                                         <a class="btn btn-success btn-xs" href="<?= Url::to(['/crud/icsr-narritive/create', 'icsr_id' => $model->id])?>">
 
                                             <span class="glyphicon glyphicon-plus"></span><?= Yii::t('app','New Narrative')?>
