@@ -16,6 +16,7 @@ use backend\modules\crud\models\Drug;
 use backend\modules\crud\models\LkpRoute;
 use backend\modules\crud\models\search\Drug as DrugSearch;
 use yii\helpers\StringHelper;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\helpers\Url;
@@ -81,7 +82,9 @@ class DrugController extends Controller
 
         $signaledIcsrs  = $model->getSignaledIcsrsAndIcsrEvenets($signaledDrugs);
         $icsrSeachModel = new IcsrSearch();
-        $icsrDataProvider = $icsrSeachModel->search($_GET);
+        $icsrDataProvider = $icsrSeachModel->search($_GET, 'real');
+        $icsrSeachModel = new IcsrSearch();
+        $icsrDrafted = $icsrSeachModel->search($_GET, 'draft');
 
         $rmpSearchModel = new RmpSearch();
         $rmpDataProvider = $rmpSearchModel->search($_GET);
@@ -95,6 +98,7 @@ class DrugController extends Controller
                 'signaledIcsrs' => $signaledIcsrs,
                 'icsrSeachModel' => $icsrSeachModel,
                 'icsrDataProvider' => $icsrDataProvider,
+                'icsrDrafted' => $icsrDrafted,
                 'signal_detection'=>$signalValues,
                 'rmpSearchModel' => $rmpSearchModel,
                 'rmpDataProvider' => $rmpDataProvider,

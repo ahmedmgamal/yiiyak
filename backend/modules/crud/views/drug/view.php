@@ -109,65 +109,131 @@ $updateIcsr = ( $helpers->currentUserCan('/crud/icsr/update')) ? '{update}' : ''
 </a>
 	<?php } ?>
 
-</div></div><?php Pjax::begin(['id'=>'pjax-Icsrs', 'enableReplaceState'=> false, 'linkSelector'=>'#pjax-Icsrs ul.pagination a, th a', 'clientOptions' => ['pjax:success'=>'function(){alert("yo")}']]) ?>
-<?php echo '<div class="table-responsive">' . \yii\grid\GridView::widget([
-		'layout' => '{summary}{pager}<br/>{items}{pager}',
-		'dataProvider' => $icsrDataProvider,
-		'filterModel' => $icsrSeachModel,
-		'pager'        => [
-			'class'          => yii\widgets\LinkPager::className(),
-			'firstPageLabel' => Yii::t('app', 'First'),
-			'lastPageLabel'  => Yii::t('app', 'Last')
-		],
-		'columns' => [[
-				'class'      => 'yii\grid\ActionColumn',
-				'template'   => '{view} '.$updateIcsr.' {signal}',
-				'contentOptions' => ['nowrap'=>'nowrap'],
+</div></div>
+<button id="approved" class="btn btn-success toggleIcsr" style="margin:10px 0">real icsrs</button>
+    <button id="draft" class="btn btn-default toggleIcsr" style="margin:10px 0">draft icsrs</button>
+<div id="RealIcsrModel" class="toggleIcsrModel">
+    <?php Pjax::begin(['id'=>'pjax-Icsrs', 'enableReplaceState'=> false, 'linkSelector'=>'#pjax-Icsrs ul.pagination a, th a', 'clientOptions' => ['pjax:success'=>'function(){alert("yo")}']]) ?>
+    <?php echo '<div class="table-responsive">' . \yii\grid\GridView::widget([
+            'layout' => '{summary}{pager}<br/>{items}{pager}',
+            'dataProvider' => $icsrDataProvider,
+            'filterModel' => $icsrSeachModel,
+            'pager'        => [
+                'class'          => yii\widgets\LinkPager::className(),
+                'firstPageLabel' => Yii::t('app', 'First'),
+                'lastPageLabel'  => Yii::t('app', 'Last')
+            ],
+            'columns' => [[
+                'class'      => 'yii\grid\ActionColumn',
+                'template'   => '{view} '.$updateIcsr.' {signal}',
+                'contentOptions' => ['nowrap'=>'nowrap'],
 
-				/**
-				 *
-				 */
-				'urlCreator' => function ($action, $model, $key, $index) {
-					// using the column name as key, not mapping to 'id' like the standard generator
-					$params = is_array($key) ? $key : [$model->primaryKey()[0] => (string) $key];
-					$params[0] = '/crud/icsr' . '/' . $action;
-					return $params;
-				},
-				'buttons'    => [
-					'signal' => function ($url,$model) use ($signaledIcsrs){
+                /**
+                 *
+                 */
+                'urlCreator' => function ($action, $model, $key, $index) {
+                    // using the column name as key, not mapping to 'id' like the standard generator
+                    $params = is_array($key) ? $key : [$model->primaryKey()[0] => (string) $key];
+                    $params[0] = '/crud/icsr' . '/' . $action;
+                    return $params;
+                },
+                'buttons'    => [
+                    'signal' => function ($url,$model) use ($signaledIcsrs){
 
-						if ($model->isSignaled($signaledIcsrs,'icsr_id'))
-						{
-							return '<small class="alert-signal-color"><span class="glyphicon glyphicon-warning-sign "></span> '.Yii::t('app','Signal Detected'). '</small>';
+                        if ($model->isSignaled($signaledIcsrs,'icsr_id'))
+                        {
+                            return '<small class="alert-signal-color"><span class="glyphicon glyphicon-warning-sign "></span> '.Yii::t('app','Signal Detected'). '</small>';
 
-						}
-						return '';
+                        }
+                        return '';
 
-					}
+                    }
 
-				],
-				'controller' => '/crud/icsr'
-			],
-			[
-				'header' => Yii::t('app','ID'),
-				'class' => SerialColumn::className()
-			],
-			'patient_identifier',
-			'safetyReportId',
-			[
-			 'attribute' =>'meddraLltFromEvents',
-				'format' => 'raw',
-			],
-			[
-				'attribute' => 'created_by',
-				'value' => function ($model,$key,$index){
-				return $model->createdBy->username;
-				}
-			],
-			'created_at'
-		]
-	]) . '</div>' ?>
-<?php Pjax::end() ?>
+                ],
+                'controller' => '/crud/icsr'
+            ],
+                [
+                    'header' => Yii::t('app','ID'),
+                    'class' => SerialColumn::className()
+                ],
+                'patient_identifier',
+                'safetyReportId',
+                [
+                    'attribute' =>'meddraLltFromEvents',
+                    'format' => 'raw',
+                ],
+                [
+                    'attribute' => 'created_by',
+                    'value' => function ($model,$key,$index){
+                        return $model->createdBy->username;
+                    }
+                ],
+                'created_at'
+            ]
+        ]) . '</div>' ?>
+    <?php Pjax::end() ?>
+</div>
+    <div id="DraftIcsrModel" class="toggleIcsrModel" style="display: none;">
+        <?php Pjax::begin(['id'=>'pjax-Icsrs', 'enableReplaceState'=> false, 'linkSelector'=>'#pjax-Icsrs ul.pagination a, th a', 'clientOptions' => ['pjax:success'=>'function(){alert("yo")}']]) ?>
+        <?php echo '<div class="table-responsive">' . \yii\grid\GridView::widget([
+                'layout' => '{summary}{pager}<br/>{items}{pager}',
+                'dataProvider' => $icsrDrafted,
+                'filterModel' => $icsrSeachModel,
+                'pager'        => [
+                    'class'          => yii\widgets\LinkPager::className(),
+                    'firstPageLabel' => Yii::t('app', 'First'),
+                    'lastPageLabel'  => Yii::t('app', 'Last')
+                ],
+                'columns' => [[
+                    'class'      => 'yii\grid\ActionColumn',
+                    'template'   => '{view} '.$updateIcsr.' {signal}',
+                    'contentOptions' => ['nowrap'=>'nowrap'],
+
+                    /**
+                     *
+                     */
+                    'urlCreator' => function ($action, $model, $key, $index) {
+                        // using the column name as key, not mapping to 'id' like the standard generator
+                        $params = is_array($key) ? $key : [$model->primaryKey()[0] => (string) $key];
+                        $params[0] = '/crud/icsr' . '/' . $action;
+                        return $params;
+                    },
+                    'buttons'    => [
+                        'signal' => function ($url,$model) use ($signaledIcsrs){
+
+                            if ($model->isSignaled($signaledIcsrs,'icsr_id'))
+                            {
+                                return '<small class="alert-signal-color"><span class="glyphicon glyphicon-warning-sign "></span> '.Yii::t('app','Signal Detected'). '</small>';
+
+                            }
+                            return '';
+
+                        }
+
+                    ],
+                    'controller' => '/crud/icsr'
+                ],
+                    [
+                        'header' => Yii::t('app','ID'),
+                        'class' => SerialColumn::className()
+                    ],
+                    'patient_identifier',
+                    'safetyReportId',
+                    [
+                        'attribute' =>'meddraLltFromEvents',
+                        'format' => 'raw',
+                    ],
+                    [
+                        'attribute' => 'created_by',
+                        'value' => function ($model,$key,$index){
+                            return $model->createdBy->username;
+                        }
+                    ],
+                    'created_at'
+                ]
+            ]) . '</div>' ?>
+        <?php Pjax::end() ?>
+    </div>
 <?php $this->endBlock() ?>
 
     <?php
@@ -362,7 +428,7 @@ $updateIcsr = ( $helpers->currentUserCan('/crud/icsr/update')) ? '{update}' : ''
 				],
 
 				'ack_created_at',
-				'next_prsu_date'
+				'next_pbrer_date'
 			]
 		]) . '</div>' ?>
 	<?php Pjax::end() ?>
@@ -407,3 +473,5 @@ $updateIcsr = ( $helpers->currentUserCan('/crud/icsr/update')) ? '{update}' : ''
 </div>
 
 <?php $this->registerCssFile('@web/crud/global/global.css');?>
+
+<?php $this->registerJsFile('@web/crud/icsr/js/toggleIcsr.js', ['depends' => [\yii\web\JqueryAsset::className()]]);?>

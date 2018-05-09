@@ -96,7 +96,7 @@ $updateButton = ( $helpers->currentUserCan('/crud/icsr/update')) ? '{update}' : 
 			'trade_name',
 			'composition',
 			'manufacturer',
-			'next_prsu_date'
+			'next_pbrer_date'
 			/*'strength'*/
 		],
 	]); ?>
