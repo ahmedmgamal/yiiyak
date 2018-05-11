@@ -312,8 +312,7 @@ private function createExportFile ($icsrObj,$content)
 
     public function actionDownloadXmlFile ($path)
     {
-
-        $path =  Yii::getAlias('@webroot') . $path;
+        $path =  Yii::getAlias('@webroot') .'/'. $path;
         if (file_exists($path))
         {
             return Yii::$app->response->sendFile($path);
