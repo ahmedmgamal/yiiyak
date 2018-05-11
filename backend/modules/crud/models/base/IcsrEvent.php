@@ -133,7 +133,7 @@ abstract class IcsrEvent extends \yii\db\ActiveRecord
      */
     public function getMeddraLlt()
     {
-        return $this->hasOne(\backend\modules\crud\models\LkpMeddraLlt::className(), ['id' => 'meddra_llt_id']);
+        return $this->hasOne(\backend\modules\crud\models\MeddraLlt::className(), ['id' => 'meddra_llt_id']);
     }
 
     /**

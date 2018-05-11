@@ -38,6 +38,7 @@ $( document ).ready(function() {
             'error' : function (error){
                 passedValidation = false;
                 //in case internal server error
+                //in case internal server error
                 $('#failedValidation').text('can\'t export xml now please try again later');
             }
         });
@@ -62,8 +63,8 @@ $( document ).ready(function() {
                 if (passedValidation) {
                     controllerUrl = targetUrl.substr(0,(targetUrl.lastIndexOf('/')+1));
 
+                    filePathFromSlashFile = redirectUrl.substr(redirectUrl.lastIndexOf('/files')+1);
                     //this will get the path from /files to the end
-                    filePathFromSlashFile = redirectUrl.substr(redirectUrl.lastIndexOf('/web')+1);
 
                     $('#dtdValidating').hide();
                     progressBar.hide();

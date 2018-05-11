@@ -119,7 +119,7 @@ use dmstr\bootstrap\Tabs;
 
 <!--  B.2.i.1	Reaction or event in MedDRA terminology (Lowest Level Term)   -->
 				<reactionmeddraversionllt> <?php echo $config['meddraversion'] ?> </reactionmeddraversionllt>
-				<reactionmeddrallt><?php echo isset($event->meddra_llt_id)?$event->getMeddraLlt()->one()->code:$event->meddra_llt_text ; ?></reactionmeddrallt>
+				<reactionmeddrallt><?php echo isset($event->meddra_llt_id)?$event->getMeddraLlt()->one()->term:$event->meddra_llt_text ; ?></reactionmeddrallt>
 
 <!--  B.2.i.4	Date of start of reaction or event     -->
 				<reactionstartdateformat>102</reactionstartdateformat>
