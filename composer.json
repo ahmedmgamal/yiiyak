@@ -33,14 +33,17 @@
     "robregonm/yii2-pdf": "*",
     "miloschuman/yii2-highcharts-widget": "*",
     "yiisoft/yii2-jui": "~2.0.0",
-    "moonlandsoft/yii2-phpexcel": "^1.1"
+    "moonlandsoft/yii2-phpexcel": "^1.1",
+    "codeception/specify": "dev-master",
+    "codeception/verify": "dev-master"
   },
   "require-dev": {
     "yiisoft/yii2-codeception": "*",
     "yiisoft/yii2-debug": "*",
     "yiisoft/yii2-gii": "*",
     "yiisoft/yii2-faker": "*",
-    "kartik-v/yii2-password": "@dev"
+    "kartik-v/yii2-password": "@dev",
+    "codeception/codeception": "2.4.x-dev"
 
   },
   "config": {
