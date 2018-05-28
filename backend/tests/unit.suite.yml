@@ -7,6 +7,6 @@ modules:
     enabled:
         - Asserts
         - Yii2:
-            configFile: 'test.php'
+            configFile: '/../config/test.php'
             part: [orm, email,init]
 
