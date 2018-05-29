@@ -61,7 +61,7 @@ use dmstr\bootstrap\Tabs;
         <!--*** A.1.7	Date of receipt of the most recent information for this report --> 
         <receiptdateformat>102</receiptdateformat>
 		<receiptdate><?php echo date("Ymd"); ?> </receiptdate>
-		<authoritynumb> 'EG'<?php echo'-'.$model->getDrug()->one()->getCompany()->one()->short_name.'-'.$model->id; ?></authoritynumb>
+		<authoritynumb> EG<?php echo'-'.$model->getDrug()->one()->getCompany()->one()->short_name.'-'.$model->id; ?></authoritynumb>
 
 		<?php if (isset($nullReason)){?>
 		<!--A.1.13	 -->
