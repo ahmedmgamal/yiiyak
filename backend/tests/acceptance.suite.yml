@@ -7,5 +7,12 @@
 actor: AcceptanceTester
 modules:
     enabled:
-        - PhpBrowser:
+        - WebDriver:
             url: http://localhost/pvradar/pv-radar-yii/yiiyak/backend/web/
+            window_size: false # disabled in ChromeDriver
+            port: 9515
+            browser: chrome
+extensions:
+    enabled:
+        - Codeception\Extension\RunProcess:
+            - chromedriver

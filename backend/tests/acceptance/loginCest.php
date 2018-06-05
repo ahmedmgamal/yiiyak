@@ -13,20 +13,21 @@ class loginCest
     {
     }
 
-    // tests
-    public function checkss(AcceptanceTester $I)
+    public function incorrectLogin(AcceptanceTester $I)
     {
         $I->amOnPage('site/login');
-        $I->see('Email');
-        $I->see('Password');
-        $I->see('Login');
+        $I->fillField('Email', 'admin');
+        $I->fillField('Password', new PasswordArgument('123456'));
+        $I->clickWithLeftButton('button[type=submit]');
+        $I->see('Incorrect username or password.');
     }
-    public function tryToTest(AcceptanceTester $I)
+
+    public function correctLogin(AcceptanceTester $I)
     {
         $I->amOnPage('site/login');
-        $I->fillField('Email', 'davert');
-        $I->fillField('Password', new PasswordArgument('thisissecret'));
-        $I->click('Login');
-        $I->see('Login');
+        $I->fillField('Email', 'ahmed@ahmed.com');
+        $I->fillField('Password', new PasswordArgument('123456'));
+        $I->clickWithLeftButton('button[type=submit]');
+        $I->see('Logout');
     }
 }
