@@ -1,0 +1,121 @@
+stages:
+  - review
+  - staging
+  - diff
+  - production
+
+review:
+  stage: review
+  script:
+    - update-review -r "$CI_BUILD_REF_NAME"
+    - rsync -rvch ./ $TESTROOTPATH/$CI_BUILD_REF_NAME/
+    - cd $TESTROOTPATH/$CI_BUILD_REF_NAME
+    - composer update
+    - echo -e "0" | ./init
+    - ./yii migrate --interactive=0
+  environment:
+    name: review/$CI_BUILD_REF_NAME
+    url: http://$CI_BUILD_REF_NAME.test.ci-runner.elwahsh.com/
+    on_stop: stop_review
+  only:
+    - branches
+  except:
+    - master
+  tags:
+    - test
+
+realdata:
+  stage: realdata
+  script:
+    - update-review -l "$CI_BUILD_REF_NAME"
+    - rsync -crvl --exclude=*.7z --exclude=*.sql --exclude=/yii --exclude=/backend/web/files --exclude=.idea --exclude=nbproject --exclude=.buildpath --exclude=.project --exclude=.settings --exclude=Thumbs.db --exclude=/vendor --exclude=/backend/web/files/* --exclude=composer.phar --exclude=.DS_Store --exclude=phpunit.phar --exclude=/phpunit.xml --exclude=.git* --exclude=/common/config/main-local.php ./ $TESTROOTPATH/$CI_BUILD_REF_NAME/
+    - cd $TESTROOTPATH/$CI_BUILD_REF_NAME
+    - composer update
+    - echo -e "0" | ./init
+    - ./yii migrate --interactive=0
+  environment:
+    name: review/$CI_BUILD_REF_NAME
+    url: http://$CI_BUILD_REF_NAME.test.ci-runner.elwahsh.com/
+    on_stop: stop_review
+  when: manual
+  only:
+    - branches
+  except:
+    - master
+  tags:
+    - test
+
+stop_review:
+  stage: review
+  script:
+    - update-review -d "$CI_BUILD_REF_NAME"
+  when: manual
+  environment:
+    name: review/$CI_BUILD_REF_NAME
+    action: stop
+  only:
+    - branches
+  except:
+    - master
+  tags:
+    - test
+
+staging:
+  stage: staging
+  script:
+    - update-staging
+    - rsync -crvl --exclude=*.7z --exclude=*.sql --exclude=/yii --exclude=/backend/web/files --exclude=.idea --exclude=nbproject --exclude=.buildpath --exclude=.project --exclude=.settings --exclude=Thumbs.db --exclude=/vendor --exclude=/backend/web/files/* --exclude=composer.phar --exclude=.DS_Store --exclude=phpunit.phar --exclude=/phpunit.xml --exclude=.git* --exclude=/common/config/main-local.php ./ $STAGINGROOTPATH/
+    - cd $STAGINGROOTPATH
+    - composer update
+    - echo -e "0" | ./init
+    - ./yii migrate --interactive=0
+  environment:
+    name: staging
+    url: http://staging.ci-runner.elwahsh.com/
+    on_stop: stop_staging
+  only:
+    - master
+  tags:
+    - staging
+
+stop_staging:
+  stage: staging
+  script:
+    - echo -e "<?php\n  echo 'to do now!!';\n?>"
+  variables:
+    GIT_STRATEGY: none
+  when: manual
+  environment:
+    name: staging
+    action: stop
+  only:
+    - master
+  tags:
+    - staging
+
+diff:
+  stage: diff
+  script:
+    - cmdoutput=$(rsync --dry-run -crvl --exclude=/yii --exclude=/backend/web/files --exclude=.idea --exclude=nbproject --exclude=.buildpath --exclude=.project --exclude=.settings --exclude=Thumbs.db --exclude=/vendor --exclude=/backend/web/files/* --exclude=composer.phar --exclude=.DS_Store --exclude=phpunit.phar --exclude=/phpunit.xml --exclude=.git* --exclude=/common/config/main-local.php ./ /home/webdata/ci-runner-prod.elwahsh.com/www/)
+    - modfiles=$(echo -e "$cmdoutput" | sed -e "/^sending\ incremental/Id" -e "/^sent\ .*received\ .*\/sec/Id" -e "/^total\ size/Id" -e "/^$/d" -e "s/\"//g")
+    - RED='\033[1;31m'
+    - YEL='\033[1;33m'
+    - NC='\033[0m'
+    - echo -e "${RED}=====================================\nUpdated files:\n=====================================\n${YEL}$modfiles\n${RED}====================================="
+  only:
+    - master
+  tags:
+    - production
+
+production:
+  stage: production
+  script:
+    - if [ -d /home/webdata/ci-runner-prod.elwahsh.com/www ]; then rsync -crvl --exclude=/yii --exclude=/backend/web/files --exclude=.idea --exclude=nbproject --exclude=.buildpath --exclude=.project --exclude=.settings --exclude=Thumbs.db --exclude=/vendor --exclude=/backend/web/files/* --exclude=composer.phar --exclude=.DS_Store --exclude=phpunit.phar --exclude=/phpunit.xml --exclude=.git* --exclude=/common/config/main-local.php ./ /home/webdata/ci-runner-prod.elwahsh.com/www/; fi
+  environment:
+    name: production
+    url: http://ci-runner-prod.elwahsh.com/
+  when: manual
+  only:
+    - master
+  tags:
+    - production
