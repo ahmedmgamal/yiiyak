@@ -23,7 +23,7 @@ review:
   except:
     - master
   tags:
-    - test
+    - reviews
 
 realdata:
   stage: realdata
@@ -44,7 +44,7 @@ realdata:
   except:
     - master
   tags:
-    - test
+    - reviews
 
 stop_review:
   stage: review
@@ -59,7 +59,7 @@ stop_review:
   except:
     - master
   tags:
-    - test
+    - reviews
 
 staging:
   stage: staging
