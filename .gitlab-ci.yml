@@ -82,7 +82,7 @@ staging:
 stop_staging:
   stage: staging
   script:
-    - echo -e "Nothing to do now!!"
+    - echo -e "Nothing to do now!"
   when: manual
   environment:
     name: staging
