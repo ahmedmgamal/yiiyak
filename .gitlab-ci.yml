@@ -9,7 +9,7 @@ review:
   stage: review
   script:
     - update-review -r "$CI_BUILD_REF_NAME"
-    - rsync -rvch ./ $TESTROOTPATH/$CI_BUILD_REF_NAME/
+    - rsync -rvch --exclude=*.7z --exclude=*.sql --exclude=Thumbs.db --exclude=.DS_Store --exclude=.git* ./ $TESTROOTPATH/$CI_BUILD_REF_NAME/
     - cd $TESTROOTPATH/$CI_BUILD_REF_NAME
     - composer update
     - echo -e "0" | ./init
@@ -95,8 +95,9 @@ stop_staging:
 diff:
   stage: diff
   script:
-    - cmdoutput=$(rsync --dry-run -crvl --exclude=/yii --exclude=/backend/web/files --exclude=.idea --exclude=nbproject --exclude=.buildpath --exclude=.project --exclude=.settings --exclude=Thumbs.db --exclude=/vendor --exclude=/backend/web/files/* --exclude=composer.phar --exclude=.DS_Store --exclude=phpunit.phar --exclude=/phpunit.xml --exclude=.git* --exclude=/common/config/main-local.php ./ /home/webdata/ci-runner-prod.elwahsh.com/www/)
+    - cmdoutput=$(rsync --dry-run -crvl --exclude=/yii --exclude=/backend/web/files --exclude=.idea --exclude=nbproject --exclude=.buildpath --exclude=.project --exclude=.settings --exclude=Thumbs.db --exclude=/vendor --exclude=/backend/web/files/* --exclude=composer.phar --exclude=.DS_Store --exclude=phpunit.phar --exclude=/phpunit.xml --exclude=.git* --exclude=/common/config/main-local.php ./ $PRODCUTIONROOTPATH/)
     - modfiles=$(echo -e "$cmdoutput" | sed -e "/^sending\ incremental/Id" -e "/^sent\ .*received\ .*\/sec/Id" -e "/^total\ size/Id" -e "/^$/d" -e "s/\"//g")
+    - if [[ -z $modfiles ]]; then modfiles="Nothing !"; fi
     - RED='\033[1;31m'
     - YEL='\033[1;33m'
     - NC='\033[0m'
