@@ -72,7 +72,7 @@ staging:
     - ./yii migrate --interactive=0
   environment:
     name: staging
-    url: http://staging.ci-runner.elwahsh.com/
+    url: http://test.pv-radar.com/
     on_stop: stop_staging
   only:
     - master
@@ -82,9 +82,7 @@ staging:
 stop_staging:
   stage: staging
   script:
-    - echo -e "<?php\n  echo 'to do now!!';\n?>"
-  variables:
-    GIT_STRATEGY: none
+    - echo -e "Nothing to do now!!"
   when: manual
   environment:
     name: staging
