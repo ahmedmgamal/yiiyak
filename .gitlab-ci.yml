@@ -16,7 +16,7 @@ review:
     - ./yii migrate --interactive=0
   environment:
     name: review/$CI_BUILD_REF_NAME
-    url: http://$CI_BUILD_REF_NAME.test.ci-runner.elwahsh.com/
+    url: http://$CI_BUILD_REF_NAME.test-branch.pv-radar.com/
     on_stop: stop_review
   only:
     - branches
@@ -36,7 +36,7 @@ realdata:
     - ./yii migrate --interactive=0
   environment:
     name: review/$CI_BUILD_REF_NAME
-    url: http://$CI_BUILD_REF_NAME.test.ci-runner.elwahsh.com/
+    url: http://$CI_BUILD_REF_NAME.test-branch.pv-radar.com/
     on_stop: stop_review
   when: manual
   only:
