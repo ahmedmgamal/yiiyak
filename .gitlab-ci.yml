@@ -110,10 +110,10 @@ diff:
 production:
   stage: production
   script:
-    - if [ -d /home/webdata/ci-runner-prod.elwahsh.com/www ]; then rsync -crvl --exclude=/yii --exclude=/backend/web/files --exclude=.idea --exclude=nbproject --exclude=.buildpath --exclude=.project --exclude=.settings --exclude=Thumbs.db --exclude=/vendor --exclude=/backend/web/files/* --exclude=composer.phar --exclude=.DS_Store --exclude=phpunit.phar --exclude=/phpunit.xml --exclude=.git* --exclude=/common/config/main-local.php ./ /home/webdata/ci-runner-prod.elwahsh.com/www/; fi
+    - if [ -d $PRODCUTIONROOTPATH ]; then rsync -crvl --exclude=/yii --exclude=/backend/web/files --exclude=.idea --exclude=nbproject --exclude=.buildpath --exclude=.project --exclude=.settings --exclude=Thumbs.db --exclude=/vendor --exclude=/backend/web/files/* --exclude=composer.phar --exclude=.DS_Store --exclude=phpunit.phar --exclude=/phpunit.xml --exclude=.git* --exclude=/common/config/main-local.php ./ $PRODCUTIONROOTPATH/; fi
   environment:
     name: production
-    url: http://ci-runner-prod.elwahsh.com/
+    url: https://pv-radar.com/
   when: manual
   only:
     - master
