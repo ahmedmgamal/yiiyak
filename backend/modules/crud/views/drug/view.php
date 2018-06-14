@@ -428,7 +428,7 @@ $updateIcsr = ( $helpers->currentUserCan('/crud/icsr/update')) ? '{update}' : ''
 				],
 
 				'ack_created_at',
-				'next_pbrer_date'
+				'next_prsu_date'
 			]
 		]) . '</div>' ?>
 	<?php Pjax::end() ?>

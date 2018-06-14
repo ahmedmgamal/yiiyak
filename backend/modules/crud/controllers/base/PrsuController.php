@@ -90,7 +90,7 @@ public $enableCsrfValidation = false;
                 if ($model->save()) {
                     $drug= Drug::findOne($drug_id);
 
-                    $drug->next_prsu_date = $model->next_prsu_date;
+                    $drug->next_pbrer_date = $model->next_prsu_date;
                     $drug->update();
 
                     $transaction->commit();

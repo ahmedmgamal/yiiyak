@@ -93,6 +93,11 @@ $( document ).ready(function() {
 
     });
 
+    $('#downloadFileAnchorTag').click(function(){
+        var version = $('a[href="#relation-tabs-tab7"] small span');
+        version.text(parseInt(version.text())+1);
+    });
+
     $('.versionDiff').on('click',function (event){
         event.preventDefault();
         ajaxUrl = $(this).attr('href');
