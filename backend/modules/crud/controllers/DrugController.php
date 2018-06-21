@@ -12,6 +12,8 @@ use backend\modules\crud\models\Drug;
 use backend\modules\crud\models\IcsrEvent;
 use backend\modules\crud\models\IcsrTest;
 use backend\modules\crud\models\search\Drug as DrugSearch;
+use backend\modules\crud\models\User;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\helpers\Url;
@@ -36,7 +38,10 @@ class DrugController extends \backend\modules\crud\controllers\base\DrugControll
             'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
-
+                    [
+                        'actions' => ['email'],
+                        'allow' => true,
+                    ],
                     [
                         'allow' => true,
                         'matchCallback' => function ($rule, $action) {
@@ -138,6 +143,36 @@ class DrugController extends \backend\modules\crud\controllers\base\DrugControll
                     GROUP BY icsr_event.meddra_pt_text , icsr.is_serious";
             $summary = Yii::$app->db->createCommand($sql,[":companyId"=>$companyId])->queryAll();
             return $summary;
+        }
+        public function actionEmail(){
+            $drugs= Drug::find()->all();
+            foreach ($drugs as $drug){
+                if($drug->rmp_first_deadline){
+                    $date_diff =strtotime($drug->rmp_first_deadline) - strtotime(date("Y-m-d"));
+                    $days_diff =($date_diff/3600/24);
+                    if($days_diff <3 && $days_diff >=0)
+                    {
+                        $company_users = $drug->getCompany()->one()->getUsers()->all();
+                        foreach ($company_users as $user){
+                            $role= $user->getRole($user->id);
+                            if($role == "Manager" && $user->email){
+                                $emailBody = "    Dear Manager:- ".$user->username."<br>"
+                                    ."the Drug ".$drug->generic_name."(".$drug->trade_name.")"
+                                ." has RMP First DeadLine in ". $days_diff." days "
+                                ."at date ". $drug->rmp_first_deadline.""
+                                ."<br><br>Regards<br>Pv-Radar";
+
+                                Yii::$app->mailer->compose()
+                                    ->setFrom([\Yii::$app->params['supportEmail'] => 'Pv-Radar'])
+                                    ->setTo($user->email)
+                                    ->setSubject('RMP First DeadLine')
+                                    ->setTextBody($emailBody)
+                                    ->send();
+                            }
+                        }
+                    }
+                }
+            }
         }
 
 
