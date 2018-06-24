@@ -32,9 +32,9 @@
     "yii2tech/file-storage": "*",
     "robregonm/yii2-pdf": "*",
     "miloschuman/yii2-highcharts-widget": "*",
-    "yiisoft/yii2-jui": "~2.0.0",
     "moonlandsoft/yii2-phpexcel": "^1.1",
-    "codeception/codeception": "2.4.x-dev"
+    "codeception/codeception": "2.4.x-dev",
+    "doctrine/annotations": "1.7.x-dev"
   },
   "require-dev": {
     "codeception/verify": "~0.3.1",
@@ -45,12 +45,16 @@
 
   },
   "config": {
+
+    "fxp-asset":{
+      "installer-paths": {
+        "npm-asset-library": "vendor/npm",
+        "bower-asset-library": "vendor/bower"
+      }
+    },
     "process-timeout": 1800
   },
   "extra": {
-    "asset-installer-paths": {
-      "npm-asset-library": "vendor/npm",
-      "bower-asset-library": "vendor/bower"
-    }
+
   }
 }

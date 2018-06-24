@@ -12,8 +12,6 @@ use backend\modules\crud\models\Drug;
 use backend\modules\crud\models\IcsrEvent;
 use backend\modules\crud\models\IcsrTest;
 use backend\modules\crud\models\search\Drug as DrugSearch;
-use backend\modules\crud\models\User;
-use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\helpers\Url;
