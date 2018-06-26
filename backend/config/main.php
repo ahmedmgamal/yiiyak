@@ -20,6 +20,7 @@ $config = [
         'crud' => [
             'class' => 'backend\modules\crud\Module',
         ],
+
  	'admin' => [
             'class' => 'mdm\admin\Module',
             'layout' => 'left-menu',
@@ -39,6 +40,16 @@ $config = [
     ],
 
     'components' => [
+        'assetManager' => [
+            'bundles' => [
+                'yii\web\JqueryAsset' => [
+                    'sourcePath' => null,   // do not publish the bundle
+                    'js' => [
+                        '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js',
+                    ]
+                ],
+            ],
+        ],
         'helpers' => [
             'class' => 'backend\components\HelpersComponent',
         ],

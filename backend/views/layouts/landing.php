@@ -55,7 +55,7 @@ LandingAsset::register($this);
     });
 
     // Parallax background
-    $('.parallax-1').parallax({
+    jQuery('.parallax-1').parallax({
         speed : 0.15
     });
 </script>

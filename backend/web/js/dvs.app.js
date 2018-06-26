@@ -10,7 +10,7 @@ License URI: http://wrapbootstrap.com
 */
 
 // On load functions
-$(window).load(function(){
+$(window).on('load',function(){
 	// Isotope Masonry
 	if($('.masonry-wrapper').length > 0){
 		$('.masonry-wrapper').isotope({
