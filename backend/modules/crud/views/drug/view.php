@@ -114,7 +114,7 @@ $updateIcsr = ( $helpers->currentUserCan('/crud/icsr/update')) ? '{update}' : ''
     <button id="draft" class="btn btn-default toggleIcsr" style="margin:10px 0">draft icsrs</button>
 <div id="RealIcsrModel" class="toggleIcsrModel">
     <?php Pjax::begin(['id'=>'pjax-Icsrs', 'enableReplaceState'=> false, 'linkSelector'=>'#pjax-Icsrs ul.pagination a, th a', 'clientOptions' => ['pjax:success'=>'function(){alert("yo")}']]) ?>
-    <?php echo '<div class="table-responsive">' . \yii\grid\GridView::widget([
+    <?php echo '<div class="table-responsive" id="icsrs">' . \yii\grid\GridView::widget([
             'layout' => '{summary}{pager}<br/>{items}{pager}',
             'dataProvider' => $icsrDataProvider,
             'filterModel' => $icsrSeachModel,
