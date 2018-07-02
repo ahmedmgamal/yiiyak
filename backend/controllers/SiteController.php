@@ -27,7 +27,7 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['timezone','login', 'error','landing','send-mail','request-password-reset','reset-password'],
+                        'actions' => ['login', 'error','landing','send-mail','request-password-reset','reset-password'],
                         'allow' => true,
                     ],
                     [
@@ -169,11 +169,5 @@ class SiteController extends Controller
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
-    }
-    public function actionTimezone(){
-        $location = Yii::$app->request->get('timeZone');
-        $timezone = timezone_name_from_abbr("", $location*-60,1);
-        date_default_timezone_set($timezone);
-        return true;
     }
 }
