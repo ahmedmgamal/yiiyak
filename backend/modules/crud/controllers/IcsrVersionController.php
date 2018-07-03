@@ -2,8 +2,12 @@
 
 namespace backend\modules\crud\controllers;
 use Aws\CloudFront\Exception\Exception;
+use Egulias\EmailValidator\Validation\DNSCheckValidation;
+use Egulias\EmailValidator\Validation\MultipleValidationWithAnd;
+use Egulias\EmailValidator\Validation\RFCValidation;
 use Swift_RfcComplianceException;
 use Yii;
+use Egulias\EmailValidator\EmailValidator;
 
 /**
 * This is the class for controller "IcsrVersionController".
@@ -37,9 +41,15 @@ class IcsrVersionController extends \backend\modules\crud\controllers\base\IcsrV
 
         if (file_exists($xmlFilePath)) {
             try {
-                if (\Swift_Validate::email($sendToEmail) == 1) {
+                $email_validator = new EmailValidator();
+                $multipleValidations = new MultipleValidationWithAnd([
+                    new RFCValidation(),
+                    new DNSCheckValidation()
+                ]);
+
+                if ($email_validator->isValid($sendToEmail,$multipleValidations) == 1) {
                     Yii::$app->mailer->compose('xmlEmail', ['additionalInfo' => $additionalInfo, 'senderCompanyName' => $senderCompanyName])
-                        ->setFrom('yiiyaktest@gmail.com')
+                        ->setFrom([\Yii::$app->params['supportEmail'] => 'Pv-Radar'])
                         ->setTo($sendToEmail)
                         ->setSubject('Xml File')
                         ->setReplyTo($senderEmail)

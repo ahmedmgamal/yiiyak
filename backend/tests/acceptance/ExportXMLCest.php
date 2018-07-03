@@ -26,6 +26,6 @@ class ExportXMLCest
         $I->clickWithLeftButton(['css'=>'table tbody tr:last-child .glyphicon-eye-open']);
         $I->clickWithLeftButton(['css'=>'#exportXml']);
         $I->wait(20);
-        $I->see('can\'t export xml now please try again later');
+        $I->see('Download File');
     }
 }
