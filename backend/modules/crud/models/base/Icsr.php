@@ -104,7 +104,7 @@ abstract class Icsr extends \yii\db\ActiveRecord
             [['drug_id', 'reaction_country_id'], 'integer'],
             [[ 'patient_weight_unit'],'integer','min' => 1 , 'max' => 2],
             [['drug_id', 'reaction_country_id', 'report_type'], 'integer'],
-            [[ 'patient_weight_unit'], 'string'],
+            [[ 'patient_weight_unit'], 'integer'],
             [['is_serious', 'results_in_death', 'life_threatening', 'requires_hospitalization', 'results_in_disability', 'is_congenital_anomaly', 'others_significant'],'boolean'],
             [['patient_birth_date'], 'safe'],
             [['status'], 'in', 'range' => [

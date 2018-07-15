@@ -73,6 +73,8 @@ return [
                 'companydrugs/<id>'=>'company/view',
                 'icsrs/<id>'=>'drug/view',
                 'export/<id>'=>'icsr/export',
+                'reject/<id>'=>'icsr/reject',
+                'approve/<id>'=>'icsr/approve',
                 'editicsr/<id>'=>'icsr/update',
                 'countries'=>'country/index',
                 'EventOutcomeList'=>'lkp-icsr-eventoutcome/index',
