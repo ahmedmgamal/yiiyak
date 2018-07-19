@@ -72,6 +72,8 @@ return [
                 /*end points */
                 'companydrugs/<id>'=>'company/view',
                 'icsrs/<id>'=>'drug/view',
+                'check-limit'=>'drug/check-limit',
+                'drug-create'=>'drug/create',
                 'export/<id>'=>'icsr/export',
                 'reject/<id>'=>'icsr/reject',
                 'approve/<id>'=>'icsr/approve',
@@ -85,6 +87,7 @@ return [
                 'drugRoleList'=>'lkp-drug-role/index',
                 'EventList/<id>'=>'icsr-event-outcome/view',
                 'occupationList'=>'lkp-occupation/index',
+                'route-of-admin'=>'lkp-route-of-admin/index',
                 'reporttypeslist'=>'lkp-icsr-type/index',
                 'saveStorageData'=>'icsr/save-storage-data',
                 'saveicsr'=>'icsr/create',

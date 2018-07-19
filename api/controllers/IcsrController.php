@@ -55,7 +55,7 @@ class IcsrController extends RestController
                     'reject' => ['GET'],
                     'create' => ['POST'],
                     'download' => ['POST'],
-                    'approve' => ['POST'],
+                    'approve' => ['GET'],
                     'save-storage-data' => ['POST'],
                     'update' => ['POST']
                 ],
@@ -167,7 +167,7 @@ class IcsrController extends RestController
 
     public function actionExport($id){
         $ex = new ExportComponent;
-        $ex->export($id);
+        return $ex->export($id);
 //        $module = Yii::$app->getModule('crud');
 //        VarDumper::dump($module->id);
 //        Yii::$app->runAction('crud/icsr/export', ['id'=>$id, 'case'=>'normal', 'api'=>1]);

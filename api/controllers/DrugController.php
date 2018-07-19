@@ -33,21 +33,16 @@ class DrugController extends RestController
                 'rules' => [
                     [
                         'actions' => [],
-                        'allow' => true,
+                        'allow' => false,
                         'roles' => ['?'],
                     ],
                     [
                         'actions' => [
-                            'index'
+                            'index', 'check-limit', 'create'
                         ],
                         'allow' => true,
                         'roles' => ['@'],
-                    ],
-                    [
-                        'actions' => [],
-                        'allow' => true,
-                        'roles' => ['*'],
-                    ],
+                    ]
                 ],
             ],
             'verbs' => [
@@ -56,7 +51,9 @@ class DrugController extends RestController
                     'index' => ['GET', 'POST'],
                     'create' => ['POST'],
                     'update' => ['POST'],
+                    'create' => ['POST'],
                     'view' => ['GET'],
+                    'check-limit' => ['GET'],
                     'delete' => ['DELETE']
                 ],
             ],
@@ -79,6 +76,25 @@ class DrugController extends RestController
             return $model;
         } else {
             Yii::$app->api->sendFailedResponse("Invalid Record requested");
+        }
+    }
+    public function actionCreate(){
+        $model = $this->actionCheckLimit();
+        if($model){
+            $model->attributes = $this->request;
+            if($model->save()){
+                Yii::$app->api->sendSuccessResponse();
+            }
+        }
+    }
+    public function actionCheckLimit()
+    {
+        $model = new Drug;
+        $model->company_id = Yii::$app->user->identity->company_id;
+        if($model->isBeyondLimit()){
+            return false;
+        }else{
+            return $model;
         }
     }
 }
