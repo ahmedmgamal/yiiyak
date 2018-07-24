@@ -68,6 +68,7 @@ return [
                 'accesstoken'=>'site/accesstoken',
                 'me'=>'site/me',
                 'logout'=>'site/logout',
+                'find-all-lkp'=>'site/find-all-lkp',
 
                 /*end points */
                 'companydrugs/<id>'=>'company/view',
@@ -96,7 +97,6 @@ return [
                 'saveTest'=>'icsr-test/create',
                 'saveprescription'=>'drug-prescription/create',
 
-                '1/employees/delete/<id>'=>'employee/delete',
 
 
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
@@ -105,7 +105,6 @@ return [
                 '<module:\w+>/<controller:\w+>/<id:\d+>' => '<module>/<controller>/view',
                 '<module:\w+>/<controller:\w+>/<action:\w+>/<id:\d+>' => '<module>/<controller>/<action>',
                 // '<module:\w+>/<controller:\w+>/<action:\w+>' => '<module>/<controller>/<action>',
-                '1/employees/create'=>'employee/create',
             ],
 
         ],
