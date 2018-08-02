@@ -1,0 +1,7 @@
+actor: ApiTester
+modules:
+    enabled:
+        - REST:
+              url: http://localhost/pvradar/pv-radar-yii/yiiyak/api/web/
+              depends: PhpBrowser
+              part: Json

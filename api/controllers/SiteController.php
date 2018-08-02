@@ -8,6 +8,8 @@ use backend\modules\crud\models\LkpIcsrEventoutcome;
 use backend\modules\crud\models\LkpIcsrType;
 use backend\modules\crud\models\LkpOccupation;
 use backend\modules\crud\models\LkpRoute;
+use backend\modules\crud\models\LkpTimeUnit;
+use backend\modules\crud\models\LkpWeightUnit;
 use backend\modules\crud\models\User;
 use Yii;
 use yii\filters\AccessControl;
@@ -208,7 +210,9 @@ class SiteController extends RestController
         $data['LkpIcsrEventoutcome'] = LkpIcsrEventoutcome::find()->all();
         $data['LkpOccupation'] = LkpOccupation::find()->all();
         $data['LkpRoute'] = LkpRoute::find()->all();
+        $data['LkpTimeUnit'] = LkpTimeUnit::find()->all();
+        $data['LkpWeightUnit'] = LkpWeightUnit::find()->all();
 
-       return ['status'=>1,'data'=>$data];
+        return ['status'=>1,'data'=>$data];
     }
 }
