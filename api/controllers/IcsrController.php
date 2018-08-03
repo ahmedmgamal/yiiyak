@@ -35,20 +35,27 @@ class IcsrController extends RestController
                 'only' => ['index'],
                 'rules' => [
                     [
+                        'actions' => [],
+                        'allow' => false,
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'actions' => [
+                            'approve', 'reject', 'export', 'create', 'save-storage-data', 'update'
+                        ],
                         'allow' => true,
-                        'matchCallback' => function ($rule, $action) {
-                            $user_id = \Yii::$app->user->id;
-                            $icsr_id = \Yii::$app->request->getQueryParam('id');
-                            return Icsr::checkAccess($user_id,$icsr_id);
-                        },
-                    ]
+                        'roles' => ['@'],
+                    ],
                 ],
             ],
             'verbs' => [
                 'class' => Verbcheck::className(),
                 'actions' => [
                     'export' => ['GET'],
+                    'reject' => ['GET'],
                     'create' => ['POST'],
+                    'download' => ['POST'],
+                    'approve' => ['GET'],
                     'save-storage-data' => ['POST'],
                     'update' => ['POST']
                 ],
@@ -136,14 +143,43 @@ class IcsrController extends RestController
         }
 
     }
+    public function actionApprove($id)
+    {
+        $model = $this->findModel($id);
+        $model->status = 'real';
+        if ($model->update()) {
+            return Yii::$app->api->sendSuccessResponse(true);
+        }
+        else {
+            return Yii::$app->api->sendFailedResponse($model->errors);
+        }
+    }
+
+    public function actionReject($id){
+        $model = $this->findModel($id);
+        if($model){
+            $model->delete();
+            return Yii::$app->api->sendSuccessResponse(true);
+        }else{
+            return Yii::$app->api->sendFailedResponse($model->errors);
+        }
+    }
 
     public function actionExport($id){
         $ex = new ExportComponent;
-        $ex->export($id);
+        return $ex->export($id);
 //        $module = Yii::$app->getModule('crud');
 //        VarDumper::dump($module->id);
 //        Yii::$app->runAction('crud/icsr/export', ['id'=>$id, 'case'=>'normal', 'api'=>1]);
 
+    }
+    protected function findModel($id)
+    {
+        if (($model = Icsr::findOne($id)) !== null) {
+            return $model;
+        } else {
+            return false;
+        }
     }
 
 }

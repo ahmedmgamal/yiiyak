@@ -14,7 +14,7 @@ use yii\helpers\VarDumper;
 class ExportComponent extends Component
 {
         public function export($id){
-            Yii::$app->getModule('crud')
+            return Yii::$app->getModule('crud')
                 ->runAction('icsr/export', ['id'=>$id, 'case'=>'normal', 'api'=>1]);
         }
 }

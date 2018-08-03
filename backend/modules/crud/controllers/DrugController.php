@@ -60,6 +60,7 @@ class DrugController extends \backend\modules\crud\controllers\base\DrugControll
 
 	public function actionIndex() {
 
+
 		$searchModel  = new DrugSearch;
                // $criteria = ;
 

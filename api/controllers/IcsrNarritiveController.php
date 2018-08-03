@@ -31,25 +31,18 @@ class IcsrNarritiveController extends RestController
                 'class' => AccessControl::className(),
                 'only' => ['index'],
                 'rules' => [
-                    [
-                        'allow' => false,
-                        'actions' => ['update','delete'],
-                        'verbs' => ['POST'],
-                        'matchCallback' => function ($rule,$action){
-                            $icsrNarritive_id = \Yii::$app->request->getQueryParam('id');
-                            return IcsrNarritive::checkObjIcsrNullExported($icsrNarritive_id);
 
-                        }
-                    ],
                     [
                         'allow' => true,
+                        'roles' => ['@'],
                     ]
                 ]
             ],
             'verbs' => [
                 'class' => Verbcheck::className(),
                 'actions' => [
-                    'create' => ['POST']
+                    'create' => ['POST'],
+                    'index' => ['GET']
                 ],
             ],
 
@@ -72,6 +65,15 @@ class IcsrNarritiveController extends RestController
             return ['status'=> 'ok'];
         } else {
             Yii::$app->api->sendFailedResponse(['status'=> 'failed']);
+        }
+
+    }
+    public function actionIndex($icsr_id){
+        $model = IcsrNarritive::find()->where(['icsr_id'=>$icsr_id])->all();
+        if($model){
+            Yii::$app->api->sendSuccessResponse($model);
+        }else{
+            Yii::$app->api->sendFailedResponse(['error'=>$model->getErrors()]);
         }
 
     }

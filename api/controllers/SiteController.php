@@ -1,6 +1,15 @@
 <?php
 namespace api\controllers;
 
+use backend\modules\crud\models\LkpCountry;
+use backend\modules\crud\models\LkpDrugAction;
+use backend\modules\crud\models\LkpDrugRole;
+use backend\modules\crud\models\LkpIcsrEventoutcome;
+use backend\modules\crud\models\LkpIcsrType;
+use backend\modules\crud\models\LkpOccupation;
+use backend\modules\crud\models\LkpRoute;
+use backend\modules\crud\models\LkpTimeUnit;
+use backend\modules\crud\models\LkpWeightUnit;
 use backend\modules\crud\models\User;
 use Yii;
 use yii\filters\AccessControl;
@@ -40,7 +49,7 @@ class SiteController extends RestController
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout', 'me'],
+                        'actions' => ['logout', 'me', 'find-all-lkp'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -55,6 +64,7 @@ class SiteController extends RestController
                 'class' => Verbcheck::className(),
                 'actions' => [
                     'logout' => ['GET'],
+                    'find-all-lkp' => ['GET'],
                     'authorize' => ['POST'],
                     'register' => ['POST'],
                     'accesstoken' => ['POST'],
@@ -168,6 +178,7 @@ class SiteController extends RestController
         }
     }
 
+
     public function actionLogout()
     {
         $headers = Yii::$app->getRequest()->getHeaders();
@@ -188,5 +199,20 @@ class SiteController extends RestController
         }
 
 
+    }
+
+    public function actionFindAllLkp(){
+        $data = [];
+        $data['LkpDrugAction'] = LkpDrugAction::find()->all();
+        $data['LkpIcsrType'] = LkpIcsrType::find()->all();
+        $data['LkpCountry'] = LkpCountry::find()->all();
+        $data['LkpDrugRole'] = LkpDrugRole::find()->all();
+        $data['LkpIcsrEventoutcome'] = LkpIcsrEventoutcome::find()->all();
+        $data['LkpOccupation'] = LkpOccupation::find()->all();
+        $data['LkpRoute'] = LkpRoute::find()->all();
+        $data['LkpTimeUnit'] = LkpTimeUnit::find()->all();
+        $data['LkpWeightUnit'] = LkpWeightUnit::find()->all();
+
+        return ['status'=>1,'data'=>$data];
     }
 }
