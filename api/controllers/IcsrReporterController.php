@@ -29,36 +29,18 @@ class IcsrReporterController extends RestController
            ],
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index'],
                 'rules' => [
-
-                    [
-                        'allow' => false,
-                        'actions' => ['update','delete','create'],
-                        'matchCallback' => function ($rule,$action){
-                            $report_id = \Yii::$app->request->getQueryParam('id');
-                            if (isset($report_id) && !empty($report_id)) {
-                                return IcsrReporter::checkObjIcsrNullExported($report_id);
-                            }
-
-                            return IcsrReporter::checkIcsrNullExported(\Yii::$app->request->getQueryParam('IcsrReporter')['icsr_id']);
-
-                        }
-                    ],
                     [
                         'allow' => true,
-                        'matchCallback' => function ($rule, $action) {
-                            $user_id = \Yii::$app->user->id;
-                            $report_id = \Yii::$app->request->getQueryParam('id');
-                            return IcsrReporter::checkAccess($user_id,$report_id);
-                        },
-                    ]
+                        'roles' => ['@'],
+                    ],
                 ]
             ],
             'verbs' => [
                 'class' => Verbcheck::className(),
                 'actions' => [
-                    'create' => ['POST']
+                    'create' => ['POST'],
+                    'index' => ['GET']
                 ],
             ],
 
@@ -82,6 +64,15 @@ class IcsrReporterController extends RestController
             return ['status'=> 'ok'];
         } else {
             Yii::$app->api->sendFailedResponse(['status'=> 'failed', 'error'=>$model->getErrors()]);
+        }
+
+    }
+    public function actionIndex($icsr_id){
+        $model = IcsrReporter::find()->where(['icsr_id'=>$icsr_id])->all();
+        if($model){
+            Yii::$app->api->sendSuccessResponse($model);
+        }else{
+            Yii::$app->api->sendFailedResponse(['error'=>$model->getErrors()]);
         }
 
     }

@@ -68,11 +68,16 @@ return [
                 'accesstoken'=>'site/accesstoken',
                 'me'=>'site/me',
                 'logout'=>'site/logout',
+                'find-all-lkp'=>'site/find-all-lkp',
 
                 /*end points */
                 'companydrugs/<id>'=>'company/view',
                 'icsrs/<id>'=>'drug/view',
+                'check-limit'=>'drug/check-limit',
+                'drug-create'=>'drug/create',
                 'export/<id>'=>'icsr/export',
+                'reject/<id>'=>'icsr/reject',
+                'approve/<id>'=>'icsr/approve',
                 'editicsr/<id>'=>'icsr/update',
                 'countries'=>'country/index',
                 'EventOutcomeList'=>'lkp-icsr-eventoutcome/index',
@@ -83,15 +88,20 @@ return [
                 'drugRoleList'=>'lkp-drug-role/index',
                 'EventList/<id>'=>'icsr-event-outcome/view',
                 'occupationList'=>'lkp-occupation/index',
+                'route-of-admin'=>'lkp-route-of-admin/index',
                 'reporttypeslist'=>'lkp-icsr-type/index',
                 'saveStorageData'=>'icsr/save-storage-data',
                 'saveicsr'=>'icsr/create',
                 'addIcsrEvent'=>'icsr-event/create',
+                'icsr-events/<icsr_id>'=>'icsr-event/index',
+                'icsr-narritives/<icsr_id>'=>'icsr-narritive/index',
+                'icsr-reporters/<icsr_id>'=>'icsr-reporter/index',
+                'icsr-tests/<icsr_id>'=>'icsr-test/index',
+                'icsr-drug-prescriptions/<icsr_id>'=>'drug-prescription/index',
                 'savereporter'=>'icsr-reporter/create',
                 'saveTest'=>'icsr-test/create',
                 'saveprescription'=>'drug-prescription/create',
 
-                '1/employees/delete/<id>'=>'employee/delete',
 
 
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
@@ -100,7 +110,6 @@ return [
                 '<module:\w+>/<controller:\w+>/<id:\d+>' => '<module>/<controller>/view',
                 '<module:\w+>/<controller:\w+>/<action:\w+>/<id:\d+>' => '<module>/<controller>/<action>',
                 // '<module:\w+>/<controller:\w+>/<action:\w+>' => '<module>/<controller>/<action>',
-                '1/employees/create'=>'employee/create',
             ],
 
         ],

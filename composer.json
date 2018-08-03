@@ -33,7 +33,8 @@
     "miloschuman/yii2-highcharts-widget": "*",
     "yiisoft/yii2-jui": "~2.0.0",
     "moonlandsoft/yii2-phpexcel": "^1.1",
-    "codeception/codeception": "2.4.x-dev"
+    "codeception/codeception": "2.4.x-dev",
+    "flow/jsonpath": "dev-master"
   },
   "require-dev": {
     "codeception/verify": "~0.3.1",

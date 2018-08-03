@@ -4,6 +4,7 @@ $(document).ready(function(){
         $('.toggleIcsr').toggleClass('btn-success').toggleClass('btn-default');
         $('.toggleIcsrModel').toggle();
     });
+
     var cells = [];
     function convertUTCDateToLocalDate(date) {
         var newDate = new Date(date.getTime()+date.getTimezoneOffset()*60*1000);

@@ -22,47 +22,29 @@ class DrugPrescriptionController extends RestController
 
         return $behaviors + [
 
-           'apiauth' => [
-               'class' => Apiauth::className(),
-               'exclude' => [],
-               'callback'=>[]
-           ],
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['index'],
-                'rules' => [
-                    [
-                        'allow' => false,
-                        'actions' => ['update','delete','create'],
-                        'matchCallback' => function ($rule,$action){
-                            $prescription_id = \Yii::$app->request->getQueryParam('id');
-                            if (isset($prescription_id) && !empty($prescription_id)) {
-                                return DrugPrescription::checkObjIcsrNullExported($prescription_id);
-                            }
-
-                            return DrugPrescription::checkIcsrNullExported(\Yii::$app->request->getQueryParam('DrugPrescription')['icsr_id']);
-
-                        }
-                    ],
-
-                    [
-                        'allow' => true,
-                        'matchCallback' => function ($rule, $action) {
-                            $user_id = \Yii::$app->user->id;
-                            $prescription_id = \Yii::$app->request->getQueryParam('id');
-                            return DrugPrescription::checkAccess($user_id,$prescription_id);
-                        },
-                    ]
-                ]
-            ],
-            'verbs' => [
-                'class' => Verbcheck::className(),
-                'actions' => [
-                    'create' => ['POST']
+                'apiauth' => [
+                    'class' => Apiauth::className(),
+                    'exclude' => [],
+                    'callback'=>[]
                 ],
-            ],
+                'access' => [
+                    'class' => AccessControl::className(),
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'roles' => ['@'],
+                        ],
+                    ]
+                ],
+                'verbs' => [
+                    'class' => Verbcheck::className(),
+                    'actions' => [
+                        'create' => ['POST'],
+                        'index' => ['GET'],
+                    ],
+                ],
 
-        ];
+            ];
     }
 
 
@@ -82,6 +64,15 @@ class DrugPrescriptionController extends RestController
             return ['status'=> 'ok'];
         } else {
             Yii::$app->api->sendFailedResponse(['status'=> 'failed', 'error'=>$model->getErrors()]);
+        }
+
+    }
+    public function actionIndex($icsr_id){
+        $model = DrugPrescription::find()->where(['icsr_id'=>$icsr_id])->all();
+        if($model){
+            Yii::$app->api->sendSuccessResponse($model);
+        }else{
+            Yii::$app->api->sendFailedResponse(['error'=>$model->getErrors()]);
         }
 
     }
