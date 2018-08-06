@@ -49,7 +49,7 @@ class SiteController extends RestController
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout', 'me', 'find-all-lkp'],
+                        'actions' => ['logout', 'me', 'find-all-lkp', 'api-version'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -63,6 +63,7 @@ class SiteController extends RestController
             'verbs' => [
                 'class' => Verbcheck::className(),
                 'actions' => [
+                    'api-version' => ['GET'],
                     'logout' => ['GET'],
                     'find-all-lkp' => ['GET'],
                     'authorize' => ['POST'],
@@ -87,6 +88,11 @@ class SiteController extends RestController
         ];
     }
 
+
+    public function actionApiVersion(){
+        return ['status'=>1,'apiVersion'=>Yii::$app->params['api-version']];
+    }
+
     /**
      * Displays homepage.
      *
@@ -95,7 +101,6 @@ class SiteController extends RestController
     public function actionIndex()
     {
         Yii::$app->api->sendSuccessResponse(['Yii2 RESTful API with OAuth2']);
-        //  return $this->render('index');
     }
 
     public function actionRegister()
