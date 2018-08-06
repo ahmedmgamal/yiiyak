@@ -63,6 +63,7 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'api-version'=>'site/api-version',
                 'register'=>'site/register',
                 'authorize'=>'site/authorize',
                 'accesstoken'=>'site/accesstoken',
