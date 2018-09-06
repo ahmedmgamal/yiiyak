@@ -4,6 +4,8 @@ stages:
   - staging
   - diff
   - production
+  - composer_install
+  - composer_update
 
 review:
   stage: review
@@ -116,6 +118,28 @@ production:
   environment:
     name: production
     url: https://pv-radar.com/
+  when: manual
+  only:
+    - master
+  tags:
+    - production
+
+composer_install:
+  stage: composer_install
+  script:
+    - cd $PRODCUTIONROOTPATH
+    - composer install
+  when: manual
+  only:
+    - master
+  tags:
+    - production
+
+composer_update:
+  stage: composer_update
+  script:
+    - cd $PRODCUTIONROOTPATH
+    - composer install
   when: manual
   only:
     - master
