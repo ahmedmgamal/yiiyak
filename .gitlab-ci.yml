@@ -139,7 +139,7 @@ composer_update:
   stage: composer_update
   script:
     - cd $PRODCUTIONROOTPATH
-    - composer install
+    - composer update
   when: manual
   only:
     - master
