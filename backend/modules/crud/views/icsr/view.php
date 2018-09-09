@@ -694,7 +694,7 @@ $updateButton = (!$isIcsrNullExported && $helpers->currentUserCan('/crud/icsr/up
                                                                     [
                                                                         'content' => $this->blocks['Narrative'],
                                                                         'label' => '<small>'.Yii::t('app','Narrative').'</small>',
-                                                                        'url' => ['icsr-narritive/update?id='.$model->narrative->id] ,
+                                                                        'url' => [($model->narrative)? 'icsr-narritive/update?id='.$model->narrative->id: 'icsr-narritive/create?icsr_id='.$model->id] ,
                                                                         'active' => false,
 
                                                                     ],
