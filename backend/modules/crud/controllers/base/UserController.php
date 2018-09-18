@@ -86,8 +86,12 @@ class UserController extends Controller
 
         try {
 			if ($model->load($_POST)) {
+                $currentUserRole = \Yii::$app->authManager->getRolesByUser(\Yii::$app->user->id);
 
-
+                if (!isset($currentUserRole['admin']))
+                {
+                    $model->company_id = \Yii::$app->user->identity->company_id;
+                }
 			    if ($model->isBeyondLimit())
                 {
                     \Yii::$app->getSession()->setFlash('error', \Yii::t('app',"you have exceeded your users limit upgrade {$model->company->name} plan to add more users "));
@@ -98,12 +102,7 @@ class UserController extends Controller
                 $roleName = \Yii::$app->request->post('role_name');
                 $connection = \Yii::$app->db;
                 $transaction = $connection->beginTransaction();
-                $currentUserRole = \Yii::$app->authManager->getRolesByUser(\Yii::$app->user->id);
 
-                if (!isset($currentUserRole['admin']))
-                {
-                    $model->company_id = \Yii::$app->user->identity->company_id;
-                }
 
 
                 if (!($model->isBeyondLimit()) && $model->save()) {
