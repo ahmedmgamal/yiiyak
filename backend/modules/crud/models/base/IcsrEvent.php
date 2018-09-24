@@ -84,6 +84,8 @@ abstract class IcsrEvent extends \yii\db\ActiveRecord
                     self::EVENT_OUTCOME_UNKNOWN,
                 ]
             ],
+            ['event_date','compare','compareValue' => date('Y-m-d') ,'operator' => '<',
+            'message' => 'Event Start Date must be in before today'],
             ['event_date','compare','compareAttribute' => 'event_end_date' ,'operator' => '<', 'enableClientValidation' => false]
 
         ];
