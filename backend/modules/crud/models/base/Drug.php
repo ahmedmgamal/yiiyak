@@ -61,7 +61,7 @@ abstract class Drug extends \yii\db\ActiveRecord
             [['company_id', 'route_lkp_id'], 'required'],
             [['company_id', 'route_lkp_id'], 'integer'],
             [['next_pbrer_date','rmp_first_deadline'],'date','format' => 'php:Y-m-d'],
-            ['rmp_first_deadline','compare','compareValue' => date('Y-m-d') ,'operator' => '>',
+            ['rmp_first_deadline','compare','compareValue' => date('Y-m-d') ,'operator' => '<', 'enableClientValidation' => false,
                 'message' => '{attribute} Date must be in after today'],
             [['generic_name', 'trade_name', 'composition', 'manufacturer', 'strength'], 'string', 'max' => 45],
             [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => Company::className(), 'targetAttribute' => ['company_id' => 'id']],
