@@ -6,10 +6,14 @@ namespace backend\modules\crud\controllers\base;
 
 use backend\modules\crud\models\Icsr;
     use backend\modules\crud\models\search\Icsr as IcsrSearch;
+use Yii;
+use yii\helpers\ArrayHelper;
+use yii\helpers\StringHelper;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\helpers\Url;
 use dmstr\bootstrap\Tabs;
+use yii\web\Response;
 
 /**
 * IcsrController implements the CRUD actions for Icsr model.
@@ -51,6 +55,18 @@ public $enableCsrfValidation = true;
 */
     public function actionView($id)
     {
+        $request = Yii::$app->request;
+        if ($request->isAjax) {
+            \Yii::$app->response->format = Response::FORMAT_JSON;
+            $model = Icsr::find()->where(['id' => $id])->with('icsrVersions')->one();
+            $versions = $this->maintainVersions($model->icsrVersions);
+            $versionsCount = count($versions);
+            return [
+                'model'=>$model,
+                'versions'=>$versions,
+                'versionsCount'=>$versionsCount
+            ];
+        }
         \Yii::$app->session['__crudReturnUrl'] = Url::previous();
         Url::remember();
         Tabs::rememberActiveState();
@@ -59,6 +75,7 @@ public $enableCsrfValidation = true;
         $signaledIcsrsAndIcsrsEvents = $model->drug->getSignaledIcsrsAndIcsrEvenets($signaledDrugs);
 
         $isIcsrNullExported = $model->isNullExported();
+
 
 
        return $this->render('view', [
@@ -155,4 +172,64 @@ public $enableCsrfValidation = true;
             throw new HttpException(404, 'The requested page does not exist.');
         }
     }
+    /**
+     * @param $versions
+     * take versions model versions
+     * and maintain it for ajax call to be equal to crud
+     * return object $versions
+     **/
+    private function maintainVersions($versions){
+        $versions_array = [];
+            $versions_array[] = ArrayHelper::toArray($versions, [
+                'backend\modules\crud\models\IcsrVersion'=>[
+                    'id',
+                    'icsr_id',
+                    'file_name',
+                    'file_url',
+                    'version_no',
+                    'export_date',
+                    'username'=>function($version){
+                        return $version->user->username;
+                    },
+                    'response'=>function($version){
+                        $url = '<a class="btn btn-warning btn-sm" href='. Yii::getAlias('@web').'/crud/icsr-version-response/create?icsr_version_id='
+                            .$version->id.'&icsr_id='.$version->icsr_id.'> Choose Response Type </a>';
+                        if (isset($version->icsrVersionResponse->response))
+                        {
+                            $bucket = Yii::$app->fileStorage->getBucket('icsrVersionsResponse');
+
+                            $responseFileName = StringHelper::basename( $version->icsrVersionResponse->response);
+
+                            if ($bucket->fileExists($responseFileName))
+                            {
+                                $url = "<a href={$version->icsrVersionResponse->response}> Response File </a>";
+                            }
+                            else{
+                                return $version->icsrVersionResponse->response;
+
+                            }
+                        }
+
+                        return $url;
+                    },
+                    'response_date'=>function($version){
+                        if (isset($model->icsrVersionResponse->response_date)) {
+
+                            return $version->icsrVersionResponse->response_date;
+                        }
+                        return Yii::t('app','response not received yet');
+                    },
+                    'send_href'=>function($version){
+
+                        return Yii::getAlias('@web').'/crud/icsr-version/create-email?xmlUrl='
+                            .$version->file_url.'&icsrId='.$version->icsr_id;
+                    },
+                ]
+            ]);
+
+
+         return $versions_array[0];
+
+    }
 }
+

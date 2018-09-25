@@ -1,5 +1,57 @@
-$( document ).ready(function() {
 
+$( document ).ready(function() {
+    function render(data){
+        var model = data.model;
+        var versions = data.versions;
+        var rendered = '';
+        $.each(versions,function(key, value){
+            rendered +=
+                '<tr>' +
+                    '<td>' +
+                        '<a href=download-xml-file?path=' +
+                            value.file_url
+                                .substring(value.file_url.indexOf('/files'), value.file_url.length) +
+                        '>Download</a>'+
+                    '</td>'+
+                    '<td>' +
+                        '<a target="_blank" href=open-pdf?path=' +
+                        value.file_url
+                            .substring(value.file_url.indexOf('/files'), value.file_url.length) +
+                        '>Open</a>'+
+                    '</td>'+
+                    '<td>' +
+                        value.version_no+
+                    '</td>'+
+                    '<td>' +
+                        '<a  class="versionDiff btn btn-default" href="get-diff-before-date?icsrId='+
+                            value.icsr_id+'&date='+value.export_date+'&versionNo='+value.version_no+
+                        '"><span class="glyphicon glyphicon-retweet"></span></a>'+
+                    '</td>'+
+                    '<td>' +
+                        value.export_date+
+                    '</td>'+
+                '<td>'+value.username+'</td>'+
+                '<td>'+value.response+'</td>'+
+                '<td>'+value.response_date+'</td>'+
+                '<td>' +
+                '<a class="btn btn-primary" href="+ value.send_href+"><span class="glyphicon glyphicon-envelope"></span></a>'+
+                '</td>'+
+                '</tr>';
+        });
+        $('#pjax-IcsrVersions table.table-bordered tbody').html(rendered);
+        var version = $('a[href="#relation-tabs-tab7"] small span');
+        version.text(parseInt(data.versionsCount));
+    }
+    function changeValidations(){
+        var url = window.location.href;
+        $.ajax({
+            'url': url,
+            'method':'GET',
+            'success': function (response) {
+                render(response);
+            }
+        });
+    }
     $('#exportXml').on('click',function (e) {
 
         progressVal = 1;
@@ -28,6 +80,7 @@ $( document ).ready(function() {
                 {
                     passedValidation = true;
                     redirectUrl = response.fileUrl;
+
                 }
                 else {
                     passedValidation = false;
@@ -79,7 +132,9 @@ $( document ).ready(function() {
                     progressBar.hide();
                     $('#validating').hide();
                     $('#failedValidation').show();
+
                 }
+                changeValidations();
                 return;
             }
 
@@ -93,10 +148,6 @@ $( document ).ready(function() {
 
     });
 
-    $('#downloadFileAnchorTag').click(function(){
-        var version = $('a[href="#relation-tabs-tab7"] small span');
-        version.text(parseInt(version.text())+1);
-    });
 
     $('.versionDiff').on('click',function (event){
         event.preventDefault();
