@@ -150,7 +150,7 @@ $( document ).ready(function() {
     });
 
 
-    $('#pjax-IcsrVersions table.table-bordered tbody').on('click', '.versionDiff', function (event){
+    $('.versionDiff').on('click', function (event){
         event.preventDefault();
         ajaxUrl = $(this).attr('href');
 
