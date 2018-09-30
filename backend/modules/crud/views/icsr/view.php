@@ -497,7 +497,7 @@ $updateButton = (!$isIcsrNullExported && $helpers->currentUserCan('/crud/icsr/up
                                         <?=
                                         '<div class="table-responsive">' . \yii\grid\GridView::widget([
                                             'layout' => '{summary}{pager}<br/>{items}{pager}',
-                                            'dataProvider' => new \yii\data\ActiveDataProvider(['query' => $model->getIcsrVersions(), 'pagination' => ['pageSize' => 20, 'pageParam' => 'page-icsrversions']]),
+                                            'dataProvider' => new \yii\data\ActiveDataProvider(['query' => $model->getIcsrVersions(), 'pagination' => ['pageSize' => 100, 'pageParam' => 'page-icsrversions']]),
                                             'pager' => [
                                                 'class' => yii\widgets\LinkPager::className(),
                                                 'firstPageLabel' => Yii::t('app', 'First'),

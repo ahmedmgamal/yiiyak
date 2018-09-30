@@ -1,10 +1,9 @@
-
 $( document ).ready(function() {
     function render(data){
-        var model = data.model;
         var versions = data.versions;
         var rendered = '';
         $.each(versions,function(key, value){
+
             rendered +=
                 '<tr>' +
                     '<td>' +
@@ -23,7 +22,7 @@ $( document ).ready(function() {
                         value.version_no+
                     '</td>'+
                     '<td>' +
-                        '<a  class="versionDiff btn btn-default" href="get-diff-before-date?icsrId='+
+                        '<a class="versionDiff btn btn-default" href="get-diff-before-date?icsrId='+
                             value.icsr_id+'&date='+value.export_date+'&versionNo='+value.version_no+
                         '"><span class="glyphicon glyphicon-retweet"></span></a>'+
                     '</td>'+
@@ -38,7 +37,9 @@ $( document ).ready(function() {
                 '</td>'+
                 '</tr>';
         });
-        $('#pjax-IcsrVersions table.table-bordered tbody').html(rendered);
+        var html = $.parseHTML( rendered );
+        $('#pjax-IcsrVersions table.table-bordered tbody').html(html);
+
         var version = $('a[href="#relation-tabs-tab7"] small span');
         version.text(parseInt(data.versionsCount));
     }
@@ -149,7 +150,7 @@ $( document ).ready(function() {
     });
 
 
-    $('.versionDiff').on('click',function (event){
+    $('#pjax-IcsrVersions table.table-bordered tbody').on('click', '.versionDiff', function (event){
         event.preventDefault();
         ajaxUrl = $(this).attr('href');
 
