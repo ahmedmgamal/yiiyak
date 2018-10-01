@@ -79,7 +79,9 @@ $( document ).ready(function() {
                     progressBar.hide();
                     $('#validating').hide();
                     $('#failedValidation').show();
+
                 }
+                $.pjax.reload({container:'#w6', timeout: false});
                 return;
             }
 
