@@ -493,7 +493,7 @@ $updateButton = (!$isIcsrNullExported && $helpers->currentUserCan('/crud/icsr/up
                                                     </div>
                                                 </div>
 
-                                            </div></div><?php Pjax::begin(['id' => 'pjax-IcsrVersions', 'enableReplaceState' => true, 'linkSelector' => '#w6', 'clientOptions' => ['pjax:success' => 'function(){alert("yo")}']]) ?>
+                                            </div></div><?php Pjax::begin(['id' => 'pjax-IcsrVersions', 'enableReplaceState' => false, 'linkSelector' => '', 'clientOptions' => ['pjax:success' => 'function(){alert("yo")}']]) ?>
                                         <?=
                                         '<div class="table-responsive">' . \yii\grid\GridView::widget([
                                             'layout' => '{summary}{pager}<br/>{items}{pager}',
