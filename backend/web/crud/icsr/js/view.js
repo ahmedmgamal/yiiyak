@@ -93,6 +93,7 @@ $( document ).ready(function() {
                     var version = $('a[href="#relation-tabs-tab6"] small span');
                     version.text(parseInt(version.text())+1);
                 });
+
                 return;
             }
 
