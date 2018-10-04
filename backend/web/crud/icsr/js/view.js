@@ -115,7 +115,6 @@ $( document ).ready(function() {
             'url' : ajaxUrl,
             'method' : 'GET',
             'success' : function (response) {
-                alert(response);
                 $('#fromVer').html(response.fromVer);
                 $('#toVer').html(response.toVer);
 
