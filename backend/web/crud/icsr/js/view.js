@@ -107,7 +107,7 @@ $( document ).ready(function() {
     });
 
 
-    $('.versionDiff').on('click',function (event){
+    $('#pjax-IcsrVersions .table-bordered td:nth-of-type(4)').on('click','.versionDiff',function (event){
         event.preventDefault();
         ajaxUrl = $(this).attr('href');
 
