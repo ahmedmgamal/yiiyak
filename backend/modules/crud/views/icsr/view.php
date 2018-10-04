@@ -493,7 +493,7 @@ $updateButton = (!$isIcsrNullExported && $helpers->currentUserCan('/crud/icsr/up
                                                     </div>
                                                 </div>
 
-                                            </div></div><?php Pjax::begin(['id' => 'pjax-IcsrVersions', 'enableReplaceState' => false, 'linkSelector' => '#pjax-IcsrVersions ul.pagination a, th a', 'clientOptions' => ['pjax:success' => 'function(){alert("yo")}']]) ?>
+                                            </div></div><?php Pjax::begin(['id' => 'pjax-IcsrVersions', 'enableReplaceState' => false, 'linkSelector' => '', 'clientOptions' => ['pjax:success' => 'function(){alert("yo")}']]) ?>
                                         <?=
                                         '<div class="table-responsive">' . \yii\grid\GridView::widget([
                                             'layout' => '{summary}{pager}<br/>{items}{pager}',
@@ -715,5 +715,5 @@ $updateButton = (!$isIcsrNullExported && $helpers->currentUserCan('/crud/icsr/up
                                                     );
                                                     ?>
 </div>
-<?php $this->registerJsFile('@web/crud/icsr/js/view.js', ['depends' => [\yii\web\JqueryAsset::className()]]);?>
+<?php $this->registerJsFile('@web/crud/icsr/js/view.js', [$this::POS_HEAD, 'depends' => [\yii\web\JqueryAsset::className()]]);?>
 <?php $this->registerCssFile('@web/crud/global/global.css');?>
