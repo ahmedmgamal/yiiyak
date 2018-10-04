@@ -83,7 +83,7 @@ $( document ).ready(function() {
                 }
                 var new_versions = $.pjax.reload({container:'#pjax-IcsrVersions', timeout: false, async:false});
                 new_versions.done(function(data){
-                    $('#relation-tabs-tab7').html(data);
+                    $('#pjax-IcsrVersions').html($.parseHTML(data));
                     var version = $('a[href="#relation-tabs-tab7"] small span');
                     version.text(parseInt(version.text())+1);
                 });
@@ -107,7 +107,7 @@ $( document ).ready(function() {
     });
 
 
-    $('#pjax-IcsrVersions .table-bordered td:nth-of-type(4)').on('click','.versionDiff',function (event){
+    $('.tab-content #relation-tabs-tab7 ').on('click', 'td .versionDiff',function (event){
         event.preventDefault();
         ajaxUrl = $(this).attr('href');
 
@@ -115,7 +115,6 @@ $( document ).ready(function() {
             'url' : ajaxUrl,
             'method' : 'GET',
             'success' : function (response) {
-
                 $('#fromVer').html(response.fromVer);
                 $('#toVer').html(response.toVer);
 
