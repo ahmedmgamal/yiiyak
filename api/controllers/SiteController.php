@@ -37,7 +37,7 @@ class SiteController extends RestController
         return $behaviors + [
             'apiauth' => [
                 'class' => Apiauth::className(),
-                'exclude' => ['authorize', 'register', 'accesstoken','index', 'api-version'],
+                'exclude' => ['authorize', 'register', 'accesstoken','index', 'api-version', 'find-all-lkp'],
             ],
             'access' => [
                 'class' => AccessControl::className(),
@@ -49,7 +49,7 @@ class SiteController extends RestController
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout', 'me', 'find-all-lkp', 'api-version'],
+                        'actions' => ['logout', 'me', 'api-version'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
