@@ -79,7 +79,21 @@ $( document ).ready(function() {
                     progressBar.hide();
                     $('#validating').hide();
                     $('#failedValidation').show();
+
                 }
+
+                var new_history = $.pjax.reload({container:'#pjax-IcsrHistory', timeout: false, async:false});
+                new_history.done(function(data){
+                    $('#relation-tabs-tab6').html(data);
+                    var version = $('a[href="#relation-tabs-tab6"] small span');
+                    version.text(parseInt(version.text())+1);
+                });
+                var new_versions = $.pjax.reload({container:'#pjax-IcsrVersions', timeout: false, async:false});
+                new_versions.done(function(data){
+                    $('#relation-tabs-tab7 #pjax-IcsrVersions').html($.parseHTML(data));
+                    var version = $('a[href="#relation-tabs-tab7"] small span');
+                    version.text(parseInt(version.text())+1);
+                });
                 return;
             }
 
@@ -93,12 +107,8 @@ $( document ).ready(function() {
 
     });
 
-    $('#downloadFileAnchorTag').click(function(){
-        var version = $('a[href="#relation-tabs-tab7"] small span');
-        version.text(parseInt(version.text())+1);
-    });
 
-    $('.versionDiff').on('click',function (event){
+    $('.tab-content #relation-tabs-tab7 ').on('click', 'td .versionDiff',function (event){
         event.preventDefault();
         ajaxUrl = $(this).attr('href');
 
@@ -106,7 +116,6 @@ $( document ).ready(function() {
             'url' : ajaxUrl,
             'method' : 'GET',
             'success' : function (response) {
-
                 $('#fromVer').html(response.fromVer);
                 $('#toVer').html(response.toVer);
 
